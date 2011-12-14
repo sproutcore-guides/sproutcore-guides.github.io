@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>SproutCore Guides: Getting Started</title>
+
+  <!-- guides styles -->
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/strobe.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <!-- syntax highlighting styles -->
+  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/shThemeStrobeGuides.css" />
+</head>
+<body class="guide">
+
+  <header role="banner">
+    <div class="container">
+      <h1 id="logo">
+        <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
+      </h1>
+      <nav role="navigation">
+        <ul>
+          <li><a href="http://sproutcore.com/about/">About</a></li>
+          <li class="active"><a href="http://sproutcore.com/guides/">Guides</a></li>
+          <li><a href="http://sproutcore.com/docs/">Docs</a></li>
+          <li><a href="http://sproutcore.com/community/">Community</a></li>
+          <li><a href="http://blog.sproutcore.com">Blog</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div id="feature">
+    <div class="wrapper">
+      <div class="feature_header">
+        <a href="/"><img src="images/strobe/guides.png"></a>
+        <h2><a href="/">SproutCore Guides</a></h2>
+        <p>These guides are designed to help you write and perfect your code.</p>
+      </div>
+      <div class="feature_sidebar">
+        <a href="index.html" id="guidesMenu">
+          Guides Index <span id="guidesArrow">&#9656;</span>
+        </a>
+        <div id="guides" class="clearfix" style="display: none;">
+          <a href="index.html" class="guidesMenu">
+            Guides Index <span class="guidesArrow">&#9662;</span>
+          </a>
+          <hr style="clear:both;">
+          <dl class="L">
+    <dt>Start Here</dt>
+      <dd><a href="getting_started.html">Getting Started: Part 1</a></dd>
+      <dd><a href="getting_started_2.html">Getting Started: Part 2</a></dd>
+      <dd><a href="core_concepts.html">Core Concepts</a></dd>
+      <dd><a href="enumerables.html">Enumerables</a></dd>
+    <dt>Views</dt>
+      <dd><a href="using_handlebars.html">Using Handlebars Templates</a></dd>
+      <dd><a href="views.html">Core View Concepts</a></dd>
+    <dt>Models</dt>
+      <dd><a href="records.html">SproutCore Records</a></dd>
+      <dd><a href="fixtures.html">Using Fixtures</a></dd>
+    <dt>Theming</dt>
+      <dd><a href="chance.html">Using Chance, SproutCore's CSS Framework</a></dd>
+      <dd><a href="theming_app.html">Theming Your App</a></dd>
+</dl>
+<dl class="R">
+    <dt>Testing</dt>
+      <dd><a href="unit_test_framework.html">Unit Testing</a></dd>
+      <dd><a href="adding_unit_test.html">Adding a Unit Test</a></dd>
+      <dd><a href="writing_unit_tests.html">Writing Unit Tests</a></dd>
+      <dd><a href="running_unit_tests.html">Running Unit Tests</a></dd>
+      <dd><a href="todos_tdd.html">SproutCore Development Using TDD</a></dd>
+    <dt>Contributing to SproutCore</dt>
+      <dd><a href="style_guide.html">Javascript Style Guide</a></dd>
+      <dd><a href="commit_code.html">Committer Guidelines</a></dd>
+      <dd><a href="documentation_guidelines.html">Documentation Guidelines</a></dd>
+</dl>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+          <div class="headerSection">
+            <h2>Getting Started</h2>
+<p>After reading this guide, you will be able to:</p>
+<ul>
+	<li>Use SproutCore&#8217;s templating support to describe the appearance of your application.</li>
+	<li>Delegate handling of user events with views.</li>
+	<li>Use bindings to update views when your models change.</li>
+</ul>
+<p>You will learn all of this by building a real Todo list application from the ground up using SproutCore.</p>
+
+          </div>
+        <h3 id="following-along">1 Following Along</h3>
+<p>You can see the finished source code for this application on <a href="https://github.com/sproutcore/Todos-Example/">Github</a>. To see it in action, click <a href="http://getting-started.strobeapp.com">here</a>.</p>
+<p>There is also a screencast available on <a href="http://vimeo.com/23527342">Vimeo</a>.</p>
+<h3 id="installing-sproutcore">2 Installing SproutCore</h3>
+<p>This guide assumes you have already installed SproutCore 1.6. If you have not, please <a href="http://www.sproutcore.com/install/?redirect=1" onclick="_gaq.push(['_trackEvent', 'Download', 'Guides']);">install it now</a>.</p>
+<h3 id="generate-your-new-application">3 Generate Your New Application</h3>
+<p>First, generate your new <span class="caps">HTML</span>-based application.</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+
+$ sc-init todos --template
+</pre></div><p>This will create several files needed for your application, inside the <strong><tt>apps/todos</tt></strong> directory.</p>
+<ul>
+	<li><strong>apps/</strong>
+	<ul>
+		<li><strong>todos/</strong>
+		<ul>
+			<li><strong>todos.js</strong> &#8211; The JavaScript file that will define your models, views, and controllers.</li>
+			<li><strong>resources/</strong>
+			<ul>
+				<li><strong>templates/</strong> &#8211; Place all Handlebars templates here.
+				<ul>
+					<li><strong>todos.handlebars</strong> &#8211; The main template for the application.</li>
+				</ul></li>
+				<li><strong>images/</strong> &#8211; Place all images here.</li>
+				<li><strong>stylesheets/</strong> &#8211; Place all stylesheets here.
+				<ul>
+					<li><strong>todos.css</strong> &#8211; The main stylesheet for the application.</li>
+				</ul></li>
+			</ul></li>
+			<li><strong>tests/</strong></li>
+		</ul></li>
+	</ul></li>
+	<li><strong>Buildfile</strong> &#8211; Tells SproutCore how your application should be built. Usually, you can just use the defaults provided.</li>
+	<li><strong><span class="caps">README</span></strong> &#8211; The description for the project.</li>
+</ul>
+<p>Go ahead and open <code>todos.js</code> now. You should see the following code:</p>
+<div class="code_container">
+<div class="filename">apps/todos/todos.js</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+Todos = SC.Application.create();
+
+SC.ready(function() {
+  Todos.mainPane = SC.TemplatePane.append({
+    layerId: &quot;todos&quot;,
+    templateName: &quot;todos&quot;
+  });
+});
+</pre></div><p>This code creates a namespace for your application (called <code>Todos</code>), then appends a new pane. A pane is responsible for event delegation and placing your templates into the <span class="caps">DOM</span>, but you&#8217;ll learn more about that later.</p>
+<div class="info"><p>If you pass a camelcase name to <ins>sc-init</ins>, such as <code>ToDos</code> &mdash; notice the uppercase &#8216;D&#8217; &mdash;, the namespace would instead be <code>ToDos</code> and the directories would be named with underscores (i.e. <strong><ins>apps/to_dos</ins></strong>)</p></div>
+<h3 id="defining-your-model">4 Defining Your Model</h3>
+<p>In this tutorial, we want to create a list for managing todos. Users should be able to create a new todo with a specific task, then check it off once it&#8217;s done.</p>
+<p>Let&#8217;s define our model as a new subclass of <code>SC.Object</code>:</p>
+<div class="code_container">
+<div class="filename">apps/todos/todos.js</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+Todos = SC.Application.create();
+
+Todos.Todo = SC.Object.extend({
+  title: null,
+  isDone: false
+});
+
+SC.ready(function() {
+  Todos.mainPane = SC.TemplatePane.append({
+    layerId: 'todos',
+    templateName: 'todos'
+  });
+});
+</pre></div>
+<div class="note"><p>Make sure you insert the new code after the <code>Todos</code> object is created.</p></div>
+<p>We&#8217;ve now defined a class with two properties: <tt>title</tt>, a String, and <tt>isDone</tt>, a Boolean.</p>
+<h3 id="managing-the-model-using-a-controller">5 Managing the Model Using a Controller</h3>
+<p>Now that we know what our data looks like, let&#8217;s create a controller to manage it. Since we want to maintain an ordered list of todos, we&#8217;ll use an instance of <code>SC.ArrayController</code>.</p>
+<div class="code_container">
+<div class="filename">in apps/todos/todos.js</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+// at the end of the file
+
+Todos.todoListController = SC.ArrayController.create({
+  // Initialize the array controller with an empty array.
+  content: []
+});
+</pre></div>
+<div class="info"><p>In <span class="caps">MVC</span> frameworks, like SproutCore, the controller layer bridges the model layer, which is only concerned with a pure-data representation of objects, and the view layer, which is only concerned with representing those objects.</p></div>
+<p>Now we have an array controller with no content. Let&#8217;s add a method to create a new todo:</p>
+<div class="code_container">
+<div class="filename">in apps/todos/todos.js</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+// updating previous code
+
+Todos.todoListController = SC.ArrayController.create({
+  // Initialize the array controller with an empty array.
+  content: [],
+
+  // Creates a new todo with the passed title, then adds it
+  // to the array.
+  createTodo: function(title) {
+    var todo = Todos.Todo.create({ title: title });
+    this.pushObject(todo);
+  }
+});
+</pre></div>
+<div class="note"><p><code>SC.ArrayController</code> acts as a proxy onto its <ins>content</ins> Array. SproutCore will propagate any modifications made to the <code>ArrayController</code> to the <ins>content</ins> Array.</p></div>
+<h3 id="creating-new-todos-with-a-text-field">6 Creating New Todos with a Text Field</h3>
+<div class="note"><p>We&#8217;ve provided a simple stylesheet to give the application some style.  At this point, you should download the <a href="https://github.com/sproutcore/Todos-Example/raw/master/apps/todos/resources/stylesheets/todos.css"><span class="caps">CSS</span></a> and replace the empty file that sc-init generated for us at <ins>apps/todos/resources/stylesheets/todos.css</ins>.</p></div>
+<p>We&#8217;ve got our model and controller set up, so let&#8217;s move on to the fun part: creating the interface for our users. The first step is to create a text field into which the user types the name of their todo.  SproutCore&#8217;s TemplateView uses Handlebars templates to quickly define the application&#8217;s interface.  While Handlebars makes it easier to markup <span class="caps">HTML</span> quickly, you&#8217;ll see that it has been extended to take advantage of SproutCore with very little additional effort.</p>
+<p>To start building our views, let&#8217;s open <tt>resources/templates/todos.handlebars</tt>.  You&#8217;ll see that the initialization pre-populated the file with a snippet of <span class="caps">HTML</span>:</p>
+<div class="code_container">
+<div class="filename">apps/todos/resources/templates/todos.handlebars</div>
+<pre class="brush: xml; gutter: false; toolbar: false">
+
+&lt;h1&gt;Welcome to SproutCore!&lt;/h1&gt;
+</pre></div><p>Go ahead and replace that with:</p>
+<div class="code_container">
+<div class="filename">apps/todos/resources/templates/todos.handlebars</div>
+<pre class="brush: xml; gutter: false; toolbar: false">
+
+&lt;h1&gt;Todos&lt;/h1&gt;
+&lt;input id=&quot;new-todo&quot; type=&quot;text&quot;
+       placeholder=&quot;What needs to be done?&quot; &gt;
+</pre></div>
+<div class="note"><p>For more information about using Handlebars, visit the <a href="http://www.handlebarsjs.com/">Handlebars website</a>. To learn more about using Handlebars with SproutCore, make sure to check out the <a href="http://guides-redesign.strobeapp.com/using_handlebars.html">Using Handlebars Template</a> guide.</p></div>
+<p>Now that we&#8217;ve got model, view, and controller represented, it&#8217;s time to open the app in our browser and see how it looks.</p>
+<p>During the development process, <tt>sc-server</tt> makes it easy to test your application. Just run the following inside of your project directory:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+
+$ sc-server
+
+Starting server at http://0.0.0.0:4020 in debug mode
+To quit sc-server, press Control-C
+&gt;&gt; Thin web server (v1.2.1 codename Bat-Shit Crazy)
+&gt;&gt; Maximum connections set to 1024
+&gt;&gt; Listening on 0.0.0.0:4020, CTRL+C to stop
+</pre></div><p>Open your web browser and navigate to <a href="http://localhost:4020/todos">http://localhost:4020/todos</a>. You should see your application load. Once you&#8217;ve verified that the application is up and running, it&#8217;s time to tell SproutCore how to handle events for your <code>&lt;input&gt;</code> tag. When the user types in the field and presses <tt>return</tt>, we will create a new Todo and have it inserted into the content of the array controller.</p>
+<div class="note"><p>In SproutCore, view objects are responsible for updating the <span class="caps">DOM</span> and handling events. Among other things, this allows us to buffer changes to the <span class="caps">DOM</span> for maximum performance and to support generic cross-platform event handling.  Whenever you want to display dynamic content or handle events, you will use a view object.</p></div>
+
+<div class="code_container">
+<div class="filename">in apps/todos/todos.js</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+// before SC.ready
+
+Todos.CreateTodoView = SC.TextField.extend({
+  insertNewline: function() {
+    var value = this.get('value');
+
+    if (value) {
+      Todos.todoListController.createTodo(value);
+      this.set('value', '');
+    }
+  }
+});
+</pre></div><p>Since <code>CreateTodoView</code> contains a text field, we create a subclass of <code>SC.TextField</code>, which provides several conveniences for working with text fields. For example, you can access the <tt>value</tt> property and respond to higher level events such as <tt>insertNewline</tt>, when the user presses <code>return</code>.</p>
+<p>Now that we have defined our view, we need to attach it to <span class="caps">HTML</span> in our Handlebars template.  Wrap the <code>&lt;input&gt;</code> like so:</p>
+<div class="code_container">
+<div class="filename">apps/todos/resources/templates/todos.handlebars</div>
+<pre class="brush: xml; gutter: false; toolbar: false">
+
+&lt;h1&gt;Todos&lt;/h1&gt;
+{{#view Todos.CreateTodoView}}
+&lt;input id=&quot;new-todo&quot; type=&quot;text&quot;
+       placeholder=&quot;What needs to be done?&quot; /&gt;
+{{/view}}
+</pre></div><p><tt>#view</tt> is a Handlebars block helper that assigns a <code>SC.TemplateView</code> to a section of <span class="caps">HTML</span>. This means that the behavior described in the specified view, such as event handling, will get associated with the <span class="caps">HTML</span> inside the block.</p>
+<p>Now that we have an interface to create new todos, let&#8217;s create the interface to display them.  We&#8217;ll use the Handlebars <tt>#collection</tt> helper to display a list of items. <tt>#collection</tt> will create an instance of <code>SC.TemplateCollectionView</code> that renders every item in its underlying Array using the enclosed <span class="caps">HTML</span>.</p>
+<div class="code_container">
+<div class="filename">in apps/todos/resources/templates/todos.handlebars</div>
+<pre class="brush: xml; gutter: false; toolbar: false">
+
+&lt;!-- at the end of the file --&gt;
+
+{{#collection SC.TemplateCollectionView ¬
+  contentBinding=&quot;Todos.todoListController&quot;}}
+  {{content.title}}
+{{/collection}}
+</pre></div>
+<div class="warning"><p>We are using a continuation character (¬) to indicate that the lines should be entered unbroken.</p></div>
+<p>Notice that we&#8217;ve also told the collection to bind its <tt>content</tt> property to our <code>todoListController</code>. For every item in the array controller, the collection view will create a new child view that renders the <tt>{{content.title}}</tt> template.</p>
+<div class="note"><p>You set up bindings by creating a property whose name ends in <ins>Binding</ins>. In this case, we bind <ins>Todos.todoListController</ins> to the collection view&#8217;s <ins>content</ins> property. When one end of a binding changes, SproutCore will automatically update the other end.</p></div>
+<p>This is a good time to visit <a href="http://localhost:4020/todos">http://localhost:4020/todos</a> in your browser (or reload if you still have it open). It should look the same as before. Type a todo into the text field and hit return.</p>
+<p>Look at that! As soon as we create a new todo and insert it into the array controller, the view updates automatically.</p>
+<p>You&#8217;ve now seen a little bit of the power of SproutCore. By using SproutCore&#8217;s bindings to describe the relationship between your data and your views, you were able to change the data layer and let SproutCore do the hard work of updating the view layer for you.</p>
+<div class="info"><p>This is actually a core concept in SproutCore, not just something that demos well.  SproutCore&#8217;s binding system is designed with the view system in mind, which makes it easy to work directly with your data and not need to worry about manually keeping your view layer in sync. You will see this concept over and over again in the rest of this tutorial and in other guides.</p></div>
+<h3 id="getting-things-done">7 Getting Things Done</h3>
+<p>We now have the ability to add todos, but no way to mark them as done. Before the frustration of a never-ending todo list gets the better of us, let&#8217;s add the ability to mark todos complete.</p>
+<p>The first thing we need to do is add a checkbox to each todo list item. As was mentioned earlier, if we want to handle events, such as user input, we need a view to manage that portion of <span class="caps">HTML</span>. In this case, we are adding a checkbox and want to be notified whenever the value of the checkbox is changed by the user. Remember that we can assign views using the <tt>#view</tt> helper and provide the <span class="caps">HTML</span> content for the assigned view in our template.  However, we can also reference views that provide their own <span class="caps">HTML</span> content using the <tt>view</tt> helper &mdash; notice the lack of the #.  For instance, we may want to create a complex view that will be used repeatedly and don&#8217;t want to have to update all the templates whenever it needs to be updated.  Here&#8217;s what the todo list looks like after updating it in <tt>todos.handlebars</tt>:</p>
+<div class="code_container">
+<div class="filename">in apps/todos/resources/templates/todos.handlebars</div>
+<pre class="brush: xml; gutter: false; toolbar: false">
+
+&lt;!-- replacing the previous code --&gt;
+
+{{#collection SC.TemplateCollectionView ¬
+  contentBinding=&quot;Todos.todoListController&quot;}}
+  {{view Todos.MarkDoneView}}
+{{/collection}}
+</pre></div><p>Now let&#8217;s implement the <code>Todos.MarkDoneView</code>, which we just referenced. Since our view implements a checkbox, we will subclass the <code>SC.Checkbox</code> control. This gives the view a <tt>value</tt> property that reflects the value in the <span class="caps">DOM</span>, as well as a <tt>title</tt> property that displays a label for the checkbox.</p>
+<div class="info"><p>Under the hood, SproutCore binds an event handler to the <ins>change</ins> event and updates <ins>value</ins> when the event occurs. This may change as needed for browser compatibility, but working with a SproutCore property insulates you from those concerns.</p></div>
+<p>For every item in its underlying <code>Array</code>, <code>SC.TemplateCollectionView</code> will create a new child view whose <tt>content</tt> property contains the object the view should represent. In our case, there will be a child view for each todo, and each will have a <tt>content</tt> property set to a corresponding <code>Todo</code> object.</p>
+<p>This makes it easy to bind the properties of the checkbox to the properties of the <code>Todo</code> object we&#8217;re representing. In this case, we bind <tt>value</tt> to <tt>isDone</tt> and <tt>title</tt> to <tt>title</tt>, so that when one changes, the other changes automatically. Let&#8217;s tie it all together:</p>
+<div class="code_container">
+<div class="filename">in apps/todos/todos.js</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+// before SC.ready
+
+Todos.MarkDoneView = SC.Checkbox.extend({
+  titleBinding: '.parentView.content.title',
+  valueBinding: '.parentView.content.isDone'
+});
+</pre></div><p>Before you reload the browser to see the new checkbox todo list items, the stylesheet we provided includes a <span class="caps">CSS</span> class meant to give completed todos a unique look, so lets also bind the class of each item to the object&#8217;s <tt>isDone</tt> property.</p>
+<p>We&#8217;ll use a property on the collection helper to set up this binding:</p>
+<div class="code_container">
+<div class="filename">in apps/todos/resources/templates/todos.handlebars</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+&lt;!-- replacing the previous code --&gt;
+
+{{#collection SC.TemplateCollectionView ¬
+  contentBinding=&quot;Todos.todoListController&quot; ¬
+  itemClassBinding=&quot;content.isDone&quot;}}
+  {{view Todos.MarkDoneView}}
+{{/collection}}
+</pre></div><p>This property defines a binding on each of the item views. Each item will get the class <tt>is-done</tt> if its associated content object&#8217;s <tt>isDone</tt> property is <code>true</code>. SproutCore will automatically dasherize property names into class names.</p>
+<div class="note"><p>All views have a number of properties, including <ins>id</ins>, <ins>class</ins>, and <ins>classBinding</ins>. The <ins>collection</ins> helper allows you to prefix any of those properties with <ins>item</ins>, which will then apply them to each of the child item views. For instance, if you use the <ins>itemClass</ins> property on a collection, each item will get that class.</p></div>
+<p>Now reload your application in the browser and try it out. As soon as you click a todo&#8217;s checkbox, the text will become crossed out. Keep in mind you didn&#8217;t need to update any views when marking the <code>Todo</code> as done, bindings did it for you. If a different part of the app changes the <code>Todo</code> item&#8217;s <tt>isDone</tt> property, your list item would automatically update without any more work on your part.</p>
+<h3 id="the-more-you-know">8 The More You Know</h3>
+<p>We can now create todos and mark them as being complete. While 76% of all statistics are made up, let&#8217;s see if we can display more accurate information from the data we have.  At the top of our list, let&#8217;s display the number of todos remaining. Open <tt>todos.handlebars</tt> and insert this new view:</p>
+<div class="code_container">
+<div class="filename">in apps/todos/resources/templates/todos.handlebars</div>
+<pre class="brush: xml; gutter: false; toolbar: false">
+
+&lt;!-- after the Todos.CreateTodoView --&gt;
+
+{{#view Todos.StatsView id=&quot;stats&quot;}}
+  {{displayRemaining}} remaining
+{{/view}}
+</pre></div><p>Handlebars expressions, like {{displayRemaining}}, allows us to automatically update the <span class="caps">DOM</span> when a property on our view changes. In this case, we&#8217;re saying that the content of the <code>Todos.StatsView</code> should be bound to the value of the view&#8217;s <tt>displayRemaining</tt> property.  As with the other bindings, this will be updated for us automatically whenever the value changes.</p>
+<p>Let&#8217;s go ahead and implement that view in <tt>todos.js</tt> now:</p>
+<div class="code_container">
+<div class="filename">in apps/todos/todos.js</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+// before SC.ready
+
+Todos.StatsView = SC.TemplateView.extend({
+  remainingBinding: 'Todos.todoListController.remaining',
+
+  displayRemaining: function() {
+    var remaining = this.get('remaining');
+    return remaining + (remaining === 1 ? &quot; item&quot; : &quot; items&quot;);
+  }.property('remaining')
+});
+</pre></div><p><tt>displayRemaining</tt> contains a pluralized string, based on the number of remaining todos.  Here is another core piece of SproutCore in action, this one called a <strong>computed property</strong>. Computed properties are properties whose value is determined by running a function. For example, if <tt>remaining</tt> equals <code>1</code>, <tt>displayRemaining</tt> will contain the string <code>"1 item"</code>.</p>
+<p>We say that <tt>displayRemaining</tt> <strong>depends on</strong> <code>remaining</code> because it requires another value to generate its own value. We list these <strong>dependent keys</strong> inside the <tt>property()</tt> declaration.</p>
+<p>We&#8217;ve also bound the view&#8217;s <tt>remaining</tt> property to the <code>todoListController</code>&#8216;s <tt>remaining</tt> property. This means that, because of the dependency chain we&#8217;ve described, if <code>Todos.todoListController.remaining</code> changes, <tt>displayRemaining</tt> will automatically update.</p>
+<p>When we have information that views need but is based on aggregate information about our models, the array controller is a good place to put it. Let&#8217;s add a new computed property to <code>todoListController</code> in <code>todos.js</code>:</p>
+<div class="code_container">
+<div class="filename">in apps/todos/todos.js</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+// updating previous code
+
+Todos.todoListController = SC.ArrayController.create({
+
+  // ...
+
+  remaining: function() {
+    return this.filterProperty('isDone', false).get('length');
+  }.property('@each.isDone')
+});
+</pre></div><p>Here, we specify our dependent key using <tt>@each</tt>. This allows us to depend on properties of the array&#8217;s items. In this case, we want to update the <code>remaining</code> property any time <tt>isDone</tt> changes on a <code>Todo</code>.</p>
+<div class="note"><p>The <ins>@each</ins> property also updates when an item is added or removed.</p></div>
+<p>It&#8217;s important to declare dependent keys because SproutCore uses this information to know when to update bindings. In our case, our <code>StatsView</code> updates any time <code>todoListController</code>&#8217;s <code>remaining</code> property changes.</p>
+<p>Here&#8217;s how it all fits together:</p>
+<div style='text-align: center'>
+<img src="images/html_based/bindings.png" alt="" />
+</div>
+<div class="info"><p>As we build up our application, we create <strong>declarative</strong> links between objects. These links describe how application state flows from the model layer to the <span class="caps">HTML</span> in the presentation layer.</p></div>
+<h3 id="clearing-completed-todos">9 Clearing Completed Todos</h3>
+<p>As we populate our list with todos, we may want to periodically clear out those we&#8217;ve completed. As you have learned, we will want to make that change to the <tt>todoListController</tt>, and let SproutCore automatically propagate those changes to the <span class="caps">DOM</span>.</p>
+<p>Let&#8217;s add a new <tt>clearCompletedTodos</tt> method to the controller.</p>
+<div class="code_container">
+<div class="filename">in apps/todos/todos.js</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+// updating existing code
+
+Todos.todoListController = SC.ArrayController.create({
+
+  // ...
+
+  clearCompletedTodos: function() {
+    this.filterProperty('isDone', true).forEach(this.removeObject, this);
+  }
+});
+</pre></div><p>Next, let&#8217;s add a button to our template. Open <tt>todos.handlebars</tt> and add a button inside the <span class="caps">HTML</span> for <code>StatsView</code> as shown here:</p>
+<div class="code_container">
+<div class="filename">in apps/todos/resources/templates/todos.handlebars</div>
+<pre class="brush: xml; gutter: false; toolbar: false">
+
+&lt;!-- updating existing code --&gt;
+
+{{#view Todos.StatsView id=&quot;stats&quot;}}
+  {{#view SC.Button classBinding=&quot;isActive&quot; ¬
+    target=&quot;Todos.todoListController&quot; ¬
+    action=&quot;clearCompletedTodos&quot;}}
+    Clear Completed Todos
+  {{/view}}
+  {{displayRemaining}} remaining.
+{{/view}}
+</pre></div><p>We&#8217;ve defined an instance of <code>SC.Button</code>, which calls a method on an object when it is clicked. In this case we&#8217;ve told the button to call the <tt>clearCompletedTodos</tt> method (its action) on the <tt>Todos.todoListController</tt> object (its target).</p>
+<p>We&#8217;ve also told it to add an <tt>is-active</tt> class to the view when it is clicked or tapped. Every <code>SC.Button</code> has an <tt>isActive</tt> property that will be true when it is in the process of being clicked. This allows us to display a visual cue to the user that they have hit the right target.</p>
+<p>Go back to your browser and try it out. Add some todos, then mark them done and clear them.  Because we previously bound the visual list to the <code>todoListController</code>, making a change through new means has the expected effect.</p>
+<h3 id="marking-all-as-done">10 Marking All as Done</h3>
+<p>Let&#8217;s say you&#8217;ve decided to actually get all of your work done. Wouldn&#8217;t it be nice to have a way to easily mark every todo as complete?</p>
+<p>It turns out that, due to our application&#8217;s declarative nature, all the hard work is already done. We just need a way to mark every <code>Todo</code> complete.</p>
+<p>Let&#8217;s first create a new computed property on our controller that describes whether or not every todo is done. It might look something like this:</p>
+<div class="code_container">
+<div class="filename">in apps/todos/todos.js</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+// updating existing code
+
+Todos.todoListController = SC.ArrayController.create({
+
+  // ...
+
+  allAreDone: function() {
+    return this.get('length') &amp;&amp; this.everyProperty('isDone', true);
+  }.property('@each.isDone')
+});
+</pre></div>
+<div class="info"><p>SproutCore has many enumerable helpers. <ins>everyProperty(&#8216;isDone&#8217;, true)</ins> returns true if every item in the array has an <ins>isDone</ins> property that evaluates to <ins>true</ins>. You can find out more in the <a href="/enumerables.html">Enumerables guide.</a></p></div>
+<p>Next, we&#8217;ll create a checkbox view to mark all items complete and bind its value to the controller&#8217;s property:</p>
+<div class="code_container">
+<div class="filename">in apps/todos/resources/templates/todos.handlebars</div>
+<pre class="brush: xml; gutter: false; toolbar: false">
+
+&lt;!-- directly below the Todos.StatsView --&gt;
+
+{{view SC.Checkbox class=&quot;mark-all-done&quot; ¬
+  title=&quot;Mark All as Done&quot; ¬
+  valueBinding=&quot;Todos.todoListController.allAreDone&quot;}}
+</pre></div><p>If you were to reload your browser and use the app now, you&#8217;d notice that clicking all of the checkboxes of your todos will cause the &#8220;Mark All as Done&#8221; checkbox to become checked. However, it doesn&#8217;t work in the other direction: clicking &#8220;Mark All as Done&#8221; has no effect.</p>
+<p>So far, our computed properties have described how to calculate a value from dependent properties. However, in this case, we want to accept a new value, and update dependent properties to reflect it.  Lets update our <tt>allAreDone</tt> computed property to also accept a value.</p>
+<div class="code_container">
+<div class="filename">in apps/todos/todos.js</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+// updating existing code
+
+Todos.todoListController = SC.ArrayController.create({
+
+  // ...
+
+  allAreDone: function(key, value) {
+    if (value !== undefined) {
+      this.setEach('isDone', value);
+
+      return value;
+    } else {
+      return this.get('length') &amp;&amp; this.everyProperty('isDone', true);
+    }
+  }.property('@each.isDone')
+});
+</pre></div><p>When you set a computed property, your computed property function is called with the property key as the first parameter and the new value as the second. To determine if SproutCore is asking for the value or trying to set it, we examine the <tt>value</tt> parameter. If it is defined, we iterate through each <code>Todo</code> and set its <tt>isDone</tt> property to the new value.</p>
+<p>Because bindings are bi-directional, SproutCore will set <tt>allAreDone</tt> to <code>true</code> when the user clicks the &#8220;Mark All as Done&#8221; checkbox. Conversely, unchecking it will make SproutCore set <tt>allAreDone</tt> to <code>false</code>, unchecking all todos.</p>
+<p>Reload the app and add some todos. Click &#8220;Mark All as Done&#8221;. Wow! Each of the individual check boxes gets checked off. If you uncheck one of them, the &#8220;Mark All as Done&#8221; checkbox un-checks itself.</p>
+<div class="info"><p>When you use SproutCore, as you scale your UI, you never need to wonder whether a new feature will work consistently with parts of the UI you already implemented. Since you build your view layer to simply reflect the state of your models, you can make changes however you want and see them update automatically.</p></div>
+<h3 id="mobile-specific-styles">11 Mobile Specific Styles</h3>
+<p>At this point, we actually have the app fully functional on all modern mobile devices.  Let&#8217;s optimize the experience for all of the different screen sizes we might encounter. Download the <a href="https://github.com/sproutcore/Todos-Example/raw/master/apps/todos/resources/stylesheets/todos_mobile.css"><span class="caps">CSS</span> for mobile</a> and save it as <tt>apps/todos/resources/stylesheets/todos_mobile.css</tt>.  Now load your app on a mobile device and you should see the same app, but styled properly for mobile devices and responding to touch events.</p>
+<div class="note"><p>The SproutCore development server will be available on your local network at your machine&#8217;s IP address. For example, you might visit http://192.168.1.1:4020/todos.</p></div>
+<h3 id="resources">12 Resources</h3>
+<p>Now that you have finished the first part of the Getting Started tutorial, you will want to acquaint yourself with the resources available to the SproutCore community.</p>
+<ul>
+	<li>Sign up for the <a href="http://groups.google.com/group/sproutcore">SproutCore Mailing List</a></li>
+	<li>Follow <a href="http://twitter.com/sproutcore">@sproutcore</a> on Twitter</li>
+	<li>Visit the <a href="irc://irc.freenode.net/sproutcore">#sproutcore</a> <span class="caps">IRC</span> channel to get real-time help</li>
+	<li>Bookmark the <a href="http://sproutcore.com/docs/">SproutCore <span class="caps">API</span> Documentation</a> and the <a href="http://sproutcore.com/guides/">SproutCore Guides</a></li>
+</ul>
+<h3 id="continue-on">13 Continue On</h3>
+<p>Now that you&#8217;ve built a basic SproutCore app, continue on to <a href="getting_started_2.html">the next part of this tutorial</a> to learn about working with SproutCore&#8217;s model layer.</p>
+<h3 id="changelog">14 Changelog</h3>
+<ul>
+	<li>March 1, 2011: initial version by <a href="credits.html#tomdale">Tom Dale</a> and <a href="credits.html#wycats">Yehuda Katz</a></li>
+	<li>March 2, 2011: fixed formmating and added paths to filenames by <a href="credits.html#topherfangio">Topher Fangio</a> and <a href="credits.html#pwagenet">Peter Wagenet</a></li>
+	<li>March 22, 2011: cleaned up demo based on new features by <a href="credits.html#wycats">Yehuda Katz</a></li>
+	<li>April 11, 2011: consistently use view classes and extend, update to reflect better Handlebars integration by <a href="credits.html#wycats">Yehuda Katz</a> and <a href="credits.html#tomdale">Tom Dale</a></li>
+	<li>May 6, 2011: clarifications, minor inconsistency fixes, updated <span class="caps">CSS</span> for older browsers, plus new mobile section by <a href="credits.html#publickeating">Tyler Keating</a></li>
+	<li>May 9, 2011: update for recent changes in SproutCore 1.6 by <a href="credits.html#tomdale">Tom Dale</a> and <a href="credits.html#wycats">Yehuda Katz</a></li>
+</ul>
+
+      </div>
+        <div id="subCol">
+          <h3 class="chapter"><img src="images/strobe/chapters.png" alt="" />Chapters</h3>
+          <ol class="chapters">
+            <li><a href="#following-along"><p>Following Along</p>
+</a></li><li><a href="#installing-sproutcore"><p>Installing SproutCore</p>
+</a></li><li><a href="#generate-your-new-application"><p>Generate Your New Application</p>
+</a></li><li><a href="#defining-your-model"><p>Defining Your Model</p>
+</a></li><li><a href="#managing-the-model-using-a-controller"><p>Managing the Model Using a Controller</p>
+</a></li><li><a href="#creating-new-todos-with-a-text-field"><p>Creating New Todos with a Text Field</p>
+</a></li><li><a href="#getting-things-done"><p>Getting Things Done</p>
+</a></li><li><a href="#the-more-you-know"><p>The More You Know</p>
+</a></li><li><a href="#clearing-completed-todos"><p>Clearing Completed Todos</p>
+</a></li><li><a href="#marking-all-as-done"><p>Marking All as Done</p>
+</a></li><li><a href="#mobile-specific-styles"><p>Mobile Specific Styles</p>
+</a></li><li><a href="#resources"><p>Resources</p>
+</a></li><li><a href="#continue-on"><p>Continue On</p>
+</a></li><li><a href="#changelog"><p>Changelog</p>
+</a></li>
+          </ol>
+        </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+	  <footer>
+	    <div class="container">
+	      <div class="col">
+	        <a href="index.html"><img src="images/footer/sc_logo_medium.png" alt="SproutCore" /></a>
+	        <p id="license">
+	          Copyright 2011 <a href="http://www.strobecorp.com">Strobe Inc</a>.
+	          <br />
+	          SproutCore framework is under MIT License.
+	        </p>
+	      </div>
+	      <nav class="col">
+	        <h1>Site Navigation</h1>
+	        <ul>
+	          <li><a href="http://www.sproutcore.com/about/">About</a></li>
+	          <li><a href="http://sproutcore.com/docs/">Docs</a></li>
+	          <li><a href="http://blog.sproutcore.com">Blog</a></li>
+	          <li><a href="http://www.sproutcore.com/install/?redirect=1">Download</a></li>
+	          <li><a href="http://www.sproutcore.com/community/">Community</a></li>
+	          <li><a href="https://github.com/sproutcore/sproutcore">GitHub</a></li>
+	          <li><a href="mailto:community@sproutcore.com">Contact Us</a></li>
+	          <li><a href="http://sproutcore.com/guides/">Guides</a></li>
+	        </ul>
+	        <a href="http://www.w3.org/html/logo/"><img src="images/footer/html5_tech.png" alt="HTML5 Powered" /></a>
+	      </nav>
+	      <div class="col">
+	        <h1>Get in Touch, Stay Informed</h1>
+	        <ul class="social">
+	          <li><a href="http://twitter.com/sproutcore"><img src="images/footer/twitter.png" alt="Twitter" /></a></li>
+	          <li><a href="http://www.facebook.com/sproutcore"><img src="images/footer/facebook.png" alt="Facebook" /></a></li>
+	          <li><a href="http://groups.google.com/group/sproutcore"><img src="images/footer/google.png" alt="Google Groups" /></a></li>
+						<li><a href="http://groups.google.com/group/sproutcore">Subscribe To Mailing List</a></li>
+	        </ul>
+					<a href="http://eepurl.com/dK1-Y" target="_blank" id="newsletter" class="button secondary">Sign Up For Our Newsletter!</a>
+	<!-- Commented out until we have mailchimp API integration.
+					<h2>Subscribe To Newsletter</h2>
+	        <div id="subscribe">
+	          <form>
+	            <input type="text" name="email" />
+	            <button name="subscribe">Sign-Up</button>
+	            <div class="processing"><img src="/img/spinner.gif"></div>
+	            <div class="error"></div>
+	          </form>
+	        </div>
+	-->
+	      </div>
+	      <a href="#feature" class="top">Back To Top</a>
+	    </div>
+	  </footer>
+
+  <script src="http://code.jquery.com/jquery-1.6.min.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" src="javascripts/sproutGuides.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushJScript.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushCss.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.all()
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-19584397-1']);
+    _gaq.push(['_setDomainName', '.sproutcore.com']);
+    _gaq.push(['_setAllowHash', false]);
+    _gaq.push(['_setAllowLinker', true]);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl': 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>SproutCore Guides: SproutCore Documentation Guidelines</title>
+
+  <!-- guides styles -->
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/strobe.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <!-- syntax highlighting styles -->
+  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/shThemeStrobeGuides.css" />
+</head>
+<body class="guide">
+
+  <header role="banner">
+    <div class="container">
+      <h1 id="logo">
+        <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
+      </h1>
+      <nav role="navigation">
+        <ul>
+          <li><a href="http://sproutcore.com/about/">About</a></li>
+          <li class="active"><a href="http://sproutcore.com/guides/">Guides</a></li>
+          <li><a href="http://sproutcore.com/docs/">Docs</a></li>
+          <li><a href="http://sproutcore.com/community/">Community</a></li>
+          <li><a href="http://blog.sproutcore.com">Blog</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div id="feature">
+    <div class="wrapper">
+      <div class="feature_header">
+        <a href="/"><img src="images/strobe/guides.png"></a>
+        <h2><a href="/">SproutCore Guides</a></h2>
+        <p>These guides are designed to help you write and perfect your code.</p>
+      </div>
+      <div class="feature_sidebar">
+        <a href="index.html" id="guidesMenu">
+          Guides Index <span id="guidesArrow">&#9656;</span>
+        </a>
+        <div id="guides" class="clearfix" style="display: none;">
+          <a href="index.html" class="guidesMenu">
+            Guides Index <span class="guidesArrow">&#9662;</span>
+          </a>
+          <hr style="clear:both;">
+          <dl class="L">
+    <dt>Start Here</dt>
+      <dd><a href="getting_started.html">Getting Started: Part 1</a></dd>
+      <dd><a href="getting_started_2.html">Getting Started: Part 2</a></dd>
+      <dd><a href="core_concepts.html">Core Concepts</a></dd>
+      <dd><a href="enumerables.html">Enumerables</a></dd>
+    <dt>Views</dt>
+      <dd><a href="using_handlebars.html">Using Handlebars Templates</a></dd>
+      <dd><a href="views.html">Core View Concepts</a></dd>
+    <dt>Models</dt>
+      <dd><a href="records.html">SproutCore Records</a></dd>
+      <dd><a href="fixtures.html">Using Fixtures</a></dd>
+    <dt>Theming</dt>
+      <dd><a href="chance.html">Using Chance, SproutCore's CSS Framework</a></dd>
+      <dd><a href="theming_app.html">Theming Your App</a></dd>
+</dl>
+<dl class="R">
+    <dt>Testing</dt>
+      <dd><a href="unit_test_framework.html">Unit Testing</a></dd>
+      <dd><a href="adding_unit_test.html">Adding a Unit Test</a></dd>
+      <dd><a href="writing_unit_tests.html">Writing Unit Tests</a></dd>
+      <dd><a href="running_unit_tests.html">Running Unit Tests</a></dd>
+      <dd><a href="todos_tdd.html">SproutCore Development Using TDD</a></dd>
+    <dt>Contributing to SproutCore</dt>
+      <dd><a href="style_guide.html">Javascript Style Guide</a></dd>
+      <dd><a href="commit_code.html">Committer Guidelines</a></dd>
+      <dd><a href="documentation_guidelines.html">Documentation Guidelines</a></dd>
+</dl>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+          <div class="headerSection">
+            <h2>SproutCore Documentation Guidelines</h2>
+<p>This guide will walk you through writing documentation for your SproutCore classes in a format that is friendly to jsdoc-toolkit, the library used for generating documentation from code.</p>
+
+          </div>
+        <h3 id="overview">1 Overview</h3>
+<p>SproutCore uses the <a href="http://code.google.com/p/jsdoc-toolkit/">jsdoc-toolkit</a> to generate its documentation. As such, your SproutCore classes should follow strict code-documenting formatting guidelines in order to properly generate your <span class="caps">HTML</span> documentation. This document outlines the proper format you should use.</p>
+<h3 id="classes">2 Classes</h3>
+<p>Classes must always start with an <tt>@class</tt> directive, followed by optional the class description. You can use <a href="http://daringfireball.net/projects/markdown/">Markdown</a> to style your description (add headings, paragraphs, code, etc.) JsDoc Toolkit also supports tags in your comments to add metadata about your class. For example, you can specify who the author of the class is, what classes it inherits from,  what classes are related, and what version of the frameworks it’s been available since.</p>
+<h4 id="common-and-supported-markdown-syntax">2.1 Common and supported Markdown syntax:</h4>
+<ul>
+	<li>For code samples, make sure you indent the code block further than the other text</li>
+	<li>For headers, add three dashes (<tt>---</tt>) for 2nd level headers, and three (<tt>===</tt>) for 1st level headers. These go on the subsequent line</li>
+	<li>For list, prefix each line with a dash (<tt>-</tt>)</li>
+</ul>
+<div class="code_container">
+<div class="filename">Sample Class Documentation</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+/**
+  @class
+  
+  Class Description
+  ======
+  
+  Overview
+  ----------
+
+  This is a sample description. Here’s some code:
+          
+         SC.Store.find(...)
+  
+  And here’s a list:
+
+  - Eggs
+  - Butter
+  
+  @deprecated This class has been deprecated. Please use SC.NewRequest
+  @see &lt;a href=&quot;http://getfirebug.com/logging.html&quot;&gt;Firebug Logging Reference&lt;/a&gt;
+  @extends SC.Object
+  @author Majd Taby
+  @since SproutCore 1.0
+*/
+
+SC.Request = SC.Object.extend(
+ /** @scope SC.Request.prototype */{
+ ...
+});
+</pre></div><p>The <tt>@scope</tt> definition is mandatory, and it defines what class/namespace the proceeding code documents.</p>
+<p>You can define multiple <tt>@see</tt>/<tt>extends</tt>/<tt>author</tt> directives for each class, as you see fit.</p>
+<p><strong>Note</strong>: you cannot put any javascript between your documentation and the class it’s documenting. Otherwise, JsDoc will get confused by what you’re trying to document.</p>
+<h4 id="instance-methods">2.2 Instance Methods</h4>
+<p>Documenting methods follows the same general structure as a class, but with a different set of required/optional directives. You start off by describing the method’s functionality, followed by the parameters, and then the return types.</p>
+<p>It’s important to keep in mind that the jsdoc toolkit does not parse javascript code. This means that you need to put the name of the parameters in the documentation, and it’s your responsibility to keep them up to date as you update the method.</p>
+<p>In the example below, the response property is marked as optional by wrapping the name in square brackets.</p>
+<div class="code_container">
+<div class="filename">Sample Instance Method Documentation</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+/**
+  Method description.
+    
+  @param {SC.Request}   request     A copy of the request, frozen.
+  @param {SC.Response} [response]   An optional parameter
+  @param {SC.Response} [foobar]     A sample parameter
+
+  @throws {SC.Exception} SC.RequestNotValidException
+  @returns {Boolean} Yes on success, NO on failure.
+*/
+didSend: function(request, response) {},
+</pre></div><h4 id="class-methods">2.3 Class Methods</h4>
+<p>Class methods are usually implemented by mixing-in extra methods to an existing class. For these methods/properties to show up in the same location in the generated output, you need to add a <tt>@scope</tt> declaration just as you did with the class.</p>
+<div class="code_container">
+<div class="filename">Sample Class Method Documentation</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+/**
+  @class
+
+   ...
+*/
+SC.Store = SC.Object.extend(/** @scope SC.Store.prototype */{...});
+
+SC.Store.mixin(/** @scope SC.Store.prototype */{...})
+</pre></div><h4 id="properties">2.4 Properties</h4>
+<p>Properties are arguably the simplest entity to document. You simply need to write a description of what the property represents, and what type it is. You can optionally provide a default value.</p>
+<div class="code_container">
+<div class="filename">Sample Property Documentation</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+/**
+  Description
+  
+  @default YES
+  @type Boolean
+*/
+isAsynchronous: YES,
+</pre></div><p><strong>Note</strong>: Constants are documented using <tt>@constant</tt> but they don’t need a default value.</p>
+<h4 id="computed-properties">2.5 Computed Properties</h4>
+<p>Computed Properties are documented just like regular properties but they add the <tt>@field</tt> property.</p>
+<div class="code_container">
+<div class="filename">Sample Computed Property Documentation</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+/**
+  Description
+  
+  @field
+  @default YES
+  @type Boolean
+*/
+isAsynchronous: function(){...
+</pre></div><h3 id="testing-and-viewing-your-documentation-during-development">3 Testing and viewing your documentation during development</h3>
+<p>If, during development, you would like to test your documentation and see how it looks once it&#8217;s generated, then you can use the SproutCore TextMate bundle available on <a href="https://github.com/sproutcore/sproutcore-tmbundle">github</a> which includes a Command to generate documentation for the current file you are viewing. To activate it, go to a jsdoc-documented javascript file, and click <span class="caps">CMD</span> + <span class="caps">CTRL</span> + G.</p>
+<p><strong>Note</strong>: Generating documentation in TextMate requires the Web Sharing feature of Mac OS X to be enabled since it uses apache to display your files.</p>
+<h4 id="references">3.1 References</h4>
+<ul>
+	<li><a href="http://code.google.com/p/jsdoc-toolkit/wiki/TagReference">JSDoc Tag Reference</a></li>
+</ul>
+<h3 id="changelog">4 Changelog</h3>
+<ul>
+	<li>March 22, 2011: initial version by <a href="credits.html#mtaby">Majd Taby</a></li>
+</ul>
+
+      </div>
+        <div id="subCol">
+          <h3 class="chapter"><img src="images/strobe/chapters.png" alt="" />Chapters</h3>
+          <ol class="chapters">
+            <li><a href="#overview"><p>Overview</p>
+</a></li><li><a href="#classes"><p>Classes</p>
+</a><ul><li><a href="#common-and-supported-markdown-syntax"><p>Common and supported Markdown syntax:</p>
+</a></li> <li><a href="#instance-methods"><p>Instance Methods</p>
+</a></li> <li><a href="#class-methods"><p>Class Methods</p>
+</a></li> <li><a href="#properties"><p>Properties</p>
+</a></li> <li><a href="#computed-properties"><p>Computed Properties</p>
+</a></li></ul></li><li><a href="#testing-and-viewing-your-documentation-during-development"><p>Testing and viewing your documentation during development</p>
+</a><ul><li><a href="#references"><p>References</p>
+</a></li></ul></li><li><a href="#changelog"><p>Changelog</p>
+</a></li>
+          </ol>
+        </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+	  <footer>
+	    <div class="container">
+	      <div class="col">
+	        <a href="index.html"><img src="images/footer/sc_logo_medium.png" alt="SproutCore" /></a>
+	        <p id="license">
+	          Copyright 2011 <a href="http://www.strobecorp.com">Strobe Inc</a>.
+	          <br />
+	          SproutCore framework is under MIT License.
+	        </p>
+	      </div>
+	      <nav class="col">
+	        <h1>Site Navigation</h1>
+	        <ul>
+	          <li><a href="http://www.sproutcore.com/about/">About</a></li>
+	          <li><a href="http://sproutcore.com/docs/">Docs</a></li>
+	          <li><a href="http://blog.sproutcore.com">Blog</a></li>
+	          <li><a href="http://www.sproutcore.com/install/?redirect=1">Download</a></li>
+	          <li><a href="http://www.sproutcore.com/community/">Community</a></li>
+	          <li><a href="https://github.com/sproutcore/sproutcore">GitHub</a></li>
+	          <li><a href="mailto:community@sproutcore.com">Contact Us</a></li>
+	          <li><a href="http://sproutcore.com/guides/">Guides</a></li>
+	        </ul>
+	        <a href="http://www.w3.org/html/logo/"><img src="images/footer/html5_tech.png" alt="HTML5 Powered" /></a>
+	      </nav>
+	      <div class="col">
+	        <h1>Get in Touch, Stay Informed</h1>
+	        <ul class="social">
+	          <li><a href="http://twitter.com/sproutcore"><img src="images/footer/twitter.png" alt="Twitter" /></a></li>
+	          <li><a href="http://www.facebook.com/sproutcore"><img src="images/footer/facebook.png" alt="Facebook" /></a></li>
+	          <li><a href="http://groups.google.com/group/sproutcore"><img src="images/footer/google.png" alt="Google Groups" /></a></li>
+						<li><a href="http://groups.google.com/group/sproutcore">Subscribe To Mailing List</a></li>
+	        </ul>
+					<a href="http://eepurl.com/dK1-Y" target="_blank" id="newsletter" class="button secondary">Sign Up For Our Newsletter!</a>
+	<!-- Commented out until we have mailchimp API integration.
+					<h2>Subscribe To Newsletter</h2>
+	        <div id="subscribe">
+	          <form>
+	            <input type="text" name="email" />
+	            <button name="subscribe">Sign-Up</button>
+	            <div class="processing"><img src="/img/spinner.gif"></div>
+	            <div class="error"></div>
+	          </form>
+	        </div>
+	-->
+	      </div>
+	      <a href="#feature" class="top">Back To Top</a>
+	    </div>
+	  </footer>
+
+  <script src="http://code.jquery.com/jquery-1.6.min.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" src="javascripts/sproutGuides.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushJScript.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushCss.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.all()
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-19584397-1']);
+    _gaq.push(['_setDomainName', '.sproutcore.com']);
+    _gaq.push(['_setAllowHash', false]);
+    _gaq.push(['_setAllowLinker', true]);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl': 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>SproutCore Guides: The SproutCore Enumerable API</title>
+
+  <!-- guides styles -->
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/strobe.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <!-- syntax highlighting styles -->
+  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/shThemeStrobeGuides.css" />
+</head>
+<body class="guide">
+
+  <header role="banner">
+    <div class="container">
+      <h1 id="logo">
+        <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
+      </h1>
+      <nav role="navigation">
+        <ul>
+          <li><a href="http://sproutcore.com/about/">About</a></li>
+          <li class="active"><a href="http://sproutcore.com/guides/">Guides</a></li>
+          <li><a href="http://sproutcore.com/docs/">Docs</a></li>
+          <li><a href="http://sproutcore.com/community/">Community</a></li>
+          <li><a href="http://blog.sproutcore.com">Blog</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div id="feature">
+    <div class="wrapper">
+      <div class="feature_header">
+        <a href="/"><img src="images/strobe/guides.png"></a>
+        <h2><a href="/">SproutCore Guides</a></h2>
+        <p>These guides are designed to help you write and perfect your code.</p>
+      </div>
+      <div class="feature_sidebar">
+        <a href="index.html" id="guidesMenu">
+          Guides Index <span id="guidesArrow">&#9656;</span>
+        </a>
+        <div id="guides" class="clearfix" style="display: none;">
+          <a href="index.html" class="guidesMenu">
+            Guides Index <span class="guidesArrow">&#9662;</span>
+          </a>
+          <hr style="clear:both;">
+          <dl class="L">
+    <dt>Start Here</dt>
+      <dd><a href="getting_started.html">Getting Started: Part 1</a></dd>
+      <dd><a href="getting_started_2.html">Getting Started: Part 2</a></dd>
+      <dd><a href="core_concepts.html">Core Concepts</a></dd>
+      <dd><a href="enumerables.html">Enumerables</a></dd>
+    <dt>Views</dt>
+      <dd><a href="using_handlebars.html">Using Handlebars Templates</a></dd>
+      <dd><a href="views.html">Core View Concepts</a></dd>
+    <dt>Models</dt>
+      <dd><a href="records.html">SproutCore Records</a></dd>
+      <dd><a href="fixtures.html">Using Fixtures</a></dd>
+    <dt>Theming</dt>
+      <dd><a href="chance.html">Using Chance, SproutCore's CSS Framework</a></dd>
+      <dd><a href="theming_app.html">Theming Your App</a></dd>
+</dl>
+<dl class="R">
+    <dt>Testing</dt>
+      <dd><a href="unit_test_framework.html">Unit Testing</a></dd>
+      <dd><a href="adding_unit_test.html">Adding a Unit Test</a></dd>
+      <dd><a href="writing_unit_tests.html">Writing Unit Tests</a></dd>
+      <dd><a href="running_unit_tests.html">Running Unit Tests</a></dd>
+      <dd><a href="todos_tdd.html">SproutCore Development Using TDD</a></dd>
+    <dt>Contributing to SproutCore</dt>
+      <dd><a href="style_guide.html">Javascript Style Guide</a></dd>
+      <dd><a href="commit_code.html">Committer Guidelines</a></dd>
+      <dd><a href="documentation_guidelines.html">Documentation Guidelines</a></dd>
+</dl>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+          <div class="headerSection">
+            <h2>The SproutCore Enumerable <span class="caps">API</span></h2>
+<p>This guide covers how to work with enumerable SproutCore objects, like Arrays, Sets, ArrayControllers, and RecordArrays. When you are done with this guide, you should be able to:</p>
+<ul>
+	<li>Identify the SproutCore enumerable objects.</li>
+	<li>Fluently work with enumerable objects using the Enumerable interface.</li>
+</ul>
+
+          </div>
+        <h3 id="what-are-enumerables">1 What Are Enumerables?</h3>
+<p>In SproutCore, an Enumerable is any object that contains a number of child objects, and which allows you to work with those children using the Enumerable interface. The most basic Enumerable is the built-in JavaScript Array.</p>
+<p>For instance, all Enumerables support the standard <tt>forEach</tt> method:</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+[1,2,3].forEach(function(item) {
+  console.log(item);
+});
+</pre></div><p>In general, Enumerable methods, like <tt>forEach</tt>, take an optional second parameter, which will become the value of <tt>this</tt> in the callback function:</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+var array = [1,2,3];
+
+array.forEach(function(item) {
+  console.log(item, this.indexOf(item));
+}, array)
+</pre></div><p>Among other reasons, you will find this useful when using another Enumerable method as a callback to <tt>forEach</tt>:</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+var array = [1,2,3];
+
+array.forEach(array.removeObject, array);
+</pre></div>
+<div class="note"><p>This second parameter helps work around a limitation of JavaScript which sets the value of <ins>this</ins> to <ins>window</ins> in methods used this way.</p></div>
+<h3 id="enumerables-in-sproutcore">2 Enumerables in SproutCore</h3>
+<p>In general, SproutCore objects that represent lists implement the Enumerable interface. Some examples:</p>
+<ul>
+	<li><strong>Array</strong>: SproutCore extends the native JavaScript Array with the Enumerable interface.</li>
+	<li><strong>ArrayController</strong>: A construct that wraps a native Array and adds additional functionality for the view layer.</li>
+	<li><strong>SparseArray</strong>: An Array-like object that will incrementally load in ranges as they are needed by the view layer.</li>
+	<li><strong>RecordArray</strong>: An Array-like object that represents a list of Record objects. RecordArray&#8217;s are &#8220;live&#8221;, and the Data Store can update them when new data comes in from the backend.</li>
+	<li><strong>Set</strong>: An object that can quickly answer whether it includes an object.</li>
+</ul>
+<h3 id="the-enumerable-interface">3 The Enumerable Interface</h3>
+<h4 id="parameters">3.1 Parameters</h4>
+<p>The callbacks to Enumerable methods take three arguments:</p>
+<ul>
+	<li><strong>item</strong>: the item for the current iteration.</li>
+	<li><strong>index</strong>: an Integer, counting up from 0.</li>
+	<li><strong>self</strong>: the Enumerable itself.</li>
+</ul>
+<h4 id="enumeration">3.2 Enumeration</h4>
+<p>To enumerate all the values of an enumerable object, use the <tt>forEach</tt> method:</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+enumerable.forEach(function(item, index, self) {
+  console.log(item);
+});
+</pre></div><p>To invoke some method on each element of an enumerable object, use the <tt>invoke</tt> method:</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+Person = SC.Object.extend({
+  sayHello: function() {
+    console.log(&quot;Hello from &quot; + this.get('name'));
+  }
+});
+
+var people = [
+  Person.create({ name: &quot;Juan&quot; }),
+  Person.create({ name: &quot;Charles&quot; }),
+  Person.create({ name: &quot;Majd&quot; })
+]
+
+people.invoke('sayHello');
+
+// Hello from Juan
+// Hello from Charles
+// Hello from Majd
+</pre></div><h4 id="first-and-last">3.3 First and Last</h4>
+<p>You can get the first or last object from an Enumerable by getting <tt>firstObject</tt> or <tt>lastObject</tt>.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+[1,2,3].get('firstObject') // 1
+[1,2,3].get('lastObject')  // 3
+</pre></div><h4 id="converting-to-array">3.4 Converting to Array</h4>
+<p>This one is simple. To convert an Enumerable into an Array, simply call its <tt>toArray</tt> method.</p>
+<h4 id="transforming">3.5 Transforming</h4>
+<p>You can transform an Enumerable into a derived Array by using the <tt>map</tt> method:</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+['Goodbye', 'cruel', 'world'].map(function(item, index, self) {
+  return item + &quot;!&quot;;
+});
+
+// returns [&quot;Goodbye!&quot;, &quot;cruel!&quot;, &quot;world!&quot;]
+</pre></div><h4 id="setting-and-getting-on-each-object">3.6 Setting and Getting on Each Object</h4>
+<p>A very common use of <tt>forEach</tt> and <tt>map</tt> is to get (or set) a property on each element. You can use the <tt>getEach</tt> and <tt>setEach</tt> methods to accomplish these goals.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+var arr = [SC.Object.create(), SC.Object.create()];
+
+// we now have an Array containing two SC.Objects
+
+arr.setEach('name', 'unknown');
+arr.getEach('name') // ['unknown', 'unknown']
+</pre></div><h4 id="filtering">3.7 Filtering</h4>
+<p>Another common task to perform on an Enumerable is to take the Enumerable as input, and return an Array after sorting or filtering it based on some criteria.</p>
+<p>For arbitrary filtering, use the (you guessed it) <tt>filter</tt> method. The filter method expects the callback to return <tt>true</tt> if SproutCore should include it in the final Array, and <tt>false</tt> or <tt>undefined</tt> if SproutCore should not.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+var arr = [1,2,3,4,5];
+
+arr.filter(function(item, index, self) {
+  if(item &lt; 4) { return true; }
+})
+
+// returns [1,2,3]
+</pre></div><p>When working with a collection of SproutCore objects, you will often want to filter a set of objects based upon the value of some property. The <tt>filterProperty</tt> method provides a shortcut.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+Todo = SC.Object.extend({
+  title: null,
+  isDone: false
+});
+
+todos = [
+  Todo.create({ title: 'Write code', isDone: true }),
+  Todo.create({ title: 'Go to sleep' })
+];
+
+todos.filterProperty('isDone', true);
+
+// returns an Array containing just the first item
+</pre></div><p>If you want to return just the first matched value, rather than an Array containing all of the matched values, you can use <tt>find</tt> and <tt>findProperty</tt>, which work just like <tt>filter</tt> and <tt>filterProperty</tt>, but return only one item.</p>
+<h4 id="sorting">3.8 Sorting</h4>
+<p>You can sort an Enumerable based on the value of some property or list of properties using <tt>sortProperty</tt>. If you pass in multiple properties, SproutCore will sort items with the same value for the first property by the value of the second parameter, and so on.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+var todos = [
+  Todo.create({ title: 'Write code', isDone: true }),
+  Todo.create({ title: 'Go to sleep' }),
+  Todo.create({ title: 'Eat lunch', isDone: true })
+];
+
+todos.sortProperty('isDone', 'title');
+
+// returns an Array containing
+// * Go to sleep
+// * Eat lunch
+// * Write code
+</pre></div><p>Internally, the <tt>sortProperty</tt> method uses <tt>SC.compare</tt>, which uses SproutCore&#8217;s comparable semantics. You can override the default comparison behavior for a custom object by using the <tt>SC.Comparable</tt> mixin.</p>
+<h4 id="aggregate-information-all-or-any">3.9 Aggregate Information (All or Any)</h4>
+<p>If you want to find out whether every item in an Enumerable matches some condition, you can use the <tt>every</tt> method:</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+Person = SC.Object.extend({
+  name: null,
+  isHappy: false
+});
+
+var people = [          
+  Person.create({ name: 'Yehuda', isHappy: true }),
+  Person.create({ name: 'Majd', isHappy: false })
+];
+
+people.every(function(person, index, self) {
+  if(person.get('isHappy')) { return true; }
+});
+
+// returns false
+</pre></div><p>If you want to find out whether at least one item in an Enumerable matches some conditions, you can use the <tt>some</tt> method:</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+people.some(function(person, index, self) {
+  if(person.get('isHappy')) { return true; }
+});
+
+// returns true
+</pre></div><p>Just like the filtering methods, the <tt>every</tt> and <tt>some</tt> methods have analogous <tt>everyProperty</tt> and <tt>someProperty</tt> methods.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+people.everyProperty('isHappy', true) // false
+people.someProperty('isHappy', true)  // true
+</pre></div><h3 id="changelog">4 Changelog</h3>
+<ul>
+	<li>May 3, 2011: initial version by <a href="credits.html#wycats">Yehuda Katz</a></li>
+</ul>
+
+      </div>
+        <div id="subCol">
+          <h3 class="chapter"><img src="images/strobe/chapters.png" alt="" />Chapters</h3>
+          <ol class="chapters">
+            <li><a href="#what-are-enumerables"><p>What Are Enumerables?</p>
+</a></li><li><a href="#enumerables-in-sproutcore"><p>Enumerables in SproutCore</p>
+</a></li><li><a href="#the-enumerable-interface"><p>The Enumerable Interface</p>
+</a><ul><li><a href="#parameters"><p>Parameters</p>
+</a></li> <li><a href="#enumeration"><p>Enumeration</p>
+</a></li> <li><a href="#first-and-last"><p>First and Last</p>
+</a></li> <li><a href="#converting-to-array"><p>Converting to Array</p>
+</a></li> <li><a href="#transforming"><p>Transforming</p>
+</a></li> <li><a href="#setting-and-getting-on-each-object"><p>Setting and Getting on Each Object</p>
+</a></li> <li><a href="#filtering"><p>Filtering</p>
+</a></li> <li><a href="#sorting"><p>Sorting</p>
+</a></li> <li><a href="#aggregate-information-all-or-any"><p>Aggregate Information (All or Any)</p>
+</a></li></ul></li><li><a href="#changelog"><p>Changelog</p>
+</a></li>
+          </ol>
+        </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+	  <footer>
+	    <div class="container">
+	      <div class="col">
+	        <a href="index.html"><img src="images/footer/sc_logo_medium.png" alt="SproutCore" /></a>
+	        <p id="license">
+	          Copyright 2011 <a href="http://www.strobecorp.com">Strobe Inc</a>.
+	          <br />
+	          SproutCore framework is under MIT License.
+	        </p>
+	      </div>
+	      <nav class="col">
+	        <h1>Site Navigation</h1>
+	        <ul>
+	          <li><a href="http://www.sproutcore.com/about/">About</a></li>
+	          <li><a href="http://sproutcore.com/docs/">Docs</a></li>
+	          <li><a href="http://blog.sproutcore.com">Blog</a></li>
+	          <li><a href="http://www.sproutcore.com/install/?redirect=1">Download</a></li>
+	          <li><a href="http://www.sproutcore.com/community/">Community</a></li>
+	          <li><a href="https://github.com/sproutcore/sproutcore">GitHub</a></li>
+	          <li><a href="mailto:community@sproutcore.com">Contact Us</a></li>
+	          <li><a href="http://sproutcore.com/guides/">Guides</a></li>
+	        </ul>
+	        <a href="http://www.w3.org/html/logo/"><img src="images/footer/html5_tech.png" alt="HTML5 Powered" /></a>
+	      </nav>
+	      <div class="col">
+	        <h1>Get in Touch, Stay Informed</h1>
+	        <ul class="social">
+	          <li><a href="http://twitter.com/sproutcore"><img src="images/footer/twitter.png" alt="Twitter" /></a></li>
+	          <li><a href="http://www.facebook.com/sproutcore"><img src="images/footer/facebook.png" alt="Facebook" /></a></li>
+	          <li><a href="http://groups.google.com/group/sproutcore"><img src="images/footer/google.png" alt="Google Groups" /></a></li>
+						<li><a href="http://groups.google.com/group/sproutcore">Subscribe To Mailing List</a></li>
+	        </ul>
+					<a href="http://eepurl.com/dK1-Y" target="_blank" id="newsletter" class="button secondary">Sign Up For Our Newsletter!</a>
+	<!-- Commented out until we have mailchimp API integration.
+					<h2>Subscribe To Newsletter</h2>
+	        <div id="subscribe">
+	          <form>
+	            <input type="text" name="email" />
+	            <button name="subscribe">Sign-Up</button>
+	            <div class="processing"><img src="/img/spinner.gif"></div>
+	            <div class="error"></div>
+	          </form>
+	        </div>
+	-->
+	      </div>
+	      <a href="#feature" class="top">Back To Top</a>
+	    </div>
+	  </footer>
+
+  <script src="http://code.jquery.com/jquery-1.6.min.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" src="javascripts/sproutGuides.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushJScript.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushCss.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.all()
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-19584397-1']);
+    _gaq.push(['_setDomainName', '.sproutcore.com']);
+    _gaq.push(['_setAllowHash', false]);
+    _gaq.push(['_setAllowLinker', true]);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl': 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</body>
+</html>

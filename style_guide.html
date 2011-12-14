@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>SproutCore Guides: JavaScript Style Guide</title>
+
+  <!-- guides styles -->
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/strobe.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <!-- syntax highlighting styles -->
+  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/shThemeStrobeGuides.css" />
+</head>
+<body class="guide">
+
+  <header role="banner">
+    <div class="container">
+      <h1 id="logo">
+        <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
+      </h1>
+      <nav role="navigation">
+        <ul>
+          <li><a href="http://sproutcore.com/about/">About</a></li>
+          <li class="active"><a href="http://sproutcore.com/guides/">Guides</a></li>
+          <li><a href="http://sproutcore.com/docs/">Docs</a></li>
+          <li><a href="http://sproutcore.com/community/">Community</a></li>
+          <li><a href="http://blog.sproutcore.com">Blog</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div id="feature">
+    <div class="wrapper">
+      <div class="feature_header">
+        <a href="/"><img src="images/strobe/guides.png"></a>
+        <h2><a href="/">SproutCore Guides</a></h2>
+        <p>These guides are designed to help you write and perfect your code.</p>
+      </div>
+      <div class="feature_sidebar">
+        <a href="index.html" id="guidesMenu">
+          Guides Index <span id="guidesArrow">&#9656;</span>
+        </a>
+        <div id="guides" class="clearfix" style="display: none;">
+          <a href="index.html" class="guidesMenu">
+            Guides Index <span class="guidesArrow">&#9662;</span>
+          </a>
+          <hr style="clear:both;">
+          <dl class="L">
+    <dt>Start Here</dt>
+      <dd><a href="getting_started.html">Getting Started: Part 1</a></dd>
+      <dd><a href="getting_started_2.html">Getting Started: Part 2</a></dd>
+      <dd><a href="core_concepts.html">Core Concepts</a></dd>
+      <dd><a href="enumerables.html">Enumerables</a></dd>
+    <dt>Views</dt>
+      <dd><a href="using_handlebars.html">Using Handlebars Templates</a></dd>
+      <dd><a href="views.html">Core View Concepts</a></dd>
+    <dt>Models</dt>
+      <dd><a href="records.html">SproutCore Records</a></dd>
+      <dd><a href="fixtures.html">Using Fixtures</a></dd>
+    <dt>Theming</dt>
+      <dd><a href="chance.html">Using Chance, SproutCore's CSS Framework</a></dd>
+      <dd><a href="theming_app.html">Theming Your App</a></dd>
+</dl>
+<dl class="R">
+    <dt>Testing</dt>
+      <dd><a href="unit_test_framework.html">Unit Testing</a></dd>
+      <dd><a href="adding_unit_test.html">Adding a Unit Test</a></dd>
+      <dd><a href="writing_unit_tests.html">Writing Unit Tests</a></dd>
+      <dd><a href="running_unit_tests.html">Running Unit Tests</a></dd>
+      <dd><a href="todos_tdd.html">SproutCore Development Using TDD</a></dd>
+    <dt>Contributing to SproutCore</dt>
+      <dd><a href="style_guide.html">Javascript Style Guide</a></dd>
+      <dd><a href="commit_code.html">Committer Guidelines</a></dd>
+      <dd><a href="documentation_guidelines.html">Documentation Guidelines</a></dd>
+</dl>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+          <div class="headerSection">
+            <h2>JavaScript Style Guide</h2>
+<p>Coding and naming convention style guidelines make your code clearer, easier to read and, they can also actually improve performance.</p>
+<p>Although you can use any convention that makes sense for you, the guidelines described here are based on years of experience from SproutCore developers in writing understandable and maintainable code.</p>
+<p>The SproutCore coding and naming convention style guidelines are based on the Cocoa style guide from <a href="http://cocoadevcentral.com/">CocoaDevCentral</a>.</p>
+
+          </div>
+        <h3 id="classes">1 Classes</h3>
+<p>Although JavaScript is a prototype-based language, SproutCore overlays the some of the concepts of traditional class-based programming for ease of use.</p>
+<h4 id="defining-classes">1.1 Defining Classes</h4>
+<p>Just as with Objective-C, JavaScript and thus, SproutCore, is not natively name spaced. Therefore, it is very important to be careful to use a consistent prefix when naming your classes. When you create a SproutCore application using the build tools, it will automatically set up a name space variable for you in core.js in your project.</p>
+<p>For example, if you are writing an application called &#8220;AddressBook&#8221;, the build tools will create the following:</p>
+<div class="code_container">
+<div class="filename">apps/address_book/core.js</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+AddressBook = SC.Application.create({
+  // ...
+});
+</pre></div><p>In SproutCore, class names are always capitalized. If you are extending an existing SproutCore view, it is generally preferred to add the name of the view to the end of the class name. For instance, if you extend a <tt>CollectionView</tt> in your AddressBook application to show a list of Contact objects, you would do it in the following manner:</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+AddressBook.ContactCollectionView = SC.CollectionView.extend({
+  // Add your custom properties and functions here.
+});
+</pre></div><h4 id="instantiated-classes">1.2 Instantiated Classes</h4>
+<p>If you are creating an instantiated SproutCore class, such as a controller, the naming convention is slightly different. An instantiated class is named using camel case with the first letter lowercase. If you&#8217;re creating an <tt>ArrayController</tt> to control your <tt>Contact</tt> objects, you would do the following:</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+AddressBook.contactsController = SC.ArrayController.create({
+  // Add your custom properties and functions here.
+});
+</pre></div><h4 id="create-vs-extend-and-design">1.3 Create vs Extend and Design</h4>
+<p>You may have noticed that the first two examples use <tt>.create()</tt> and the third uses <tt>.extend()</tt>. When should you use one of the other?</p>
+<p>When you use <tt>.create()</tt>, you are creating an instance of a class. It is similar to using the new operator. On the other hand, when you use <tt>.extend()</tt>, the resulting object is created as a new a subclass, where the properties and functions from the base class are added in addition to the things that you define on your own.</p>
+<p><tt>.design()</tt> is essentially the same as <tt>.extend()</tt>.  It allows Greenhouse and the SproutCore design framework to create parallel classes that can be used to manipulate views at design time.  Unless you&#8217;re including the design framework <tt>.design()</tt> works the same as <tt>.extend()</tt>.</p>
+<h3 id="properties-and-variables">2 Properties and Variables</h3>
+<p>Descriptive property and variable names are strongly encouraged in SproutCore. Since most deployed applications will deliver the JavaScript compressed to the user, using terse names will not significantly reduce the amount sent over the wire. Also, if any obfuscation is used as part of the build process, it will optimize the names for you. Therefore, naming your variables or properties as descriptive as you need will make the life of the developer a lot better and not degrade performance or the user experience.</p>
+<p>All properties and variable names are camel case with the first letter lower case. The name should describe what the variable or property contains. It is not necessary to indicate the type of a variable in the name. For example, you don&#8217;t need to name a variable meant to store a string <tt>myString</tt> or an array variable <tt>myArray</tt>, but it is useful to name them in such a way that it is obvious anyway.</p>
+<p>The only exceptions are <strong>booleans</strong>. When naming a boolean, it is recommended prefix them with <tt>is</tt> or <tt>isNot</tt>. Therefore, it is easy to determine in which manner they are to be used.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+isEnabled: true // This is good.
+
+enabled: true // This is possibly confusing.
+</pre></div><h4 id="properties">2.1 Properties</h4>
+<p>A property is a variable that is directly defined on an object or class. These properties can be either public or private. Since JavaScript has no actual concept of private properties,  the concept is merely to help developers. A private property name is prefixed with a underscore. In the following example of the <tt>contactController</tt>, there are two properties, first there is property called <tt>contactsList</tt> that is a public array containing the list of contacts, and then there is a private property called <tt>_contactsCount</tt> for internal book keeping. No matter if the property is static or if it is a computed property (which is actually a function), the naming convention is the same.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+AddressBook.contactsController = SC.ArrayController.create({
+
+  _contactsCount: 0, // This is a private variable.
+
+  // This is a public variable.  Access using get() and set()
+  contactsList: []
+});
+</pre></div>
+<div class="note"><p>To access or modify public properties inside or outside the object, <strong>always</strong> use the get and set functions on the object, i.e.: <ins>this.get(&#8216;contacts&#8217;)</ins>. For private properties, always access them directly (i.e., <ins>this._contactsCount = 23;</ins>)  If you find yourself accessing private variables from other objects, make them public and use get and set to access them. You can also use the getPath and setPath functions if you need to access/set a deeper property. This is not as fast, but it can make your code more readable.</p></div>
+<h4 id="variables">2.2 Variables</h4>
+<p>Variables are internal to a function only. Since it is local to that function, it is not encouraged to use an underscore as a prefix.</p>
+<p>JavaScript will allow you to reference any variable name, even if you have not declared it before.  If you reference a variable without declaring it first, however, the variable will be treated as a &#8220;global&#8221; variable, accessible to every function in your application.  Since SproutCore applications are often very complex, it is important that you always use the <tt>var</tt> statement to declare your local variables first.  Otherwise you may introduce bugs inadvertently. Mistakenly defining something outside of its scope is a typical error that can be very difficult to debug.</p>
+<p>In addition, local variables are the fastest way of storing data in JavaScript.  Making extensive use of local variables will get the best performance out of your code.</p>
+<p>For example, in this function, <tt>count</tt> is a local variable:</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+countContacts: function(){
+  var count = 0; // This is local.
+}
+</pre></div><p>However, in this function, <tt>count</tt> is not a local variable, but rather a global variable defined in the window scope:</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+countContacts: function(){
+  count = 0; // This is NOT local, and VERY BAD.
+}
+</pre></div><h5 id="optimizing-the-use-of-variables">2.2.1 Optimizing the use of variables</h5>
+<p>When you access a property defined on an object multiple times, it is encouraged to store it locally inside the function. For instance, if you have a function that gets content of a view, collects some information from the record and then returns a string with all of the values combined.  The first example is not efficient because there are many unnecessary function calls. Not only that, it is also hard to read! The second example pulls the content object into a local variable, <tt>contact</tt> and constructs the string with far fewer function calls and with far superior readability to boot.</p>
+<p>This is confusing and inefficient:</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+constructName: function(){
+  return [this.get('content').get('prefix'),
+          this.get('content').get('firstName'),
+          this.get('content').get('middleName'),
+          this.get('content').get('lastName'),
+          this.get('content').get('suffix')].join(' ');
+}
+</pre></div><p>This is more readable and far faster since the commonly accessed property is saved locally:</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+constructName: function(){
+  var contact = this.get('content');
+
+  // This is more readable and far faster.
+  return [contact.get('prefix'),
+          contact.get('firstName'),
+          contact.get('middleName'),
+          contact.get('lastName'),
+          contact.get('suffix')].join(' ');
+}
+</pre></div><p>This is best (using the <tt>getEach</tt> function):</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+constructName: function(){
+  // This is EVEN more readable.
+  return this.get('content')
+             .getEach('prefix','firstName','middleName',
+                      'lastName','suffix')
+             .join(' ');
+}
+</pre></div><p>Another suggestion declare all local variables at the beginning of your method. The <span class="caps">YUI</span> compressor recommends declaring all variables on one line i.e.,</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+  var a, b, x, obj;
+</pre></div><h3 id="functions">3 Functions</h3>
+<p>This is perhaps where the naming and coding style guidelines for SproutCore deviate the most from Objective-C. The reason is that the syntactic sugar is very different between Objective-C and JavaScript.</p>
+<p>For SproutCore applications, the naming conventions are more or less the same as those used to name properties. Just as with properties, private functions on objects are prefixed with an underscore. The name of a function should be descriptive and give a sense of what purpose it is intended to perform. This, however, is not a blank check to make a function name a full sentence. Naming a function <tt>constructContactFullNameWithPrefixAndSuffixString</tt> is not helping anyone, especially you, the developer. The specifics can be captured in the documentation. Instead, naming the function <tt>constructName</tt> gives a hint at what the function does and is not exceedingly verbose.</p>
+<h4 id="observers">3.1 Observers</h4>
+<p>If you are creating a function that serves as an observer, it is not required, but strongly encouraged to add the <tt>DidChange</tt> suffix to the name. Also, if the observer function is only observing one property, it is nice to name it after the name of the observed property. Below is an observer function observing the <tt>isSelected</tt> boolean property of a view:</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+isSelectedDidChange: function(){
+  // Do stuff based on selection.
+}.observes('isSelected')
+</pre></div><p>If you are observing more than one property, it is not useful to name the function after all the properties. In this case, naming the observer function after the first observed property is acceptable but it also okay to name something descriptive that hints at what happens in the function when it is triggered. For example, if you are observing multiple properties, such as <tt>content</tt>, <tt>isSelected</tt>, and <tt>dimensions</tt> and when any of those change, a redraw of your view will be triggered, you can name it as such:</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+redrawStateDidChange: function(){
+  this.displayDidChange(); // Redraw the view.
+}.observes('content', 'isSelected', 'dimensions')
+</pre></div><h4 id="bindings">3.2 Bindings</h4>
+<p>Bindings are special properties that will connect together the values of two objects in your application.  Unlike most parts of SproutCore, you must follow a very specific formula for bindings to work properly.  To bind to the value property of one object from the <tt>title</tt> object of another property, you must add a property to the object you are binding TO that looks like this:</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+  valueBinding: &quot;MyApp.anotherObject.title&quot;
+</pre></div><h3 id="constants">4 Constants</h3>
+<p>A constant is a value that will not change throughout your application.  Constant values can make your code both easier to read and help it to perform better.  Instead of using the same string or number to represent some state, define constants on your application or classes instead.</p>
+<p>Constants should always be named using all upper case, separating words with underscores.  You should always define constants in your application namespace or on a class.  Never define a global constant that is not prefixed by a namespace as it may conflict with other libraries you load.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+MyApp.DEFAULT_CONTACT_COUNT = 23; // Good - defined on app namespace
+MyApp.controller.HELP_LINK = &quot;/help&quot;; // Good - defined on a class
+
+CONTACT_FIELDS = ['firstName', 'lastName']; // Bad - no globals!
+</pre></div><h3 id="other-coding-style-guidelines">5 Other Coding Style Guidelines</h3>
+<p>SproutCore does not have a lot of specific coding style guidelines but the ones that it does have help a SproutCore application to be readable, maintainable, and easily extended.</p>
+<h4 id="two-space-soft-tabs">5.1 Two Space Soft tabs!</h4>
+<p>One very important, yet easy way to ensure that your code is readable is to have a consistent code indent scheme. SproutCore&#8217;s standard is to have a two space soft tab instead of an actual tab. This makes the code much more readable and it is easy to set up your favorite text editor to do this.</p>
+<h4 id="value-vs-content">5.2 Value vs Content</h4>
+<p>Usually a property named value represents a simple JavaScript value of an object, such as a string, a number, etc.  A property named <tt>content</tt> (or ending in <tt>Content</tt>) represents an Object that you will show one or more aspects of.  For example, if you set the <tt>value</tt> property on an <tt>SC.LabelView</tt> to a string, the label view will show that string directly.  If you set the <tt>content</tt> property on the <tt>SC.LabelView</tt> to a <tt>Contact</tt> object and then set the <tt>contentValueKey</tt> to <tt>fullName</tt>, then the <tt>SC.LabelView</tt> will show the value of the <tt>fullName</tt> property on the <tt>content</tt> object.</p>
+<h4 id="always-use-curly-brackets-for-if-statements">5.3 Always Use Curly Brackets for If statements</h4>
+<p>It is OK to use the curly brackets after a while, for, or if statement but <span class="caps">ONLY</span> if the following bit does <span class="caps">NOT</span> fit on the same line. Never, ever, separate while, for, or if statements from their predicated onto separate lines without wrapping in curly braces.  This creates lots of programming errors:</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+if (isReady) readyCount++;  // OK - one line
+
+if (isReady)
+ readyCount = oldReadCount + newReadyCount; // not OK!
+
+if (isReady) {
+  readyCount = oldReadyCount + newReadyCount ;
+} // OK - multi-line but wrapped in curly-Qs.
+</pre></div><h3 id="performance">6 Performance</h3>
+<p>While some style guidelines just make for more readable code, the suggestions in this section will actually make your code faster.  Ignore them at your own peril.</p>
+<h4 id="always-use">6.1 Always use ===</h4>
+<p>You should always use <strong>===</strong> and <strong>!==</strong> when comparing objects.  This special form of equality is both faster and performs fewer transforms on the values you are comparing.  It will behave more like you would expect compare to other languages than <strong>==</strong> or <strong>!=</strong>.  If you want to see if a value is either <tt>null</tt> OR <tt>undefined</tt>, use <tt>SC.none(foo)</tt>.</p>
+<h4 id="cache-length-in-for-loops">6.2 Cache Length in For Loops</h4>
+<p>When writing <tt>for()</tt> loops, first capture the length you want to iterate through like so:</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+for(var idx=0,len= items.length;idx&lt;len;idx++) {
+  item = items[idx]; //do stuff...
+}
+</pre></div><p>Better yet, if the order you iterate does not matter, use a <tt>while</tt> loop like so since it is faster than using a for loop:</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+var idx = items.length;
+while(--idx) {
+  //do stuff
+}
+</pre></div><h4 id="avoid-creating-closures">6.3 Avoid Creating Closures</h4>
+<p>Closures functions are a convenient way to define iterators and callbacks but they come at a price.  When you define a closure function, the function will have to be recreated every time the surrounding function is called.  In addition, closures can capture and hold your application&#8217;s stack state for a long time, possibly leading to memory leaks, especially in IE</p>
+<p>Instead of using iterators like <tt>forEach()</tt> that require a closure, use simple <tt>for()</tt> or <tt>while()</tt> loops instead.  If you do need to provide a function for a callback, define the function as a method on your object and pass a pointer to the method instead.  All SproutCore classes that accept callback functions (such as <tt>addObserver()</tt>, <tt>removeObserver()</tt>, and <tt>invokeLater()</tt>) all accept both a target object and a method so you can avoid creating closures in most cases.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+// Bad - this function creates a closure function
+// to iterate over the array, AND creates a closure
+// function to pass as a callback to addObserver().
+//
+// (This method also recreates the 'keys' array each
+// time it is called)
+setupObservers: function() {
+  var keys = ['firstName', 'lastName'];
+  keys.forEach(function(key) {
+    this.addObserver(key, function() {
+      console.log('%@ did change!'.fmt(key)) ;
+    });
+  });
+}
+
+// Good - this function uses a simple for loop, passes a
+// target and method as the callback.
+//
+// (It also defines the keys array as a constant that is
+// not recreated each time.)
+OBSERVER_KEYS: ['firstName', 'lastName'],
+
+keyDidChange: function(target, key) {
+  console.log('%@ did change!'.fmt(key));
+},
+
+setupObservers: function() {
+  var keys = this.OBSERVER_KEYS, len = keys.length, idx;
+  for(idx=0;idx&lt;len;idx++) {
+    this.addObserver(keys[idx], this, this.keyDidChange);
+  }
+}
+</pre></div><h4 id="beware-of-redefining-arrays">6.4 Beware of Redefining Arrays</h4>
+<p>Arrays are first class objects in JavaScript.  This means every time you define an empty array, you are actually creating an object.  When you write code, think about those times when you define new arrays and try to keep them to a minimum, especially in loops or other &#8220;hot&#8221; code.  Instead of defining a new array, consider reusing an existing array and just resetting its length to 0.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+// Good - reuses the array to collect temporary values
+enqueItems: function() {
+ var items = this.get(items), len = items.length, idx;
+ var cur = [] ; // we'll reuse this one
+
+  for(idx=0;idx&lt;len;idx++) {
+    var item = items[idx];
+    cur[0] = item.target ;
+    cur[1] = item.method;
+    this.enqueue(cur);
+    cur.length = 0; // reset array
+  }
+}
+</pre></div><p>Also, in these coding examples, you have have noticed that the <tt>{}</tt> are not on new lines, that is due to the author&#8217;s stance and not an official guideline. That is up to the developer to choose how to format your curly-braces since after it is compressed, it won&#8217;t really matter!</p>
+<h3 id="related-material">7 Related Material</h3>
+<p><a href="http://www.youtube.com/watch?v=mHtdZgou0qU">Google Tech Talk regarding Javascript performance</a></p>
+<p><a href="http://www.youtube.com/watch?v=hQVTIJBZook">Javascript: The Good Parts</a></p>
+<h3 id="changelog">8 Changelog</h3>
+<ul>
+	<li>March 3, 2011: ported by <a href="credits.html#onkis">Mike Ball</a> from the <a href="http://wiki.sproutcore.com/w/page/12412942/JavaScript-Style-Guide">original wiki entry</a> written by <a href="credits.html#pbergstrom">Peter Bergstrom</a></li>
+	<li>March 3, 2011: minor adjustments by <a href="credits.html#pwagenet">Peter Wagenet</a></li>
+</ul>
+
+      </div>
+        <div id="subCol">
+          <h3 class="chapter"><img src="images/strobe/chapters.png" alt="" />Chapters</h3>
+          <ol class="chapters">
+            <li><a href="#classes"><p>Classes</p>
+</a><ul><li><a href="#defining-classes"><p>Defining Classes</p>
+</a></li> <li><a href="#instantiated-classes"><p>Instantiated Classes</p>
+</a></li> <li><a href="#create-vs-extend-and-design"><p>Create vs Extend and Design</p>
+</a></li></ul></li><li><a href="#properties-and-variables"><p>Properties and Variables</p>
+</a><ul><li><a href="#properties"><p>Properties</p>
+</a></li> <li><a href="#variables"><p>Variables</p>
+</a></li></ul></li><li><a href="#functions"><p>Functions</p>
+</a><ul><li><a href="#observers"><p>Observers</p>
+</a></li> <li><a href="#bindings"><p>Bindings</p>
+</a></li></ul></li><li><a href="#constants"><p>Constants</p>
+</a></li><li><a href="#other-coding-style-guidelines"><p>Other Coding Style Guidelines</p>
+</a><ul><li><a href="#two-space-soft-tabs"><p>Two Space Soft tabs!</p>
+</a></li> <li><a href="#value-vs-content"><p>Value vs Content</p>
+</a></li> <li><a href="#always-use-curly-brackets-for-if-statements"><p>Always Use Curly Brackets for If statements</p>
+</a></li></ul></li><li><a href="#performance"><p>Performance</p>
+</a><ul><li><a href="#always-use"><p>Always use ===</p>
+</a></li> <li><a href="#cache-length-in-for-loops"><p>Cache Length in For Loops</p>
+</a></li> <li><a href="#avoid-creating-closures"><p>Avoid Creating Closures</p>
+</a></li> <li><a href="#beware-of-redefining-arrays"><p>Beware of Redefining Arrays</p>
+</a></li></ul></li><li><a href="#related-material"><p>Related Material</p>
+</a></li><li><a href="#changelog"><p>Changelog</p>
+</a></li>
+          </ol>
+        </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+	  <footer>
+	    <div class="container">
+	      <div class="col">
+	        <a href="index.html"><img src="images/footer/sc_logo_medium.png" alt="SproutCore" /></a>
+	        <p id="license">
+	          Copyright 2011 <a href="http://www.strobecorp.com">Strobe Inc</a>.
+	          <br />
+	          SproutCore framework is under MIT License.
+	        </p>
+	      </div>
+	      <nav class="col">
+	        <h1>Site Navigation</h1>
+	        <ul>
+	          <li><a href="http://www.sproutcore.com/about/">About</a></li>
+	          <li><a href="http://sproutcore.com/docs/">Docs</a></li>
+	          <li><a href="http://blog.sproutcore.com">Blog</a></li>
+	          <li><a href="http://www.sproutcore.com/install/?redirect=1">Download</a></li>
+	          <li><a href="http://www.sproutcore.com/community/">Community</a></li>
+	          <li><a href="https://github.com/sproutcore/sproutcore">GitHub</a></li>
+	          <li><a href="mailto:community@sproutcore.com">Contact Us</a></li>
+	          <li><a href="http://sproutcore.com/guides/">Guides</a></li>
+	        </ul>
+	        <a href="http://www.w3.org/html/logo/"><img src="images/footer/html5_tech.png" alt="HTML5 Powered" /></a>
+	      </nav>
+	      <div class="col">
+	        <h1>Get in Touch, Stay Informed</h1>
+	        <ul class="social">
+	          <li><a href="http://twitter.com/sproutcore"><img src="images/footer/twitter.png" alt="Twitter" /></a></li>
+	          <li><a href="http://www.facebook.com/sproutcore"><img src="images/footer/facebook.png" alt="Facebook" /></a></li>
+	          <li><a href="http://groups.google.com/group/sproutcore"><img src="images/footer/google.png" alt="Google Groups" /></a></li>
+						<li><a href="http://groups.google.com/group/sproutcore">Subscribe To Mailing List</a></li>
+	        </ul>
+					<a href="http://eepurl.com/dK1-Y" target="_blank" id="newsletter" class="button secondary">Sign Up For Our Newsletter!</a>
+	<!-- Commented out until we have mailchimp API integration.
+					<h2>Subscribe To Newsletter</h2>
+	        <div id="subscribe">
+	          <form>
+	            <input type="text" name="email" />
+	            <button name="subscribe">Sign-Up</button>
+	            <div class="processing"><img src="/img/spinner.gif"></div>
+	            <div class="error"></div>
+	          </form>
+	        </div>
+	-->
+	      </div>
+	      <a href="#feature" class="top">Back To Top</a>
+	    </div>
+	  </footer>
+
+  <script src="http://code.jquery.com/jquery-1.6.min.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" src="javascripts/sproutGuides.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushJScript.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushCss.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.all()
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-19584397-1']);
+    _gaq.push(['_setDomainName', '.sproutcore.com']);
+    _gaq.push(['_setAllowHash', false]);
+    _gaq.push(['_setAllowLinker', true]);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl': 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</body>
+</html>

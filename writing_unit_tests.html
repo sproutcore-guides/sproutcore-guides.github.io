@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>SproutCore Guides: UnitTesting - Writing Unit Test Cases</title>
+
+  <!-- guides styles -->
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/strobe.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <!-- syntax highlighting styles -->
+  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/shThemeStrobeGuides.css" />
+</head>
+<body class="guide">
+
+  <header role="banner">
+    <div class="container">
+      <h1 id="logo">
+        <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
+      </h1>
+      <nav role="navigation">
+        <ul>
+          <li><a href="http://sproutcore.com/about/">About</a></li>
+          <li class="active"><a href="http://sproutcore.com/guides/">Guides</a></li>
+          <li><a href="http://sproutcore.com/docs/">Docs</a></li>
+          <li><a href="http://sproutcore.com/community/">Community</a></li>
+          <li><a href="http://blog.sproutcore.com">Blog</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div id="feature">
+    <div class="wrapper">
+      <div class="feature_header">
+        <a href="/"><img src="images/strobe/guides.png"></a>
+        <h2><a href="/">SproutCore Guides</a></h2>
+        <p>These guides are designed to help you write and perfect your code.</p>
+      </div>
+      <div class="feature_sidebar">
+        <a href="index.html" id="guidesMenu">
+          Guides Index <span id="guidesArrow">&#9656;</span>
+        </a>
+        <div id="guides" class="clearfix" style="display: none;">
+          <a href="index.html" class="guidesMenu">
+            Guides Index <span class="guidesArrow">&#9662;</span>
+          </a>
+          <hr style="clear:both;">
+          <dl class="L">
+    <dt>Start Here</dt>
+      <dd><a href="getting_started.html">Getting Started: Part 1</a></dd>
+      <dd><a href="getting_started_2.html">Getting Started: Part 2</a></dd>
+      <dd><a href="core_concepts.html">Core Concepts</a></dd>
+      <dd><a href="enumerables.html">Enumerables</a></dd>
+    <dt>Views</dt>
+      <dd><a href="using_handlebars.html">Using Handlebars Templates</a></dd>
+      <dd><a href="views.html">Core View Concepts</a></dd>
+    <dt>Models</dt>
+      <dd><a href="records.html">SproutCore Records</a></dd>
+      <dd><a href="fixtures.html">Using Fixtures</a></dd>
+    <dt>Theming</dt>
+      <dd><a href="chance.html">Using Chance, SproutCore's CSS Framework</a></dd>
+      <dd><a href="theming_app.html">Theming Your App</a></dd>
+</dl>
+<dl class="R">
+    <dt>Testing</dt>
+      <dd><a href="unit_test_framework.html">Unit Testing</a></dd>
+      <dd><a href="adding_unit_test.html">Adding a Unit Test</a></dd>
+      <dd><a href="writing_unit_tests.html">Writing Unit Tests</a></dd>
+      <dd><a href="running_unit_tests.html">Running Unit Tests</a></dd>
+      <dd><a href="todos_tdd.html">SproutCore Development Using TDD</a></dd>
+    <dt>Contributing to SproutCore</dt>
+      <dd><a href="style_guide.html">Javascript Style Guide</a></dd>
+      <dd><a href="commit_code.html">Committer Guidelines</a></dd>
+      <dd><a href="documentation_guidelines.html">Documentation Guidelines</a></dd>
+</dl>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+          <div class="headerSection">
+            <h2>UnitTesting &#8211; Writing Unit Test Cases</h2>
+<p>After reading this guide, you will be able to:</p>
+<ul>
+	<li>Use modules to group your unit tests together to share setup and teardown code.</li>
+	<li>Use assertions to test values and report results.</li>
+	<li>Use <tt>start</tt> and <tt>stop</tt> to synchronize wtih an asynchronous event such as a timer or callback.</li>
+	<li>Specify <span class="caps">HTML</span> in the case where you need to test against <span class="caps">HTML</span>.</li>
+</ul>
+
+          </div>
+        <h3 id="overview">1 Overview</h3>
+<p>Once you&#8217;ve <a href="/adding_unit_test.html">added a unit test file</a>, writing your unit test cases is easy.</p>
+<p>A unit test file is made up of modules. A module is a collection of unit test cases that run together. An individual unit test case performs some verification on your code.</p>
+<h3 id="defining-a-module">2 Defining a Module</h3>
+<p>To define a module, call the <tt>module()</tt> method.  For example, in the <a href="/adding_unit_test.html">previous guide</a>, a module called <tt>MyApp.loginController</tt> is created.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+module(&quot;MyApp.loginController&quot;);
+</pre></div><p>Unit test cases defined after calling <tt>module()</tt> will automatically be grouped into that module until the next <tt>module()</tt> call or the end of the file.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+module(&quot;MyApp.loginController.module1&quot;);
+test (&quot;test1 for MyApp.loginController module 1&quot;, ...);
+test (&quot;test2 for MyApp.loginController module 1&quot;, ...);
+
+module(&quot;MyApp.loginController.module2&quot;);
+test (&quot;test1 for MyApp.loginController module 2&quot;, ...);
+test (&quot;test2 for MyApp.loginController module 2&quot;, ...);
+</pre></div><p>Within the <tt>module</tt>, you may optionally implement <tt>setup()</tt> and <tt>teardown()</tt> callbacks to run before and after each unit test case for that module.  Use these methods to setup and teardown any common testing infrastructure.</p>
+<p>For example, if you are  writing a group of tests to work on a <tt>Contact</tt> record, you might define your module like so:</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+var contact ;
+module(&quot;Test Contact record&quot;, {
+  setup: function() {
+    contact = MyApp.Contact.create({  firstName: &quot;John&quot;, lastName: &quot;Doe&quot; });
+  },
+  teardown: function() {
+    contact = null; // reset
+ }
+});
+
+// .. unit tests go here
+
+</pre></div><p>Note that any common setup you define should be placed into global variables (such as the <tt>contact</tt> variable above).  Since unit tests are the last thing loaded in the page, it is OK to create these variables globally instead of isolating everything into namespaces like you should with all other code.</p>
+<h3 id="defining-a-unit-test-case">3 Defining a Unit Test Case</h3>
+<p>Once you&#8217;ve defined a module, you can add individual unit test cases.  A unit test case is defined using the <tt>test()</tt> method.  A test should have a description followed by the function you want to execute to perform the test.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+test(&quot;test description&quot;, function() {
+  var expected = &quot;test&quot;;
+  var result   = &quot;test&quot;;
+  equals(result, expected, &quot;test should equal test&quot;);
+});
+</pre></div><p>For example, if you were writing tests for a <tt>Contact</tt> model object, you might add a test like this:</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+test(&quot;fullName property returns combined firstName and lastName&quot;, function() {
+  // set preconditions
+  contact.set('firstName', 'John');
+  contact.set('lastName', 'Doe');
+
+  // verify
+  equals(contact.get('fullName'), 'John Doe');
+});
+</pre></div>
+<div class="note"><p>Use the test description to describe the <em>business rule</em> you are testing; you (and developers that follow you) will be thankful that you did.</p></div>
+<h3 id="assertions">4 Assertions</h3>
+<p>Unit test case functions may contain any valid JavaScript.  To actually record the results of your test, however, you can use one of the built-in <strong>assertions</strong>.</p>
+<p>Assertions are methods that test a value and then report the result.  If the assertion fails, the test runner will report a failure.  If the assertion passes, then your test is allowed to continue.</p>
+<h4 id="ok">4.1 ok()</h4>
+<p>The most basic assertion you can make is <tt>ok()</tt>.  This method accepts a boolean value and an optional description string.  The assertion passes if the value is true and fails otherwise.  For example, here is how you would assert that a test value is greater than 10:</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+
+ok(contacts.get('length') &gt; 10, &quot;should be more than 10 contacts&quot;);
+
+</pre></div><p>To make your tests more understandable, you should always include a description when you use <tt>ok()</tt> assertions.  Otherwise, the test runner will simply print the value that was returned and the value that was expected.</p>
+<h4 id="equals">4.2 equals()</h4>
+<p>The other assertion you will commonly use is <tt>equals()</tt>.  This method accepts two values and an optional description.  It passes if the two values are equal and fails otherwise.  The advantage of using <tt>equals</tt> over <tt>ok(a == b, &quot;a equals b&quot;)</tt> is that, if the test fails, then the test runner will display both the expected value and the actual value; this can be valuable when debugging your code.</p>
+<p>For example, here is how you would test the fullName property of a contact:</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+
+equals(contact.get('fullName'), 'John Doe', 'fullName = John Doe');
+
+</pre></div><p>Note: this method is equivalent to <tt>equal()</tt> in the latest QUnit <span class="caps">API</span>.</p>
+<h4 id="other-assertions">4.3 Other assertions</h4>
+<p>There are several other assertion types that you can learn about from the <a href="http://docs.jquery.com/QUnit#API_documentation">QUnit pages</a>, such as <tt>same()</tt> or <tt>expects()</tt>.  Most of these assertions are not as generally useful as <tt>ok()</tt> and <tt>equals()</tt>. However, you can use them if you wish.</p>
+<h3 id="asynchronous-unit-tests-cases">5 Asynchronous Unit Tests Cases</h3>
+<p>Sometimes, a unit test case needs to stop and wait for task(s) to complete.  This is particularly true when testing code that involves loading data from a server or using timers.  In these scenarios, you can use the <tt>stop()</tt> and <tt>start()</tt> methods to control your test execution.</p>
+<p>The <tt>stop()</tt> method temporarily pauses your unit test case from running.  This means that when your test function returns, instead of calling the module&#8217;s <tt>teardown()</tt> method (if defined) and running the next unit test case, the test runner will just exit.</p>
+<p>After the test runner has been stopped, you can resume it by calling <tt>start()</tt>.  To invoke <tt>start()</tt>, you will need to setup a callback or timer.</p>
+<p>For example, the unit test case below verifies if a particular file loads from the server.  It first issues a <tt>stop()</tt> to the test runner for 1 second.  If <tt>start()</tt> is not called within 1 second, the test will fail.  It then uses the callback in <tt>SC.Request.getUrl()</tt> to call <tt>start()</tt>.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+test(&quot;load file from server&quot;, function() {
+  // setup a timeout in case of failure
+  stop(1000);
+
+  var req = SC.Request.getUrl(&quot;/foo.json&quot;).notify(function() {
+    // verify request loaded OK
+    ok(SC.typeOf(req.get('response')) !== SC.T_ERROR, &quot;response should not be an error&quot;);
+    // resume executing tests
+    start();
+  });
+});
+</pre></div><p>Here&#8217;s a more complex example with assertions.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+test('Create User', function() {
+  // Pause the test runner. If start() is not called within 2 seconds, fail the test.
+  stop(2000);
+
+  var user = MyApp.store.createRecord(MyApp.UserRecord, {
+    username: 'SpongeBob',
+    department: 'Accounts',
+    status: 'Active',
+    isAdmin: NO,
+    lastLoggedInDate: '2010-05-05T10:20:30Z'
+  });
+
+  equal(user.get('username'), 'SpongeBob', 'user name');
+  equal(user.get('department'), 'Accounts', 'department');
+  equal(user.get('userStatus'), 'Active', 'user status');
+  equal(user.get('isAdmin'), NO, 'user is Admin');
+  var d1 = user.get('lastLoggedInDate').toISO8601();
+  var d2 = '2010-05-05T10:20:30+00:00';
+  equal(d1, d2, 'user last logged in');
+
+  // Status should be ready new because record is new and not committed to server
+  ok(user.get('status') === SC.Record.READY_NEW, 'Status is READY_NEW');
+
+  // Commit changes
+  MyApp.store.commitRecords();
+
+  // Give our store 1 second to commit records to the remote server
+  setTimeout(checkCreate, 1000);
+});
+
+function checkCreate() {
+  // Should be to find record now
+  var query = SC.Query.local(MyApp.UserRecord, {
+    conditions: 'username = {name}',
+    name: 'SpongeBob'
+  });
+
+  var users = MyApp.store.find(query);
+  equal(users.get('length'), 1, 'SpongeBob record should be searchable by query');
+
+  // Status should now be 'clean' since it's been saved
+  equal(user.get('status'), SC.Record.READY_CLEAN, 'Status is READY_CLEAN');
+
+  // Can get our record by primary key
+  var user2 = MyApp.store.find(MyApp.UserRecord, user.get('id'));
+  equal(user2.get('username'), 'SpongeBob', 'user name');
+
+  // Resume the test runner again
+  start();
+}
+</pre></div><h3 id="writing-html">6 Writing <span class="caps">HTML</span></h3>
+<p>Normally you will not need to add <span class="caps">HTML</span> to your page when you write tests since you will be testing functionality provided by your application and all the <span class="caps">HTML</span> you need will already exist.</p>
+<p>If you do need to write out some sample <span class="caps">HTML</span> on the page to work against when testing, however, you can add this <span class="caps">HTML</span> using the method <tt>htmlbody()</tt>.  This method should be the first thing called in your page, even before you start a new module.</p>
+<p>To use this method, just pass a string containing the <span class="caps">HTML</span> you want to add.  The <span class="caps">HTML</span> will be appended to the main body tag.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+// adds the h1 tag to the end of the body.
+htmlbody(&quot;&lt;h1 id='testheader'&gt;&lt;/h1&gt;&quot;) ;
+</pre></div><h3 id="moving-on">7 Moving On</h3>
+<p>Now that you have written a unit test case or two, it&#8217;s time to run them.  The next section will tell you everything you need to know about how unit tests are loaded and executed by the test runner.</p>
+<p>On to <a href="/running_unit_tests.html">Running Unit Tests »</a></p>
+<h3 id="changelog">8 Changelog</h3>
+<ul>
+	<li>February 15, 2011: initial version by <a href="credits.html#ssmith">Scott Smith</a> and <a href="credits.html#veebs">Vibul Imtarnasan</a></li>
+	<li>March     2, 2011: minor paragraph formatting changes by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+</ul>
+
+      </div>
+        <div id="subCol">
+          <h3 class="chapter"><img src="images/strobe/chapters.png" alt="" />Chapters</h3>
+          <ol class="chapters">
+            <li><a href="#overview"><p>Overview</p>
+</a></li><li><a href="#defining-a-module"><p>Defining a Module</p>
+</a></li><li><a href="#defining-a-unit-test-case"><p>Defining a Unit Test Case</p>
+</a></li><li><a href="#assertions"><p>Assertions</p>
+</a><ul><li><a href="#ok"><p>ok()</p>
+</a></li> <li><a href="#equals"><p>equals()</p>
+</a></li> <li><a href="#other-assertions"><p>Other assertions</p>
+</a></li></ul></li><li><a href="#asynchronous-unit-tests-cases"><p>Asynchronous Unit Tests Cases</p>
+</a></li><li><a href="#writing-html"><p>Writing <span class="caps">HTML</span></p>
+</a></li><li><a href="#moving-on"><p>Moving On</p>
+</a></li><li><a href="#changelog"><p>Changelog</p>
+</a></li>
+          </ol>
+        </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+	  <footer>
+	    <div class="container">
+	      <div class="col">
+	        <a href="index.html"><img src="images/footer/sc_logo_medium.png" alt="SproutCore" /></a>
+	        <p id="license">
+	          Copyright 2011 <a href="http://www.strobecorp.com">Strobe Inc</a>.
+	          <br />
+	          SproutCore framework is under MIT License.
+	        </p>
+	      </div>
+	      <nav class="col">
+	        <h1>Site Navigation</h1>
+	        <ul>
+	          <li><a href="http://www.sproutcore.com/about/">About</a></li>
+	          <li><a href="http://sproutcore.com/docs/">Docs</a></li>
+	          <li><a href="http://blog.sproutcore.com">Blog</a></li>
+	          <li><a href="http://www.sproutcore.com/install/?redirect=1">Download</a></li>
+	          <li><a href="http://www.sproutcore.com/community/">Community</a></li>
+	          <li><a href="https://github.com/sproutcore/sproutcore">GitHub</a></li>
+	          <li><a href="mailto:community@sproutcore.com">Contact Us</a></li>
+	          <li><a href="http://sproutcore.com/guides/">Guides</a></li>
+	        </ul>
+	        <a href="http://www.w3.org/html/logo/"><img src="images/footer/html5_tech.png" alt="HTML5 Powered" /></a>
+	      </nav>
+	      <div class="col">
+	        <h1>Get in Touch, Stay Informed</h1>
+	        <ul class="social">
+	          <li><a href="http://twitter.com/sproutcore"><img src="images/footer/twitter.png" alt="Twitter" /></a></li>
+	          <li><a href="http://www.facebook.com/sproutcore"><img src="images/footer/facebook.png" alt="Facebook" /></a></li>
+	          <li><a href="http://groups.google.com/group/sproutcore"><img src="images/footer/google.png" alt="Google Groups" /></a></li>
+						<li><a href="http://groups.google.com/group/sproutcore">Subscribe To Mailing List</a></li>
+	        </ul>
+					<a href="http://eepurl.com/dK1-Y" target="_blank" id="newsletter" class="button secondary">Sign Up For Our Newsletter!</a>
+	<!-- Commented out until we have mailchimp API integration.
+					<h2>Subscribe To Newsletter</h2>
+	        <div id="subscribe">
+	          <form>
+	            <input type="text" name="email" />
+	            <button name="subscribe">Sign-Up</button>
+	            <div class="processing"><img src="/img/spinner.gif"></div>
+	            <div class="error"></div>
+	          </form>
+	        </div>
+	-->
+	      </div>
+	      <a href="#feature" class="top">Back To Top</a>
+	    </div>
+	  </footer>
+
+  <script src="http://code.jquery.com/jquery-1.6.min.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" src="javascripts/sproutGuides.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushJScript.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushCss.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.all()
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-19584397-1']);
+    _gaq.push(['_setDomainName', '.sproutcore.com']);
+    _gaq.push(['_setAllowHash', false]);
+    _gaq.push(['_setAllowLinker', true]);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl': 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</body>
+</html>

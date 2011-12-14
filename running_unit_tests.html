@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>SproutCore Guides: UnitTesting - Running Unit Tests</title>
+
+  <!-- guides styles -->
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/strobe.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <!-- syntax highlighting styles -->
+  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/shThemeStrobeGuides.css" />
+</head>
+<body class="guide">
+
+  <header role="banner">
+    <div class="container">
+      <h1 id="logo">
+        <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
+      </h1>
+      <nav role="navigation">
+        <ul>
+          <li><a href="http://sproutcore.com/about/">About</a></li>
+          <li class="active"><a href="http://sproutcore.com/guides/">Guides</a></li>
+          <li><a href="http://sproutcore.com/docs/">Docs</a></li>
+          <li><a href="http://sproutcore.com/community/">Community</a></li>
+          <li><a href="http://blog.sproutcore.com">Blog</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div id="feature">
+    <div class="wrapper">
+      <div class="feature_header">
+        <a href="/"><img src="images/strobe/guides.png"></a>
+        <h2><a href="/">SproutCore Guides</a></h2>
+        <p>These guides are designed to help you write and perfect your code.</p>
+      </div>
+      <div class="feature_sidebar">
+        <a href="index.html" id="guidesMenu">
+          Guides Index <span id="guidesArrow">&#9656;</span>
+        </a>
+        <div id="guides" class="clearfix" style="display: none;">
+          <a href="index.html" class="guidesMenu">
+            Guides Index <span class="guidesArrow">&#9662;</span>
+          </a>
+          <hr style="clear:both;">
+          <dl class="L">
+    <dt>Start Here</dt>
+      <dd><a href="getting_started.html">Getting Started: Part 1</a></dd>
+      <dd><a href="getting_started_2.html">Getting Started: Part 2</a></dd>
+      <dd><a href="core_concepts.html">Core Concepts</a></dd>
+      <dd><a href="enumerables.html">Enumerables</a></dd>
+    <dt>Views</dt>
+      <dd><a href="using_handlebars.html">Using Handlebars Templates</a></dd>
+      <dd><a href="views.html">Core View Concepts</a></dd>
+    <dt>Models</dt>
+      <dd><a href="records.html">SproutCore Records</a></dd>
+      <dd><a href="fixtures.html">Using Fixtures</a></dd>
+    <dt>Theming</dt>
+      <dd><a href="chance.html">Using Chance, SproutCore's CSS Framework</a></dd>
+      <dd><a href="theming_app.html">Theming Your App</a></dd>
+</dl>
+<dl class="R">
+    <dt>Testing</dt>
+      <dd><a href="unit_test_framework.html">Unit Testing</a></dd>
+      <dd><a href="adding_unit_test.html">Adding a Unit Test</a></dd>
+      <dd><a href="writing_unit_tests.html">Writing Unit Tests</a></dd>
+      <dd><a href="running_unit_tests.html">Running Unit Tests</a></dd>
+      <dd><a href="todos_tdd.html">SproutCore Development Using TDD</a></dd>
+    <dt>Contributing to SproutCore</dt>
+      <dd><a href="style_guide.html">Javascript Style Guide</a></dd>
+      <dd><a href="commit_code.html">Committer Guidelines</a></dd>
+      <dd><a href="documentation_guidelines.html">Documentation Guidelines</a></dd>
+</dl>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+          <div class="headerSection">
+            <h2>UnitTesting &#8211; Running Unit Tests</h2>
+After reading this guide, you will be able to:
+<ul>
+	<li>Understand how unit test files are loaded and executed</li>
+	<li>Use the <span class="caps">GUI</span> Test Runner</li>
+	<li>Manually run unit test(s)</li>
+</ul>
+
+          </div>
+        <h3 id="how-unit-test-cases-are-loaded-and-executed">1 How Unit Test Cases Are Loaded and Executed</h3>
+<p>When you run a unit test, SproutCore retrieves and runs the source unit test JavaScript and renders the results as an <span class="caps">HTML</span> page.</p>
+<p>SproutCore does this in the following sequence:</p>
+<ol>
+	<li>Load the application including its dependencies.</li>
+	<li>Load the unit tests.</li>
+	<li>Instead of calling the main application&#8217;s <tt>main()</tt> function, runs all or some of the unit tests.</li>
+	<li>Like most javascript test frameworks, SproutCore renders the results in a nicely-formatted <span class="caps">HTML</span> page.</li>
+</ol>
+<p>The advantage is that your unit tests are run in an environment that is very close to the actual combination of code and resources that will be available to your application when it runs.</p>
+<p>It also means that if you write code that runs on page load <span class="caps">BEFORE</span> the <tt>main()</tt> method is called, it could be executed even in test mode.  Make sure that any code you write to run at early page startup can deal with being loaded in test mode as well.</p>
+<h3 id="using-the-sproutcore-test-runner">2 Using the SproutCore Test Runner</h3>
+<div class="warning"><p>The new Abbot tools do not yet support the test runner.  Until they do, you should follow the <a href="running_unit_tests.html#running-selected-unit-tests">Running Selected Unit Tests</a> section below.</p></div>
+<h4 id="starting-the-test-runner">2.1 Starting the Test Runner</h4>
+<p>The easiest way to run unit tests is to simply visit the built-in unit test runner by starting your browser and navigating to <a href="http://localhost:4020">http://localhost:4020</a>, then selecting <tt>tests</tt> from the application list as shown.</p>
+<p><img src="images/testing/unit_test_2.png" title="Test Runner" alt="Test Runner" /></p>
+<p>Your unit tests for your application(s) will be listed under <tt>APPS</tt>.  The unit tests for SproutCore itself are listed under <tt>SPROUTCORE</tt>.</p>
+<p>For quicker access to this page, bookmark <a href="http://localhost:4020/sproutcore/tests">http://localhost:4020/sproutcore/tests</a>.</p>
+<h4 id="selecting-and-running-tests">2.2 Selecting and Running Tests</h4>
+<p>Suppose your application is named &#8220;my_app&#8221;. To see a list of your unit tests, in the left hand column under <tt>APPS</tt>, double-click &#8220;my_app&#8221;:</p>
+<p><img src="images/testing/unit_test_3.png" title="Test Runner Unit Test Files" alt="Test Runner Unit Test Files" /></p>
+<p>Run all the unit test cases within a file by clicking on it.</p>
+<div class="note"><p>The &#8220;<ins>Using Continuous Integration</ins>&#8221; checkbox and the &#8220;<ins>Run Tests</ins>&#8221; button are under construction.</p></div>
+<p>When the test run is complete, the results are displayed as follows:</p>
+<p><img src="images/testing/unit_test_4.png" title="Test Runner Unit Test Results" alt="Test Runner Unit Test Results" /></p>
+<h3 id="running-selected-unit-tests">3 Running Selected Unit Tests</h3>
+<p>Sometimes you may want to run unit tests manually outside of the test runner. For example, perhaps you have a continuous integration environment and would like to use Selenium to evaluate the results of running your unit tests.</p>
+<p>All unit tests for an application can be found at an easily computed <span class="caps">URL</span>.</p>
+<p>The computed URLs can run all tests on all applications or a subset of them as detailed below.</p>
+<h4 id="running-an-individual-unit-test-file">3.1 Running an Individual Unit Test File</h4>
+<p>Any unit test file can be run from a browser using a <span class="caps">URL</span> in the following format:</p>
+<p><code>http://localhost:4020/APP_NAME/LANGUAGE/current/tests/PATH/TO/TEST.html</code></p>
+<p>where:</p>
+<ul>
+	<li><tt>APP_NAME</tt> is your application name.</li>
+	<li><tt>LANGUAGE</tt> is the language you want to run tests for. (Usually &#8216;en&#8217;)</li>
+	<li><tt>PATH/TO/TEST</tt> is the subpath from the <tt>PROJECT_FOLDER/apps/APP_NAME/tests</tt> folder.  It should include the body of the javascript file name but not the <tt>.js</tt> extension.</li>
+</ul>
+<p>As an example, suppose you have a unit test file located at:</p>
+<p><code>PROJECT_HOME/apps/my_app/tests/unit/sample.js</code></p>
+<p>To run this test, browse:</p>
+<p><code>http://localhost:4020/my_app/en/current/tests/unit/sample.html</code></p>
+<h4 id="running-all-unit-tests-in-a-directory">3.2 Running All Unit Tests in a Directory</h4>
+<p>If you would like to run all of the unit tests in a directory, you can use the same method described as above, but instead name the directory with an .html extension.  For example, to run all of the unit tests in the <tt>tests/unit</tt> directory, you could visit:</p>
+<p><code>http://localhost:4020/my_app/en/current/tests/unit.html</code></p>
+<p>Note that the <span class="caps">HTML</span> file loaded at this <span class="caps">URL</span> will contain all of your unit tests files concatenated together in a single <span class="caps">HTML</span> page.  If your tests are not properly isolated, they may interfere with one another when loaded this way, though this is rare.</p>
+<h4 id="running-all-unit-tests-in-an-application">3.3 Running All Unit Tests in an Application</h4>
+<p>If you would like to run all of the unit tests in your application, you can do that too.  Instead of naming a directory, just visit a <span class="caps">URL</span> with the format described above but ending in tests.html.  For example, to load all of the unit tests at once for your contact application you could visit:</p>
+<p><code>http://localhost:4020/my_app/en/current/tests.html</code></p>
+<p>Note that, like the combined directory tests above, this global test file will contain all of your unit test files concatenated together in a single <span class="caps">HTML</span> page.  If your tests are not properly isolated, they may interfere with one another, causing the unit tests to pass when loaded individually but fail when they are loaded together.  This situation is rare, but you should be careful to write your test files so that they will not clobber one another at load time.</p>
+<h4 id="loading-tests-from-nested-targets">3.4 Loading Tests from Nested Targets</h4>
+<p>If you use nested targets, you can load tests from them as well.  Just name your nested target like you name it in a config file.  For example, the sproutcore framework contains a nested framework called &#8220;runtime&#8221;.  You could load all of the unit tests for the sproutcore/runtime framework by visiting:</p>
+<p><code>http://localhost:4020/sproutcore/runtime/en/current/tests.html</code></p>
+<h3 id="moving-on">4 Moving On</h3>
+<p>This concludes the main programming guide for working with Unit Tests in SproutCore applications.  You&#8217;re now ready to change the world with awesome unit tests!</p>
+<h3 id="changelog">5 Changelog</h3>
+<ul>
+	<li>February 15, 2011: initial version by <a href="credits.html#ssmith">Scott Smith</a> and <a href="credits.html#veebs">Vibul Imtarnasan</a></li>
+	<li>February 15, 2011: minor revisions by <a href="credits.html#pwagenet">Peter Wagenet</a></li>
+	<li>March     2, 2011: minor revisions by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+	<li>March 2, 2011: minor revisions by <a href="credits.html#veebs">Vibul Imtarnasan</a></li>
+</ul>
+
+      </div>
+        <div id="subCol">
+          <h3 class="chapter"><img src="images/strobe/chapters.png" alt="" />Chapters</h3>
+          <ol class="chapters">
+            <li><a href="#how-unit-test-cases-are-loaded-and-executed"><p>How Unit Test Cases Are Loaded and Executed</p>
+</a></li><li><a href="#using-the-sproutcore-test-runner"><p>Using the SproutCore Test Runner</p>
+</a><ul><li><a href="#starting-the-test-runner"><p>Starting the Test Runner</p>
+</a></li> <li><a href="#selecting-and-running-tests"><p>Selecting and Running Tests</p>
+</a></li></ul></li><li><a href="#running-selected-unit-tests"><p>Running Selected Unit Tests</p>
+</a><ul><li><a href="#running-an-individual-unit-test-file"><p>Running an Individual Unit Test File</p>
+</a></li> <li><a href="#running-all-unit-tests-in-a-directory"><p>Running All Unit Tests in a Directory</p>
+</a></li> <li><a href="#running-all-unit-tests-in-an-application"><p>Running All Unit Tests in an Application</p>
+</a></li> <li><a href="#loading-tests-from-nested-targets"><p>Loading Tests from Nested Targets</p>
+</a></li></ul></li><li><a href="#moving-on"><p>Moving On</p>
+</a></li><li><a href="#changelog"><p>Changelog</p>
+</a></li>
+          </ol>
+        </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+	  <footer>
+	    <div class="container">
+	      <div class="col">
+	        <a href="index.html"><img src="images/footer/sc_logo_medium.png" alt="SproutCore" /></a>
+	        <p id="license">
+	          Copyright 2011 <a href="http://www.strobecorp.com">Strobe Inc</a>.
+	          <br />
+	          SproutCore framework is under MIT License.
+	        </p>
+	      </div>
+	      <nav class="col">
+	        <h1>Site Navigation</h1>
+	        <ul>
+	          <li><a href="http://www.sproutcore.com/about/">About</a></li>
+	          <li><a href="http://sproutcore.com/docs/">Docs</a></li>
+	          <li><a href="http://blog.sproutcore.com">Blog</a></li>
+	          <li><a href="http://www.sproutcore.com/install/?redirect=1">Download</a></li>
+	          <li><a href="http://www.sproutcore.com/community/">Community</a></li>
+	          <li><a href="https://github.com/sproutcore/sproutcore">GitHub</a></li>
+	          <li><a href="mailto:community@sproutcore.com">Contact Us</a></li>
+	          <li><a href="http://sproutcore.com/guides/">Guides</a></li>
+	        </ul>
+	        <a href="http://www.w3.org/html/logo/"><img src="images/footer/html5_tech.png" alt="HTML5 Powered" /></a>
+	      </nav>
+	      <div class="col">
+	        <h1>Get in Touch, Stay Informed</h1>
+	        <ul class="social">
+	          <li><a href="http://twitter.com/sproutcore"><img src="images/footer/twitter.png" alt="Twitter" /></a></li>
+	          <li><a href="http://www.facebook.com/sproutcore"><img src="images/footer/facebook.png" alt="Facebook" /></a></li>
+	          <li><a href="http://groups.google.com/group/sproutcore"><img src="images/footer/google.png" alt="Google Groups" /></a></li>
+						<li><a href="http://groups.google.com/group/sproutcore">Subscribe To Mailing List</a></li>
+	        </ul>
+					<a href="http://eepurl.com/dK1-Y" target="_blank" id="newsletter" class="button secondary">Sign Up For Our Newsletter!</a>
+	<!-- Commented out until we have mailchimp API integration.
+					<h2>Subscribe To Newsletter</h2>
+	        <div id="subscribe">
+	          <form>
+	            <input type="text" name="email" />
+	            <button name="subscribe">Sign-Up</button>
+	            <div class="processing"><img src="/img/spinner.gif"></div>
+	            <div class="error"></div>
+	          </form>
+	        </div>
+	-->
+	      </div>
+	      <a href="#feature" class="top">Back To Top</a>
+	    </div>
+	  </footer>
+
+  <script src="http://code.jquery.com/jquery-1.6.min.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" src="javascripts/sproutGuides.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushJScript.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushCss.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.all()
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-19584397-1']);
+    _gaq.push(['_setDomainName', '.sproutcore.com']);
+    _gaq.push(['_setAllowHash', false]);
+    _gaq.push(['_setAllowLinker', true]);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl': 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</body>
+</html>

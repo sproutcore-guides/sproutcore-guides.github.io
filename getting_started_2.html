@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>SproutCore Guides: Getting Started: Part 2</title>
+
+  <!-- guides styles -->
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/strobe.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <!-- syntax highlighting styles -->
+  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/shThemeStrobeGuides.css" />
+</head>
+<body class="guide">
+
+  <header role="banner">
+    <div class="container">
+      <h1 id="logo">
+        <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
+      </h1>
+      <nav role="navigation">
+        <ul>
+          <li><a href="http://sproutcore.com/about/">About</a></li>
+          <li class="active"><a href="http://sproutcore.com/guides/">Guides</a></li>
+          <li><a href="http://sproutcore.com/docs/">Docs</a></li>
+          <li><a href="http://sproutcore.com/community/">Community</a></li>
+          <li><a href="http://blog.sproutcore.com">Blog</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div id="feature">
+    <div class="wrapper">
+      <div class="feature_header">
+        <a href="/"><img src="images/strobe/guides.png"></a>
+        <h2><a href="/">SproutCore Guides</a></h2>
+        <p>These guides are designed to help you write and perfect your code.</p>
+      </div>
+      <div class="feature_sidebar">
+        <a href="index.html" id="guidesMenu">
+          Guides Index <span id="guidesArrow">&#9656;</span>
+        </a>
+        <div id="guides" class="clearfix" style="display: none;">
+          <a href="index.html" class="guidesMenu">
+            Guides Index <span class="guidesArrow">&#9662;</span>
+          </a>
+          <hr style="clear:both;">
+          <dl class="L">
+    <dt>Start Here</dt>
+      <dd><a href="getting_started.html">Getting Started: Part 1</a></dd>
+      <dd><a href="getting_started_2.html">Getting Started: Part 2</a></dd>
+      <dd><a href="core_concepts.html">Core Concepts</a></dd>
+      <dd><a href="enumerables.html">Enumerables</a></dd>
+    <dt>Views</dt>
+      <dd><a href="using_handlebars.html">Using Handlebars Templates</a></dd>
+      <dd><a href="views.html">Core View Concepts</a></dd>
+    <dt>Models</dt>
+      <dd><a href="records.html">SproutCore Records</a></dd>
+      <dd><a href="fixtures.html">Using Fixtures</a></dd>
+    <dt>Theming</dt>
+      <dd><a href="chance.html">Using Chance, SproutCore's CSS Framework</a></dd>
+      <dd><a href="theming_app.html">Theming Your App</a></dd>
+</dl>
+<dl class="R">
+    <dt>Testing</dt>
+      <dd><a href="unit_test_framework.html">Unit Testing</a></dd>
+      <dd><a href="adding_unit_test.html">Adding a Unit Test</a></dd>
+      <dd><a href="writing_unit_tests.html">Writing Unit Tests</a></dd>
+      <dd><a href="running_unit_tests.html">Running Unit Tests</a></dd>
+      <dd><a href="todos_tdd.html">SproutCore Development Using TDD</a></dd>
+    <dt>Contributing to SproutCore</dt>
+      <dd><a href="style_guide.html">Javascript Style Guide</a></dd>
+      <dd><a href="commit_code.html">Committer Guidelines</a></dd>
+      <dd><a href="documentation_guidelines.html">Documentation Guidelines</a></dd>
+</dl>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+          <div class="headerSection">
+            <h2>Getting Started: Part 2</h2>
+<p>After reading this guide you will be able to:</p>
+<ul>
+	<li>Define your models using SC.Record.</li>
+	<li>Manage your models using SC.Store.</li>
+	<li>Load data into the store from fixture data.</li>
+	<li>Query your models using SC.Query.</li>
+</ul>
+
+          </div>
+        <h3 id="prepare-the-application">1 Prepare the Application</h3>
+<p>In the <a href="getting_started.html">first part of this guide</a>, you learned how to build a basic Todo application. You now know how to define your models, views, and controllers, then describe how they interact via bindings. So far, however, you have had no way to persist the information between page refreshes.</p>
+<p>The best way to change that is to use SproutCore&#8217;s Data Store framework to manage records. An instance of <tt>SC.Store</tt> is responsible for managing the lifecycle of your records. Behind the scenes, the store uses an <tt>SC.DataSource</tt> to translate retrieve data from your server and persist changes back.</p>
+<p>If you still have your Todo application from the first part of this guide, use that. If not, you can get a <a href="https://www.github.com/sproutcore/Todos-Example">completed version</a> from GitHub.</p>
+<p>Now that we&#8217;ll be using the Data Store, we need to tell SproutCore to include it when your run your application. You can add this dependency in the Buildfile. Just change <tt>config</tt> line to:</p>
+<div class="code_container">
+<div class="filename">Buildfile</div>
+<pre class="brush: ruby; gutter: false; toolbar: false">
+
+config :all,¬
+  :required =&gt; [&quot;sproutcore/core_foundation&quot;, &quot;sproutcore/datastore&quot;], ¬
+  :theme =&gt; &quot;sproutcore/empty_theme&quot;
+</pre></div><h3 id="defining-the-model">2 Defining the Model</h3>
+<p>The first thing that we need to modify in code is <tt>Todos.Todo</tt>. Currently it&#8217;s just a subclass of <tt>SC.Object</tt>. Let&#8217;s change it to <tt>SC.Record</tt>:</p>
+<div class="code_container">
+<div class="filename">apps/todos/todos.js</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+Todos.Todo = SC.Record.extend({
+  title: SC.Record.attr(String),
+  isDone: SC.Record.attr(Boolean, { defaultValue: NO })
+});
+</pre></div><p>Now we are subclassing <tt>SC.Record</tt> instead of <tt>SC.Object</tt>. We also add attributes definitions: <tt>title</tt> always gets converted to a <tt>String</tt>, and <tt>isDone</tt> becomes a <tt>Boolean</tt>. Additionally <tt>isDone</tt> will default to <tt>NO</tt> if you don&#8217;t provide a different value when creating a new record. If you want to read more about how records work, check out the <a href="records.html">records guide</a>.</p>
+<h3 id="creating-fixture-data">3 Creating Fixture Data</h3>
+<p>The easiest way to start development without having to connect to a backend server is to use fixtures. With fixtures, we provide an array of data hashes that represent each record. Let&#8217;s create a few fixtures below the record definition:</p>
+<div class="code_container">
+<div class="filename">apps/todos/todos.js</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+Todos.Todo.FIXTURES = [
+
+    { &quot;guid&quot;: &quot;todo-1&quot;,
+      &quot;title&quot;: &quot;Build my first SproutCore app&quot;,
+      &quot;isDone&quot;: false },
+
+    { &quot;guid&quot;: &quot;todo-2&quot;,
+      &quot;title&quot;: &quot;Build a really awesome SproutCore app&quot;,
+      &quot;isDone&quot;: false },
+
+    { &quot;guid&quot;: &quot;todo-3&quot;,
+      &quot;title&quot;: &quot;Next, the world!&quot;,
+      &quot;isDone&quot;: false }
+];
+</pre></div><p>Now we have a model and some sample data, but if you run the application, nothing happens. What&#8217;s wrong?</p>
+<p>Remember that an instance of <tt>SC.Store</tt> is responsible for loading records, and that includes fixture data. We will also need to tell the controller exactly which data we want to fetch from that store. Let&#8217;s start by adding a store to Todos application:</p>
+<div class="code_container">
+<div class="filename">apps/todos/todos.js</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+// add store property to previously created Todos object
+Todos = SC.Application.create({
+  store: SC.Store.create().from(SC.Record.fixtures)
+});
+</pre></div><p>We just created a new <tt>SC.Store</tt> and told it to load its data from the fixtures we previously defined. Later in the development cycle, when you want to connect your application to a real server, you can just change the argument of the <tt>from()</tt> method to something like &#8220;MyDataSource&#8221;.</p>
+<p>Let&#8217;s make sure that everything is working. If you haven&#8217;t already, run <tt>sc-server</tt> from your application directory, then open <a href="http://localhost:4020/todos">http://localhost:4020/todos</a> in your web browser. Open your browser&#8217;s JavaScript console and type the following commands:</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+records = Todos.store.find(Todos.Todo)
+records.objectAt(0).get('title')
+// =&gt; &quot;Build my first SproutCore app&quot;
+</pre></div><p>We just used the store&#8217;s <tt>find()</tt> method to return all records of a certain type. This will return an instance of <tt>SC.RecordArray</tt> that contains all of <tt>Todos.Todo</tt> records the store knows about. If you create a new <code>Todo</code> record in the future, it will automatically be added to the record array. Conversely, if you were to ever destroy one of your <code>Todo</code> objects, it would be automatically removed.</p>
+<h3 id="connecting-the-pieces">4 Connecting the Pieces</h3>
+<p>Now you&#8217;re ready to bind your controller to the store. In order to do that, you&#8217;ll need to set <tt>content</tt> property of <tt>Todos.todoListController</tt> to a record array that you will fetch with <tt>SC.Store.find()</tt> function. You can do it in the <tt>SC.ready</tt> callback, which is already defined at the end of your <code>todos.js</code> file:</p>
+<div class="code_container">
+<div class="filename">apps/todos/todos.js</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+SC.ready(function() {
+  Todos.mainPane = SC.TemplatePane.append({
+    layerId: 'todos',
+    templateName: 'todos'
+  });
+
+  var todos = Todos.store.find(Todos.Todo);
+  Todos.todoListController.set('content', todos);
+});
+</pre></div><p>Now refresh the page and you should see that all of the todos from fixtures are displayed in the view.</p>
+<p>Next, we need to make sure that the store knows about new records. Update the controller&#8217;s <tt>createTodo</tt> method to use <code>SC.Store</code>&#8217;s <tt>createRecord</tt> method:</p>
+<div class="code_container">
+<div class="filename">apps/todos/todos.js</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+  createTodo: function(title) {
+    Todos.store.createRecord(Todos.Todo, { title: title });
+  },
+</pre></div><p>Last, our <tt>clearCompletedTodos</tt> function needs to be updated to utilize the <tt>destroy</tt> method available on <tt>SC.Record</tt>:</p>
+<div class="code_container">
+<div class="filename">apps/todos/todos.js</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+
+  // updating existing code
+
+  Todos.todoListController = SC.ArrayController.create({
+
+    // ...
+
+    clearCompletedTodos: function(){
+      this.filterProperty('isDone', true).forEach( function(item) {
+        item.destroy();
+      });
+    },
+
+    // ...
+
+  )};
+</pre></div><p>Try reloading a page and adding a new todo, marking a few as done and clicking the &#8220;Clear Completed Todos&#8221; button. It should automatically place new one at the bottom of the list and clear any completed when you click the button. All of the other operations that you perform on records should also work seamlessly, because we use standard <tt>get()</tt> and <tt>set()</tt> functions that work for every type of objects in SproutCore.</p>
+<h3 id="changelog">5 Changelog</h3>
+<ul>
+	<li>May 5, 2011: initial version by <a href="credits.html#drogus">Piotr Sarnacki</a></li>
+	<li>May 9, 2011: Stylistic edits by <a href="credits.html#tomdale">Tom Dale</a></li>
+</ul>
+
+      </div>
+        <div id="subCol">
+          <h3 class="chapter"><img src="images/strobe/chapters.png" alt="" />Chapters</h3>
+          <ol class="chapters">
+            <li><a href="#prepare-the-application"><p>Prepare the Application</p>
+</a></li><li><a href="#defining-the-model"><p>Defining the Model</p>
+</a></li><li><a href="#creating-fixture-data"><p>Creating Fixture Data</p>
+</a></li><li><a href="#connecting-the-pieces"><p>Connecting the Pieces</p>
+</a></li><li><a href="#changelog"><p>Changelog</p>
+</a></li>
+          </ol>
+        </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+	  <footer>
+	    <div class="container">
+	      <div class="col">
+	        <a href="index.html"><img src="images/footer/sc_logo_medium.png" alt="SproutCore" /></a>
+	        <p id="license">
+	          Copyright 2011 <a href="http://www.strobecorp.com">Strobe Inc</a>.
+	          <br />
+	          SproutCore framework is under MIT License.
+	        </p>
+	      </div>
+	      <nav class="col">
+	        <h1>Site Navigation</h1>
+	        <ul>
+	          <li><a href="http://www.sproutcore.com/about/">About</a></li>
+	          <li><a href="http://sproutcore.com/docs/">Docs</a></li>
+	          <li><a href="http://blog.sproutcore.com">Blog</a></li>
+	          <li><a href="http://www.sproutcore.com/install/?redirect=1">Download</a></li>
+	          <li><a href="http://www.sproutcore.com/community/">Community</a></li>
+	          <li><a href="https://github.com/sproutcore/sproutcore">GitHub</a></li>
+	          <li><a href="mailto:community@sproutcore.com">Contact Us</a></li>
+	          <li><a href="http://sproutcore.com/guides/">Guides</a></li>
+	        </ul>
+	        <a href="http://www.w3.org/html/logo/"><img src="images/footer/html5_tech.png" alt="HTML5 Powered" /></a>
+	      </nav>
+	      <div class="col">
+	        <h1>Get in Touch, Stay Informed</h1>
+	        <ul class="social">
+	          <li><a href="http://twitter.com/sproutcore"><img src="images/footer/twitter.png" alt="Twitter" /></a></li>
+	          <li><a href="http://www.facebook.com/sproutcore"><img src="images/footer/facebook.png" alt="Facebook" /></a></li>
+	          <li><a href="http://groups.google.com/group/sproutcore"><img src="images/footer/google.png" alt="Google Groups" /></a></li>
+						<li><a href="http://groups.google.com/group/sproutcore">Subscribe To Mailing List</a></li>
+	        </ul>
+					<a href="http://eepurl.com/dK1-Y" target="_blank" id="newsletter" class="button secondary">Sign Up For Our Newsletter!</a>
+	<!-- Commented out until we have mailchimp API integration.
+					<h2>Subscribe To Newsletter</h2>
+	        <div id="subscribe">
+	          <form>
+	            <input type="text" name="email" />
+	            <button name="subscribe">Sign-Up</button>
+	            <div class="processing"><img src="/img/spinner.gif"></div>
+	            <div class="error"></div>
+	          </form>
+	        </div>
+	-->
+	      </div>
+	      <a href="#feature" class="top">Back To Top</a>
+	    </div>
+	  </footer>
+
+  <script src="http://code.jquery.com/jquery-1.6.min.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" src="javascripts/sproutGuides.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushJScript.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushCss.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.all()
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-19584397-1']);
+    _gaq.push(['_setDomainName', '.sproutcore.com']);
+    _gaq.push(['_setAllowHash', false]);
+    _gaq.push(['_setAllowLinker', true]);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl': 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</body>
+</html>
