@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>SproutCore Guides: SproutCore's Build Tools</title>
+
+  <!-- guides styles -->
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/guides.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <!-- syntax highlighting styles -->
+  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/shThemeGuides.css" />
+</head>
+<body class="guide">
+
+  <header role="banner">
+    <div class="container">
+      <h1 id="logo">
+        <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
+      </h1>
+      <nav role="navigation">
+        <ul>
+          <li><a href="http://sproutcore.com/about/">About</a></li>
+          <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
+          <li><a href="http://docs.sproutcore.com">Docs</a></li>
+          <li><a href="http://sproutcore.com/community/">Community</a></li>
+          <li><a href="http://blog.sproutcore.com">Blog</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div id="feature">
+    <div class="wrapper">
+      <div class="feature_header">
+        <a href="/"><img src="images/graphics/guides.png"></a>
+        <h2><a href="/">SproutCore Guides</a></h2>
+        <p>These guides are designed to help you write and perfect your code.</p>
+      </div>
+      <div class="feature_sidebar">
+        <a href="index.html" id="guidesMenu">
+          Guides Index <span id="guidesArrow">&#9656;</span>
+        </a>
+        <div id="guides" class="clearfix" style="display: none;">
+          <a href="index.html" class="guidesMenu">
+            Guides Index <span class="guidesArrow">&#9662;</span>
+          </a>
+          <hr style="clear:both;">
+          <dl class="L">
+    <dt>Start Here</dt>
+      <dd><a href="getting_started.html">Getting Started: Part 1</a></dd>
+      <dd><a href="getting_started_2.html">Getting Started: Part 2</a></dd>
+      <dd><a href="build_tools.html">Build Tools</a></dd>
+      <dd><a href="core_concepts.html">Core Concepts</a></dd>
+    <dt>Views</dt>
+      <dd><a href="using_handlebars.html">Using Handlebars Templates</a></dd>
+      <dd><a href="views.html">Core View Concepts</a></dd>
+    <dt>Models</dt>
+      <dd><a href="records.html">SproutCore Records</a></dd>
+      <dd><a href="fixtures.html">Using Fixtures</a></dd>
+    <dt>Theming</dt>
+      <dd><a href="chance.html">Using Chance, SproutCore's CSS Framework</a></dd>
+      <dd><a href="theming_app.html">Theming Your App</a></dd>
+</dl>
+<dl class="R">
+    <dt>Testing</dt>
+      <dd><a href="unit_test_framework.html">Unit Testing</a></dd>
+      <dd><a href="adding_unit_test.html">Adding a Unit Test</a></dd>
+      <dd><a href="writing_unit_tests.html">Writing Unit Tests</a></dd>
+      <dd><a href="running_unit_tests.html">Running Unit Tests</a></dd>
+      <dd><a href="todos_tdd.html">SproutCore Development Using TDD</a></dd>
+    <dt>Extras</dt>
+      <dd><a href="enumerables.html">Enumerables</a></dd>
+    <dt>Contributing to SproutCore</dt>
+      <dd><a href="style_guide.html">Javascript Style Guide</a></dd>
+      <dd><a href="commit_code.html">Committer Guidelines</a></dd>
+      <dd><a href="documentation_guidelines.html">Documentation Guidelines</a></dd>
+</dl>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+          <div class="headerSection">
+            <h2>SproutCore&#8217;s Build Tools</h2>
+<p>After reading this guide, you will be able to:</p>
+<ul>
+	<li>Create a new SproutCore project skeletons using <tt>sproutcore init</tt>.</li>
+	<li>Add additional apps to a SproutCore project and additional views, controllers, models and unit tests to a SproutCore app using <tt>sproutcore gen</tt>.</li>
+	<li>Configure your apps using <tt>Buildfiles</tt>.</li>
+	<li>Use SproutCore&#8217;s server and proxy, <tt>sproutcore server</tt>, for development and testing.</li>
+	<li>Build a SproutCore app for production deployment using <tt>sproutcore build</tt>.</li>
+</ul>
+
+          </div>
+        <h3 id="introduction">1 Introduction</h3>
+<p>One of the least understood and, because of this, occasionally maligned components of SproutCore are the accompanying build tools.  Let&#8217;s be clear, build tools are absolutely necessary for even the smallest project and to attempt to write an application without them from the start, simply means being forced to cobble together less effective processes later on.</p>
+<p>The reason for this is it quickly becomes too difficult and time consuming to manage multiple source files and assets; there are several important optimizations required for deploying top-of-class web experiences that are best left to automated scripts.</p>
+<p>For example, SproutCore&#8217;s build tools do the following and more:</p>
+<ul>
+	<li>Automatically scans your source code and builds a manifest of how your code should be built into a final project.  This ensures that your JavaScript and <span class="caps">CSS</span> always load in the proper order.</li>
+	<li>Run stylesheets through the <a href="http://compass-style.org/">Compass <span class="caps">CSS</span> Authoring Framework</a> for simple and clean <span class="caps">CSS</span>.</li>
+	<li>Proxies <span class="caps">XHR</span> requests to avoid same-origin policy restrictions while developing.</li>
+	<li>Applies localization rules to automatically build different language variations of your project.</li>
+	<li>Inserts cache-friendly URLs on build for any assets (such as images) that you may want to load.</li>
+	<li>Builds your JavaScript files and stylesheets into a single JavaScript and a single <span class="caps">CSS</span> file and minifies the contents of each.  This makes your deployed app load much faster since multiple smaller requests are slower for the clients.</li>
+	<li>Automatically slices and sprites your images; a typically very time-consuming and error prone task.</li>
+</ul>
+<p>For a list of the available commands, type <tt>sproutcore</tt> on the command line after installing the SproutCore gem:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+
+$ sproutcore
+
+SproutCore 1.8.0 Usage
+======================
+
+Tasks:
+  sproutcore build [TARGET..]                                                                   # Builds one or more targets
+  sproutcore build-number TARGET                                                                # Computes a build number for the target
+  sproutcore docs [TARGET..]                                                                    # Generates JSDoc's for specified targets.
+  sproutcore gen generator Namespace[.ClassName] [--target=TARGET_NAME] [--filename=FILE_NAME]  # Generates SproutCore components
+  sproutcore help                                                                               # How to use the sproutcore command
+  sproutcore help [TASK]                                                                        # Describe available tasks or one specific task
+  sproutcore init PROJECT [APP]                                                                 # Generates a SproutCore project with an initial appl...
+  sproutcore manifest [TARGET..]                                                                # Generates a manifest for the specified targets
+  sproutcore server                                                                             # Starts the development server
+  sproutcore version                                                                            # Show the SproutCore version number
+
+Options:
+      [--project=PROJECT]
+      [--mode=MODE]
+      [--logfile=LOGFILE]
+  -b, [--build=BUILD]
+      [--build-targets=BUILD-TARGETS]  # Targets to build (excluding their dependencies)
+      [--dont-minify]                  # Disables minification for the build.
+  -v, [--verbose]
+  -V, [--very-verbose]
+      [--help]
+</pre></div><h3 id="generating-a-new-sproutcore-project-sproutcore-init">2 Generating a New SproutCore Project: <tt>sproutcore init</tt></h3>
+<p>To create a new basic SproutCore project simply use <tt>sproutcore init</tt> or its short form equivalent, <tt>sc-init</tt>, and supply a project name and optional initial app name.  If you don&#8217;t supply the AppName parameter, an app with the same name as the project will be created.  For example, to create a project &#8220;MediaTools&#8221; with the default app &#8220;VideoEditor&#8221; use the following:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+
+$ sproutcore init MediaTools VideoEditor
+ ~ Created directory at media_tools
+ ~ Created file at media_tools/Buildfile
+ ~ Created file at media_tools/README
+ ~ Created directory at apps
+ ~ Created directory at apps/video_editor
+ ~ Created file at apps/video_editor/Buildfile
+ ~ Created file at apps/video_editor/core.js
+ ~ Created file at apps/video_editor/main.js
+ ~ Created directory at apps/video_editor/resources
+ ~ Created file at apps/video_editor/resources/_theme.css
+ ~ Created file at apps/video_editor/resources/loading.rhtml
+ ~ Created file at apps/video_editor/resources/main_page.js
+ ~ Created file at apps/video_editor/theme.js
+Your new SproutCore project is ready!
+
+To get started, you can find your initial application in the &quot;apps&quot; directory.
+</pre></div><p>To create a project &#8220;Calculator&#8221; with an app of the same name, simply use:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+
+$ sproutcore init Calculator
+~ Created directory at calculator
+~ Created file at calculator/Buildfile
+...
+</pre></div><p>To create a project &#8220;BusyBee&#8221; with an app of the same name with a base statechart, simply use:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+
+$ sproutcore init BusyBee --statechart
+~ Created directory at busy_bee
+~ Created file at busy_bee/Buildfile
+...
+</pre></div>
+<div class="note"><p>Passing a camelcase app name to <ins>sproutcore init</ins>, such as <code>VideoEditor</code> &mdash; notice the uppercase &#8216;E&#8217; &mdash;, creates a namespace <code>VideoEditor</code> and the directories are named using underscores (i.e. <strong><ins>apps/video_editor</ins></strong>)</p></div>
+<h3 id="generating-additional-sproutcore-files-sproutcore-gen">3 Generating Additional SproutCore Files: <tt>sproutcore gen</tt></h3>
+<p>The command <code>sproutcore init</code> creates a few default files for you that form a typical starting point for a new project, but you will soon need other files and this is where the command <tt>sproutcore gen</tt> or <tt>sc-gen</tt>, for short, can come in.  The following are the most commonly used commands with a brief description of each.</p>
+<h4 id="sc-gen-project-projectname">3.1 <tt>sc-gen project ProjectName</tt></h4>
+<p>Creates an empty SproutCore project.  You may use this instead of <code>sproutcore init</code>, if you don&#8217;t want a default app to be created.</p>
+<h4 id="sc-gen-app-appname">3.2 <tt>sc-gen app AppName</tt></h4>
+<p>When called from within a project, adds an app to the project with the namespace <code>AppName</code>.</p>
+<h4 id="sc-gen-statechart_app-appname">3.3 <tt>sc-gen statechart_app AppName</tt></h4>
+<p>When called from within a project, adds an app with a basic SC.Statechart setup.</p>
+<div class="note"><p>Similar to generating basic statechart files with <code>sproutcore init --statechart</code> you can achieve the same result with <code>sproutcore gen app --statechart</code>.</p></div>
+<h4 id="sc-gen-model-appname-modelname">3.4 <tt>sc-gen model AppName.ModelName</tt></h4>
+<p>Adds a SC.Record subclass, &#8216;AppName.ModelName&#8217;, in the file <code>model_name_model.js</code> along with stub fixture and unit test files.</p>
+<h4 id="sc-gen-controller-appname-controllername">3.5 <tt>sc-gen controller AppName.ControllerName</tt></h4>
+<p>Adds a SC.ObjectController subclass instance, &#8216;AppName.controllerName&#8217;, in the file <code>controller_name_controller.js</code> and a stub unit test file.</p>
+<h4 id="sc-gen-view-appname-viewname">3.6 <tt>sc-gen view AppName.ViewName</tt></h4>
+<p>Adds a SC.View subclass, &#8216;AppName.ViewName&#8217;, in the file <code>view_name_view.js</code> and a stub unit test file.</p>
+<h4 id="sc-gen-data-source-appname-datasourcename">3.7 <tt>sc-gen data-source AppName.DataSourceName</tt></h4>
+<p>Adds a SC.DataSource subclass, &#8216;AppName.DataSourceName&#8217;, in the file <code>data_source_name.js</code>.</p>
+<h4 id="sc-gen-language-appname-language">3.8 <tt>sc-gen language AppName.Language</tt></h4>
+<p>Adds a language file for &#8216;Language&#8217;, in the file <code>language.lproj</code>.  Here are some examples:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+
+$ sc-gen language MediaTools French
+ ~ Created directory at french.lproj
+ ~ Created file at french.lproj/strings.js
+
+$ sc-gen language MediaTools en-ca
+ ~ Created directory at en_ca.lproj
+ ~ Created file at en_ca.lproj/strings.js
+
+$ sc-gen language MediaTools Latin
+ ~ Created directory at Latin.lproj
+ ~ Created file at Latin.lproj/strings.js
+</pre></div>
+<div class="note"><p>Generally the provided &#8216;Language&#8217; will result in the same named directory, &#8216;Language.lproj&#8217;, but as can be seen by the French example above, the build tools have a bit of an odd behavior of recognizing English, French, German, Italian, Spanish and Japanese as parameters and making the directory name the lowercase version.</p></div>
+<h4 id="sc-gen-framework-frameworkname">3.9 <tt>sc-gen framework FrameworkName</tt></h4>
+<p>Creates a framework with namespace <code>FrameworkName</code> in the project&#8217;s <code>frameworks</code> directory.  Read further to learn about including frameworks in your SproutCore apps.</p>
+<h3 id="configuring-sproutcore-applications-buildfile">4 Configuring SproutCore Applications: <tt>Buildfile</tt></h3>
+<p>The operations of the build tools are configured via the project, framework and app Buildfiles.  If you used the previous commands, you will find a Buildfile within your root project directory and a Buildfile in each of your app directories.  As it states in the default app Buildfiles, the settings in the app Buildfile will override the project Buildfile.</p>
+<p>Therefore, a recommended setup would configure properties shared between all your apps within a project in the project&#8217;s Buildfile and to configure any properties specific to an app, in the app&#8217;s Buildfile.  For simplicity state, the following examples will just use a single Buildfile in most cases.</p>
+<p>Before looking at each config setting in detail, there is one important statement, <tt>mode</tt>, that is valuable to understand.  Any configurations within a <code>mode #{name}</code> block will only apply to the named environment.  By default, <code>sproutcore build</code> uses the mode <tt>production</tt> and <code>sproutcore server</code> uses the mode <tt>debug</tt>, but you may provide any custom mode by passing <tt>--mode=my_mode</tt> to the command.</p>
+<p>The following list describes the most common Buildfile <code>config</code> properties.</p>
+<h4 id="build_number-string">4.1 <tt>:build_number =&gt; {String}</tt></h4>
+<p>By default, the build project assets will get cache friendly paths containing a unique build number.  This is necessary to ensure that the files are properly cached, but you can specify a custom build number with this setting.</p>
+<div class="warning"><p>Using a fixed build_number will cause cached assets to not be invalidated.  Use this setting with caution.</p></div>
+<h4 id="combine_javascript-boolean">4.2 <tt>:combine_javascript =&gt; {Boolean}</tt></h4>
+<p>By default, the built project combines all the JavaScript files into a single file.  Setting <code>:combine_javascript</code> to <code>false</code> will prevent this from happening, which may be useful for debugging purposes.</p>
+<h4 id="combine_stylesheets-boolean">4.3 <tt>:combine_stylesheets =&gt; {Boolean}</tt></h4>
+<p>By default, the built project combines all the <span class="caps">CSS</span> files into a single file.  Setting <code>:combine_stylesheets</code> to <code>false</code> will prevent this from happening, which may be useful for debugging purposes.</p>
+<h4 id="javascript_libs-array">4.4 <tt>:javascript_libs =&gt; {Array}</tt></h4>
+<p>An array of JavaScript file URLs that will be inserted as the src attributes of &lt;script&gt; tags in the <code>&lt;head&gt;</code> element.</p>
+<p>Ex. Including the Google Maps <span class="caps">API</span>:</p>
+<div class="code_container">
+<div class="filename">my_project/apps/my_app/Buildfile</div>
+<pre class="brush: ruby; gutter: false; toolbar: false">
+
+  config :my_app,
+    :javascript_libs =&gt; [
+      'https://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false'
+    ]
+</pre></div><h4 id="layout-string">4.5 <tt>:layout =&gt; {String}</tt></h4>
+<p>By default, SproutCore apps use the index.html template in the SproutCore framework at <code>lib/index.rhtml</code>.  You may copy the default index.rhtml file into your app and specify the path in your Buildfile.</p>
+<div class="warning"><p>Failing to update your copy of index.rhtml when SproutCore is updated, may cause conflicts with the build tools.  Therefore it is recommended to use the config parameters to modify the generated index.html, rather than modifying the template directly.</p></div>
+<h4 id="load_debug-boolean">4.6 <tt>:load_debug =&gt; {Boolean}</tt></h4>
+<p>By default, directories named <code>debug</code> are not included in the built project.  Set <code>:load_debug</code> to <code>true</code> to have them included.</p>
+<h4 id="load_fixtures-boolean">4.7 <tt>:load_fixtures =&gt; {Boolean}</tt></h4>
+<p>By default, fixtures are excluded in the built project.  Set <code>:load_fixtures</code> to <code>true</code> to have them included.</p>
+<h4 id="load_protocols-boolean">4.8 <tt>:load_protocols =&gt; {Boolean}</tt></h4>
+<p>By default, files in directories named <code>protocols</code> are excluded in the built project.  Set <code>:load_protocols</code> to <code>true</code> to have them included.</p>
+<h4 id="minify-boolean">4.9 <tt>:minify =&gt; {Boolean}</tt></h4>
+<p>By default, the <span class="caps">HTML</span>, JavaScript and <span class="caps">CSS</span> is minified when built.  Set this to <code>false</code> to prevent minification, which may be useful for debugging.  You can also be more specific by using either <tt>:minify_javascript</tt>, <tt>:minify_css</tt> or <tt>:minify_html</tt>.</p>
+<div class="note"><p>If minify is <code>false</code>, <code>sc-build</code> will throw a security exception unless <code>--allow-commented-js</code> is set, because all comments will be visible in the built product.</p></div>
+<h4 id="required-array">4.10 <tt>:required =&gt; {Array}</tt></h4>
+<p>This defines the frameworks in the order that the app requires them and is initially set by default to <code>:sproutcore</code>.  Since frameworks can be nested and can define their own requirements, the <code>:sproutcore</code> framework is actually just a wrapper framework that includes several of its sub-frameworks each of which have their own requirements as well.  New developers should not generally concern themselves with stripping away</p>
+<p>Ex. The most basic Buildfile:</p>
+<div class="code_container">
+<div class="filename">my_project/Buildfile</div>
+<pre class="brush: ruby; gutter: false; toolbar: false">
+
+  config :all, :required =&gt; :sproutcore
+</pre></div><p>Ex. Including a framework, DataHelpers, from the project&#8217;s frameworks directory for all apps within the project:</p>
+<div class="code_container">
+<div class="filename">my_project/Buildfile</div>
+<pre class="brush: ruby; gutter: false; toolbar: false">
+
+  config :all, :required =&gt; [:sproutcore, :data_helpers]
+</pre></div><p>Ex. Including different frameworks for different apps:</p>
+<div class="code_container">
+<div class="filename">my_project/Buildfile</div>
+<pre class="brush: ruby; gutter: false; toolbar: false">
+
+  config :all, :required =&gt; [:sproutcore]
+
+  config :my_app, :required =&gt; [:client_views]
+
+  config :my_admin_app, :required =&gt; [:admin_tools]
+</pre></div><p>Ex. Including different frameworks for different apps using app specific Buildfiles:</p>
+<div class="code_container">
+<div class="filename">my_project/Buildfile</div>
+<pre class="brush: ruby; gutter: false; toolbar: false">
+
+  config :all, :required =&gt; [:sproutcore]
+</pre></div>
+<div class="code_container">
+<div class="filename">my_project/apps/my_app/Buildfile</div>
+<pre class="brush: ruby; gutter: false; toolbar: false">
+
+  config :my_app, :required =&gt; [:client_views]
+
+&lt;ruby filename=&quot;my_project/apps/my_admin_app/Buildfile&quot;&gt;
+  config :my_admin_app, :required =&gt; [:admin_tools]
+</pre></div>
+<div class="info"><p>For advanced manipulation of the included SproutCore frameworks, refer to the SproutCore <a href="https://github.com/sproutcore/sproutcore/blob/master/Buildfile">Buildfile</a>.</p></div>
+<h4 id="theme-string">4.11 <tt>:theme =&gt; {String}</tt></h4>
+<p>The framework or theme that contains the app&#8217;s theme.  See the guide on <a href="theming_app.html">Theming Your App</a> for more information.</p>
+<h4 id="theme-name-string">4.12 <tt>:theme-name =&gt; {String}</tt></h4>
+<p>A class name to set on the <code>&lt;body&gt;</code> element.  If not specified, the body will have a class <code>sc-theme</code>.</p>
+<h4 id="title-string">4.13 <tt>:title =&gt; {String}</tt></h4>
+<p>The value of the <span class="caps">HTML</span> <code>&lt;title&gt;</code> element.</p>
+<p>Ex. Separate titles for different apps:</p>
+<div class="code_container">
+<div class="filename">my_project/Buildfile</div>
+<pre class="brush: ruby; gutter: false; toolbar: false">
+
+  config :all, :required =&gt; [:sproutcore]
+
+  config :my_app, :title =&gt; 'My App'
+
+  config :my_admin_app, :title =&gt; 'My App (Administration)'
+</pre></div>
+<div class="info"><p>For advanced Buildfile configuration, refer to the build tool&#8217;s <a href="https://github.com/sproutcore/abbot/blob/master/lib/Buildfile">Buildfile</a>.</p></div>
+<h3 id="developing-with-sproutcore-sproutcore-server">5 Developing with SproutCore: <tt>sproutcore server</tt></h3>
+<p>So that you can view and test your code in action immediately, the build tools also provide a local server and proxy.  As was mentioned in <a href="/getting_started.html">Getting Started</a>, you run the server by changing to your project&#8217;s directory and running either <tt>sproutcore server</tt> or <tt>sc-server</tt> for short.  The server will monitor your files for changes and re-build them when they do change.  To keep the process fast and to allow you to debug your code while developing, the individual files aren&#8217;t packed or minified in debug mode.  When your server is running, you can access your apps at <tt>http://localhost:4020</tt> or a specific app at <tt>http://localhost:4020/app_name</tt>.</p>
+<p>The server also includes a proxy that is configurable within the project&#8217;s Buildfile.  Without a proxy, <span class="caps">XHR</span> requests will fail since the origin of your test page, <code>http://localhost:4020</code> will not match the origin of your backend server (ex. <code>https://my-private-api.com:8080</code>) and the browser will consequently reject the request.  Therefore, if you want to load data from your backend from a <span class="caps">URL</span> like <code>https://my-private-api.com:8080/users/3</code>, your <span class="caps">XHR</span> request must be to <code>/users/3</code> and you will use the SproutCore server to proxy the request across.</p>
+<p>Here are some examples configuring the SproutCore server proxy:</p>
+<div class="code_container">
+<div class="filename">my_project/Buildfile</div>
+<pre class="brush: ruby; gutter: false; toolbar: false">
+
+  # Proxy all requests for '/news' to 'http://news.com/news'.
+  proxy &quot;/news&quot;, :to =&gt; &quot;news-server.com&quot;
+
+  # Proxy all requests for '/session' to 'https://session-server.net/session'.
+  proxy &quot;/session&quot;, :to =&gt; &quot;session-server.com&quot;, :secure =&gt; true
+
+  # Proxy all requests for '/users' to 'https://our-app.com/people'.
+  #   ex. /users/23 =&gt; https://our-app.com/people/23
+  proxy &quot;/users&quot;, :to =&gt; &quot;our-app.com&quot;, :secure =&gt; true, :url =&gt; &quot;/people&quot;
+
+  # Proxy to a local server with a longer timeout to support long-polling requests.
+  #   ex. /socket.io =&gt; http://localhost:3443/socket.io
+  proxy '/socket.io', :to =&gt; 'localhost:3443', :timeout =&gt; 25
+
+  # An alternate configuration of the above.
+  proxy '/socket.io', :to =&gt; 'localhost:3443', :connect_timeout =&gt; 5, :inactivity_timeout =&gt; 30
+
+  # Disallow redirects
+  proxy '/originals', :to =&gt; 'some-api.org', :redirect =&gt; false
+</pre></div><h3 id="building-a-sproutcore-application-sproutcore-build">6 Building a SproutCore Application: <tt>sproutcore build</tt></h3>
+<p>Finally, when your application is ready to be deployed to a real server, you will do a production build and move the files across to be hosted.  Depending on the options you set in your Buildfile, this will generate some variant of static deployable and cache-able content.</p>
+<p>Ex. Building all apps and required frameworks within a project.</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+
+$ sproutcore build
+</pre></div><p>Ex. Building a specific app within a project, including it&#8217;s required frameworks.</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+
+$ sproutcore build my_app
+</pre></div><p>The following are some options that you may want to pass to <tt>sproutcore build</tt> or <tt>sc-build</tt>.</p>
+<h4 id="allow-commented-js">6.1 <tt>--allow-commented-js</tt></h4>
+<p>You must set this if you have set <code>minify: false</code> in your Buildfile and you do want to build an un-minified product which includes all your comments.</p>
+<h4 id="build">6.2 <tt>--build</tt></h4>
+<p>Specify the build number manually to use.  This results in paths that won&#8217;t cache properly, but may be useful for testing or embedding a SproutCore app.</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+
+$ sproutcore build my_app --build=test_build
+</pre></div><h4 id="buildroot">6.3 <tt>--buildroot</tt></h4>
+<p>Specify the path to the built product.</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+
+$ sproutcore build my_app --buildroot=../builds
+</pre></div><h4 id="languages">6.4 <tt>--languages</tt></h4>
+<p>Specify which languages to build.  By default, the build tool will build all languages in the project.</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+
+$ sproutcore build my_app --languages=en,en-ca,zh
+</pre></div><h4 id="dont-minify">6.5 <tt>--dont-minify</tt></h4>
+<p>Disables minification for the build without throwing a Security exception as setting <tt>minify: false</tt> within the Buildfile would do.</p>
+<div class="warning"><p>Be sure to remove any <ins>debugger</ins> statements from your code, as they will cause the build to fail.</p></div>
+<h4 id="stageroot">6.6 <tt>--stageroot</tt></h4>
+<p>Specify the path to the staging products.</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+
+$ sproutcore build my_app --stageroot=../tmp/staging
+</pre></div><h4 id="verbose-or-v">6.7 <tt>--verbose</tt> or <tt>-v</tt></h4>
+<p>Verbose output.</p>
+
+      </div>
+        <div id="subCol">
+          <h3 class="chapter"><img src="images/graphics/chapters.png" alt="" />Chapters</h3>
+          <ol class="chapters">
+            <li><a href="#introduction"><p>Introduction</p>
+</a></li><li><a href="#generating-a-new-sproutcore-project-sproutcore-init"><p>Generating a New SproutCore Project: <tt>sproutcore init</tt></p>
+</a></li><li><a href="#generating-additional-sproutcore-files-sproutcore-gen"><p>Generating Additional SproutCore Files: <tt>sproutcore gen</tt></p>
+</a><ul><li><a href="#sc-gen-project-projectname"><tt>sc-gen project ProjectName</tt>
+</a></li> <li><a href="#sc-gen-app-appname"><tt>sc-gen app AppName</tt>
+</a></li> <li><a href="#sc-gen-statechart_app-appname"><tt>sc-gen statechart_app AppName</tt>
+</a></li> <li><a href="#sc-gen-model-appname-modelname"><tt>sc-gen model AppName.ModelName</tt>
+</a></li> <li><a href="#sc-gen-controller-appname-controllername"><tt>sc-gen controller AppName.ControllerName</tt>
+</a></li> <li><a href="#sc-gen-view-appname-viewname"><tt>sc-gen view AppName.ViewName</tt>
+</a></li> <li><a href="#sc-gen-data-source-appname-datasourcename"><tt>sc-gen data-source AppName.DataSourceName</tt>
+</a></li> <li><a href="#sc-gen-language-appname-language"><tt>sc-gen language AppName.Language</tt>
+</a></li> <li><a href="#sc-gen-framework-frameworkname"><tt>sc-gen framework FrameworkName</tt>
+</a></li></ul></li><li><a href="#configuring-sproutcore-applications-buildfile"><p>Configuring SproutCore Applications: <tt>Buildfile</tt></p>
+</a><ul><li><a href="#build_number-string"><tt>:build_number =&gt; {String}</tt>
+</a></li> <li><a href="#combine_javascript-boolean"><tt>:combine_javascript =&gt; {Boolean}</tt>
+</a></li> <li><a href="#combine_stylesheets-boolean"><tt>:combine_stylesheets =&gt; {Boolean}</tt>
+</a></li> <li><a href="#javascript_libs-array"><tt>:javascript_libs =&gt; {Array}</tt>
+</a></li> <li><a href="#layout-string"><tt>:layout =&gt; {String}</tt>
+</a></li> <li><a href="#load_debug-boolean"><tt>:load_debug =&gt; {Boolean}</tt>
+</a></li> <li><a href="#load_fixtures-boolean"><tt>:load_fixtures =&gt; {Boolean}</tt>
+</a></li> <li><a href="#load_protocols-boolean"><tt>:load_protocols =&gt; {Boolean}</tt>
+</a></li> <li><a href="#minify-boolean"><tt>:minify =&gt; {Boolean}</tt>
+</a></li> <li><a href="#required-array"><tt>:required =&gt; {Array}</tt>
+</a></li> <li><a href="#theme-string"><tt>:theme =&gt; {String}</tt>
+</a></li> <li><a href="#theme-name-string"><tt>:theme-name =&gt; {String}</tt>
+</a></li> <li><a href="#title-string"><tt>:title =&gt; {String}</tt>
+</a></li></ul></li><li><a href="#developing-with-sproutcore-sproutcore-server"><p>Developing with SproutCore: <tt>sproutcore server</tt></p>
+</a></li><li><a href="#building-a-sproutcore-application-sproutcore-build"><p>Building a SproutCore Application: <tt>sproutcore build</tt></p>
+</a><ul><li><a href="#allow-commented-js"><tt>--allow-commented-js</tt>
+</a></li> <li><a href="#build"><tt>--build</tt>
+</a></li> <li><a href="#buildroot"><tt>--buildroot</tt>
+</a></li> <li><a href="#languages"><tt>--languages</tt>
+</a></li> <li><a href="#dont-minify"><tt>--dont-minify</tt>
+</a></li> <li><a href="#stageroot"><tt>--stageroot</tt>
+</a></li> <li><a href="#verbose-or-v"><p><tt>--verbose</tt> or <tt>-v</tt></p>
+</a></li></ul></li>
+          </ol>
+        </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+	  <footer>
+	    <div class="container">
+	      <div class="col">
+	        <a href="index.html"><img src="images/footer/sc_logo_medium.png" alt="SproutCore" /></a>
+	        <p id="license">
+	          SproutCore framework is under MIT License.
+	        </p>
+	      </div>
+	      <nav class="col">
+	        <h1>Site Navigation</h1>
+	        <ul>
+	          <li><a href="http://www.sproutcore.com/about/">About</a></li>
+	          <li><a href="http://docs.sproutcore.com">Docs</a></li>
+	          <li><a href="http://blog.sproutcore.com">Blog</a></li>
+	          <li><a href="http://www.sproutcore.com/install/?redirect=1">Download</a></li>
+	          <li><a href="http://www.sproutcore.com/community/">Community</a></li>
+	          <li><a href="https://github.com/sproutcore/sproutcore">GitHub</a></li>
+	          <li><a href="mailto:community@sproutcore.com">Contact Us</a></li>
+	          <li><a href="http://guides.sproutcore.com">Guides</a></li>
+	        </ul>
+	        <a href="http://www.w3.org/html/logo/"><img src="images/footer/html5_tech.png" alt="HTML5 Powered" /></a>
+	      </nav>
+	      <div class="col">
+	        <h1>Get in Touch, Stay Informed</h1>
+	        <ul class="social">
+	          <li><a href="http://twitter.com/sproutcore"><img src="images/footer/twitter.png" alt="Twitter" /></a></li>
+	          <li><a href="http://www.facebook.com/sproutcore"><img src="images/footer/facebook.png" alt="Facebook" /></a></li>
+	          <li><a href="http://groups.google.com/group/sproutcore"><img src="images/footer/google.png" alt="Google Groups" /></a></li>
+						<li><a href="http://groups.google.com/group/sproutcore">Subscribe To Mailing List</a></li>
+	        </ul>
+					<a href="http://eepurl.com/dK1-Y" target="_blank" id="newsletter" class="button secondary">Sign Up For Our Newsletter!</a>
+	<!-- Commented out until we have mailchimp API integration.
+					<h2>Subscribe To Newsletter</h2>
+	        <div id="subscribe">
+	          <form>
+	            <input type="text" name="email" />
+	            <button name="subscribe">Sign-Up</button>
+	            <div class="processing"><img src="/img/spinner.gif"></div>
+	            <div class="error"></div>
+	          </form>
+	        </div>
+	-->
+	      </div>
+	      <a href="#feature" class="top">Back To Top</a>
+	    </div>
+	  </footer>
+
+  <script src="http://code.jquery.com/jquery-1.6.min.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" src="javascripts/sproutGuides.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushJScript.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushCss.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.all()
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-19584397-1']);
+    _gaq.push(['_setDomainName', '.sproutcore.com']);
+    _gaq.push(['_setAllowHash', false]);
+    _gaq.push(['_setAllowLinker', true]);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl': 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</body>
+</html>

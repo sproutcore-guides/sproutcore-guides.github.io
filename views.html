@@ -7,7 +7,7 @@
   <!-- guides styles -->
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
   <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/strobe.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/guides.css" />
   <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
   <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
   <!--[if lt IE 9]>
@@ -16,7 +16,7 @@
 
   <!-- syntax highlighting styles -->
   <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/shThemeStrobeGuides.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/shThemeGuides.css" />
 </head>
 <body class="guide">
 
@@ -28,8 +28,8 @@
       <nav role="navigation">
         <ul>
           <li><a href="http://sproutcore.com/about/">About</a></li>
-          <li class="active"><a href="http://sproutcore.com/guides/">Guides</a></li>
-          <li><a href="http://sproutcore.com/docs/">Docs</a></li>
+          <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
+          <li><a href="http://docs.sproutcore.com">Docs</a></li>
           <li><a href="http://sproutcore.com/community/">Community</a></li>
           <li><a href="http://blog.sproutcore.com">Blog</a></li>
         </ul>
@@ -40,7 +40,7 @@
   <div id="feature">
     <div class="wrapper">
       <div class="feature_header">
-        <a href="/"><img src="images/strobe/guides.png"></a>
+        <a href="/"><img src="images/graphics/guides.png"></a>
         <h2><a href="/">SproutCore Guides</a></h2>
         <p>These guides are designed to help you write and perfect your code.</p>
       </div>
@@ -57,8 +57,8 @@
     <dt>Start Here</dt>
       <dd><a href="getting_started.html">Getting Started: Part 1</a></dd>
       <dd><a href="getting_started_2.html">Getting Started: Part 2</a></dd>
+      <dd><a href="build_tools.html">Build Tools</a></dd>
       <dd><a href="core_concepts.html">Core Concepts</a></dd>
-      <dd><a href="enumerables.html">Enumerables</a></dd>
     <dt>Views</dt>
       <dd><a href="using_handlebars.html">Using Handlebars Templates</a></dd>
       <dd><a href="views.html">Core View Concepts</a></dd>
@@ -76,6 +76,8 @@
       <dd><a href="writing_unit_tests.html">Writing Unit Tests</a></dd>
       <dd><a href="running_unit_tests.html">Running Unit Tests</a></dd>
       <dd><a href="todos_tdd.html">SproutCore Development Using TDD</a></dd>
+    <dt>Extras</dt>
+      <dd><a href="enumerables.html">Enumerables</a></dd>
     <dt>Contributing to SproutCore</dt>
       <dd><a href="style_guide.html">Javascript Style Guide</a></dd>
       <dd><a href="commit_code.html">Committer Guidelines</a></dd>
@@ -107,36 +109,36 @@
 <div class="info"><p>The file <ins>main_page.js</ins> is included into the application&#8217;s resources folder when using <code>sc-init</code> without the <code>--template</code> param.</p></div>
 
 <div class="code_container">
-<div class="filename">apps/app/resources/main_page.js</div>
+<div class="filename">apps/addressbook/resources/main_page.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
-App.mainPage = SC.Page.design({
+AddressBook.mainPage = SC.Page.design({
   mainPane: SC.MainPane.design({
     childViews: 'labelView'.w(),
     labelView: SC.LabelView.design({
       layout: { centerX: 0, centerY: 0, width: 200, height: 18 },
       textAlign: SC.ALIGN_CENTER,
-      tagName: &quot;h1&quot;, 
+      tagName: &quot;h1&quot;,
       value: &quot;Welcome to SproutCore!&quot;
     })
   })
 });
-</pre></div><p>To understand what all of this means, we&#8217;ll have to look at and understand what this boilerplate code does. <tt>App.mainPage</tt> is our main application page. Your application may end up having several &#8220;pages&#8221; or you may choose to swap content into and out of a single page. <tt>App.mainPage</tt> is an <tt>SC.Page</tt> which works by lazily configuring itself. The views within a page are only awakened when you <tt>get</tt> the page in the <tt>main.js</tt> file:</p>
+</pre></div><p>To understand what all of this means, we&#8217;ll have to look at and understand what this boilerplate code does. <tt>AddressBook.mainPage</tt> is our main application page. Your application may end up having several &#8220;pages&#8221; or you may choose to swap content into and out of a single page. <tt>AddressBook.mainPage</tt> is an <tt>SC.Page</tt> which works by lazily configuring itself. The views within a page are only awakened when you <tt>get</tt> the page in the <tt>main.js</tt> file:</p>
 <div class="code_container">
-<div class="filename">in apps/app/main.js</div>
+<div class="filename">in apps/addressbook/main.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
-App.getPath('mainPage.mainPane').append();
-</pre></div><p><tt>App.mainPage.mainPane</tt> is an <tt>SC.MainPane</tt> which is itself an <tt>SC.Pane</tt>.  There will probably be many panes in your app because a pane is just like a regular view except that it doesn&#8217;t need to live within a parent view. These can be anything from a palette to a popup to a menu. In this case, our pane is an <tt>SC.MainPane</tt> which automatically makes itself the main pane as soon as it&#8217;s appended to the doument.</p>
+AddressBook.getPath('mainPage.mainPane').append();
+</pre></div><p><tt>AddressBook.mainPage.mainPane</tt> is an <tt>SC.MainPane</tt> which is itself an <tt>SC.Pane</tt>.  There will probably be many panes in your app because a pane is just like a regular view except that it doesn&#8217;t need to live within a parent view. These can be anything from a palette to a popup to a menu. In this case, our pane is an <tt>SC.MainPane</tt> which automatically makes itself the main pane as soon as it&#8217;s appended to the doument.</p>
 <p>Our main pane is configured with only one <tt>childView</tt>, an <tt>SC.LabelView</tt>.  SproutCore uses absolute positioning to lay out its views, and this label view is no different. Giving it a width and height allows us to place the label directly in the center of the page using <tt>centerX</tt> and <tt>centerY</tt>. These attributes specify how many pixels offset from the center we&#8217;d like the view.</p>
 <div class="note"><p>The <ins>w</ins> function splits a string by spaces and turns it into an array.  We could have accomplished the same thing by using <ins>childViews:[&#8216;labelView&#8217;]</ins>.</p></div>
 <h3 id="laying-out-views-on-the-page">2 Laying Out Views on the Page</h3>
 <p>Let&#8217;s say we wanted to make an address book. This address book would have a list of all your contacts that you could scroll through and see contact details such as phone numbers and addresses. Let&#8217;s start the address book by starting an <tt>SC.WorkspaceView</tt> which allows us to have a toolbar on the top and bottom and a view between those two toolbars:</p>
 <div class="code_container">
-<div class="filename">apps/app/resources/main_page.js</div>
+<div class="filename">apps/addressbook/resources/main_page.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
-App.mainPage = SC.Page.design({
+AddressBook.mainPage = SC.Page.design({
   mainPane: SC.MainPane.design({
     childViews: 'workspaceView'.w(),
     workspaceView: SC.WorkspaceView.design({
@@ -148,7 +150,7 @@ App.mainPage = SC.Page.design({
 <div class="note"><p>The class method <ins>design</ins> performs like <ins>extend</ins> and may register with SproutCore&#8217;s <ins>designer</ins> framework, which is the basis of the interface builder, Greenhouse. You should never use <ins>design</ins> outside of a page definition.</p></div>
 <p>We now have a nice toolbar on the top of the page, but we still don&#8217;t have a list of any contacts. If we want a list on the left and details on the right, it sounds like <tt>SC.SplitView</tt> is the perfect view to do that, so let&#8217;s make that our <tt>contentView</tt>:</p>
 <div class="code_container">
-<div class="filename">in apps/app/resources/main_page.js</div>
+<div class="filename">in apps/addressbook/resources/main_page.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
 workspaceView: SC.WorkspaceView.design({
@@ -163,15 +165,15 @@ workspaceView: SC.WorkspaceView.design({
 <div class="note"><p>When you use values less than 1 for dimensions in SproutCore they&#8217;re interpreted as percentages. E.g. <ins>width: 0.5</ins> tells SproutCore that you want it to be 50% wide.</p></div>
 <p>We&#8217;re going to need to list our contacts, so let&#8217;s do that to the left, with our details view to the right. For this, we could use <tt>SC.ListView</tt> which is used for generic lists of stacked information where you know each list item&#8217;s height. Fortunately, SproutCore includes <tt>SC.SourceListView</tt> which not only looks great out of the box, but also provides the default behaviors of a source list:</p>
 <div class="code_container">
-<div class="filename">in apps/app/resources/main_page.js</div>
+<div class="filename">in apps/addressbook/resources/main_page.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
 topLeftView: SC.SourceListView.design({
-  content: [&quot;Devin Torres&quot;, &quot;Charles Jolley&quot;, &quot;Peter Wagenet&quot;]
+  content: [&quot;Elizabeth Jones&quot;, &quot;Arnold Washington&quot;, &quot;Pete Matthews&quot;]
 })
 </pre></div><p>We can then move on to the details of a contact, such as his name, phone phone number, and address. We can use <tt>SC.LabelView</tt> for all three in our <tt>bottomRightView</tt>:</p>
 <div class="code_container">
-<div class="filename">in apps/app/resources/main_page.js</div>
+<div class="filename">in apps/addressbook/resources/main_page.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
 bottomRightView: SC.View.design({
@@ -201,58 +203,58 @@ bottomRightView: SC.View.design({
 <h3 id="binding-views-to-controllers">3 Binding Views to Controllers</h3>
 <p>Instead of having our source list content and our label values in our views, let&#8217;s bind them to some controllers. We&#8217;ll start by creating an <tt>SC.ArrayController</tt> for our list of contacts:</p>
 <div class="code_container">
-<div class="filename">apps/app/controllers/contacts.js</div>
+<div class="filename">apps/addressbook/controllers/contacts.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
-App.contactsController = SC.ArrayController.create({
+AddressBook.contactsController = SC.ArrayController.create({
   allowsMultipleSelection: NO,
   content: [
     SC.Object.create({
-      name: &quot;Devin Torres&quot;,
+      name: &quot;Elizabeth Jones&quot;,
       phone: &quot;(555) 391-1419&quot;,
-      address: &quot;214 12th St. Austin, TX 78701&quot;,
-      website: 'http://www.linkedin.com/in/devintorres'
+      address: &quot;145 Wandering Way, Austin, TX 78701&quot;,
+      website: 'http://www.elizabethjonesproductions.com'
     }),
-    
+
     SC.Object.create({
-      name: &quot;Charles Jolley&quot;,
-      phone: &quot;(555) 749-1585&quot;,
-      address: &quot;378 16th St. Austin, TX 78701&quot;,
-      website: 'http://www.linkedin.com/in/charlesjolley'
+      name: &quot;Arnold Washington&quot;,
+      phone: &quot;(453) 749-1585&quot;,
+      address: &quot;378 North 16th St., Ann Arbor, MI 79883&quot;,
+      website: 'http://www.arnoldwashingtonmedia.com'
     }),
-    
+
     SC.Object.create({
-      name: &quot;Peter Wagenet&quot;,
-      phone: &quot;(555) 856-3750&quot;,
-      address: &quot;935 2nd St. Austin, TX 78701&quot;,
-      website: 'http://www.linkedin.com/in/wagenet'
+      name: &quot;Pete Matthews&quot;,
+      phone: &quot;(343) 856-3750&quot;,
+      address: &quot;935 2nd St., Phoenix, AZ 87435&quot;,
+      website: 'http://www.petematthewsfurniture.com'
     })
   ]
 });
 </pre></div><p>Because we are only going to be working with one object at a time, <tt>allowsMultipleSelection: NO</tt> will restrict the ability to select only one item.</p>
 <p>And then an <tt>SC.ObjectController</tt> that proxies individual contact objects:</p>
 <div class="code_container">
-<div class="filename">apps/app/controllers/contact.js</div>
+<div class="filename">apps/addressbook/controllers/contact.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
-App.contactController = SC.ObjectController.create({
-  contentBinding: 'App.contactsController.selection'
+AddressBook.contactController = SC.ObjectController.create({
+  contentBinding: 'AddressBook.contactsController.selection'
 });
 </pre></div>
-<div class="note"><p>An object controller will automatically detect if you have a single selection and will automatically set it&#8217;s content to the only item in the selection set. If you are in the rare case of needing to force a single selection, you can use <ins>SC.Binding.single(&#8216;App.contactsController.selection&#8217;)</ins>.</p></div>
+<div class="note"><p>An object controller will automatically detect if you have a single selection and will automatically set it&#8217;s content to the only item in the selection set. If you are in the rare case of needing to force a single selection, you can use <ins>SC.Binding.single(&#8216;AddressBook.contactsController.selection&#8217;)</ins>.</p></div>
 <p>Now we can bind our source list to the <tt>SC.ArrayController</tt> to get a dynamic list of contacts and individual contact selection support:</p>
 <div class="code_container">
-<div class="filename">in apps/app/resources/main_page.js</div>
+<div class="filename">in apps/addressbook/resources/main_page.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
 topLeftView: SC.SourceListView.design({
   contentValueKey: 'name',
-  contentBinding: 'App.contactsController.content',
-  selectionBinding: 'App.contactsController.selection'
+  contentBinding: 'AddressBook.contactsController.arrangedObjects',
+  selectionBinding: 'AddressBook.contactsController.selection'
 })
 </pre></div><p>With the contacts selectable, the only thing missing is dynamic label values for the contact&#8217;s name, phone, and address:</p>
 <div class="code_container">
-<div class="filename">in apps/app/resources/main_page.js</div>
+<div class="filename">in apps/addressbook/resources/main_page.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
 bottomRightView: SC.View.design({
@@ -261,17 +263,17 @@ bottomRightView: SC.View.design({
 
   nameLabel: SC.LabelView.design({
     layout: { width: 500, height: 18 },
-    valueBinding: SC.Binding.oneWay('App.contactController.name')
+    valueBinding: SC.Binding.oneWay('AddressBook.contactController.name')
   }),
 
   phoneLabel: SC.LabelView.design({
     layout: { top: 40, width: 500, height: 18 },
-    valueBinding: SC.Binding.oneWay('App.contactController.phone')
+    valueBinding: SC.Binding.oneWay('AddressBook.contactController.phone')
   }),
 
   addressLabel: SC.LabelView.design({
     layout: { top: 80, width: 500, height: 500 },
-    valueBinding: SC.Binding.oneWay('App.contactController.address')
+    valueBinding: SC.Binding.oneWay('AddressBook.contactController.address')
   })
 })
 </pre></div>
@@ -282,7 +284,7 @@ bottomRightView: SC.View.design({
 <h4 id="using-css-to-style-a-view">4.1 Using <span class="caps">CSS</span> to Style a View</h4>
 <p>Let&#8217;s make the interface a bit more visually appealing and user friendly by giving a usage hint when no contact has been selected yet. We can create a generic view and add the class name <tt>app-usage-hint</tt> to the <tt>classNames</tt> array, and then a label view as a child to display the hint. Our <tt>bottomRightView</tt> should now look like this:</p>
 <div class="code_container">
-<div class="filename">in apps/app/resources/main_page.js</div>
+<div class="filename">in apps/addressbook/resources/main_page.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
 bottomRightView: SC.View.design({
@@ -290,7 +292,7 @@ bottomRightView: SC.View.design({
 
   usageHint: SC.View.design({
     classNames: 'app-usage-hint',
-    isVisibleBinding: SC.Binding.not('App.contactsController.hasSelection'),
+    isVisibleBinding: SC.Binding.not('AddressBook.contactsController.hasSelection'),
 
     childViews: [SC.LabelView.design({
       layout: { width: 300, height: 22, centerX: 0, centerY: 0 },
@@ -307,23 +309,23 @@ bottomRightView: SC.View.design({
 
     nameLabel: SC.LabelView.design({
       layout: { width: 500, height: 18 },
-      valueBinding: 'App.contactController.name'
+      valueBinding: 'AddressBook.contactController.name'
     }),
 
     phoneLabel: SC.LabelView.design({
       layout: { top: 40, width: 500, height: 18 },
-      valueBinding: 'App.contactController.phone'
+      valueBinding: 'AddressBook.contactController.phone'
     }),
 
     addressLabel: SC.LabelView.design({
       layout: { top: 80, width: 500, height: 500 },
-      valueBinding: 'App.contactController.address'
+      valueBinding: 'AddressBook.contactController.address'
     })
   })
 })
 </pre></div><p>Right now it looks rather small, so let&#8217;s add some style to it. Create a file in the <tt>resources</tt> directory and name it <tt>theme.css</tt>:</p>
 <div class="code_container">
-<div class="filename">apps/app/resources/theme.css</div>
+<div class="filename">apps/addressbook/resources/theme.css</div>
 <pre class="brush: css; gutter: false; toolbar: false">
 
 .app-usage-hint {
@@ -342,22 +344,22 @@ bottomRightView: SC.View.design({
 <div class="note"><p>As soon as you start overriding methods such as <ins>render</ins> and <ins>update</ins>, your views really need to be in their own files under the <ins>views</ins> directory.  A good rule of thumb is that <ins>main_page.js</ins> should never have anything longer than a one line function.</p></div>
 <p>The <tt>update</tt> method is called whenever a property that is defined on the view&#8217;s <tt>displayProperties</tt> array is changed on the view. The <tt>render</tt> method is passed a <tt>context</tt> variable which is an <tt>SC.RenderContext</tt>. <tt>SC.RenderContext</tt> is used to queue up and build <span class="caps">HTML</span> for a view. You build <span class="caps">HTML</span> by calling <tt>context.push()</tt> and passing it <span class="caps">HTML</span>:</p>
 <div class="code_container">
-<div class="filename">apps/creepy_app/views/charles_jolley.js</div>
+<div class="filename">apps/addressbook/views/person.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
-CreepyApp.CharlesJolleyView = SC.View.extend({
+AddressBook.PersonView = SC.View.extend({
   render: function (context) {
-    context.push(&quot;&lt;h1&gt;Charles Jolley is 31 years young...&lt;/h1&gt;&quot;);
+    context.push(&quot;&lt;h1&gt;Arnold Washington is 31 years young...&lt;/h1&gt;&quot;);
   }
 });
 </pre></div><p>You can also use <tt>context.begin()</tt> and <tt>context.end()</tt> to begin building a tag and push arguments that are &#8220;stringable&#8221; (have a <tt>toString</tt> method) into it:</p>
 <div class="code_container">
-<div class="filename">apps/creepy_app/views/charles_jolley.js</div>
+<div class="filename">apps/addressbook/views/person.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
-CreepyApp.CharlesJolleyView = SC.View.extend({
+AddressBook.PersonView = SC.View.extend({
   displayProperties: ['name', 'age'],
-  name: 'Charles Jolley',
+  name: 'Arnold Washington',
   age: 31,
   render: function (context) {
     var name = this.get('name'), age = this.get('age');
@@ -368,12 +370,12 @@ CreepyApp.CharlesJolleyView = SC.View.extend({
 });
 </pre></div><p>The <tt>update</tt> method is passed a jQuery handle of the view&#8217;s layer, the <span class="caps">DOM</span> element that belongs to the view. You can use it and all of jQuery&#8217;s <span class="caps">API</span> to manipulate the <span class="caps">DOM</span> and update your view:</p>
 <div class="code_container">
-<div class="filename">apps/creepy_app/views/charles_jolley.js</div>
+<div class="filename">apps/addressbook/views/person.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
-CreepyApp.CharlesJolleyView = SC.View.extend({
+AddressBook.PersonView = SC.View.extend({
   displayProperties: ['name', 'age'],
-  name: 'Charles Jolley',
+  name: 'Arnold Washington',
   age: 31,
   render: function (context) {
     var name = this.get('name'), age = this.get('age');
@@ -390,12 +392,12 @@ CreepyApp.CharlesJolleyView = SC.View.extend({
     h1.find('.age').text(this.get('age'));
   }
 })
-</pre></div><p>Say we wanted to make the name of the contact bigger in the details. To do this, let&#8217;s create a custom view called <tt>App.ContactNameView</tt> that will put the contact name in an <tt>h1</tt> tag:</p>
+</pre></div><p>Say we wanted to make the name of the contact bigger in the details. To do this, let&#8217;s create a custom view called <tt>AddressBook.ContactNameView</tt> that will put the contact name in an <tt>h1</tt> tag:</p>
 <div class="code_container">
-<div class="filename">apps/app/views/contact_name.js</div>
+<div class="filename">apps/addressbook/views/contact_name.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
-App.ContactNameView = SC.View.extend({
+AddressBook.ContactNameView = SC.View.extend({
   displayProperties: ['value'],
   render: function (context) {
     context.push('&lt;h1&gt;', this.get('value'), '&lt;/h1&gt;');
@@ -405,12 +407,12 @@ App.ContactNameView = SC.View.extend({
   }
 });
 </pre></div><h4 id="render-delegates">4.3 Render Delegates</h4>
-<p>Render delegates are an easy way to manage theming your apps. You can create a render delegate to manage the rendering of your views for you and add it to the theme you&#8217;re using. Render delegates also have a <tt>render</tt> and <tt>update</tt> method, but their first argument is the <tt>dataSource</tt>, or the view delegating to them. Let&#8217;s recreate the last scenario using an <tt>SC.RenderDelegate</tt> that we&#8217;re going to create in <tt>render_delegates/contact_name.js</tt>:</p>
+<p>Render delegates are an way to manage theming your apps. You can create a render delegate to manage the rendering of your views for you and add it to the theme you&#8217;re using. Render delegates also have a <tt>render</tt> and <tt>update</tt> method, but their first argument is the <tt>dataSource</tt>, or the view delegating to them. Let&#8217;s recreate the last scenario using an <tt>SC.RenderDelegate</tt> that we&#8217;re going to create in <tt>render_delegates/contact_name.js</tt>:</p>
 <div class="code_container">
-<div class="filename">apps/app/render_delegates/contact_name.js</div>
+<div class="filename">apps/addressbook/render_delegates/contact_name.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
-App.MyTheme.contactNameRenderDelegate = SC.RenderDelegate.create({
+AddressBook.MyTheme.contactNameRenderDelegate = SC.RenderDelegate.create({
   render: function (dataSource, context) {
     context.push('&lt;h1&gt;', dataSource.get('value'), '&lt;/h1&gt;');
   },
@@ -420,22 +422,22 @@ App.MyTheme.contactNameRenderDelegate = SC.RenderDelegate.create({
 });
 </pre></div><p>Now we have to tell our view to use our new render delegate to draw itself:</p>
 <div class="code_container">
-<div class="filename">apps/app/views/contact_name.js</div>
+<div class="filename">apps/addressbook/views/contact_name.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
-App.ContactNameView = SC.View.extend({
+AddressBook.ContactNameView = SC.View.extend({
   displayProperties: ['value'],
   renderDelegateName: 'contactNameRenderDelegate'
 });
 </pre></div>
 <div class="info"><p>For a more detailed overview of theming see <a href="theming_app.html">Theming Your App</a></p></div>
 <h3 id="view-events">5 View Events</h3>
-<p>A SproutCore view hierarchy can be viewed like a pond, if the water is touched it ripples outwards affecting all the water around it, or in our case, all the parent views. <tt>SC.View</tt> extends <tt>SC.Responder</tt>, inheriting the ability to react to <span class="caps">DOM</span> events such as <tt>mouseDown</tt> and <tt>mouseEntered</tt>. Let&#8217;s highlight the contact name when it&#8217;s being hovered over and take the user to the contact&#8217;s website if it&#8217;s clicked:</p>
+<p>Events bubble up to parent views in a SproutCore view hierarchy. <tt>SC.View</tt> extends <tt>SC.Responder</tt>, inheriting the ability to react to <span class="caps">DOM</span> events such as <tt>mouseDown</tt> and <tt>mouseEntered</tt>. Let&#8217;s highlight the contact name when it&#8217;s being hovered over and take the user to the contact&#8217;s website if it&#8217;s clicked:</p>
 <div class="code_container">
-<div class="filename">apps/app/views/contact_name_view.js</div>
+<div class="filename">apps/addressbook/views/contact_name_view.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
-App.ContactNameView = SC.View.extend({
+AddressBook.ContactNameView = SC.View.extend({
   displayProperties: ['value'],
   renderDelegateName: 'contactNameRenderDelegate',
   mouseEntered: function () {
@@ -451,33 +453,33 @@ App.ContactNameView = SC.View.extend({
     return YES;
   },
   mouseDown: function (evt) {
-    App.openWebsite();
+    AddressBook.openWebsite();
     return YES;
   }
 });
 </pre></div><p>And in <tt>core.js</tt>:</p>
 <div class="code_container">
-<div class="filename">in apps/app/core.js</div>
+<div class="filename">in apps/addressbook/core.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
 openWebsite: function () {
-  var website = App.contactController.get('website');
+  var website = AddressBook.contactController.get('website');
   window.open(website);
 }
 </pre></div><p>You should return <tt>YES</tt> when you&#8217;ve handled the event, otherwise it would propagate to all of it&#8217;s parent views.</p>
 <div class="warning"><p>Actions such as these would usually be handled by a statechart and are handled here for the purposes of demonstration.</p></div>
-<p>SproutCore views are powerful, and when coupled with bindings, controllers, a few models, and a data source make developing applications fast and easy.</p>
 <h3 id="changelog">6 Changelog</h3>
 <ul>
 	<li>January 12, 2011: initial version by <a href="credits.html#dtorres">Devin Torres</a></li>
 	<li>March 2, 2011: added filenames and small code example changes by <a href="credits.html#topherfangio">Topher Fangio</a></li>
 	<li>March 2, 2011: some corrections to section on render delegates by <a href="credits.html#pwagenet">Peter Wagenet</a></li>
 	<li>March 4, 2011: corrected the title and added a few more filenames by <a href="credits.html#dtorres">Devin Torres</a></li>
+	<li>February 22, 2012: sample code changes and a few edits by <a href="credits.html#geojeff">Jeff Pittman</a></li>
 </ul>
 
       </div>
         <div id="subCol">
-          <h3 class="chapter"><img src="images/strobe/chapters.png" alt="" />Chapters</h3>
+          <h3 class="chapter"><img src="images/graphics/chapters.png" alt="" />Chapters</h3>
           <ol class="chapters">
             <li><a href="#introduction"><p>Introduction</p>
 </a></li><li><a href="#laying-out-views-on-the-page"><p>Laying Out Views on the Page</p>
@@ -500,8 +502,6 @@ openWebsite: function () {
 	      <div class="col">
 	        <a href="index.html"><img src="images/footer/sc_logo_medium.png" alt="SproutCore" /></a>
 	        <p id="license">
-	          Copyright 2011 <a href="http://www.strobecorp.com">Strobe Inc</a>.
-	          <br />
 	          SproutCore framework is under MIT License.
 	        </p>
 	      </div>
@@ -509,13 +509,13 @@ openWebsite: function () {
 	        <h1>Site Navigation</h1>
 	        <ul>
 	          <li><a href="http://www.sproutcore.com/about/">About</a></li>
-	          <li><a href="http://sproutcore.com/docs/">Docs</a></li>
+	          <li><a href="http://docs.sproutcore.com">Docs</a></li>
 	          <li><a href="http://blog.sproutcore.com">Blog</a></li>
 	          <li><a href="http://www.sproutcore.com/install/?redirect=1">Download</a></li>
 	          <li><a href="http://www.sproutcore.com/community/">Community</a></li>
 	          <li><a href="https://github.com/sproutcore/sproutcore">GitHub</a></li>
 	          <li><a href="mailto:community@sproutcore.com">Contact Us</a></li>
-	          <li><a href="http://sproutcore.com/guides/">Guides</a></li>
+	          <li><a href="http://guides.sproutcore.com">Guides</a></li>
 	        </ul>
 	        <a href="http://www.w3.org/html/logo/"><img src="images/footer/html5_tech.png" alt="HTML5 Powered" /></a>
 	      </nav>

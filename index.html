@@ -7,7 +7,7 @@
   <!-- guides styles -->
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
   <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/strobe.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/guides.css" />
   <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
   <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
   <!--[if lt IE 9]>
@@ -16,7 +16,7 @@
 
   <!-- syntax highlighting styles -->
   <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/shThemeStrobeGuides.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/shThemeGuides.css" />
 </head>
 <body class="guide">
 
@@ -28,8 +28,8 @@
       <nav role="navigation">
         <ul>
           <li><a href="http://sproutcore.com/about/">About</a></li>
-          <li class="active"><a href="http://sproutcore.com/guides/">Guides</a></li>
-          <li><a href="http://sproutcore.com/docs/">Docs</a></li>
+          <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
+          <li><a href="http://docs.sproutcore.com">Docs</a></li>
           <li><a href="http://sproutcore.com/community/">Community</a></li>
           <li><a href="http://blog.sproutcore.com">Blog</a></li>
         </ul>
@@ -40,7 +40,7 @@
   <div id="feature">
     <div class="wrapper">
       <div class="feature_header">
-        <a href="/"><img src="images/strobe/guides.png"></a>
+        <a href="/"><img src="images/graphics/guides.png"></a>
         <h2><a href="/">SproutCore Guides</a></h2>
         <p>These guides are designed to help you write and perfect your code.</p>
       </div>
@@ -57,8 +57,8 @@
     <dt>Start Here</dt>
       <dd><a href="getting_started.html">Getting Started: Part 1</a></dd>
       <dd><a href="getting_started_2.html">Getting Started: Part 2</a></dd>
+      <dd><a href="build_tools.html">Build Tools</a></dd>
       <dd><a href="core_concepts.html">Core Concepts</a></dd>
-      <dd><a href="enumerables.html">Enumerables</a></dd>
     <dt>Views</dt>
       <dd><a href="using_handlebars.html">Using Handlebars Templates</a></dd>
       <dd><a href="views.html">Core View Concepts</a></dd>
@@ -76,6 +76,8 @@
       <dd><a href="writing_unit_tests.html">Writing Unit Tests</a></dd>
       <dd><a href="running_unit_tests.html">Running Unit Tests</a></dd>
       <dd><a href="todos_tdd.html">SproutCore Development Using TDD</a></dd>
+    <dt>Extras</dt>
+      <dd><a href="enumerables.html">Enumerables</a></dd>
     <dt>Contributing to SproutCore</dt>
       <dd><a href="style_guide.html">Javascript Style Guide</a></dd>
       <dd><a href="commit_code.html">Committer Guidelines</a></dd>
@@ -103,13 +105,13 @@
       <dd class="clearfix">
         <p>Connect the application you wrote in Part 1 to SproutCore's data store, and learn how to test with fixture data.</p>
       </dd>
+      <dt><a href="build_tools.html">Build Tools</a></dt>
+      <dd class="clearfix">
+        <p>Discover the many deployment advantages and time saving development benefits of SproutCore's build tools.</p>
+      </dd>
       <dt><a href="core_concepts.html">Core Concepts</a></dt>
       <dd class="clearfix">
         <p>In this guide, we will touch on many of the core concepts of SproutCore like bindings and the run loop. We'll cover just enough to get you going with out getting bogged down in the details. If you want to learn more, take a look at the detailed overviews of these concepts in the &quot;Digging Deeper&quot; section.</p>
-      </dd>
-      <dt><a href="enumerables.html">Enumerables</a></dt>
-      <dd class="clearfix">
-        <p>To simplify working with various kinds of lists, SproutCore provides a unified Enumerable interface. This guide explores which SproutCore objects are Enumerable, and how to use the Enumerable API.</p>
       </dd>
   </dl>
   <h3 class="group">Views</h3>
@@ -172,6 +174,14 @@
         <p>Show implementing the TODOs project using TDD.</p>
       </dd>
   </dl>
+  <h3 class="group">Extras</h3>
+
+  <dl>
+      <dt><a href="enumerables.html">Enumerables</a></dt>
+      <dd class="clearfix">
+        <p>To simplify working with various kinds of lists, SproutCore provides a unified Enumerable interface. This guide explores which SproutCore objects are Enumerable, and how to use the Enumerable API.</p>
+      </dd>
+  </dl>
   <h3 class="group">Contributing to SproutCore</h3>
 
   <dl>
@@ -195,13 +205,13 @@
       <div id="subCol">
         <h3>Get Involved</h3>
 <p class="getInvolved">
-  <img src="../images/strobe/paperandpencil.png">
+  <img src="../images/graphics/paperandpencil.png">
   <a href="/contribute.html">Contribute New Guides</a><br>
   SproutCore Guides are a community effort; contribute your own!
 </p>
 
 <p class="getInvolved">
-  <img src="../images/strobe/starperson.png">
+  <img src="../images/graphics/starperson.png">
   <a href="/credits.html">Author Credits</a><br>
   Meet the team responsible for putting the SproutCore Guides together.
 </p>
@@ -209,22 +219,22 @@
 <h3>Icon Legend</h3>
 
 <p>
-  <img src="../images/strobe/warning.png">
+  <img src="../images/graphics/warning.png">
   The warning icon means the content you're looking at isn't quite done yet.
 </p>
 
 <p>
-  <img src="../images/strobe/notes.png">
+  <img src="../images/graphics/notes.png">
   Notes are bits of important side info you want to make sure you pay attention to.
 </p>
 
 <p>
-  <img src="../images/strobe/pin.png">
+  <img src="../images/graphics/pin.png">
   Pins are for supplementary info tidbits you might want; background, fun facts, etc.
 </p>
 
 <p>
-  <img src="../images/strobe/code.png">
+  <img src="../images/graphics/code.png">
   This icon tells you you're looking at code. Which you likely knew... It's still pretty :p
 </p>
 
@@ -238,8 +248,6 @@
 	      <div class="col">
 	        <a href="index.html"><img src="images/footer/sc_logo_medium.png" alt="SproutCore" /></a>
 	        <p id="license">
-	          Copyright 2011 <a href="http://www.strobecorp.com">Strobe Inc</a>.
-	          <br />
 	          SproutCore framework is under MIT License.
 	        </p>
 	      </div>
@@ -247,13 +255,13 @@
 	        <h1>Site Navigation</h1>
 	        <ul>
 	          <li><a href="http://www.sproutcore.com/about/">About</a></li>
-	          <li><a href="http://sproutcore.com/docs/">Docs</a></li>
+	          <li><a href="http://docs.sproutcore.com">Docs</a></li>
 	          <li><a href="http://blog.sproutcore.com">Blog</a></li>
 	          <li><a href="http://www.sproutcore.com/install/?redirect=1">Download</a></li>
 	          <li><a href="http://www.sproutcore.com/community/">Community</a></li>
 	          <li><a href="https://github.com/sproutcore/sproutcore">GitHub</a></li>
 	          <li><a href="mailto:community@sproutcore.com">Contact Us</a></li>
-	          <li><a href="http://sproutcore.com/guides/">Guides</a></li>
+	          <li><a href="http://guides.sproutcore.com">Guides</a></li>
 	        </ul>
 	        <a href="http://www.w3.org/html/logo/"><img src="images/footer/html5_tech.png" alt="HTML5 Powered" /></a>
 	      </nav>
@@ -268,8 +276,8 @@
 					<a href="http://eepurl.com/dK1-Y" target="_blank" id="newsletter" class="button secondary">Sign Up For Our Newsletter!</a>
 	<!-- Commented out until we have mailchimp API integration.
 					<h2>Subscribe To Newsletter</h2>
-	        <div id="subscribe">
-	          <form>
+	        <div id="subscribe">     
+	          <form>     
 	            <input type="text" name="email" />
 	            <button name="subscribe">Sign-Up</button>
 	            <div class="processing"><img src="/img/spinner.gif"></div>

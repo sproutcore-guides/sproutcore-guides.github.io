@@ -7,7 +7,7 @@
   <!-- guides styles -->
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
   <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/strobe.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/guides.css" />
   <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
   <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
   <!--[if lt IE 9]>
@@ -16,7 +16,7 @@
 
   <!-- syntax highlighting styles -->
   <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/shThemeStrobeGuides.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/shThemeGuides.css" />
 </head>
 <body class="guide">
 
@@ -28,8 +28,8 @@
       <nav role="navigation">
         <ul>
           <li><a href="http://sproutcore.com/about/">About</a></li>
-          <li class="active"><a href="http://sproutcore.com/guides/">Guides</a></li>
-          <li><a href="http://sproutcore.com/docs/">Docs</a></li>
+          <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
+          <li><a href="http://docs.sproutcore.com">Docs</a></li>
           <li><a href="http://sproutcore.com/community/">Community</a></li>
           <li><a href="http://blog.sproutcore.com">Blog</a></li>
         </ul>
@@ -40,7 +40,7 @@
   <div id="feature">
     <div class="wrapper">
       <div class="feature_header">
-        <a href="/"><img src="images/strobe/guides.png"></a>
+        <a href="/"><img src="images/graphics/guides.png"></a>
         <h2><a href="/">SproutCore Guides</a></h2>
         <p>These guides are designed to help you write and perfect your code.</p>
       </div>
@@ -57,8 +57,8 @@
     <dt>Start Here</dt>
       <dd><a href="getting_started.html">Getting Started: Part 1</a></dd>
       <dd><a href="getting_started_2.html">Getting Started: Part 2</a></dd>
+      <dd><a href="build_tools.html">Build Tools</a></dd>
       <dd><a href="core_concepts.html">Core Concepts</a></dd>
-      <dd><a href="enumerables.html">Enumerables</a></dd>
     <dt>Views</dt>
       <dd><a href="using_handlebars.html">Using Handlebars Templates</a></dd>
       <dd><a href="views.html">Core View Concepts</a></dd>
@@ -76,6 +76,8 @@
       <dd><a href="writing_unit_tests.html">Writing Unit Tests</a></dd>
       <dd><a href="running_unit_tests.html">Running Unit Tests</a></dd>
       <dd><a href="todos_tdd.html">SproutCore Development Using TDD</a></dd>
+    <dt>Extras</dt>
+      <dd><a href="enumerables.html">Enumerables</a></dd>
     <dt>Contributing to SproutCore</dt>
       <dd><a href="style_guide.html">Javascript Style Guide</a></dd>
       <dd><a href="commit_code.html">Committer Guidelines</a></dd>
@@ -103,7 +105,7 @@
 
           </div>
         <h3 id="following-along">1 Following Along</h3>
-<p>You can see the finished source code for this application on <a href="https://github.com/sproutcore/Todos-Example/">Github</a>. To see it in action, click <a href="http://getting-started.strobeapp.com">here</a>.</p>
+<p>You can see the finished source code for this application on <a href="https://github.com/sproutcore/Todos-Example/">Github</a>.</p>
 <p>There is also a screencast available on <a href="http://vimeo.com/23527342">Vimeo</a>.</p>
 <h3 id="installing-sproutcore">2 Installing SproutCore</h3>
 <p>This guide assumes you have already installed SproutCore 1.6. If you have not, please <a href="http://www.sproutcore.com/install/?redirect=1" onclick="_gaq.push(['_trackEvent', 'Download', 'Guides']);">install it now</a>.</p>
@@ -152,7 +154,6 @@ SC.ready(function() {
   });
 });
 </pre></div><p>This code creates a namespace for your application (called <code>Todos</code>), then appends a new pane. A pane is responsible for event delegation and placing your templates into the <span class="caps">DOM</span>, but you&#8217;ll learn more about that later.</p>
-<div class="info"><p>If you pass a camelcase name to <ins>sc-init</ins>, such as <code>ToDos</code> &mdash; notice the uppercase &#8216;D&#8217; &mdash;, the namespace would instead be <code>ToDos</code> and the directories would be named with underscores (i.e. <strong><ins>apps/to_dos</ins></strong>)</p></div>
 <h3 id="defining-your-model">4 Defining Your Model</h3>
 <p>In this tutorial, we want to create a list for managing todos. Users should be able to create a new todo with a specific task, then check it off once it&#8217;s done.</p>
 <p>Let&#8217;s define our model as a new subclass of <code>SC.Object</code>:</p>
@@ -228,7 +229,7 @@ Todos.todoListController = SC.ArrayController.create({
 &lt;input id=&quot;new-todo&quot; type=&quot;text&quot;
        placeholder=&quot;What needs to be done?&quot; &gt;
 </pre></div>
-<div class="note"><p>For more information about using Handlebars, visit the <a href="http://www.handlebarsjs.com/">Handlebars website</a>. To learn more about using Handlebars with SproutCore, make sure to check out the <a href="http://guides-redesign.strobeapp.com/using_handlebars.html">Using Handlebars Template</a> guide.</p></div>
+<div class="note"><p>For more information about using Handlebars, visit the <a href="http://www.handlebarsjs.com/">Handlebars website</a>.</p></div>
 <p>Now that we&#8217;ve got model, view, and controller represented, it&#8217;s time to open the app in our browser and see how it looks.</p>
 <p>During the development process, <tt>sc-server</tt> makes it easy to test your application. Just run the following inside of your project directory:</p>
 <div class="code_container">
@@ -487,7 +488,7 @@ Todos.todoListController = SC.ArrayController.create({
 	<li>Sign up for the <a href="http://groups.google.com/group/sproutcore">SproutCore Mailing List</a></li>
 	<li>Follow <a href="http://twitter.com/sproutcore">@sproutcore</a> on Twitter</li>
 	<li>Visit the <a href="irc://irc.freenode.net/sproutcore">#sproutcore</a> <span class="caps">IRC</span> channel to get real-time help</li>
-	<li>Bookmark the <a href="http://sproutcore.com/docs/">SproutCore <span class="caps">API</span> Documentation</a> and the <a href="http://sproutcore.com/guides/">SproutCore Guides</a></li>
+	<li>Bookmark the <a href="http://docs.sproutcore.com">SproutCore <span class="caps">API</span> Documentation</a> and the <a href="http://guides.sproutcore.com">SproutCore Guides</a></li>
 </ul>
 <h3 id="continue-on">13 Continue On</h3>
 <p>Now that you&#8217;ve built a basic SproutCore app, continue on to <a href="getting_started_2.html">the next part of this tutorial</a> to learn about working with SproutCore&#8217;s model layer.</p>
@@ -503,7 +504,7 @@ Todos.todoListController = SC.ArrayController.create({
 
       </div>
         <div id="subCol">
-          <h3 class="chapter"><img src="images/strobe/chapters.png" alt="" />Chapters</h3>
+          <h3 class="chapter"><img src="images/graphics/chapters.png" alt="" />Chapters</h3>
           <ol class="chapters">
             <li><a href="#following-along"><p>Following Along</p>
 </a></li><li><a href="#installing-sproutcore"><p>Installing SproutCore</p>
@@ -531,8 +532,6 @@ Todos.todoListController = SC.ArrayController.create({
 	      <div class="col">
 	        <a href="index.html"><img src="images/footer/sc_logo_medium.png" alt="SproutCore" /></a>
 	        <p id="license">
-	          Copyright 2011 <a href="http://www.strobecorp.com">Strobe Inc</a>.
-	          <br />
 	          SproutCore framework is under MIT License.
 	        </p>
 	      </div>
@@ -540,13 +539,13 @@ Todos.todoListController = SC.ArrayController.create({
 	        <h1>Site Navigation</h1>
 	        <ul>
 	          <li><a href="http://www.sproutcore.com/about/">About</a></li>
-	          <li><a href="http://sproutcore.com/docs/">Docs</a></li>
+	          <li><a href="http://docs.sproutcore.com">Docs</a></li>
 	          <li><a href="http://blog.sproutcore.com">Blog</a></li>
 	          <li><a href="http://www.sproutcore.com/install/?redirect=1">Download</a></li>
 	          <li><a href="http://www.sproutcore.com/community/">Community</a></li>
 	          <li><a href="https://github.com/sproutcore/sproutcore">GitHub</a></li>
 	          <li><a href="mailto:community@sproutcore.com">Contact Us</a></li>
-	          <li><a href="http://sproutcore.com/guides/">Guides</a></li>
+	          <li><a href="http://guides.sproutcore.com">Guides</a></li>
 	        </ul>
 	        <a href="http://www.w3.org/html/logo/"><img src="images/footer/html5_tech.png" alt="HTML5 Powered" /></a>
 	      </nav>
