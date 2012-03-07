@@ -57,7 +57,7 @@
     <dt>Start Here</dt>
       <dd><a href="getting_started.html">Getting Started: Part 1</a></dd>
       <dd><a href="getting_started_2.html">Getting Started: Part 2</a></dd>
-      <dd><a href="build_tools.html">Build Tools</a></dd>
+      <dd><a href="getting_started_3.html">Getting Started: Part 3</a></dd>
       <dd><a href="core_concepts.html">Core Concepts</a></dd>
     <dt>Views</dt>
       <dd><a href="using_handlebars.html">Using Handlebars Templates</a></dd>
@@ -68,15 +68,16 @@
     <dt>Theming</dt>
       <dd><a href="chance.html">Using Chance, SproutCore's CSS Framework</a></dd>
       <dd><a href="theming_app.html">Theming Your App</a></dd>
-</dl>
-<dl class="R">
     <dt>Testing</dt>
       <dd><a href="unit_test_framework.html">Unit Testing</a></dd>
       <dd><a href="adding_unit_test.html">Adding a Unit Test</a></dd>
       <dd><a href="writing_unit_tests.html">Writing Unit Tests</a></dd>
       <dd><a href="running_unit_tests.html">Running Unit Tests</a></dd>
       <dd><a href="todos_tdd.html">SproutCore Development Using TDD</a></dd>
+</dl>
+<dl class="R">
     <dt>Extras</dt>
+      <dd><a href="build_tools.html">Build Tools</a></dd>
       <dd><a href="enumerables.html">Enumerables</a></dd>
     <dt>Contributing to SproutCore</dt>
       <dd><a href="style_guide.html">Javascript Style Guide</a></dd>
@@ -100,21 +101,21 @@
           </div>
         <h3 id="how-to-contribute">1 How to Contribute?</h3>
 <p>First, you will need to fork the SproutCore guides repository from Github.</p>
-<p>Go to <a href="https://github.com/sproutcore/sproutguides">https://github.com/sproutcore/sproutguides</a> and fork it. then, check your forked copy out onto your local machine.</p>
+<p>Go to <a href="https://github.com/sproutcore/guides">https://github.com/sproutcore/guides</a> and fork it. then, check your forked copy out onto your local machine.</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 
-$ git clone git@github.com:&lt;yourname&gt;/sproutguides.git
+$ git clone git@github.com:&lt;yourname&gt;/guides.git
 </pre></div><p>Switch to your newly cloned repository.</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 
-$ cd sproutguides
+$ cd guides
 </pre></div><p>You will want to add the main SproutCore repository as a remote:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 
-$ git remote add upstream git://github.com/sproutcore/sproutguides.git
+$ git remote add upstream git://github.com/sproutcore/guides.git
 </pre></div><p>For each guide you write, you will want to create a new branch:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
@@ -138,7 +139,7 @@ $ gem install guides
 <pre class="brush: plain; gutter: false; toolbar: false">
 
 $ gem install bundler
-$ cd sproutguides
+$ cd guides
 $ bundle install --binstubs
 </pre></div><p>The above commands will download the source, compile and install the <tt>guides</tt> executable in the <tt>bin</tt> sub-directory.</p>
 <div class="info"><p>This action may take a while to download and place everithing in place for local usage.</p></div>
@@ -203,7 +204,7 @@ $ git push origin &lt;branchName&gt;
 	<li>Guides are written in a modified Textile. For examples take a look at existing guides, or some of the <a href="https://github.com/rails/rails/tree/master/railties/guides/source">Rails Guides</a> for some examples.</li>
 	<li>For now, follow the <a href="https://github.com/lifo/docrails/wiki/rails-guides-conventions">Rails Guides Conventions</a>.</li>
 	<li>Assets are stored in the <tt>assets</tt> directory.</li>
-	<li>Sample format: <a href="http://github.com/sproutcore/sproutguides/blob/master/source/fixtures.textile">Fixtures</a>.</li>
+	<li>Sample format: <a href="http://github.com/sproutcore/guides/blob/master/source/fixtures.textile">Fixtures</a>.</li>
 	<li>Sample output: <a href="http://guides.sproutcore.com/fixtures.html">Fixtures</a>.</li>
 </ul>
 <h3>What to Contribute?</h3>

@@ -57,7 +57,7 @@
     <dt>Start Here</dt>
       <dd><a href="getting_started.html">Getting Started: Part 1</a></dd>
       <dd><a href="getting_started_2.html">Getting Started: Part 2</a></dd>
-      <dd><a href="build_tools.html">Build Tools</a></dd>
+      <dd><a href="getting_started_3.html">Getting Started: Part 3</a></dd>
       <dd><a href="core_concepts.html">Core Concepts</a></dd>
     <dt>Views</dt>
       <dd><a href="using_handlebars.html">Using Handlebars Templates</a></dd>
@@ -68,15 +68,16 @@
     <dt>Theming</dt>
       <dd><a href="chance.html">Using Chance, SproutCore's CSS Framework</a></dd>
       <dd><a href="theming_app.html">Theming Your App</a></dd>
-</dl>
-<dl class="R">
     <dt>Testing</dt>
       <dd><a href="unit_test_framework.html">Unit Testing</a></dd>
       <dd><a href="adding_unit_test.html">Adding a Unit Test</a></dd>
       <dd><a href="writing_unit_tests.html">Writing Unit Tests</a></dd>
       <dd><a href="running_unit_tests.html">Running Unit Tests</a></dd>
       <dd><a href="todos_tdd.html">SproutCore Development Using TDD</a></dd>
+</dl>
+<dl class="R">
     <dt>Extras</dt>
+      <dd><a href="build_tools.html">Build Tools</a></dd>
       <dd><a href="enumerables.html">Enumerables</a></dd>
     <dt>Contributing to SproutCore</dt>
       <dd><a href="style_guide.html">Javascript Style Guide</a></dd>
@@ -95,137 +96,321 @@
       <div id="mainCol">
           <div class="headerSection">
             <h2>Getting Started: Part 2</h2>
-<p>After reading this guide you will be able to:</p>
+<p>In Part 1, we walked through the basic elements of a SproutCore app. In Part 2 we introduce some of the guiding concepts behind a SproutCore application such as views, controllers, and statecharts.</p>
+<p>In Part 2, you will:</p>
 <ul>
-	<li>Define your models using SC.Record.</li>
-	<li>Manage your models using SC.Store.</li>
-	<li>Load data into the store from fixture data.</li>
-	<li>Query your models using SC.Query.</li>
+	<li>Learn about statecharts and how they can improve your application.</li>
+	<li>Create a new statechart-based SproutCore application, TodosTwo.</li>
+	<li>Learn about views and how they should handle events.</li>
+	<li>Learn how to separate views in individual files with the use of <em>sc_require()</em>.</li>
+	<li>Learn how to pass events to the application&#8217;s statechart.</li>
 </ul>
 
           </div>
-        <h3 id="prepare-the-application">1 Prepare the Application</h3>
-<p>In the <a href="getting_started.html">first part of this guide</a>, you learned how to build a basic Todo application. You now know how to define your models, views, and controllers, then describe how they interact via bindings. So far, however, you have had no way to persist the information between page refreshes.</p>
-<p>The best way to change that is to use SproutCore&#8217;s Data Store framework to manage records. An instance of <tt>SC.Store</tt> is responsible for managing the lifecycle of your records. Behind the scenes, the store uses an <tt>SC.DataSource</tt> to translate retrieve data from your server and persist changes back.</p>
-<p>If you still have your Todo application from the first part of this guide, use that. If not, you can get a <a href="https://www.github.com/sproutcore/Todos-Example">completed version</a> from GitHub.</p>
-<p>Now that we&#8217;ll be using the Data Store, we need to tell SproutCore to include it when your run your application. You can add this dependency in the Buildfile. Just change <tt>config</tt> line to:</p>
-<div class="code_container">
-<div class="filename">Buildfile</div>
-<pre class="brush: ruby; gutter: false; toolbar: false">
+        <h3 id="why-statecharts">1 Why Statecharts?</h3>
+<p>If you&#8217;ve ever built any sizable application, or even small ones for that matter, you&#8217;ve probably run into a bug that was caused by some piece of logic that didn&#8217;t work quite as you intended.</p>
+<p>Perhaps it was an if statement with an invalid test expression, or some piece of code that changed a variable that you weren&#8217;t expecting to be updated. Some bugs happen because you don&#8217;t understand how your app would react under a particular set of conditions.</p>
+<p>Statecharts help reduce uncertainty, by defining more explicitly what can and cannot happen within your application. You think of discrete states, such as &#8220;showing login panel.&#8221; You think of transitions between states. For example, you would think about what should happen as the login  panel is shown, what could happen while it is showing, and what should happen when it is taken down.</p>
+<h3 id="what-is-a-statechart">2 What is a Statechart?</h3>
+<p>A statechart is a simple nested construct that helps you better organize your code into logical hierarchical states. Your applications will have many states, and each state may have many substates within it. Each state can respond to a certain set of actions, the name for events associated with a statechart.</p>
+<div class="note"><p>The term &#8220;event&#8221; is more generic than the term &#8220;action.&#8221; We can speak of the event system, generally, that includes normal web events like <strong>mouseDown</strong> along with actions in the statechart. A statechart action is a type of event.</p></div>
+<p>Consider a SproutCore application for mapping, with the following top-level states, substates, and actions:</p>
+<ol>
+	<li><span class="caps">LOADING</span>
+	<ul>
+		<li><em>loadingFinished</em></li>
+	</ul></li>
+	<li><span class="caps">LOADED</span>
+		<ul>
+			<li><em>viewTermsOfService</em></li>
+			<li><em>viewPrivacyPolicy</em></li>
+			<li>LOGGED_OUT
+			<ul>
+				<li><em>login</em></li>
+			</ul></li>
+			<li>LOGGED_IN
+			<ul>
+				<li><em>createBasemap</em></li>
+				<li><em>zoomMapView</em></li>
+				<li><em>showPointData</em></li>
+				<li><em>other mapping actions&#8230;</em></li>
+			</ul></li>
+		</ul></li>
+</ol>
+<p>In the list above, the states are in <span class="caps">ALL</span>-<span class="caps">CAPS</span>, the actions are in italics.</p>
+<div class="info"><p>The Getting Started Todos applications use ALL_CAPS for state names, for the sake of continuity. However, states are standard SC objects and can follow any naming convention you want.  Many developers prefer CamelCase (i.e., MyApp.LoggedInState) while others prefer namespacing their states (i.e., MyApp.States.LoggedIn).  Some prefer verb-style over noun-style state names. Whatever method you  choose is fine, just be consistent, so you, and other developers, can more easily follow your code.</p></div>
 
-config :all,¬
-  :required =&gt; [&quot;sproutcore/core_foundation&quot;, &quot;sproutcore/datastore&quot;], ¬
-  :theme =&gt; &quot;sproutcore/empty_theme&quot;
-</pre></div><h3 id="defining-the-model">2 Defining the Model</h3>
-<p>The first thing that we need to modify in code is <tt>Todos.Todo</tt>. Currently it&#8217;s just a subclass of <tt>SC.Object</tt>. Let&#8217;s change it to <tt>SC.Record</tt>:</p>
+<div class="note"><p>A state is a state is a state. A substate is a state. (You can always use the term state; when you use the term substate, the reference is relative to a parent state).</p></div>
+<h4 id="decoding-the-statechart">2.1 Decoding the Statechart</h4>
+<p>In our mapping example here, the application can be in one of the two top level states: <span class="caps">LOADING</span> or <span class="caps">LOADED</span>. If  it is in one of these states, it cannot be in the other. When it is in the <span class="caps">LOADING</span> state, the only available  action is the <em>loadingFinished</em> action. The statechart/application should not respond to any other events.  Once control moves into the <span class="caps">LOADED</span> state, it can move to two additional states, substates of the <span class="caps">LOADED</span>  state: LOGGED_OUT or LOGGED_IN. Again, the program can only be in one at a given time, so when the user is  &#8220;logged out&#8221;, after the application has loaded, the only available action is the <em>login</em> action.</p>
+<p>However, notice that the <em>viewTermsOfService</em> action and the <em>viewPrivacyPolicy</em> action are both available in the <span class="caps">LOADED</span> state. This means that regardless of whether the program is in the LOGGED_OUT state or the LOGGED_IN state, the user should be allowed to view the terms of service or the privacy policy.</p>
+<p>Once the user has authenticated and logged in, they have various actions available in the mapping system. Imagine a map user interface that appears, with buttons in a dashboard, with live clickable elements on the map, etc.  The example actions given above, <em>createBasemap</em>, <em>zoomMapView</em>, and <em>showPointData</em> are just a sample of what would be many actions tied to user interface elements.</p>
+<div class="note"><p>States are used in all parts of an application, not just to user interface parts. A large behind-the-scenes data import system in our mapping example could be programmed using statecharts.</p></div>
+<h4 id="how-statecharts-help">2.2 How Statecharts Help</h4>
+<p>An application only responds to certain actions at certain times. This makes it much easier to verify that an app is working properly, by ensuring that events are handled exactly when they need to be handled. Furthermore, if, say, a bug in the design of the user interface allows an action to happen when it shouldn&#8217;t (like allowing some action when the user is logged out), the application itself may maintain  a consistent state and continue to operate. Programming with statecharts can help isolate parts of the system.</p>
+<h3 id="creating-the-statechart">3 Creating the Statechart</h3>
+<p>Create a statechart-based SproutCore app with the <strong>sproutcore gen statechart_app</strong> command:</p>
 <div class="code_container">
-<div class="filename">apps/todos/todos.js</div>
+<pre class="brush: plain; gutter: false; toolbar: false">
+
+$ cd ~/development/sproutcore/getting_started
+$ sproutcore gen statechart_app TodosTwo
+   ~ Created directory at apps/todos_two
+   ~ Created file at apps/todos_two/Buildfile
+   ~ Created file at apps/todos_two/core.js
+   ~ Created file at apps/todos_two/main.js
+   ~ Created directory at apps/todos_two/resources
+   ~ Created file at apps/todos_two/resources/_theme.css
+   ~ Created file at apps/todos_two/resources/loading.rhtml
+   ~ Created file at apps/todos_two/resources/main_page.js
+   ~ Created file at apps/todos_two/statechart.js
+   ~ Created directory at apps/todos_two/states
+   ~ Created file at apps/todos_two/states/ready_state.js
+   ~ Created file at apps/todos_two/theme.js
+
+  Your application target is now ready to use!
+</pre></div><p>The directory structure is:</p>
+<ul>
+	<li><strong>getting_started/</strong>
+	<ul>
+		<li><strong>Buildfile</strong></li>
+		<li><strong><span class="caps">README</span>.md</strong></li>
+		<li><strong>apps/</strong>
+		<ul>
+			<li><strong>todos_one/</strong>
+			<ul>
+				<li><strong>&#8230;</strong></li>
+			</ul></li>
+			<li><strong>todos_two/</strong>
+			<ul>
+				<li><strong>Buildfile</strong></li>
+				<li><strong>core.js</strong></li>
+				<li><strong>main.js</strong></li>
+				<li><strong><em>statechart.js</em></strong></li>
+				<li><strong>theme.js</strong></li>
+				<li><strong>resources/</strong>
+				<ul>
+					<li><strong>_theme.css</strong></li>
+					<li><strong>loading.rhtml</strong></li>
+					<li><strong>main_page.js</strong></li>
+				</ul></li>
+				<li><strong><em>states/</em></strong>
+				<ul>
+					<li><strong><em>ready_state.js</em></strong></li>
+				</ul></li>
+			</ul></li>
+		</ul></li>
+	</ul></li>
+</ul>
+<p>This structure looks almost identical to the standard app made with the <strong>sproutcore gen app</strong> command, except  that you now see two new files, a <em>statechart.js</em> file in the application root directory, and a new  <em>states</em> directory with one state file, <em>ready_state.js</em>:</p>
+<ul>
+	<li><em>statechart.js</em>, and</li>
+	<li><em>states/ready_state.js</em></li>
+</ul>
+<p>The <em>statechart.js</em> file describes your statechart and the initial state that should be entered when the statechart is first initialized. Open it, and you should see the following:</p>
+<div class="code_container">
+<div class="filename">apps/todos_two/statechart.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
-Todos.Todo = SC.Record.extend({
-  title: SC.Record.attr(String),
-  isDone: SC.Record.attr(Boolean, { defaultValue: NO })
+TodosTwo.statechart = SC.Statechart.create({
+
+  initialState: 'readyState',
+
+  readyState: SC.State.plugin('TodosTwo.ReadyState'),
+  // someOtherState: SC.State.plugin('TodosTwo.SomeOtherState')
+
 });
-</pre></div><p>Now we are subclassing <tt>SC.Record</tt> instead of <tt>SC.Object</tt>. We also add attributes definitions: <tt>title</tt> always gets converted to a <tt>String</tt>, and <tt>isDone</tt> becomes a <tt>Boolean</tt>. Additionally <tt>isDone</tt> will default to <tt>NO</tt> if you don&#8217;t provide a different value when creating a new record. If you want to read more about how records work, check out the <a href="records.html">records guide</a>.</p>
-<h3 id="creating-fixture-data">3 Creating Fixture Data</h3>
-<p>The easiest way to start development without having to connect to a backend server is to use fixtures. With fixtures, we provide an array of data hashes that represent each record. Let&#8217;s create a few fixtures below the record definition:</p>
+</pre></div>
+<div class="note"><p>This example uses CamelCase state names.</p></div>
+<p>Note the use of SC.Statechart.create(), instead of SC.Statechart.extend().  Views and models generally  use .extend() when you are defining them, because elsewhere in the system, instantiation of objects happens. Controllers and the statechart use .create() because we need to directly create objects to work with.</p>
+<p>Also note the use of the SC.State.plugin() function. This allows you to put your states in separate files in a states directory.</p>
+<p>Open <em>states/ready_state.js</em> and take a look:</p>
 <div class="code_container">
-<div class="filename">apps/todos/todos.js</div>
+<div class="filename">apps/todos_two/states/ready_state.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
-Todos.Todo.FIXTURES = [
+TodosTwo.ReadyState = SC.State.extend({
 
-    { &quot;guid&quot;: &quot;todo-1&quot;,
-      &quot;title&quot;: &quot;Build my first SproutCore app&quot;,
-      &quot;isDone&quot;: false },
-
-    { &quot;guid&quot;: &quot;todo-2&quot;,
-      &quot;title&quot;: &quot;Build a really awesome SproutCore app&quot;,
-      &quot;isDone&quot;: false },
-
-    { &quot;guid&quot;: &quot;todo-3&quot;,
-      &quot;title&quot;: &quot;Next, the world!&quot;,
-      &quot;isDone&quot;: false }
-];
-</pre></div><p>Now we have a model and some sample data, but if you run the application, nothing happens. What&#8217;s wrong?</p>
-<p>Remember that an instance of <tt>SC.Store</tt> is responsible for loading records, and that includes fixture data. We will also need to tell the controller exactly which data we want to fetch from that store. Let&#8217;s start by adding a store to Todos application:</p>
-<div class="code_container">
-<div class="filename">apps/todos/todos.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
-// add store property to previously created Todos object
-Todos = SC.Application.create({
-  store: SC.Store.create().from(SC.Record.fixtures)
-});
-</pre></div><p>We just created a new <tt>SC.Store</tt> and told it to load its data from the fixtures we previously defined. Later in the development cycle, when you want to connect your application to a real server, you can just change the argument of the <tt>from()</tt> method to something like &#8220;MyDataSource&#8221;.</p>
-<p>Let&#8217;s make sure that everything is working. If you haven&#8217;t already, run <tt>sc-server</tt> from your application directory, then open <a href="http://localhost:4020/todos">http://localhost:4020/todos</a> in your web browser. Open your browser&#8217;s JavaScript console and type the following commands:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
-records = Todos.store.find(Todos.Todo)
-records.objectAt(0).get('title')
-// =&gt; &quot;Build my first SproutCore app&quot;
-</pre></div><p>We just used the store&#8217;s <tt>find()</tt> method to return all records of a certain type. This will return an instance of <tt>SC.RecordArray</tt> that contains all of <tt>Todos.Todo</tt> records the store knows about. If you create a new <code>Todo</code> record in the future, it will automatically be added to the record array. Conversely, if you were to ever destroy one of your <code>Todo</code> objects, it would be automatically removed.</p>
-<h3 id="connecting-the-pieces">4 Connecting the Pieces</h3>
-<p>Now you&#8217;re ready to bind your controller to the store. In order to do that, you&#8217;ll need to set <tt>content</tt> property of <tt>Todos.todoListController</tt> to a record array that you will fetch with <tt>SC.Store.find()</tt> function. You can do it in the <tt>SC.ready</tt> callback, which is already defined at the end of your <code>todos.js</code> file:</p>
-<div class="code_container">
-<div class="filename">apps/todos/todos.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
-SC.ready(function() {
-  Todos.mainPane = SC.TemplatePane.append({
-    layerId: 'todos',
-    templateName: 'todos'
-  });
-
-  var todos = Todos.store.find(Todos.Todo);
-  Todos.todoListController.set('content', todos);
-});
-</pre></div><p>Now refresh the page and you should see that all of the todos from fixtures are displayed in the view.</p>
-<p>Next, we need to make sure that the store knows about new records. Update the controller&#8217;s <tt>createTodo</tt> method to use <code>SC.Store</code>&#8217;s <tt>createRecord</tt> method:</p>
-<div class="code_container">
-<div class="filename">apps/todos/todos.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
-  createTodo: function(title) {
-    Todos.store.createRecord(Todos.Todo, { title: title });
+  enterState: function() {
+    TodosTwo.getPath('mainPage.mainPane').append();
   },
-</pre></div><p>Last, our <tt>clearCompletedTodos</tt> function needs to be updated to utilize the <tt>destroy</tt> method available on <tt>SC.Record</tt>:</p>
+
+  exitState: function() {
+    TodosTwo.getPath('mainPage.mainPane').remove();
+  }
+
+});
+</pre></div><p>States may define an <em>enterState()</em> function to prepare for the new state, and an <em>exitState()</em> function to  clean up after themselves. For user interface programming, these functions are where you show and hide  panels, as you see here, with the use of .append() to show and .remove() to hide.</p>
+<p>The TodosTwo.ReadyState is the only state in this &#8220;Hello World&#8221; app, so it only appends the main page&#8217;s main pane.</p>
+<h3 id="where-views-fit-in">4 Where Views Fit In</h3>
+<p>We&#8217;ve covered statecharts, so you know a little bit about how they work. Let&#8217;s talk about how statecharts  can help organize views and make your code super-clean.</p>
+<p>The <em>resources/main_page.js</em> file defines the main user interface of your application.</p>
+<p>Edit the file to add a second child view, labelView2:</p>
 <div class="code_container">
-<div class="filename">apps/todos/todos.js</div>
+<div class="filename">apps/todos_two/resources/main_page.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
+TodosTwo.mainPage = SC.Page.design({
 
-  // updating existing code
+  mainPane: SC.MainPane.design({
+    childViews: 'labelView labelView2'.w(),
 
-  Todos.todoListController = SC.ArrayController.create({
+    labelView: SC.LabelView.design({
+      layout: { centerX: 0, centerY: 0, width: 200, height: 18 },
+      textAlign: SC.ALIGN_CENTER,
+      tagName: &quot;h1&quot;,
+      value: &quot;Welcome to SproutCore!&quot;
+    }),
 
-    // ...
+    labelView2: SC.LabelView.design({
+      layout: { centerX: 0, centerY: 15, width: 200, height: 18 },
+      textAlign: SC.ALIGN_CENTER,
+      tagName: &quot;h1&quot;,
+      value: &quot;Now we're rolling!&quot;
+    })
+  })
 
-    clearCompletedTodos: function(){
-      this.filterProperty('isDone', true).forEach( function(item) {
-        item.destroy();
-      });
-    },
+});
+</pre></div>
+<div class="info"><p>Throughout the Getting Started guides we have minimized in-code comments for brevity.</p></div>
+<p>Note the use of the <em>.design()</em> method here. <em>.design()</em> is often confused with <em>.extend()</em>.  This confusion is caused by a SproutCore &#8220;wart.&#8221; <em>.design()</em> exists so that views will work  with a graphical designer tool for SproutCore (like Interface Builder for Mac OS X) that has  been in development for a long time, but remains unfinished, with development long ago stalled.  A designer tool might be created in the future, but regardless, there is a logic you can follow,  wherein you use <em>.design()</em> when you are <strong>using</strong> a view, and <em>.extend()</em> where you  are <strong>defining</strong> it. Here we are using <em>.design()</em>, but rest assured that SC.LabelView uses  extend where it is defined in the SproutCore codebase.</p>
+<div class="note"><p>When you make your own views, remember to use <em>.extend()</em> when you are making the view  in the first place, and <em>.design()</em> elsewhere, where you use it.</p></div>
+<p>If you load up <a href="http://localhost:4020/todos_two/">http://localhost:4020/todos_two/</a> in your browser, you should see both labels now; the second one right below the first.</p>
+<h4 id="separating-views">4.1 Separating Views</h4>
+<p>Before we get into using views with statecharts, let&#8217;s first arrange view files for TodosTwo.  Technically, you can put all view code in <em>main_page.js</em>, but that will get impractical  very fast. Instead you can separate each view into it&#8217;s own file. This is accomplished by using the special <em>sc_require()</em> functionality. Modify the mainPane of the mainPage view to have two sc_require() statements at the top, to declare two views as dependencies, and to change the childViews of the pane to use these views:</p>
+<div class="code_container">
+<div class="filename">apps/todos_two/resources/main_page.js</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
 
-    // ...
+sc_require('views/welcome');
+sc_require('views/rolling');
 
-  )};
-</pre></div><p>Try reloading a page and adding a new todo, marking a few as done and clicking the &#8220;Clear Completed Todos&#8221; button. It should automatically place new one at the bottom of the list and clear any completed when you click the button. All of the other operations that you perform on records should also work seamlessly, because we use standard <tt>get()</tt> and <tt>set()</tt> functions that work for every type of objects in SproutCore.</p>
-<h3 id="changelog">5 Changelog</h3>
+TodosTwo.mainPage = SC.Page.design({
+
+  mainPane: SC.MainPane.design({
+    childViews: 'welcomeView rollingView'.w(),
+
+    welcomeView: TodosTwo.WelcomeView.design(),
+    rollingView: TodosTwo.RollingView.design()
+  })
+
+});
+</pre></div><p><em>sc_require()</em> functionality:</p>
+<ol>
+	<li>The file path used in <em>sc_require()</em> is relative to the application&#8217;s root directory.</li>
+	<li>The reference in <em>sc_require()</em> has the filename sans the .js extension.</li>
+	<li>The load order for javascript files will be alphabetical, unless otherwise controlled with sc_require().  Sometimes you  get lucky on the default file loading order, if you omit a sc_require() statement. Sometimes you don&#8217;t, and  you will get a dependency error.</li>
+</ol>
+<p>Now create the views folder for our new WelcomeView and RollingView:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+
+$ cd ~/development/sproutcore/getting_started
+$ mkdir apps/todos_two/views
+</pre></div><p>Next, add the views. Make sure the files have the following content and are located in the views directory:</p>
+<div class="code_container">
+<div class="filename">apps/todos_two/views/welcome.js</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+TodosTwo.WelcomeView = SC.LabelView.extend({
+  layout: { centerX: 0, centerY: 0, width: 200, height: 18 },
+  textAlign: SC.ALIGN_CENTER,
+  tagName: &quot;h1&quot;,
+  value: &quot;Welcome to SproutCore!&quot;
+});
+</pre></div>
+<div class="code_container">
+<div class="filename">apps/todos_two/views/rolling.js</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+TodosTwo.RollingView = SC.LabelView.extend({
+  layout: { centerX: 0, centerY: 15, width: 200, height: 18 },
+  textAlign: SC.ALIGN_CENTER,
+  tagName: &quot;h1&quot;,
+  value: &quot;Now we're rolling!&quot;
+});
+</pre></div><p>If you refresh the page, everything should look exactly as it did before, but now your code is cleaner and more manageable.</p>
+<h4 id="handling-events-and-statechart-actions">4.2 Handling Events and Statechart Actions</h4>
+<p>Standard events for a web application include the ubiquitous mouseDown, and many others. Here we add  an event to watch for mouseDown in our TodosTwo.RollingView, associating it with a statechart action:</p>
+<div class="code_container">
+<div class="filename">apps/todos_two/views/rolling.js</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+TodosTwo.RollingView = SC.LabelView.design({
+  layout: { centerX: 0, centerY: 15, width: 200, height: 18 },
+  textAlign: SC.ALIGN_CENTER,
+  tagName: &quot;h1&quot;,
+  value: &quot;Now we're rolling!&quot;,
+
+  mouseDown: function(evt) {
+    var someParam = &quot;Woot!&quot;;
+
+    TodosTwo.statechart.sendAction('proveIt', someParam);
+  }
+});
+</pre></div><p>We set a <em>proveIt</em> action to happen on the mouseDown event, using the statechart.sendAction() function. We must  handle the action in the appropriate state in the statechart.</p>
+<p>The statechart has a property for the <em>current state</em>. When the statechart recieves an  action event, it will first ask the current state to handle it. If the current state cannot handle  it, the statechart will ask the current state&#8217;s parent state to handle the event. Attempts  continue in this manner, bubbling up until either an ancestor state is found that can handle  the event, or it will log a warning for the developer.  You can see warnings, as well as other  informational messages (such as for state transitions), by turning on tracing on the statechart.</p>
+<p>Do that now:</p>
+<div class="code_container">
+<div class="filename">apps/todos_two/statechart.js</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+TodosTwo.statechart = SC.Statechart.create({
+
+  trace: YES,   // &lt;-- Add this line
+
+  initialState: 'readyState',
+
+  readyState: SC.State.plugin('TodosTwo.ReadyState')
+
+});
+</pre></div><p>Let&#8217;s make our TodosTwo.ReadyState handle the <em>proveIt</em> action that was defined on the mouseDown event in TodosTwo.RollingView above:</p>
+<div class="code_container">
+<div class="filename">apps/todos_two/states/ready_state.js</div>
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+TodosTwo.ReadyState = SC.State.extend({
+
+  enterState: function() {
+    TodosTwo.getPath('mainPage.mainPane').append();
+  },
+
+  exitState: function() {
+    TodosTwo.getPath('mainPage.mainPane').remove();
+  },
+
+  // Prove that we are rolling!
+  proveIt: function(someParam) {
+    alert(someParam);
+  }
+
+});
+</pre></div><p>proveIt() is a function. It is an action in the ReadyState state.</p>
+<p>Save your files and refresh the page. When you click on the &#8220;Now we&#8217;re rolling!&#8221; label, you should see an alert. If you look at the console output, you can also see the tracing reports, with the event being handled by the statechart, as well  as the initialization and the transition to the readyState.</p>
+<h3 id="moving-forward">5 Moving Forward</h3>
+<p>You are now ready to move on to creating a full-scale SproutCore app!</p>
+<p><a href="/getting_started_3.html">Part 3</a> will introduce you to a more complete Todos application, called TodosThree, and walk you through the process of building it from scratch.  You will learn about models, controllers and how they tie in with the statechart  and views.</p>
+<p>So go grab a hot cup of joe, or something else to steel your resolve (Joking. You think?), and dive in to <a href="/getting_started_3.html">Getting Started: Part 3</a>.</p>
+<h3 id="changelog">6 Changelog</h3>
 <ul>
 	<li>May 5, 2011: initial version by <a href="credits.html#drogus">Piotr Sarnacki</a></li>
 	<li>May 9, 2011: Stylistic edits by <a href="credits.html#tomdale">Tom Dale</a></li>
+	<li>March 6, 2012: rewrite for SproutCore 1.8 by the 1.8 release sprint team, including the following who did much work on this task: <a href="credits.html#tce">Tim Evans</a>, <a href="credits.html#topherfangio">Topher Fangio</a>, <a href="credits.html#geojeff">Jeff Pittman</a></li>
 </ul>
 
       </div>
         <div id="subCol">
           <h3 class="chapter"><img src="images/graphics/chapters.png" alt="" />Chapters</h3>
           <ol class="chapters">
-            <li><a href="#prepare-the-application"><p>Prepare the Application</p>
-</a></li><li><a href="#defining-the-model"><p>Defining the Model</p>
-</a></li><li><a href="#creating-fixture-data"><p>Creating Fixture Data</p>
-</a></li><li><a href="#connecting-the-pieces"><p>Connecting the Pieces</p>
+            <li><a href="#why-statecharts"><p>Why Statecharts?</p>
+</a></li><li><a href="#what-is-a-statechart"><p>What is a Statechart?</p>
+</a><ul><li><a href="#decoding-the-statechart"><p>Decoding the Statechart</p>
+</a></li> <li><a href="#how-statecharts-help"><p>How Statecharts Help</p>
+</a></li></ul></li><li><a href="#creating-the-statechart"><p>Creating the Statechart</p>
+</a></li><li><a href="#where-views-fit-in"><p>Where Views Fit In</p>
+</a><ul><li><a href="#separating-views"><p>Separating Views</p>
+</a></li> <li><a href="#handling-events-and-statechart-actions"><p>Handling Events and Statechart Actions</p>
+</a></li></ul></li><li><a href="#moving-forward"><p>Moving Forward</p>
 </a></li><li><a href="#changelog"><p>Changelog</p>
 </a></li>
           </ol>
