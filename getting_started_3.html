@@ -109,16 +109,15 @@
           </div>
         <h3 id="following-along">1 Following Along</h3>
 <p>You have learned in previous guides how to use <strong>sproutcore gen</strong> to make a project directory and to create apps in the project apps directory. You have learned how to run <strong>sproutcore server</strong> in the project directory, and how to view apps in a local browser at localhost:4020/. You have learned about SproutCore app concepts, including the use of a buildfile and of views and a statechart. We will build on that foundation to produce a TodosThree app with components of a best-practices SproutCore app.</p>
-<p>You would benefit from carefully following the instructions in this guide to create directories, to type in code (or to copy and paste it), because it will register in your mind solidly. The presentation is written as if you would add the app in this manual fashion, although you surely might prefer instead the following options to get the finished source code:</p>
-<ul>
-	<li>clone with &#8216;git clone git@github.com/sproutcore/getting-started.git getting_started&#8217; from <a href="https://github.com/sproutcore/getting-started">Github</a> into your work area.</li>
-</ul>
-<p>To see TodosThree in action, click <a href="http://sproutcore.com/getting-started/TodosThree">here</a>.</p>
+<p>You would benefit from carefully following the instructions in this guide to create directories, to type in code (or to copy and paste it), because it will register in your mind solidly. The presentation is written as if you would add the app in this manual fashion, although you surely might prefer instead to get the finished  source code and read along as if you had done it manually:</p>
+<p>You may wish to clone with <strong>git clone git@github.com/sproutcore/getting-started.git getting_started</strong> from <a href="https://github.com/sproutcore/getting-started">Github</a> into your work area.</p>
 <div class="info"><p>Reminder: These &#8220;Getting Started&#8221; guides attempt to strike a matter-of-fact tone that doesn&#8217;t sugar-coat complexity too much, but tries not to overwhelm. We are ramping up to inherently more challening concepts, however.  If you need help, please ask questions in <span class="caps">IRC</span> or on the mailing list, with references to the numeric heading  for relevant sections of this guide page.</p></div>
 <h3 id="creating-a-todosthree-application">2 Creating A TodosThree Application</h3>
-<p>Here is a screen capture of the completed application: [<span class="caps">TODO</span>] need TodosThree screen capture image here.</p>
+<p>Here is a screen capture of the completed application:</p>
+<div><img src="images/getting_started/todos_three_screen_capture.png"></div>
+<p>Or view <a href="http://sproutcore.com/getting-started/TodosThree">TodosThree in action</a>.</p>
 <p>The TodosThree app looks simple. It has toolbars at the top and bottom. It has a text field near the top, where a user types in a new todo. It has a list of already added todos. Even such a simple-looking app like this involves the use of intelligent SproutCore programming.</p>
-<p>We can describe these intelligent aspects, generally, as the &#8220;system of connections&#8221; or, in the manner an electrician would use, as the &#8220;wiring diagram.&#8221; SproutCore apps have <em>bindings</em> between various components of the user interface and those of underlying machinery, the normal complement of events in a web app, and <em>actions</em> coordinated with <em>states</em>.</p>
+<p>We can describe these intelligent aspects, generally, as the &#8220;system of connections&#8221; or, in the manner an electrician would use, as the &#8220;wiring diagram.&#8221; SproutCore apps have <em>bindings</em> and <em>observers</em> between various  components of the user interface and those of underlying machinery, the normal complement of events in a web app,  and <em>actions</em> coordinated with <em>states</em>.</p>
 <p>You see the components of the user interface in the screen capture: checkboxes, buttons, text fields, list views, etc. We&#8217;ll be looking at the underlying machinery.</p>
 <p>This will be the directory structure for the TodosThree app:</p>
 <ul>
@@ -375,15 +374,16 @@ TodosThree.READY = SC.State.design({
 });
 </pre></div>
 <div class="note"><p>You have seen different conventions for naming states. The style used here makes the state names prominent.</p></div>
-<p>When the statechart is initialized in the TodosThree.main() function, program control will go to the <span class="caps">READY</span> state, specifically to its enterState() function, where there is a check for the type of dataSource set on the store. Because it is an instance of FixturesDataSource, there is initialization of the controllers, instead of going directly to the LOGGING_IN state, which we won&#8217;t use in the TodosThree app. In a larger app, the data loading would probably come at some point after logging in, in a state dedicated to the task.</p>
-<p>We see our first observer function in didLoad(). This function is fired when the trigger given in the chained call happens: .stateObserves(&#8216;TodosThree.todosController*content.status&#8217;). In human language, this means:</p>
-<p>&#8220;When the status of the content changes, fire this function.&#8221;</p>
+<p>When the statechart is initialized in the TodosThree.main() function, program control will go to the <span class="caps">READY</span> state, specifically to its enterState() function, where there is a check for the type of dataSource set on the store. Because it is an instance of FixturesDataSource, there is initialization of the data controllers, instead of going directly to the LOGGING_IN state, which we won&#8217;t use in the TodosThree app. In a larger app, the data loading would probably come at some point after logging in, in a state dedicated to the task.</p>
+<p>We see our first observer function in didLoad(). This function is fired when the trigger given in the chained call happens: .stateObserves(&#8216;TodosThree.todosController.status&#8217;). In human language, this means:</p>
+<p><em>If the status of the content changes, fire this function.</em></p>
 <p>When the didLoad function is fired, there is an explicit check to see that the status change was to become SC.READY_CLEAN, and if so, to move control to the SHOWING_APP state.</p>
-<p>This is a common pattern in SproutCore apps: Use bindings whenever you can to solve most problems, but  there are also cases to use an observer function to wait for some task to complete before firing. Try not to abuse observers, however, because in certain situations, there are performance penalties. This is especially true where you do not follow best practices for wiring things together, and there is inefficient, or even unneeded updating.</p>
-<p>Here we are creating an observer in a state, so we use the dedicated .stateObserves() observer style, but in general use, the observer function, used in exactly the same way, is simply called .observes().  There are nuances to learn about specifying paths in observer declarations, such as how to use an asterisk  for one of the internal dots in a path. For example, for .observes(a*b.c), the meaning would be &#8220;if a.b changes,  notify that a.b.c changed and update bindings.&#8221; If it were .observes(a.b.c), instead, the meaning would be &#8220;if b  changes, then your binding won&#8217;t be updated when c changes.&#8221;</p>
+<p>This is a common pattern in SproutCore apps: Use bindings, described in a section below, whenever you can to  solve most problems, but there are also cases to use an observer function to wait for some task to complete  before firing. Try not to abuse observers, however, because in certain situations, there are performance  penalties. This is especially true where you do not follow best practices for wiring things together, and there  is inefficient, or even unneeded updating.</p>
+<p>Here we are creating an observer in a state, so we use the dedicated .stateObserves() observer style, but in general use, the observer function, used in exactly the same way, is simply called .observes().  There are nuances to learn about specifying paths in observer declarations, such as how to use an asterisk  for one of the internal dots in a path. For example, for .observes(a*b.c), the meaning would be &#8220;if a.b changes,  notify that a.b.c changed and update.&#8221; If it were .observes(a.b.c), instead, the meaning would be &#8220;if b  changes, then your update won&#8217;t happen when c changes.&#8221;</p>
 <h6 id="initialization-of-the-controllers">2.2.1.1 <strong>Initialization of the Controllers</strong></h6>
-<p>Data content of the two array controllers is set in enterState() by issuing data query find calls to the store.  SC.Query.local() is used because we know we don&#8217;t have to find the data remotely in the TodosThree app. We  search for todos, referencing the TodosThree.Todo model (an SC.Record instance). For the primary controller,  todosController, we search for all the todos, ordering them by their timestamp property. For the  completedTodosController, we search for all the todos for which isCompleted is true.</p>
-<p>These aren&#8217;t one-time &#8220;searches.&#8221; They are associations set between the &#8216;content&#8217; property of a controller and a store.find() query. This is a very powerful construct, explaining how SproutCore apps get part of their &#8220;automatic&#8221; and &#8220;always up-to-date&#8221; aspect.</p>
+<p>Controllers are part of the communications system, often used specifically as interfaces to data models, in concert  with the statechart, which covers more general purpose connections. Controllers needn&#8217;t contain a large amount of code to play a key role, and often don&#8217;t. We distinguish between array and object controllers; in TodosThree, we only use SC.ArrayController.</p>
+<p>Data content of the two array controllers used in TodosThree is set in enterState() by issuing data query find calls to the store. SC.Query.local() is used because we know we don&#8217;t have to find the data remotely in the  TodosThree app. We search for todos, referencing the TodosThree.Todo model (an SC.Record instance). For the  primary controller, todosController, we search for all the todos, ordering them by their timestamp property.  For the completedTodosController, we search for all the todos for which isCompleted is true.</p>
+<p>These aren&#8217;t &#8220;one-time searches.&#8221; They are associations set between the &#8216;content&#8217; property of a controller and a store.find() query. This is a very powerful construct, explaining how SproutCore apps get part of their <em>automatic</em> and <em>always up-to-date</em> aspect.</p>
 <div class="note"><p><strong><span class="caps">GIT</span></strong>: git commit -a -m &#8216;Renamed ready_state.js file to ready.js. Edited to add controller content setting code.&#8217;</p></div>
 <h5 id="logging_in-state">2.2.2 LOGGING_IN State</h5>
 <div class="code_container">
@@ -437,7 +437,7 @@ TodosThree.SHOWING_APP = SC.State.design({
   }
 });
 </pre></div><p>In the SHOWING_APP/enterState() function, we want a blinking cursor in the new todo text field. This is accomplished by setting this field to become first responder in the events system.</p>
-<p>This state handles two actions, addTodo and clearCompletedTodos. There are references to view code (view.) that will become clear after we add the resources directory, with the mainPage view and associated files, and other view and system components.</p>
+<p>This state handles two actions, addTodo and clearCompletedTodos. There are references to view code (view.) which we will see in the mainPage view in the resources directory.</p>
 <h5 id="showing_destroy_confirmation-state">2.2.4 SHOWING_DESTROY_CONFIRMATION State</h5>
 <div class="code_container">
 <div class="filename">apps/todos_three/states/showing_destroy_confirmation.js</div>
@@ -484,8 +484,11 @@ TodosThree.SHOWING_DESTROY_CONFIRMATION = SC.State.design({
     this.gotoState('SHOWING_APP');
   }
 });
-</pre></div><p>When we enter the SHOWING_DESTROY_CONFIRMATION state, we grab the current list of completed todos, format them nicely, and then create a warning pane to make sure that the user actually wants to delete their todos. If so, we tell the completedTodosController to destroy, or remove, the current completed todos. Then, we go back to the SHOWING_APP state so that we can enter more todos.</p>
-<div class="note"><p><strong><span class="caps">GIT</span></strong>: git commit -a -m &#8216;Added additional states.&#8217;</p></div>
+</pre></div><p>When the SHOWING_DESTROY_CONFIRMATION state is entered, the current list of completed todos is grabbed and formatted nicely, and then a warning pane is shown to make sure that the user actually wants to  delete their completed todos. If so, we tell the completedTodosController to destroy the current completed  todos. Then, we go back to the SHOWING_APP state so that the user can enter more todos.</p>
+<p>The SHOWING_DESTROY_CONFIRMATION state illustrates how states are just objects: you can add local variables to them as you would for any other. You learn to think about a state as something built unto its own for  some task, fleshed out with needed properties, bindings, workhorse functions and the like.</p>
+<p>_panel is a local variable in the state, marked with a beginning underscore to signify that it is not connected  to anything external.</p>
+<p>todosBinding sets up a local property as a reference to the completedTodosController, for ease of use in this  case: in the code for displayDescription, you see where the succinct name todos is used. When we tack Binding  onto the end of a property declaration, as with xBinding = something, we are creating a property called x,  which works via a binding (todos is x here).  Furthermore, regarding property name choice, in the narrow  context of this state, we know that todos refers to &#8220;completed todos&#8221;. We could have been more explicit by  using completedTodosController and the property reference would have been completedTodos, but brevity can be good.</p>
+<div class="note"><p><strong><span class="caps">GIT</span></strong>: git add . &amp; git commit -a -m &#8216;Added additional states.&#8217;</p></div>
 <h4 id="the-resources-directory">2.3 The Resources Directory</h4>
 <p>We&#8217;ve covered the highest-level parts of the app defined in the statechart. Let&#8217;s add the rest.</p>
 <p>The mainPage view, <span class="caps">CSS</span> file, a theme file, and an html page live in a directory called resources.  Go to that directory:</p>
@@ -494,7 +497,7 @@ TodosThree.SHOWING_DESTROY_CONFIRMATION = SC.State.design({
 
 $ cd ~/development/sproutcore/getting_started/apps/todos_three/resources
 </pre></div>
-<p>Files to add in the apps/todos_three/resources directory are:</p>
+<p>Files to edit or add in the apps/todos_three/resources directory are:</p>
 <table>
 	<tr>
 		<th>main_page.js </th>
@@ -509,7 +512,7 @@ $ cd ~/development/sproutcore/getting_started/apps/todos_three/resources
 <div class="filename">apps/todos_three/resources/main_page.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
-sc_require('todo_item');
+sc_require('resources/todo_item');
 
 TodosThree.mainPage = SC.Page.design({
   field: SC.outlet('mainPane.newTodoField.field'),
@@ -588,12 +591,12 @@ TodosThree.mainPage = SC.Page.design({
   })
 
 });
-</pre></div><p>There are four parts to the TodosThree mainPage view: a header and footer, and between them are a newTodoField and a todosList. A user types a new todo in the newTodoField, and when they click the button, labeled &#8216;Add&#8217;, the new todo is added by means of the todosController&#8217;s addTodo action. The new todo will show up in the todosList. How does this happen? Look at the lines that have Binding in the property names. When you write user interface element code, you &#8220;wire up&#8221; these connections with such binding instructions.</p>
+</pre></div><p>There are four parts to the TodosThree mainPage view: a header and footer, and between them are a newTodoField and a todosList. A user types a new todo in the newTodoField, and when they click the button, labeled &#8216;Add&#8217;, the new todo is added by means of the todosController&#8217;s addTodo action. The new todo will show up in the todosList. How does this happen? We see the use of bindings again. Look at the lines that have Binding in  the property names. When you write user interface element code, you &#8220;wire up&#8221; these connections with such  binding instructions.</p>
 <h6 id="toolbars-in-header-and-footer">2.3.1.1 <strong>Toolbars in header and footer</strong></h6>
 <p>The header view is an SC.ToolbarView with two child views: a completeAll checkbox view and a title label view. The valueBinding property of the checkbox is tied to an areAllCompleted() function in the completedTodosController, which answers that question &#8212; if yes, then the completeAll checkbox will show as checked. This is a two-way binding, so it works in reverse. If the user clicks the completeAll checkbox, then areAllCompleted() will set isCompleted to true for all todos. That makes areAllCompleted() a very special type of function, called a computed property.</p>
 <p>As an introduction to computed properties, we start with a basic one in the title view, an SC.LabelView. You see two local properties as totalTodosBinding and completedTodosBinding. The computed property is the value,  declared with a normal no-argument function signature, with .property(&#8216;totalTodo&#8217;, &#8216;completedTodos&#8217;).cacheable() chained onto the end. The chained part means:</p>
-<p>&#8220;Base this computed property on the totalTodos and completedTodos properties, and update it if either of them changes, and, also, cache the value so unnecessary updates are avoided.&#8221;</p>
-<p>Note that the special way of setting a binding, as with totalTodosBinding, results in the creation of a property  that is referred to as just totalTodos. You see this in the two this.get() calls where the completedTodos are  subtracted from the totalTodos.</p>
+<p><em>Base this computed property on the totalTodos and completedTodos properties, and update it if either of them changes, and, also, cache the value so unnecessary updates are avoided.</em></p>
+<p>Note again that the way of setting a binding, as with totalTodosBinding, results in the creation of a property  that is referred to as just totalTodos. You see this in the two this.get() calls where the completedTodos are  subtracted from the totalTodos.</p>
 <div class="note"><p>Computed properties, so important in SproutCore, are given a fuller description below, and in other guides pages.</p></div>
 <p>The footer view has a single child view, clearCompletedTodos, which is a button whose action is the clearCompletedTodos action in the SHOWING_APP state. The isEnabledBinding property has a one-way binding (faster, if you don&#8217;t need two-way, reciprocal updating) to the length of the completedTodosController array. If its length is 0, then isEnabled is false and the button will not be active &#8212; if there aren&#8217;t any todos, there is nothing to clear.</p>
 <h6 id="newtodofield">2.3.1.2 <strong>newTodoField</strong></h6>
@@ -728,7 +731,7 @@ $theme.todo-item {
 
 &lt;% end %&gt;
 </pre></div>
-<div class="note"><p><strong><span class="caps">GIT</span></strong>: git commit -a -m &#8216;Added resources files.&#8217;</p></div>
+<div class="note"><p><strong><span class="caps">GIT</span></strong>: git add . &amp; git commit -a -m &#8216;Edited/Added resources files.&#8217;</p></div>
 <h4 id="the-models-directory">2.4 The Models Directory</h4>
 <p><strong>sproutcore gen</strong> does not make a models directory, so we&#8217;ll make it.</p>
 <p>Move to the app root directory, make a models directory, and go there:</p>
@@ -760,7 +763,7 @@ TodosThree.Todo = SC.Record.extend({
 });
 </pre></div><p>The Todo model has three properties: timestamp, isCompleted, and title. All are defined using the SC.Record.attr() helper (convenience) function, where builtin javascript types and Sproutcore types may be specified. There is much more that could be done in these property definitions, but for TodosThree, the basic types and their defaults will suffice.</p>
 <p>Recall discussion of good habits regarding sc_require. The use of sc_require(&#8216;core&#8217;); here is not mandatory, but it is a good habit: TodosThree is defined in core.js.</p>
-<div class="note"><p><strong><span class="caps">GIT</span></strong>: git add models &amp; git commit -a -m &#8216;Added models directory and todo model file.&#8217;</p></div>
+<div class="note"><p><strong><span class="caps">GIT</span></strong>: git add . &amp; git commit -a -m &#8216;Added models directory and todo model file.&#8217;</p></div>
 <h4 id="the-controllers-directory">2.5 The Controllers Directory</h4>
 <p><strong>sproutcore gen</strong> does not make a controllers directory, so we&#8217;ll make it.</p>
 <p>Move to the TodosThree app root directory, make a controllers directory, and go there:</p>
@@ -811,10 +814,10 @@ TodosThree.completedTodosController = SC.ArrayController.create({
 <h6 id="the-areallcompleted-computed-property">2.5.2.1 <strong>The areAllCompleted() Computed Property</strong></h6>
 <p>areAllCompleted() is a function, but that very special type of function, the computed property you have seen in its simpler usage as a &#8220;getter.&#8221; Here we are using a computed property as both a setter and a getter. You see the .property() call hanging on the end of the function definition. This gives &#8216;length&#8217; and &#8216;totalTodos&#8217; as dependencies for updating, then tacks on .cacheable(). We have a &#8216;length&#8217; property available &#8212; this is a built-in property of an array controller. Quiz from something explained earlier: isn&#8217;t the property called  totalTodosBinding not totalTodos? Recall that the answer is that anytime Binding is seen at the end of a property name, you have a kind of dual-property arrangement. The &#8220;actual&#8221; property is, in fact, totalTodos. In defining totalTodosBinding, we essentially say to get the value of totalTodos from this other source.</p>
 <p>That covers the background on mechanics of property names and bindings. As before, here is a human language  explanation of the chained calls on the end (.property(&#8216;length&#8217;, &#8216;totalTodos&#8217;).cacheable()):</p>
-<p>&#8220;Base this computed property on the length and totalTodos properties, and update it if either of them changes, and, also, cache the value so unnecessary updates are avoided.&#8221;</p>
+<p><em>Base this computed property on the length and totalTodos properties, and update it if either of them changes, and, also, cache the value so unnecessary updates are avoided.</em></p>
 <p>There is more to learn about the working of this computed property. What are the k and v parameters, and what does the internal code do? k and v are key and value. On a call, if v is a defined value, then the totalTodos value is being changed. This is a mandate to try to mark all todos as completed by this value. The name of the computed property is <em>areAllCompleted</em>. If a call is made to set it, then the body of the function needs to update the data accordingly. If v evaluates to true, then isCompleted for each todo item will be set and all the checkboxes will be checked in the list. That explains what the if block does.</p>
 <p>Notice the return on the last line in areAllCompleted(). We return the result of a test comparing the length of the array (the local &#8216;length&#8217;) to the length of the todos array (the local &#8216;totalTodos&#8217;, which is bound to an external source, the full todosController array). If these lengths are the same, then all todos have been marked as completed, otherwise no.</p>
-<div class="note"><p><strong><span class="caps">GIT</span></strong>: git add controllers &amp; git commit -a -m &#8216;Added controllers directory and controller files.&#8217;</p></div>
+<div class="note"><p><strong><span class="caps">GIT</span></strong>: git add . &amp; git commit -a -m &#8216;Added controllers directory and controller files.&#8217;</p></div>
 <h4 id="the-fixtures-directory">2.6 The Fixtures Directory</h4>
 <p><strong>sproutcore gen</strong> does not make a fixtures directory. We&#8217;ll make it.</p>
 <p>Move to the TodosThree app root directory, make a fixtures directory, and go there:</p>
@@ -860,7 +863,7 @@ TodosThree.Todo.FIXTURES = [
  }
 ];
 </pre></div>
-<div class="note"><p><strong><span class="caps">GIT</span></strong>: git add fixtures &amp; git commit -a -m &#8216;Added fixtures directory and fixture file.&#8217;</p></div>
+<div class="note"><p><strong><span class="caps">GIT</span></strong>: git add . &amp; git commit -a -m &#8216;Added fixtures directory and fixture file.&#8217;</p></div>
 <h3 id="running-the-app">3 Running the App</h3>
 <p>With all that work done (or if you downloaded the code or cloned it from git) we can run the app, which we should do from the project root directory, where the project Buildfile lives:</p>
 <div class="code_container">
