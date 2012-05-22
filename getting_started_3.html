@@ -28,6 +28,7 @@
       <nav role="navigation">
         <ul>
           <li><a href="http://sproutcore.com/about/">About</a></li>
+          <li><a href="http://showcase.sproutcore.com">Showcase</a></li>
           <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
           <li><a href="http://docs.sproutcore.com">Docs</a></li>
           <li><a href="http://sproutcore.com/community/">Community</a></li>
@@ -291,7 +292,7 @@ TodosThree = SC.Application.create(
 <div class="filename">apps/todos_three/main.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
-TodosThree.main = function main() {
+TodosThree.main = function () {
   TodosThree.statechart.initStatechart();
 };
 
@@ -379,7 +380,7 @@ TodosThree.READY = SC.State.design({
 <p><em>If the status of the content changes, fire this function.</em></p>
 <p>When the didLoad function is fired, there is an explicit check to see that the status change was to become SC.READY_CLEAN, and if so, to move control to the SHOWING_APP state.</p>
 <p>This is a common pattern in SproutCore apps: Use bindings, described in a section below, whenever you can to  solve most problems, but there are also cases to use an observer function to wait for some task to complete  before firing. Try not to abuse observers, however, because in certain situations, there are performance  penalties. This is especially true where you do not follow best practices for wiring things together, and there  is inefficient, or even unneeded updating.</p>
-<p>Here we are creating an observer in a state, so we use the dedicated .stateObserves() observer style, but in general use, the observer function, used in exactly the same way, is simply called .observes().  There are nuances to learn about specifying paths in observer declarations, such as how to use an asterisk  for one of the internal dots in a path. For example, for .observes(a*b.c), the meaning would be &#8220;if a.b changes,  notify that a.b.c changed and update.&#8221; If it were .observes(a.b.c), instead, the meaning would be &#8220;if b  changes, then your update won&#8217;t happen when c changes.&#8221;</p>
+<p>Here we are creating an observer in a state, so we use the dedicated .stateObserves() observer style, but in general use, the observer function, used in exactly the same way, is simply called .observes().  There are nuances to learn about specifying paths in observer declarations, such as how to use absolute (a.b.c) vs. relative paths (.b.c), and how to use chained absolute (a*b.c) vs. chained relative (*b.c) paths. We will leave the details for other documentation, where a full coverage can be given to how each use specifies a different set of triggers for an observer update.</p>
 <h6 id="initialization-of-the-controllers">2.2.1.1 <strong>Initialization of the Controllers</strong></h6>
 <p>Controllers are part of the communications system, often used specifically as interfaces to data models, in concert  with the statechart, which covers more general purpose connections. Controllers needn&#8217;t contain a large amount of code to play a key role, and often don&#8217;t. We distinguish between array and object controllers; in TodosThree, we only use SC.ArrayController.</p>
 <p>Data content of the two array controllers used in TodosThree is set in enterState() by issuing data query find calls to the store. SC.Query.local() is used because we know we don&#8217;t have to find the data remotely in the  TodosThree app. We search for todos, referencing the TodosThree.Todo model (an SC.Record instance). For the  primary controller, todosController, we search for all the todos, ordering them by their timestamp property.  For the completedTodosController, we search for all the todos for which isCompleted is true.</p>
@@ -446,14 +447,12 @@ TodosThree.SHOWING_APP = SC.State.design({
 TodosThree.SHOWING_DESTROY_CONFIRMATION = SC.State.design({
   _panel: null,
 
-  todosBinding: 'TodosThree.completedTodosController.content',
-
   enterState: function() {
-    var todos = this.get('todos');
     var displayDescription = &quot;Are you sure that you wish to clear the following tasks?&lt;br /&gt;&lt;br /&gt;&quot;;
+    var completedTodos = TodosThree.completedTodosController;
 
     displayDescription += &quot;&lt;ul&gt;&quot;;
-    displayDescription += todos.map(function(t) { return &quot;&lt;li&gt;%@&lt;/li&gt;&quot;.fmt(t.get('title')) }).join('\n');
+    displayDescription += completedTodos.map(function(t) { return &quot;&lt;li&gt;%@&lt;/li&gt;&quot;.fmt(t.get('title')); }).join('\n');
     displayDescription += &quot;&lt;/ul&gt;&quot;;
 
     this._panel = SC.AlertPane.warn({
@@ -465,8 +464,8 @@ TodosThree.SHOWING_DESTROY_CONFIRMATION = SC.State.design({
       displayDescription: displayDescription,
 
       buttons: [
-        { title: 'Clear', action: 'confirm', default: NO },
-        { title: 'Cancel', action: 'cancel', default: YES }
+        { title: 'Clear', action: 'confirm' },
+        { title: 'Cancel', action: 'cancel' }
       ]
     });
   },
@@ -512,7 +511,7 @@ $ cd ~/development/sproutcore/getting_started/apps/todos_three/resources
 <div class="filename">apps/todos_three/resources/main_page.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
-sc_require('resources/todo_item');
+//sc_require('resources/todo_item'); // Not used. See comments below about exampleView.
 
 TodosThree.mainPage = SC.Page.design({
   field: SC.outlet('mainPane.newTodoField.field'),
@@ -568,11 +567,7 @@ TodosThree.mainPage = SC.Page.design({
       contentView: SC.ListView.design({
         contentBinding: SC.Binding.oneWay('TodosThree.todosController'),
         rowHeight: 36,
-        exampleView: SC.CheckboxView.design({
-          classNames: ['todo-item'],
-          valueBinding: '.content.isCompleted',
-          titleBinding: SC.Binding.oneWay('.content.title')
-        })
+        exampleView: TodosThree.TodoItemView
       })
     }),
 
@@ -614,8 +609,9 @@ TodosThree.TodoItemView = SC.CheckboxView.design({
   valueBinding: '.content.isCompleted',
   titleBinding: SC.Binding.oneWay('.content.title')
 });
-</pre></div><p>TodoItemView is a checkbox, which has a label. You see a bit of wiring to <span class="caps">CSS</span> in the classNames property, an array of <span class="caps">CSS</span> class names that are to be applied to this view. valueBinding has a reference to .content.isCompleted. What is the context for this reference? We know that this view is defined as the exampleView property of the todos list. The term example here means &#8220;the view to use for each list item.&#8221; List items for the todos list are todos, which are defined in the TodosThree.Todo model. So, .content used in the TodoItemView definition refers to a single todo item in the list. .content.isCompleted refers to this property of a todo item. Likewise, titleBinding is bound to the title property of a list todo item.</p>
-<p>You have to think about where this view is used to understand it, but that comes with the territory of having individual views declared in separate files for convenience.</p>
+</pre></div><p>This file is not used in the app, but is here for illustration of how you could pull in code from an external source file. If you look at resources/main_page.js, you will see that the TodosListView has exampleView set as &#8220;inline&#8221; code for the same checkbox view you see in this resouces/todo_item.js file. Instead of defining the exampleView there as an &#8220;inline&#8221; code block, the require that is commented out at the top of  resources/main_page.js could be used, and the exampleView would be set with the usual property definition, exampleView: TodosThree.TodoItemView, which would come from the required resources/todo_item.js file.</p>
+<p>Whether you declare your exampleView inline or pull it in from an external file depends on its size and  complexity. In TodosThree, it is small enough to declare inline. Whatever the case, we can describe what this code does. It helps to focus on the context of this code block within the list view, so look again at the resources/main_page.js file.</p>
+<p>TodoItemView is a checkbox, which has a label. You see a bit of wiring to <span class="caps">CSS</span> in the classNames property, an array of <span class="caps">CSS</span> class names that are to be applied to this view. valueBinding has a reference to .content.isCompleted. What is the context for this reference? We know that this view is defined as the exampleView property of the todos list. The term example here means &#8220;the view to use for each list item.&#8221; List items for the todos list are todos, which are defined in the TodosThree.Todo model. So, .content used in the TodoItemView definition refers to a single todo item in the list. .content.isCompleted refers to this property of a todo item. Likewise, titleBinding is bound to the title property of a list todo item.</p>
 <div class="note"><p>It helps to name such views as SomethingItemView, because the Item part indicates the use in a list. </p></div>
 <h5 id="_theme-css-resources-directory">2.3.3 _theme.css (resources directory)</h5>
 <div class="code_container">

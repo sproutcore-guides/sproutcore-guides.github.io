@@ -28,6 +28,7 @@
       <nav role="navigation">
         <ul>
           <li><a href="http://sproutcore.com/about/">About</a></li>
+          <li><a href="http://showcase.sproutcore.com">Showcase</a></li>
           <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
           <li><a href="http://docs.sproutcore.com">Docs</a></li>
           <li><a href="http://sproutcore.com/community/">Community</a></li>
@@ -140,7 +141,7 @@
 <p>In the list above, the states are in <span class="caps">ALL</span>-<span class="caps">CAPS</span>, the actions are in italics.</p>
 <div class="info"><p>The Getting Started Todos applications use ALL_CAPS for state names, for the sake of continuity. However, states are standard SC objects and can follow any naming convention you want.  Many developers prefer CamelCase (i.e., MyApp.LoggedInState) while others prefer namespacing their states (i.e., MyApp.States.LoggedIn).  Some prefer verb-style over noun-style state names. Whatever method you  choose is fine, just be consistent, so you, and other developers, can more easily follow your code.</p></div>
 
-<div class="note"><p>A state is a state is a state. A substate is a state. (You can always use the term state; when you use the term substate, the reference is relative to a parent state).</p></div>
+<div class="note"><p>The term state is generic: you can use state to refer to states and substates. When you use the term substate,  the reference is more specific, and is relative to a parent state.</p></div>
 <h4 id="decoding-the-statechart">2.1 Decoding the Statechart</h4>
 <p>In our mapping example here, the application can be in one of the two top level states: <span class="caps">LOADING</span> or <span class="caps">LOADED</span>. If  it is in one of these states, it cannot be in the other. When it is in the <span class="caps">LOADING</span> state, the only available  action is the <em>loadingFinished</em> action. The statechart/application should not respond to any other events.  Once control moves into the <span class="caps">LOADED</span> state, it can move to two additional states, substates of the <span class="caps">LOADED</span>  state: LOGGED_OUT or LOGGED_IN. Again, the program can only be in one at a given time, so when the user is  &#8220;logged out&#8221;, after the application has loaded, the only available action is the <em>login</em> action.</p>
 <p>However, notice that the <em>viewTermsOfService</em> action and the <em>viewPrivacyPolicy</em> action are both available in the <span class="caps">LOADED</span> state. This means that regardless of whether the program is in the LOGGED_OUT state or the LOGGED_IN state, the user should be allowed to view the terms of service or the privacy policy.</p>

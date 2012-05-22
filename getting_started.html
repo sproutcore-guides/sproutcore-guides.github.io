@@ -28,6 +28,7 @@
       <nav role="navigation">
         <ul>
           <li><a href="http://sproutcore.com/about/">About</a></li>
+          <li><a href="http://showcase.sproutcore.com">Showcase</a></li>
           <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
           <li><a href="http://docs.sproutcore.com">Docs</a></li>
           <li><a href="http://sproutcore.com/community/">Community</a></li>
@@ -211,7 +212,10 @@ $ sproutcore server
 <h3 id="troubleshooting">7 Troubleshooting</h3>
 <p>As with any unfamiliar framework, you may hit a few snags on the way. Below we list some of the common pitfalls that users have discovered, with solutions for getting past them.</p>
 <ul>
-	<li><em>&#8220;RuntimeError at /todos_one html_builder could not find a layout file for sproutcore:lib/index.rhtml&#8221;</em> - This error usually means that <strong>sproutcore server</strong> could not find SproutCore where it thought it should exist. Make sure that you&#8217;ve properly installed the latest version of SproutCore; and if you are using RubyGems, try closing and re-opening the terminal to ensure that paths are properly set.</li>
+	<li><em>&#8220;Error: Handlebars is not defined Source File: &#8230;&#8221;</em> &#8211; If you have previously installed SproutCore 1.6 using the installer, you may see this error. If so, please make sure to un-install SproutCore 1.6 first and then re-install 1.8.</li>
+</ul>
+<ul>
+	<li><em>&#8220;RuntimeError at /todos_one html_builder could not find a layout file for &#8230;&#8221;</em> - This error usually means that <strong>sproutcore server</strong> could not find SproutCore where it thought it should exist. Make sure that you&#8217;ve properly installed the latest version of SproutCore; and if you are using RubyGems, try closing and re-opening the terminal to ensure that paths are properly set.</li>
 </ul>
 <ul>
 	<li><em>&#8220;Browser says &#8216;No matching target&#8217;&#8221;</em> &#8211; This is generally caused if you misspelled the name of the application in the <span class="caps">URL</span>. Make sure that you properly typed it, and that you used underscores instead of spaces. For example: &#8216;http://localhost/todos_one&#8217;.</li>
@@ -228,6 +232,7 @@ $ sproutcore server
 	<li>May 6, 2011: clarifications, minor inconsistency fixes, updated <span class="caps">CSS</span> for older browsers, plus new mobile section by <a href="credits.html#publickeating">Tyler Keating</a></li>
 	<li>May 9, 2011: update for recent changes in SproutCore 1.6 by <a href="credits.html#tomdale">Tom Dale</a> and <a href="credits.html#wycats">Yehuda Katz</a></li>
 	<li>March 6, 2012: rewrite for SproutCore 1.8 by the 1.8 release sprint team, including the following who did much work on this task: <a href="credits.html#tce">Tim Evans</a>, <a href="credits.html#topherfangio">Topher Fangio</a>, <a href="credits.html#geojeff">Jeff Pittman</a></li>
+	<li>March 12, 2012: added new error and fixed italics in the troubleshooting section by <a href="credits.html#topherfangio">Topher Fangio</a></li>
 </ul>
 
       </div>
