@@ -109,7 +109,7 @@
 
           </div>
         <h3 id="following-along">1 Following Along</h3>
-<p>You have learned in previous guides how to use <strong>sproutcore gen</strong> to make a project directory and to create apps in the project apps directory. You have learned how to run <strong>sproutcore server</strong> in the project directory, and how to view apps in a local browser at localhost:4020/. You have learned about SproutCore app concepts, including the use of a buildfile and of views and a statechart. We will build on that foundation to produce a TodosThree app with components of a best-practices SproutCore app.</p>
+<p>You have learned in previous guides how to use <strong>sproutcore gen</strong> to make a project directory and to create apps in the project apps directory. You have learned how to run <strong>sproutcore server</strong> in the project directory, and how to view apps in a local browser at localhost:4020/. You have learned about SproutCore app concepts, including knowledge of views and statecharts. We will build on that foundation to produce a TodosThree app with components of a best-practices SproutCore app.</p>
 <p>You would benefit from carefully following the instructions in this guide to create directories, to type in code (or to copy and paste it), because it will register in your mind solidly. The presentation is written as if you would add the app in this manual fashion, although you surely might prefer instead to get the finished  source code and read along as if you had done it manually:</p>
 <p>You may wish to clone with <strong>git clone git://github.com/sproutcore/getting-started.git getting_started</strong> from <a href="https://github.com/sproutcore/getting-started">Github</a> into your work area.</p>
 <div class="info"><p>Reminder: These &#8220;Getting Started&#8221; guides attempt to strike a matter-of-fact tone that doesn&#8217;t sugar-coat complexity too much, but tries not to overwhelm. We are ramping up to inherently more challening concepts, however.  If you need help, please ask questions in <span class="caps">IRC</span> or on the mailing list, with references to the numeric heading  for relevant sections of this guide page.</p></div>
@@ -434,7 +434,7 @@ TodosThree.SHOWING_APP = SC.State.design({
   },
 
   clearCompletedTodos: function() {
-    this.gotoState('SHOWING_DESTROY_CONFIRMATION', this);
+    this.gotoState('SHOWING_DESTROY_CONFIRMATION');
   }
 });
 </pre></div><p>In the SHOWING_APP/enterState() function, we want a blinking cursor in the new todo text field. This is accomplished by setting this field to become first responder in the events system.</p>
@@ -486,7 +486,7 @@ TodosThree.SHOWING_DESTROY_CONFIRMATION = SC.State.design({
 </pre></div><p>When the SHOWING_DESTROY_CONFIRMATION state is entered, the current list of completed todos is grabbed and formatted nicely, and then a warning pane is shown to make sure that the user actually wants to  delete their completed todos. If so, we tell the completedTodosController to destroy the current completed  todos. Then, we go back to the SHOWING_APP state so that the user can enter more todos.</p>
 <p>The SHOWING_DESTROY_CONFIRMATION state illustrates how states are just objects: you can add local variables to them as you would for any other. You learn to think about a state as something built unto its own for  some task, fleshed out with needed properties, bindings, workhorse functions and the like.</p>
 <p>_panel is a local variable in the state, marked with a beginning underscore to signify that it is not connected  to anything external.</p>
-<p>todosBinding sets up a local property as a reference to the completedTodosController, for ease of use in this  case: in the code for displayDescription, you see where the succinct name todos is used. When we tack Binding  onto the end of a property declaration, as with xBinding = something, we are creating a property called x,  which works via a binding (todos is x here).  Furthermore, regarding property name choice, in the narrow  context of this state, we know that todos refers to &#8220;completed todos&#8221;. We could have been more explicit by  using completedTodosController and the property reference would have been completedTodos, but brevity can be good.</p>
+<p>completedTodos sets up a local property as a reference to the completedTodosController, for ease of use in this  case: in the code for displayDescription, you see where the succinct name completedTodos is used. When we tack Binding  onto the end of a property declaration, as with xBinding = something, we are creating a property called x,  which works via a binding (completedTodos is x here).</p>
 <div class="note"><p><strong><span class="caps">GIT</span></strong>: git add . &amp; git commit -a -m &#8216;Added additional states.&#8217;</p></div>
 <h4 id="the-resources-directory">2.3 The Resources Directory</h4>
 <p>We&#8217;ve covered the highest-level parts of the app defined in the statechart. Let&#8217;s add the rest.</p>
@@ -567,7 +567,12 @@ TodosThree.mainPage = SC.Page.design({
       contentView: SC.ListView.design({
         contentBinding: SC.Binding.oneWay('TodosThree.todosController'),
         rowHeight: 36,
-        exampleView: TodosThree.TodoItemView
+        // exampleView: TodosThree.TodoItemView // If pulled in from external file.
+        exampleView: SC.CheckboxView.design({
+          classNames: ['todo-item'],
+          valueBinding: '.content.isCompleted',
+          titleBinding: SC.Binding.oneWay('.content.title')
+        })
       })
     }),
 

@@ -246,7 +246,7 @@ TodosTwo.ReadyState = SC.State.extend({
 <h3 id="where-views-fit-in">4 Where Views Fit In</h3>
 <p>We&#8217;ve covered statecharts, so you know a little bit about how they work. Let&#8217;s talk about how statecharts  can help organize views and make your code super-clean.</p>
 <p>The <em>resources/main_page.js</em> file defines the main user interface of your application.</p>
-<p>Edit the file to add a second child view, labelView2:</p>
+<p>Edit the file to add a second child view, labelView2, taking care to add labelView2 to the childViews array of view references, which uses the &#8216;space delimited strings&#8217;.w() SproutCore idiom to make an array:</p>
 <div class="code_container">
 <div class="filename">apps/todos_two/resources/main_page.js</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
