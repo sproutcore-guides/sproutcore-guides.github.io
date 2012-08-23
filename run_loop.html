@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>SproutCore Guides: Committing Code</title>
+  <title>SproutCore Guides: The Run Loop</title>
 
   <!-- guides styles -->
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
@@ -98,143 +98,59 @@
     <div class="wrapper">
       <div id="mainCol">
           <div class="headerSection">
-            <h2>Committing Code</h2>
-<p>So, you&#8217;re ready to push some code into the public repo?  Here&#8217;s a list of things you can do to make sure your code gets past the review process.</p>
+            <h2>The Run Loop</h2>
+<p>The guide covers SproutCore&#8217;s Run Loop. By referring to this guide, you will be able to:</p>
+<ul>
+	<li>Understand the Run Loop</li>
+	<li>Know when to manually trigger a Run Loop (rare).</li>
+	<li>Know how to use invokeOnce(), invokeLast() and invokeNext() to adjust the execution flow of code.</li>
+</ul>
 
           </div>
-        <h3 id="conform-to-sc-style-guides">1 Conform to SC Style Guides</h3>
-<p>Yeah, this is pretty obvious.  If you haven&#8217;t already go <a href="style_guide.html">read them</a>.</p>
-<h3 id="must-pass-js-lint">2 Must Pass JS lint</h3>
-<p>Javascript can be beautiful and annoying all at the same time.  <a href="http://www.jslint.com">Crockford&#8217;s JSLint</a> is a god send and helps check for common mistakes like:</p>
-<ul>
-	<li>Undefined global vars</li>
-	<li>use of <tt>==</tt> and <tt>!=</tt> instead of <tt>===</tt> and <tt>!==</tt></li>
-	<li>Extra or missing commas</li>
-</ul>
-<p>The following JS lint config can be used in combination with the <a href="https://github.com/sproutit/sproutcore-tmbundle">SproutCore Textmate bundle</a>.</p>
-<p>Install it at <tt>&lt;path to your Textmate bundles&gt;/SproutCore.tmbundle/Support/bin/prefs.js</tt></p>
+        <h3 id="the-run-loop">1 The Run Loop</h3>
+<p>The Run Loop coordinates all the events within your application, which includes primarily flushing bindings when observers update. This helps make sure that events stay synchronized and run at the proper times. One of the main ways this will affect your application is that bindings do not propagate unless a Run Loop runs.  Also, Views will only render updates once per Run Loop, thus avoiding unnecessarily touching the <span class="caps">DOM</span>.  This keeps display updates extremely fast even if many properties are changing per Run Loop.</p>
+<p>SproutCore manages the Run Loop for you, automatically starting a Run Loop when it receives any browser events or user input. The only case in which you will have to manage the Run Loop from within your app is <em>if you have a callback from an external library that is not managed by SproutCore</em>. In this circumstance, you will want to trigger a new Run Loop by wrapping the code in <tt>SC.run()</tt>. This will create a new Run Loop for that bit of code and will make sure your application continues to update as expected.</p>
+<p>Here is an example of triggering a Run Loop when a Web Worker message event is fired.</p>
 <div class="code_container">
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
-var JSLINT_PREFS = {
-    adsafe     : false, // if ADsafe should be enforced
-    bitwise    : false, // if bitwise operators should not be allowed
-    browser    : true,  // if the standard browser globals should be predefined
-    cap        : false, // if upper case HTML should be allowed
-    debug      : true,  // if debugger statements should be allowed
-    eqeqeq     : true, // if === should be required
-    evil       : false, // if eval should be allowed
-    forin      : true,  // if for in statements must filter
-    fragment   : false, // if HTML fragments should be allowed
-    laxbreak   : true,  // if line breaks should not be checked
-    nomen      : false, // if names should be checked
-    on         : false, // if HTML event handlers should be allowed
-    passfail   : false, // if the scan should stop on first error
-    plusplus   : false, // if increment/decrement should not be allowed
-    regexp     : true,  // if the . should not be allowed in regexp literals
-    rhino      : false, // if the Rhino environment globals should be predefined
-    undef      : true,  // if variables should be declared before used
-    safe       : false, // if use of some browser features should be restricted
-    sidebar    : false, // if the System object should be predefined
-    sub        : true,  // if all forms of subscript notation are tolerated
-    white      : false, // if strict whitespace rules apply
-    widget     : false, // if the Yahoo Widgets globals should be predefined
-    indent: 2,
-    predef: ['SC', 'require', 'sc_super', 'YES', 'NO', 'static_url', 'sc_static', 'sc_resource', 'sc_require', 'module', 'test', 'equals', 'same', 'ok', 'CoreTest', 'SproutCore', '$', 'jQuery', 'start', 'stop', 'expect', 'htmlbody']
+worker = new Worker(path);
+
+worker.onmessage = function(event) {
+  SC.run(function() {
+    // Do something
+  });
 };
-
-</pre></div><h3 id="unit-tests">3 Unit Tests</h3>
-<h4 id="don-t-break-anyone-else-s-tests">3.1 Don&#8217;t break anyone else&#8217;s tests</h4>
-<p>On stable builds, all of the unit tests should pass.  On development branches, if there are broken tests because of a major project that someone on the Core Team is doing, you can ignore those failures.</p>
-<h4 id="write-good-tests">3.2 Write good tests</h4>
-<p>Writing good unit tests is something often pontificated on by seasoned developers, so rather than waste time with a long essay I&#8217;ll just show some examples of good and bad unit tests:</p>
-<h5 id="view-unit-tests">3.2.1 View Unit Tests</h5>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
-test(&quot;basic&quot;, function() {
-  var view = pane.view('basic');
-  ok(!view.$().hasClass('disabled'), 'should not have disabled class');
-  ok(!view.$().hasClass('sel'), 'should not have sel class');
-
-  var input = view.$();
-  equals(input.attr('aria-checked'), 'false',  'input should not be checked');
-
-  var label = view.$('span.label');
-  equals(label.text(), 'Hello World', 'should have label');
-});
-</pre></div><p>The above test is great because it verifies that the <strong>rendered <span class="caps">DOM</span></strong> is correct.</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
-test(&quot;basic&quot;, function() {
-  var view = pane.view('basic');
-  equals(view.get('title'), 'Hello World', 'should have label');
-});
-</pre></div><p>This test sucks because it only verifies that you can set a property on an object.</p>
-<div class="info"><p>For more information see <a href="writing_unit_tests.html">Writing Unit Tests</a>.</p></div>
-<h4 id="running-unit-tests">3.3 Running Unit Tests</h4>
-<p>You can run the unit tests by using the test runner app <tt>http://localhost:4020/sproutcore/tests</tt> or by calling them manually:</p>
+</pre></div>
+<div class="note"><p>See <ins>SC.Event.addEvent()</ins> for a SproutCore compatible way to add the <code>message</code> event listener in the example above.</p></div>
+<h4 id="using-the-run-loop-in-unit-tests">1.1 Using the Run Loop in Unit Tests</h4>
+<p>When working with unit tests, you will also have situations where you need to force bindings and observers to update so that you can check for the correct results. In these cases, it is completely legitimate to manually invoke the Run Loop. Normally user events would trigger the Run Loop, but since your tests are automated, there are no user events taking place.</p>
+<p>You may also find that when you are working in your browser&#8217;s JavaScript console that, when you set a variable, your application&#8217;s interface doesn&#8217;t update as you expect. This may be caused by a Run Loop not firing (since you aren&#8217;t interacting directly with the application no events are being triggered). In this case you should try invoking the Run Loop manually or just move your mouse over the application to trigger a new event.</p>
+<div class="warning"><p>Remember, you rarely need to manage the Run Loop manually from within your application. If you aren&#8217;t certain of why you are forcing a new Run Loop, then you may be doing something wrong.</p></div>
+<h3 id="the-run-loop-methods-invokelast-invokeonce-invokenext">2 The Run Loop Methods: invokeLast(), invokeOnce(), invokeNext()</h3>
+<p>SC.RunLoop provides three methods for greater control over the execution of code within a Run Loop: <code>invokeOnce()</code>, <code>invokeLast()</code> and <code>invokeNext()</code>.  All methods take the same parameters, a <code>target</code> and a <code>method</code> and, depending on which function is used, the method is called on the target at a specific point in the Run Loop.</p>
+<p>The following describes the execution order:  functions passed to <code>invokeOnce()</code> are run at the beginning of the current Run Loop, functions passed to <code>invokeLast()</code> are run at the end of the current Run Loop and functions passed to <code>invokeNext()</code> are run at the very beginning of the <em>next</em> Run Loop.</p>
+<div class="info"><p>You will likely never call these methods on SC.RunLoop itself, since there are matching convenience methods defined on SC.Object (i.e. in any subclass of SC.Object you can call <code>this.invokeLater(method)</code>).</p></div>
+<p>To best illustrate the different stages of the Run Loop, see the following diagram.</p>
+<div><img src="images/run_loop_diagram.jpg"></div>
+<p>You will notice the recursive &#8220;More changes?&#8221; stages.  These exist because each time a wave of changes is propagated, it may cause several additional observers to fire and more code to be run.  The Run Loop keeps flushing these waves of changes until everything is stable, thus demonstrating another key benefit of using Run Loops; that at the end of each Run Loop and before the next event, the application&#8217;s state is guaranteed to be stabilized.</p>
+<p>Here are some typical usage scenarios for each of the Run Loop methods:</p>
 <ul>
-	<li>All Tests:   <code>http://localhost:4020/&lt;framework_or_app_name&gt;/en/current/tests.html</code></li>
+	<li>If you have a function that could be called from multiple places, but you only want it to execute once no matter how many times it was referenced, use <code>invokeOnce()</code>.</li>
+	<li>If you have a function that you want to run after all bindings have flushed and after views have updated, use <code>invokeLast()</code>.</li>
+	<li>If you have a function that you want to defer entirely, such as a View paint, use <code>invokeNext()</code>.</li>
 </ul>
-<ul>
-	<li>Specific Tests:   <code>http://localhost:4020/&lt;framework_or_app_name&gt;/en/current/tests/path/to/your/tests.html</code></li>
-</ul>
-<p>For example:</p>
-<ul>
-	<li>All of SproutCore&#8217;s datastore tests (<a href="http://localhost:4020/sproutcore/datastore/en/current/tests.html">link</a>):   <code>http://localhost:4020/sproutcore/datastore/en/current/tests.html</code></li>
-</ul>
-<ul>
-	<li>Just the tests in the store directory (<a href="http://localhost:4020/sproutcore/datastore/en/current/tests/system/store.html">link</a>):   <code>http://localhost:4020/sproutcore/datastore/en/current/tests/system/store.html</code></li>
-</ul>
-<ul>
-	<li>Just the find tests (<a href="http://localhost:4020/sproutcore/datastore/en/current/tests/system/store/find.html">link</a>):   <code>http://localhost:4020/sproutcore/datastore/en/current/tests/system/store/find.html</code></li>
-</ul>
-<div class="info"><p>For more information see <a href="running_unit_tests.html">Running Unit Tests</a>.</p></div>
-<h3 id="consistency">4 Consistency</h3>
-All code must be consistent with patterns found in the Application and within the Frameworks.
-example: <span class="caps">MVC</span>, Visitor, Statecharts don&#8217;t add special functionality without good reason!
-<h3 id="performance">5 Performance</h3>
-<p>Avoid Known Slow stuff:</p>
-<ul>
-	<li><tt>.observes</tt></li>
-	<li>nested run loops</li>
-	<li>looping</li>
-	<li>missing <tt>.cacheable()</tt></li>
-	<li>code must be prove-ably fast with <tt>SC.Benchmark</tt></li>
-	<li>keep in mind code size in kb, number of statements(IE!), doing too much on init</li>
-</ul>
-<h3 id="maintainability">6 Maintainability</h3>
-<ul>
-	<li>Don&#8217;t override private APIs</li>
-	<li>Be consistent and predictable</li>
-	<li>Make your classes extensible for other devs! (comment and modularize)</li>
-	<li>Use good OO practices</li>
-	<li>Reduce coupling between layers (parent classes should not know about their children &#8594; looking at you SC.View)</li>
-	<li>Refactor, don&#8217;t <em>hack</em> &#8594; <strong>make code better not worse!</strong></li>
-</ul>
-<h3 id="changelog">7 Changelog</h3>
-<ul>
-	<li>March 3, 2011: initial version by <a href="credits.html#onkis">Mike Ball</a></li>
-	<li>March 3, 2011: minor adjustments by <a href="credits.html#pwagenet">Peter Wagenet</a></li>
-	<li>March 3, 2011: minor grammatical/formatting changes by <a href="credits.html#topherfangio">Topher Fangio</a></li>
-</ul>
+<p>Therefore, as the previous usage scenarios suggest, you will not typically find the need to use any of these methods.  The most common exception is that you may occasionally use invokeLast() to ensure that your Views have rendered before doing some operation on dependent on their rendered output, such as an animation.</p>
+<div class="note"><p>If you add the same <code>target</code> and <code>method</code> pair multiple times to any of these functions, it will still only be executed once.</p></div>
+<p>.</p>
 
       </div>
         <div id="subCol">
           <h3 class="chapter"><img src="images/graphics/chapters.png" alt="" />Chapters</h3>
           <ol class="chapters">
-            <li><a href="#conform-to-sc-style-guides"><p>Conform to SC Style Guides</p>
-</a></li><li><a href="#must-pass-js-lint"><p>Must Pass JS lint</p>
-</a></li><li><a href="#unit-tests"><p>Unit Tests</p>
-</a><ul><li><a href="#don-t-break-anyone-else-s-tests"><p>Don&#8217;t break anyone else&#8217;s tests</p>
-</a></li> <li><a href="#write-good-tests"><p>Write good tests</p>
-</a></li> <li><a href="#running-unit-tests"><p>Running Unit Tests</p>
-</a></li></ul></li><li><a href="#consistency"><p>Consistency</p>
-</a></li><li><a href="#performance"><p>Performance</p>
-</a></li><li><a href="#maintainability"><p>Maintainability</p>
-</a></li><li><a href="#changelog"><p>Changelog</p>
+            <li><a href="#the-run-loop"><p>The Run Loop</p>
+</a><ul><li><a href="#using-the-run-loop-in-unit-tests"><p>Using the Run Loop in Unit Tests</p>
+</a></li></ul></li><li><a href="#the-run-loop-methods-invokelast-invokeonce-invokenext"><p>The Run Loop Methods: invokeLast(), invokeOnce(), invokeNext()</p>
 </a></li>
           </ol>
         </div>

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>SproutCore Guides: Computed Properties, Observers and Bindings</title>
+
+  <!-- guides styles -->
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/guides.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <!-- syntax highlighting styles -->
+  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/shThemeGuides.css" />
+</head>
+<body class="guide">
+
+  <header role="banner">
+    <div class="container">
+      <h1 id="logo">
+        <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
+      </h1>
+      <nav role="navigation">
+        <ul>
+          <li><a href="http://sproutcore.com/about/">About</a></li>
+          <li><a href="http://showcase.sproutcore.com">Showcase</a></li>
+          <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
+          <li><a href="http://docs.sproutcore.com">Docs</a></li>
+          <li><a href="http://sproutcore.com/community/">Community</a></li>
+          <li><a href="http://blog.sproutcore.com">Blog</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div id="feature">
+    <div class="wrapper">
+      <div class="feature_header">
+        <a href="/"><img src="images/graphics/guides.png"></a>
+        <h2><a href="/">SproutCore Guides</a></h2>
+        <p>These guides are designed to help you write and perfect your code.</p>
+      </div>
+      <div class="feature_sidebar">
+        <a href="index.html" id="guidesMenu">
+          Guides Index <span id="guidesArrow">&#9656;</span>
+        </a>
+        <div id="guides" class="clearfix" style="display: none;">
+          <a href="index.html" class="guidesMenu">
+            Guides Index <span class="guidesArrow">&#9662;</span>
+          </a>
+          <hr style="clear:both;">
+          <dl class="L">
+    <dt>Start Here</dt>
+      <dd><a href="getting_started.html">Getting Started: Part 1</a></dd>
+      <dd><a href="getting_started_2.html">Getting Started: Part 2</a></dd>
+      <dd><a href="getting_started_3.html">Getting Started: Part 3</a></dd>
+      <dd><a href="core_concepts_sc_object.html">Classes and SC.Object</a></dd>
+      <dd><a href="core_concepts_kvo.html">Computed Properties, Observers and Bindings</a></dd>
+    <dt>Views</dt>
+      <dd><a href="views.html">Core View Concepts</a></dd>
+    <dt>Models</dt>
+      <dd><a href="records.html">SproutCore Records</a></dd>
+      <dd><a href="fixtures.html">Using Fixtures</a></dd>
+    <dt>Theming</dt>
+      <dd><a href="chance.html">Using Chance, SproutCore's CSS Framework</a></dd>
+      <dd><a href="theming_app.html">Theming Your App</a></dd>
+    <dt>Testing</dt>
+      <dd><a href="unit_test_framework.html">Unit Testing</a></dd>
+      <dd><a href="adding_unit_test.html">Adding a Unit Test</a></dd>
+      <dd><a href="writing_unit_tests.html">Writing Unit Tests</a></dd>
+      <dd><a href="running_unit_tests.html">Running Unit Tests</a></dd>
+      <dd><a href="todos_tdd.html">SproutCore Development Using TDD</a></dd>
+</dl>
+<dl class="R">
+    <dt>Extras</dt>
+      <dd><a href="build_tools.html">Build Tools</a></dd>
+      <dd><a href="run_loop.html">The Run Loop</a></dd>
+      <dd><a href="enumerables.html">Enumerables</a></dd>
+      <dd><a href="using_handlebars.html">Using Handlebars Templates</a></dd>
+    <dt>Contributing to SproutCore</dt>
+      <dd><a href="style_guide.html">Javascript Style Guide</a></dd>
+      <dd><a href="commit_code.html">Committer Guidelines</a></dd>
+      <dd><a href="documentation_guidelines.html">Documentation Guidelines</a></dd>
+</dl>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+          <div class="headerSection">
+            <h2>Computed Properties, Observers and Bindings</h2>
+<p>The guide covers some of the core concepts of properties, bindings and key-value observing in SproutCore. By referring to this guide, you will be able to:</p>
+<ul>
+	<li>Be familiar with Computed Properties, Observers and Bindings.</li>
+	<li>Add Computed Properties, Observers and Bindings to your Classes.</li>
+	<li>Be familiar with absolute, relative and chained property paths.</li>
+</ul>
+
+          </div>
+        <h3 id="key-value-observing">1 Key-Value Observing</h3>
+<p>One of the core tenets of a SproutCore application is leveraging SproutCore&#8217;s Key-Value Observing (<span class="caps">KVO</span>) system.  <span class="caps">KVO</span> is a powerful feature that keeps code clean, fast and maintainable.  Rather than writing fallible code to manually keep your application in sync between models, views and other objects, we simply define and bind the proper properties and let SproutCore magically update the state of our application as these properties change.</p>
+<h4 id="get-and-set">1.1 get() and set()</h4>
+<p>For <span class="caps">KVO</span> to work properly, SproutCore implements getters and setters to track changes to objects. This is why it&#8217;s important to always use <tt>get()</tt> and <tt>set()</tt> for properties that might use observers, bindings, or be computed properties. Failure to do so will cause your app to get out of sync and not update properly.  While this may seem like a nuisance for those used to accessing everything via dot notation, the benefits of <span class="caps">KVO</span> are substantial and you&#8217;ll quickly get used to using <code>get()</code> and <code>set()</code> such that you&#8217;ll forget you ever had to worry about it.</p>
+<p>The following example shows <span class="caps">KVO</span> compliant access to an SC.Object object.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+var obj = SC.Object.create({ name: 'Jim' });
+obj.get('name'); // Jim
+obj.set('name', 'Bob');
+obj.get('name'); // Bob
+</pre></div>
+<div class="info"><p>Those of you who have worked in languages like Java may be familiar with having to write property accessors. Instead of having to define accessors for every property, <ins>get()</ins> and <ins>set()</ins> serve as universal accessors.</p></div>
+<h4 id="property-paths">1.2 Property Paths</h4>
+<p>SproutCore also introduces the concept of property paths, which will play a role in the next important sections. A <tt>property path</tt> is a String that points to a nested property. For instance, <code>"MyApp.userController.firstName"</code> refers to the <code>firstName</code> property of the <code>MyApp.userController</code> object. You can also have relative paths which refer to paths relative to the current object. For instance, within the context of <code>MyApp</code>, you could use the path <code>".userController.firstName"</code> to point to the same location. As you can see, the relative property begins with a period, which is always the case for relative property paths.</p>
+<p>To work with relative property paths you can use the <tt>getPath()</tt> and <tt>setPath()</tt> functions. These work identically to <code>get()</code> and <code>set()</code> except that they expect a path as the first argument.</p>
+<h3 id="computed-properties">2 Computed Properties</h3>
+<p>Often you have properties that depend on the value of several other properties. These are known as computed properties and they are an extremely useful means to keep your code contextually correct without resorting to manual property manipulation. Computed properties are defined as functions with a call to <tt>property()</tt> using a list of the dependent property names as arguments.</p>
+<p>In the next example, we will revisit an earlier version of <code>MyApp.Person</code>, to make the <code>fullName()</code> function into a computed property.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+MyApp.Person = SC.Object.extend({
+  firstName: null,
+  lastName:  null,
+
+  fullName: function() {
+    return [this.get('firstName'), this.get('lastName')].compact().join(' ');
+  }.property('firstName', 'lastName')
+});
+
+var person = MyApp.Person.create({
+  firstName: 'Peter',
+  lastName:  'Wagenet'
+});
+
+person.get('fullName'); // Peter Wagenet
+person.set('lastName', 'Smith');
+person.get('fullName'); // Peter Smith
+</pre></div><p>As you can see, you are able to use <code>get()</code> with computed properties in the same way you would use it with regular properties.</p>
+<p>This may not seem like much of an improvement over the previous <code>fullName()</code> function, but it is or at least it will be.  On the one hand, by making <code>fullName</code> into a property it can now be observed and bound to, an important detail which is described later, but on the other hand SproutCore provides a function to make computed properties even more efficient for our use right now.  This is where the <tt>cacheable()</tt> extension comes in.  By making our computed properties cacheable, they don&#8217;t need to be computed <em>unless their dependent properties change</em>.</p>
+<p>The next example highlights how multiple requests of the same property don&#8217;t involve re-calculations. Notice the addition of <code>cacheable()</code> to the computed property.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+MyApp.Person = SC.Object.extend({
+  firstName: null,
+  lastName:  null,
+
+  fullName: function() {
+    console.log('Calculating fullName...');
+    return [this.get('firstName'), this.get('lastName')].compact().join(' ');
+  }.property('firstName', 'lastName').cacheable()
+});
+
+var person = MyApp.Person.create({
+  firstName: 'Peter',
+  lastName:  'Wagenet'
+});
+
+person.get('fullName');
+&gt; 'Calculating fullName...' // Peter Wagenet
+person.get('fullName');   // Peter Wagenet
+person.set('lastName', 'Smith');
+person.get('fullName');
+&gt; 'Calculating fullName...' // Peter Smith
+</pre></div>
+<div class="note"><p>Computed properties are &#8220;lazily&#8221; computed.  That is, their functions are not run <em>until</em> the property is requested.  If the computed property is never requested, the function will never need be run.</p></div>
+<p>Setting computed properties is slightly more complicated, but still easy to grasp. Each call to <code>set()</code> passes <tt>key</tt> and <tt>value</tt> arguments to the computed property function, while a call to <code>get()</code> on the same computed property will only pass the <code>key</code> and the <code>value</code> will be <code>undefined</code>.  Therefore, the existence of <code>value</code> tells us whether the property is being got or set.</p>
+<p>Here is an example of creating a computed property that is also writable with <code>set()</code>.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+MyApp.Capitalizer = SC.Object.extend({
+  capitalizedValue: function(key, value) {
+    if (value !== undefined) {
+      this._capitalizedValue = value.toUpperCase();
+      console.log('Set capitalizedValue to ' + this._capitalizedValue);
+    }
+    return this._capitalizedValue;
+  }.property()
+});
+
+var cap = MyApp.Capitalizer.create();
+cap.set('capitalizedValue', 'abc');
+&gt; 'Set capitalizedValue to ABC'
+cap.get('capitalizedValue'); // 'ABC'
+</pre></div><p>The <code>key</code> argument is ignored, which is generally the case with computed properties.</p>
+<h3 id="observers">3 Observers</h3>
+<p>Closely related to the concept of properties is that of observers. Observers do exactly what their name suggests, they observe properties, watching for changes. The most basic observer looks like this,</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+var obj = SC.Object.create({
+  value: null,
+  valueDidUpdate: function(){
+    alert('New Value: ' + this.get('value'));
+  }.observes('value')
+});
+
+obj.set('value', 'Test'); // alert('New Value: Test');
+</pre></div><p>As you can see <tt>observes()</tt> is added to the function and when the matching property is updated, the function is run. You can even pass multiple properties or property paths into an observer.</p>
+<p>The following example uses an observer on a property and a computed property.  This is actually an example of an improper use of <code>observes()</code>, because <code>fullName</code> is dependent on <code>firstName</code> and <code>lastName</code> and therefore also appears to change whenever one of those properties changes.  Therefore, it probably doesn&#8217;t make sense to observe both <code>fullName</code> and <code>firstName</code>, but it helps us to really understand how computed properties and observers work.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+MyApp.Person = SC.Object.extend({
+  firstName: null,
+  lastName: null,
+  fullName: function() {
+    console.log('Calculating fullName...');
+    return [this.get('firstName'), this.get('lastName')].compact().join(' ');
+  }.property('firstName', 'lastName').cacheable(),
+
+  nameDidChange: function() {
+    console.log('firstName or fullName changed!');
+  }.observes('firstName','fullName')
+});
+
+person = MyApp.Person.create({
+  firstName: 'Emma',
+  lastName: 'Goldman'
+});
+
+person.set('lastName','Berkman');
+&gt; 'firstName or fullName changed!' // because fullName will have changed
+person.set('firstName','Alexander');
+&gt; 'firstName or fullName changed!' // because firstName changed
+&gt; 'firstName or fullName changed!' // because fullName will have changed
+</pre></div>
+<div class="note"><p>Note that <code>fullName</code> properly notifies changing as <code>firstName</code> and <code>lastName</code> change, but it is still not re-computed in this example because we didn&#8217;t actually <code>get()</code> <code>fullName</code> anywhere.</p></div>
+
+<div class="info"><p>Using <code>set()</code> to repeatedly set the same value will not result in the observer firing repeatedly.  It will only fire when the value changes.</p></div>
+<h4 id="observer-notification">3.1 Observer Notification</h4>
+<p>It is important to realize that observers have to be notified of property changes. The <code>set()</code> method and <code>property()</code> extension handles this for us automatically, which is one of the reasons <code>get()</code> and <code>set()</code> should be used to access properties. However, there are rare cases where we know that an observed property has changed without having updated the <span class="caps">KVO</span> system. In these cases you can use <tt>notifyPropertyChange()</tt> to tell observers that the property has been updated (i.e. <code>this.notifyPropertyChange('value')</code>).  However, if you find this is the case, check your code to see that you are using <code>set()</code> and that your computed properties have the correct dependent properties defined.</p>
+<p>Another case that is less rare is that you may find that you are updating a number of properties at once. If you have a lot of observers that depend on these properties, you may find them getting called more often than necessary. In this case, you can use <tt>beginPropertyChanges()</tt> and <tt>endPropertyChanges()</tt> to wrap your property change calls. This will cause all change notifications to happen once <tt>endPropertyChanges</tt> is called and will prevent unnecessary duplicate notifications.</p>
+<h4 id="chained-property-paths">3.2 Chained Property Paths</h4>
+<p>Observers are able to use a special type of property path called a <tt>chained property path</tt>. When using an observer (or abinding as we will see), usually the actual observer is only added to the <em>second to last object</em> in the property path. Therefore, if you add an observer for the path <code>"MyApp.usersController.mainUser.name"</code>, SproutCore finds the object at <code>"MyApp.usersController.mainUser"</code> and adds the observer to its <code>name</code> property. In this case, nothing is observing <code>MyApp.usersController</code> to see if its <code>mainUser</code> property changes.</p>
+<p>For example,</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+MyApp.usersController = SC.Object.create({
+  mainUser: SC.Object.create({
+    name: 'Joe'
+  })
+});
+
+MyApp.observerObject = SC.Object.create({
+  userNameDidChange: function() {
+    console.log(this.getPath('MyApp.usersController.mainUser.name'));
+  }.observes('MyApp.usersController.mainUser.name')
+});
+
+MyApp.usersController.setPath('mainUser.name', 'Jim');
+&gt; 'Jim'
+MyApp.usersController.set('mainUser', SC.Object.create({ name: 'Bob' }));
+MyApp.usersController.setPath('mainUser.name', 'Doug');
+</pre></div><p>As you can see, when we replace <code>mainUser</code> the observer does not fire. This is because we only had an observer on the original <code>mainUser</code> object, which has been replaced.</p>
+<p>What we want to do is watch for changes to <code>usersController.mainUser</code> and for changes to <code>mainUser.name</code>. This is where chained property paths come in. To let SproutCore know that we want observers on both, we use a chained property path like <code>MyApp.usersController*mainUser.name</code>.</p>
+<p>The asterisk (*) in the property path indicates that we want SproutCore to observe changes to all properties <em>following</em> the asterisk. In this case, that is both <code>mainUser</code> and <code>name</code>.</p>
+<p>Here&#8217;s an updated version of the previous example with a chained observer,</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+MyApp.observerObject = SC.Object.create({
+  userNameDidChange: function() {
+    console.log(this.getPath('MyApp.usersController.mainUser.name'));
+  }.observes('MyApp.usersController*mainUser.name') // Chained observer
+});
+
+MyApp.usersController.setPath('mainUser.name', 'Jim');
+&gt; 'Jim'
+MyApp.usersController.set('mainUser', SC.Object.create({ name: 'Bob' }));
+&gt; 'Bob'
+</pre></div><p>The observer will now fire if <code>MyApp.usersController.mainUser.name</code> or <code>MyApp.usersController.mainUser</code> changes.</p>
+<p>So why don&#8217;t we always use chained observers?  Observers are &#8220;expensive&#8221;, they take time to set up and they have to run each time their properties change and often times we don&#8217;t have changes in all levels. In the previous example, we don&#8217;t care about changes to <code>MyApp.usersController</code>, because we are never going to replace it.  If the same were true for <code>mainUser</code>, we wouldn&#8217;t want to observe it either. Therefore, it is advisable in practice to use chained observers as little as possible, in order to protect performance.</p>
+<h3 id="bindings">4 Bindings</h3>
+<p>When you combine properties and observers, you end up with <tt>bindings</tt>. Bindings serve to link two properties together and if you have experience with other application development frameworks, you will likely recognize their importance.</p>
+<p>Here is an example which binds a property on an SC.View object to a property on a controller object.  SC.View is the main SproutCore view class and it is a common pattern to bind views to controllers, so that as properties change on the controller, the view updates automatically.  This example uses the short form of creating a binding, by simply suffixing <tt>Binding</tt> to the property name.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+MyApp.userController = SC.Object.create({
+  name: null
+});
+
+MyApp.mainView = SC.View.create({
+  userBinding: 'MyApp.userController.name'
+});
+
+MyApp.userController.set('name', 'Joe');
+
+// The runloop must run
+
+console.log(MyApp.mainView.get('user'));
+&gt; 'Joe'
+
+MyApp.mainView.set('user', 'Jim');
+
+// The runloop must run
+
+console.log(MyApp.userController.get('name'));
+&gt; 'Jim'
+</pre></div>
+<div class="note"><p>In this example, we used the absolute path to the property. Bindings support relative property paths and chained property paths as well.</p></div>
+<p>As you can see in the example, when you update the value on one side of the relationship, it is automatically updated on the other side and vice versa. By default bindings are bi-directional, but you can also set them to only go in one direction by using the long form <tt>SC.Binding.oneWay()</tt> setup instead.  Making bindings unidirectional increases the performance of the binding and is recommended.</p>
+<div class="info"><p>The long form for a bi-directional binding is <code>SC.Binding.from()</code>.</p></div>
+<p>For example, if we used <code>userBinding: SC.Binding.oneWay('MyApp.userController.name')</code>, changes to <code>MyApp.userController.name</code> would update <code>MyApp.mainView.user</code>, but setting <code>MyApp.mainView.user</code> will not update <code>MyApp.userController.name</code>.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+MyApp.userController = SC.Object.create({
+  name: null
+});
+
+MyApp.mainView = SC.View.create({
+  userBinding: SC.Binding.oneWay('MyApp.userController.name')
+});
+
+MyApp.userController.set('name', 'Joe');
+
+// The runloop must run
+
+console.log(MyApp.mainView.get('user'));
+&gt; 'Joe'
+
+MyApp.mainView.set('user', 'Jim');
+
+// The runloop must run
+
+console.log(MyApp.userController.get('name'));
+&gt; 'Joe'
+</pre></div>
+<div class="note"><p>One very important difference between bindings and observers is that observers update almost immediately, while bindings update once at the end of each Run Loop. By deferring binding updates, it offers considerable improvements in performance, but can be confusing if you are expecting an update to propagate immediately.  See ‘The Run Loop’ for more details.</p></div>
+<h4 id="bindings-and-chained-property-paths">4.1 Bindings and Chained Property Paths</h4>
+<p>Since bindings are based off of observers behind the scenes, the same principles of chained observers applies. This means that if you want to bind a chained property path, you will want to use asterisks in your path as appropriate.</p>
+<p>For example,</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+MyApp.usersController = SC.Object.create({
+  mainUser: SC.Object.create({
+    name: 'Joe'
+  })
+});
+
+MyApp.userNameView = SC.LabelView.create({
+  valueBinding: 'MyApp.usersController*mainUser.name'
+});
+
+MyApp.usersController.setPath('mainUser.name', 'Harriet');
+
+// The run loop must run
+
+console.log(MyApp.userNameView.get('value'));
+&gt; 'Harriet'
+
+MyApp.usersController.set('mainUser', SC.Object.create({ name: 'Eunice' }));
+
+// The run loop must run
+
+console.log(MyApp.userNameView.get('value'));
+&gt; 'Eunice'
+</pre></div><p>Since we used an asterisk in the property path, the binding will be updated when either <code>mainUser</code> or <code>mainUser.name</code> changes.</p>
+
+      </div>
+        <div id="subCol">
+          <h3 class="chapter"><img src="images/graphics/chapters.png" alt="" />Chapters</h3>
+          <ol class="chapters">
+            <li><a href="#key-value-observing"><p>Key-Value Observing</p>
+</a><ul><li><a href="#get-and-set"><p>get() and set()</p>
+</a></li> <li><a href="#property-paths"><p>Property Paths</p>
+</a></li></ul></li><li><a href="#computed-properties"><p>Computed Properties</p>
+</a></li><li><a href="#observers"><p>Observers</p>
+</a><ul><li><a href="#observer-notification"><p>Observer Notification</p>
+</a></li> <li><a href="#chained-property-paths"><p>Chained Property Paths</p>
+</a></li></ul></li><li><a href="#bindings"><p>Bindings</p>
+</a><ul><li><a href="#bindings-and-chained-property-paths"><p>Bindings and Chained Property Paths</p>
+</a></li></ul></li>
+          </ol>
+        </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+	  <footer>
+	    <div class="container">
+	      <div class="col">
+	        <a href="index.html"><img src="images/footer/sc_logo_medium.png" alt="SproutCore" /></a>
+	        <p id="license">
+	          SproutCore framework is under MIT License.
+	        </p>
+	      </div>
+	      <nav class="col">
+	        <h1>Site Navigation</h1>
+	        <ul>
+	          <li><a href="http://www.sproutcore.com/about/">About</a></li>
+	          <li><a href="http://docs.sproutcore.com">Docs</a></li>
+	          <li><a href="http://blog.sproutcore.com">Blog</a></li>
+	          <li><a href="http://www.sproutcore.com/install/?redirect=1">Download</a></li>
+	          <li><a href="http://www.sproutcore.com/community/">Community</a></li>
+	          <li><a href="https://github.com/sproutcore/sproutcore">GitHub</a></li>
+	          <li><a href="mailto:community@sproutcore.com">Contact Us</a></li>
+	          <li><a href="http://guides.sproutcore.com">Guides</a></li>
+	        </ul>
+	        <a href="http://www.w3.org/html/logo/"><img src="images/footer/html5_tech.png" alt="HTML5 Powered" /></a>
+	      </nav>
+	      <div class="col">
+	        <h1>Get in Touch, Stay Informed</h1>
+	        <ul class="social">
+	          <li><a href="http://twitter.com/sproutcore"><img src="images/footer/twitter.png" alt="Twitter" /></a></li>
+	          <li><a href="http://www.facebook.com/sproutcore"><img src="images/footer/facebook.png" alt="Facebook" /></a></li>
+	          <li><a href="http://groups.google.com/group/sproutcore"><img src="images/footer/google.png" alt="Google Groups" /></a></li>
+						<li><a href="http://groups.google.com/group/sproutcore">Subscribe To Mailing List</a></li>
+	        </ul>
+					<a href="http://eepurl.com/dK1-Y" target="_blank" id="newsletter" class="button secondary">Sign Up For Our Newsletter!</a>
+	<!-- Commented out until we have mailchimp API integration.
+					<h2>Subscribe To Newsletter</h2>
+	        <div id="subscribe">
+	          <form>
+	            <input type="text" name="email" />
+	            <button name="subscribe">Sign-Up</button>
+	            <div class="processing"><img src="/img/spinner.gif"></div>
+	            <div class="error"></div>
+	          </form>
+	        </div>
+	-->
+	      </div>
+	      <a href="#feature" class="top">Back To Top</a>
+	    </div>
+	  </footer>
+
+  <script src="http://code.jquery.com/jquery-1.6.min.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" src="javascripts/sproutGuides.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushJScript.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushCss.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.all()
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-19584397-1']);
+    _gaq.push(['_setDomainName', '.sproutcore.com']);
+    _gaq.push(['_setAllowHash', false]);
+    _gaq.push(['_setAllowLinker', true]);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl': 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>SproutCore Guides: SproutCore Documentation Guidelines</title>
+  <title>SproutCore Guides: Classes and SC.Object</title>
 
   <!-- guides styles -->
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
@@ -98,144 +98,172 @@
     <div class="wrapper">
       <div id="mainCol">
           <div class="headerSection">
-            <h2>SproutCore Documentation Guidelines</h2>
-<p>This guide will walk you through writing documentation for your SproutCore classes in a format that is friendly to jsdoc-toolkit, the library used for generating documentation from code.</p>
+            <h2>Classes and SC.Object</h2>
+<p>The guide covers some of the core concepts of object-oriented programming with the SproutCore framework. By referring to this guide, you will be able to:</p>
+<ul>
+	<li>Understand how Classes work, including SC.Object.</li>
+	<li>Write your own subclasses based on SC.Object.</li>
+	<li>Create mixins to share functionality between Classes.</li>
+	<li>Add Class properties and functions.</li>
+</ul>
 
           </div>
-        <h3 id="overview">1 Overview</h3>
-<p>SproutCore uses the <a href="http://code.google.com/p/jsdoc-toolkit/">jsdoc-toolkit</a> to generate its documentation. As such, your SproutCore classes should follow strict code-documenting formatting guidelines in order to properly generate your <span class="caps">HTML</span> documentation. This document outlines the proper format you should use.</p>
-<h3 id="classes">2 Classes</h3>
-<p>Classes must always start with an <tt>@class</tt> directive, followed by optional the class description. You can use <a href="http://daringfireball.net/projects/markdown/">Markdown</a> to style your description (add headings, paragraphs, code, etc.) JsDoc Toolkit also supports tags in your comments to add metadata about your class. For example, you can specify who the author of the class is, what classes it inherits from,  what classes are related, and what version of the frameworks it’s been available since.</p>
-<h4 id="common-and-supported-markdown-syntax">2.1 Common and supported Markdown syntax:</h4>
-<ul>
-	<li>For code samples, make sure you indent the code block further than the other text</li>
-	<li>For headers, add three dashes (<tt>---</tt>) for 2nd level headers, and three (<tt>===</tt>) for 1st level headers. These go on the subsequent line</li>
-	<li>For list, prefix each line with a dash (<tt>-</tt>)</li>
-</ul>
+        <h3 id="sc-object">1 SC.Object</h3>
+<p>SproutCore uses a traditional class-based <a href="http://en.wikipedia.org/wiki/Object-oriented_programming">object-oriented programming</a> style based on the <tt>SC.Object</tt> Class. In this style, <code>SC.Object</code> becomes the base for all &#8220;Classes&#8221; in SproutCore and provides powerful extensions to regular JavaScript objects. These extensions include computed properties, automatic bindings, observers and more, which will be described in detail below.</p>
+<h4 id="creating-an-sc-object-instance">1.1 Creating an SC.Object Instance</h4>
+<p>Creation of an <code>SC.Object</code> instance is straightforward.</p>
 <div class="code_container">
-<div class="filename">Sample Class Documentation</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
-/**
-  @class
+var obj = SC.Object.create()
+</pre></div><p>In most cases you will want to create your <code>SC.Object</code> with some pre-set properties. You accomplish this by providing the properties in a hash.  The following example creates a new SC.Object to represent a person.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
 
-  Class Description
-  ======
-
-  Overview
-  ----------
-
-  This is a sample description. Here’s some code:
-
-         SC.Store.find(...)
-
-  And here’s a list:
-
-  - Eggs
-  - Butter
-
-  @deprecated This class has been deprecated. Please use SC.NewRequest
-  @see &lt;a href=&quot;http://getfirebug.com/logging.html&quot;&gt;Firebug Logging Reference&lt;/a&gt;
-  @extends SC.Object
-  @author Majd Taby
-  @since SproutCore 1.0
-*/
-
-SC.Request = SC.Object.extend(
- /** @scope SC.Request.prototype */{
- ...
+// Create an SC.Object to represent a person.
+var person = SC.Object.create({
+  firstName: 'Peter',
+  lastName:  'Wagenet'
 });
-</pre></div><p>The <tt>@scope</tt> definition is mandatory, and it defines what class/namespace the proceeding code documents.</p>
-<p>You can define multiple <tt>@see</tt>/<tt>extends</tt>/<tt>author</tt> directives for each class, as you see fit.</p>
-<p><strong>Note</strong>: you cannot put any javascript between your documentation and the class it’s documenting. Otherwise, JsDoc will get confused by what you’re trying to document.</p>
-<h4 id="instance-methods">2.2 Instance Methods</h4>
-<p>Documenting methods follows the same general structure as a class, but with a different set of required/optional directives. You start off by describing the method’s functionality, followed by the parameters, and then the return types.</p>
-<p>It’s important to keep in mind that the jsdoc toolkit does not parse javascript code. This means that you need to put the name of the parameters in the documentation, and it’s your responsibility to keep them up to date as you update the method.</p>
-<p>In the example below, the response property is marked as optional by wrapping the name in square brackets.</p>
+
+// Access our object's properties
+person.get('firstName'); // 'Peter'
+person.get('lastName');  // 'Wagenet'
+</pre></div>
+<div class="note"><p>The <ins>get()</ins> and <ins>set()</ins> functions allow for Key-Value observing which is described in more detail below. For now, trust that they are important and you should make a habit of always using them to access properties on SC.Object and its subclasses.</p></div>
+<h4 id="creating-an-sc-object-subclass">1.2 Creating an SC.Object Subclass</h4>
+<p>In many cases you will want to create subclasses of <code>SC.Object</code> rather than direct instances. In the above example, we created a new <code>SC.Object</code> to represent a person, but it often makes more sense to define a unique <code>Person</code> Class, and to create instances of it.  Doing so allows us to define default properties on the Class and to include related helper functions.  To do this, we simply call <tt>extend()</tt> on <code>SC.Object</code> as the next example shows.</p>
 <div class="code_container">
-<div class="filename">Sample Instance Method Documentation</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
-/**
-  Method description.
+MyApp.Person = SC.Object.extend({
+  firstName: null,
+  lastName:  null,
+  permissions: 'none',
 
-  @param {SC.Request}   request     A copy of the request, frozen.
-  @param {SC.Response} [response]   An optional parameter
-  @param {SC.Response} [foobar]     A sample parameter
-
-  @throws {SC.Exception} SC.RequestNotValidException
-  @returns {Boolean} Yes on success, NO on failure.
-*/
-didSend: function(request, response) {},
-</pre></div><h4 id="class-methods">2.3 Class Methods</h4>
-<p>Class methods are usually implemented by mixing-in extra methods to an existing class. For these methods/properties to show up in the same location in the generated output, you need to add a <tt>@scope</tt> declaration just as you did with the class.</p>
+  fullName: function() {
+    return [this.get('firstName'), this.get('lastName')].compact().join(' ');
+  }
+});
+</pre></div><p>After defining the <code>Person</code> Class, we can now create new <code>Person</code> objects and each will contain the properties <code>firstName</code>, <code>lastName</code> and <code>permissions</code> as well as the simple <code>fullName()</code> function.  The following example shows this.</p>
 <div class="code_container">
-<div class="filename">Sample Class Method Documentation</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
-/**
-  @class
+var person = MyApp.Person.create({
+  firstName: 'Peter',
+  lastName:  'Wagenet'
+});
 
-   ...
-*/
-SC.Store = SC.Object.extend(/** @scope SC.Store.prototype */{...});
-
-SC.Store.mixin(/** @scope SC.Store.prototype */{...})
-</pre></div><h4 id="properties">2.4 Properties</h4>
-<p>Properties are arguably the simplest entity to document. You simply need to write a description of what the property represents, and what type it is. You can optionally provide a default value.</p>
+person.fullName(); // 'Peter Wagenet'
+person.get('permissions'); // 'none'
+</pre></div><h5 id="calling-superclass-methods-with-sc_super">1.2.1 Calling superclass methods with sc_super</h5>
+<p>In some cases when you subclass a Class you will want to augment a method of the parent Class without completely overriding it. In this case, SproutCore provides the <tt>sc_super</tt> method which calls the original function. For those familiar with Ruby&#8217;s <code>super</code> method, <code>sc_super</code> is very similar.  Here is an example of a subclass of <code>Person</code> that extends and uses the superclass&#8217;s <code>fullName()</code> method.</p>
 <div class="code_container">
-<div class="filename">Sample Property Documentation</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
-/**
-  Description
+// Define a new subclass of MyApp.Person
+MyApp.FormalPerson = MyApp.Person.extend({
+  title: null,
 
-  @default YES
-  @type Boolean
-*/
-isAsynchronous: YES,
-</pre></div><p><strong>Note</strong>: Constants are documented using <tt>@constant</tt> but they don’t need a default value.</p>
-<h4 id="computed-properties">2.5 Computed Properties</h4>
-<p>Computed Properties are documented just like regular properties but they add the <tt>@field</tt> property.</p>
+  fullName: function() {
+    // Joins `title` with the result of `fullName()` on the superclass.
+    return [this.get('title'), sc_super()].compact().join(' ');
+  }
+});
+
+// Create a MyApp.FormalPerson object
+var person = MyApp.FormalPerson.create({
+  title:     'Mr.',
+  firstName: 'Peter',
+  lastName:  'Wagenet'
+});
+
+person.fullName(); // Mr. Peter Wagenet
+person.get('permissions'); // 'none'
+</pre></div>
+<div class="note"><p><ins>sc_super</ins> is one of the rare exceptions in SproutCore in that it is not actually a JavaScript function. It&#8217;s just a pre-processor directive that gets replaced with <code>arguments.callee.base.apply(this, arguments)</code> by the Build Tools.</p></div>
+<h5 id="the-init-method">1.2.2 The init method</h5>
+<p>Whenever an instance of an <code>SC.Object</code> is created, its <tt>init()</tt> method is called first. This function can be overridden when you need to perform additional setup each time one of your objects is created.  The next example uses <code>init()</code> to ensure that a calculation is performed each time a new MyApp.Calculation object is created.</p>
 <div class="code_container">
-<div class="filename">Sample Computed Property Documentation</div>
 <pre class="brush: javascript; gutter: false; toolbar: false">
 
-/**
-  Description
+MyApp.Calculation = SC.Object.extend({
+  input: null,
+  result: null,
 
-  @field
-  @default YES
-  @type Boolean
-*/
-isAsynchronous: function(){...
-</pre></div><h3 id="testing-and-viewing-your-documentation-during-development">3 Testing and viewing your documentation during development</h3>
-<p>If, during development, you would like to test your documentation and see how it looks once it&#8217;s generated, then you can use the SproutCore TextMate bundle available on <a href="https://github.com/sproutcore/sproutcore-tmbundle">github</a> which includes a Command to generate documentation for the current file you are viewing. To activate it, go to a jsdoc-documented javascript file, and click <span class="caps">CMD</span> + <span class="caps">CTRL</span> + G.</p>
-<p><strong>Note</strong>: Generating documentation in TextMate requires the Web Sharing feature of Mac OS X to be enabled since it uses apache to display your files.</p>
-<h4 id="references">3.1 References</h4>
-<ul>
-	<li><a href="http://code.google.com/p/jsdoc-toolkit/wiki/TagReference">JSDoc Tag Reference</a></li>
-</ul>
-<h3 id="changelog">4 Changelog</h3>
-<ul>
-	<li>March 22, 2011: initial version by <a href="credits.html#mtaby">Majd Taby</a></li>
-</ul>
+  _calculate: function() {
+    // Do expensive calculation
+    this.set('result', this.get('input') * 2);
+  },
+
+  init: function() {
+    sc_super();  // Warning: Always invoke SC.Object's init() method!
+    this._calculate();
+  }
+});
+
+var calc = MyApp.Calculation.create({ input: 5 });
+calc.get('result'); // 10
+</pre></div>
+<div class="warning"><p>When overriding the <code>init()</code> method it is important that you call <code>sc_super</code> at the start of your custom <code>init()</code> method. This will ensure that all internal object initialization takes place as expected.</p></div>
+<h5 id="using-mixins">1.2.3 Using Mixins</h5>
+<p>Mixins are an easy way to extend multiple classes, that don&#8217;t share an inheritance tree, with similar functionality.  Mixins are simply a hash with a series of properties that will be added to the objects you create.  The next example defines the <code>MyApp.Introducable</code> mixin, which can then be shared between many different Classes.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+MyApp.Introducable = {
+  sayHello: function() {
+    return 'Hello, my name is ' + this.name;
+  }
+};
+</pre></div><p>To add one or more mixins to a Class, add them as parameters to extend.  For example,</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+MyApp.Person = SC.Object.extend(MyApp.Introducable, { name: ''; });
+
+var person = MyApp.Person.create({ name: 'Bob' });
+person.sayHello(); // Hello, my name is Bob
+</pre></div><p>As you may have guessed, <code>SC.Object.extend</code> just takes a <em>series of hashes</em> and mixes them all in to a newly created class.</p>
+<h5 id="class-methods">1.2.4 Class methods</h5>
+<p>You can also define Class methods on your custom Classes. If you need to add a single Class method to a Class, you can do it in the traditional JavaScript manner.  For example, the following adds a <code>quickCreate()</code> helper function to <code>MyApp.Person</code>.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+MyApp.Person.quickCreate = function(firstName, lastName){
+  return MyApp.Person.create({
+    firstName: firstName,
+    lastName: lastName
+  });
+};
+
+var person = MyApp.Person.quickCreate('Peter', 'Wagenet');
+person.fullName(); // Peter Wagenet
+</pre></div><p>However, sometimes you may want to add a series of Class methods and properties. In this case you can use the <tt>mixin()</tt> method.</p>
+<div class="code_container">
+<pre class="brush: javascript; gutter: false; toolbar: false">
+
+MyApp.Person.mixin({
+  quickCreate: function(firstName, lastName){
+    return MyApp.Person.create({
+      firstName: firstName,
+      lastName: lastName
+    });
+  }),
+});
+
+person = MyApp.Person.quickCreate('Mary', 'Shelley');
+person.fullName(); // Mary Shelley
+</pre></div><p>Note that the <code>mixin()</code> method is different from the Mixins described above. The <code>mixin()</code> method will add the properties and methods within the block as <em>Class properties and methods</em>. Mixins themselves add <em>instance variables and methods</em>.</p>
 
       </div>
         <div id="subCol">
           <h3 class="chapter"><img src="images/graphics/chapters.png" alt="" />Chapters</h3>
           <ol class="chapters">
-            <li><a href="#overview"><p>Overview</p>
-</a></li><li><a href="#classes"><p>Classes</p>
-</a><ul><li><a href="#common-and-supported-markdown-syntax"><p>Common and supported Markdown syntax:</p>
-</a></li> <li><a href="#instance-methods"><p>Instance Methods</p>
-</a></li> <li><a href="#class-methods"><p>Class Methods</p>
-</a></li> <li><a href="#properties"><p>Properties</p>
-</a></li> <li><a href="#computed-properties"><p>Computed Properties</p>
-</a></li></ul></li><li><a href="#testing-and-viewing-your-documentation-during-development"><p>Testing and viewing your documentation during development</p>
-</a><ul><li><a href="#references"><p>References</p>
-</a></li></ul></li><li><a href="#changelog"><p>Changelog</p>
-</a></li>
+            <li><a href="#sc-object"><p>SC.Object</p>
+</a><ul><li><a href="#creating-an-sc-object-instance"><p>Creating an SC.Object Instance</p>
+</a></li> <li><a href="#creating-an-sc-object-subclass"><p>Creating an SC.Object Subclass</p>
+</a></li></ul></li>
           </ol>
         </div>
     </div>
