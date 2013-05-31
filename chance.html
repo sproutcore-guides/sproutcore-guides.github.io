@@ -292,7 +292,7 @@ $theme.button { /* normal styles here */ }
 .my-image {
   @include slice(&quot;my-image.png&quot;, $left: 3, $width: 1, $repeat: repeat-x);
 }
-</pre></div><p>This lets Chance know that the image repeats, which can impact how it deals with the image. For instance, if Chance were to sprite the image, it would create separate sprites for each <tt>repeat-x, repeat-y, and repeat-both</tt>.</p>
+</pre></div><p>This lets Chance know that the image repeats, which can impact how it deals with the image. For instance, if Chance were to sprite the image, it would create separate sprites for each <tt>repeat-x, repeat-y, and repeat</tt>.</p>
 <h4 id="offsetting">4.3 Offsetting</h4>
 <p><tt>@include slice</tt> and the <tt>background-position</tt> property are incompatible. If you need to offset the position of a background image, you must use Chance&#8217;s <tt>$offset</tt> argument.</p>
 <p><tt>$offset</tt> takes two numbers: an x offset and a y offset. For example:</p>
