@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <!-- plugin styles -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/highlight-github.css" />
+
+    <!-- guides styles -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/reset.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/main.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/guides.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+    <meta name="generator" content="DocPad v6.57.0" />
+    
+  </head>
+
+  <body class="guide">
+
+    <header role="banner">
+      <div class="container">
+        <h1 id="logo">
+          <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
+        </h1>
+        <nav role="navigation">
+          <ul>
+            <li><a href="http://sproutcore.com/about/">About</a></li>
+            <li><a href="http://showcase.sproutcore.com">Showcase</a></li>
+            <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
+            <li><a href="http://docs.sproutcore.com">Docs</a></li>
+            <li><a href="http://sproutcore.com/community/">Community</a></li>
+            <li><a href="http://blog.sproutcore.com">Blog</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div id="feature">
+      <div class="wrapper">
+        <div class="feature_header">
+          <a href="/"><img src="images/graphics/guides.png"></a>
+          <h2><a href="/">SproutCore Guides</a></h2>
+          <p>These guides are designed to help you write and perfect your code.</p>
+        </div>
+        <div class="feature_sidebar">
+          <a href="index.html" id="guidesMenu">
+            Guides Index <span id="guidesArrow">&#9656;</span>
+          </a>
+          <div id="guides" class="clearfix" style="display: none;">
+            <a href="index.html" class="guidesMenu">
+              Guides Index <span class="guidesArrow">&#9662;</span>
+            </a>
+
+            <hr style="clear:both;">
+
+            <dl class='L'><dt>Start Here</dt>
+<dd><a href='/getting_started.html'>Getting Started: Part 1</a></dd>
+<dd><a href='/getting_started_2.html'>Getting Started: Part 2</a></dd>
+<dd><a href='/getting_started_3.html'>Getting Started: Part 3</a></dd>
+<dd><a href='/core_concepts_sc_object.html'>Classes and SC.Object</a></dd>
+<dd><a href='/core_concepts_kvo.html'>Computed Properties, Observers and Bindings</a></dd><dt>Views</dt>
+<dd><a href='/views.html'>Core View Concepts</a></dd>
+<dd><a href='/animate.html'>DRAFT - Animation</a></dd><dt>Models</dt>
+<dd><a href='/records.html'>SproutCore Records</a></dd>
+<dd><a href='/fixtures.html'>Using Fixtures</a></dd>
+<dd><a href='/record_lifecycle.html'>DRAFT - Understanding the Record Lifecycle</a></dd>
+<dd><a href='/no_store.html'>DRAFT - No DataStore</a></dd>
+<dd><a href='/data_source.html'>DRAFT - Data Source</a></dd><dt>Theming</dt>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
+<dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
+<dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd>
+<dd><a href='/testing_guidelines.html'>DRAFT - Testing Guidelines</a></dd><dt>Extras</dt>
+<dd><a href='/build_tools.html'>SproutCore's Build Tools</a></dd>
+<dd><a href='/run_loop.html'>The Run Loop</a></dd>
+<dd><a href='/enumerables.html'>Enumerables</a></dd>
+<dd><a href='/connect_server.html'>DRAFT - Connecting to a Server</a></dd><dt>Contributing to SproutCore</dt>
+<dd><a href='/style_guide.html'>Javascript Guidelines</a></dd>
+<dd><a href='/commit_code.html'>Committer Guidelines</a></dd>
+<dd><a href='/documentation_guidelines.html'>Documentation Guidelines</a></dd>
+<dd><a href='/contribute.html'>Contributing Guides</a></dd><dt>Thanks</dt>
+<dd><a href='/credits.html'>Credits</a></dd></dl>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="container">
+      <div class="wrapper">
+        <div id="mainCol">
+          <div class='headerSection'>
+            
+              <h2>Animation - Core Concepts</h2>
+            
+
+            
+              <p>The guide covers some of the core concepts of animations in SproutCore.  By referring to this guide, you will be able to:</p>
+            
+
+            
+              <ul>
+                
+                  <li>Gain a basic understanding of <tt>SC.View#animate</tt></li>
+                
+                  <li>Become familiar with the types of animations, how to set their duration, and understand the timing of the effect.</li>
+                
+                  <li>Take the information provided and apply it to an existing application.</li>
+                
+                  <li>See real world examples for animating buttons on a toolbar, animating views on touch enabled devices, and creating a 3d plane on a 2d view.</li>
+                
+              </ul>
+            
+          </div>
+
+          <p><em>TODO: This needs more substance and less fluff. This also needs to be more
+guide-like and less API-like.</em></p>
+<h3 id='-Introduction-'>1 -  Introduction
+</h3>
+
+
+<p>Animations play an important role when engineering an application.  They allow
+a stagnant set of states and views to become fluid with movement.  When used
+tactfully, these visual effects can be used to create seamless transitions
+between views, provide 3D space to a flat view or object, or help draw
+attention to a specific part of your application.  The possibilities are
+endless with <tt>SC.View#animate</tt>.</p>
+<h4 id='--What-is-SC-View-animate--'>1.1 -   What is SC.View#animate?
+</h4>
+
+
+<p><tt>SC.View#animate</tt> is a set of features and functionality that makes it easy to
+build compelling user interfaces. It animates the properties of a view.  You&#39;ll
+need to think about three things when applying an animation:  The type of
+animation you&#39;d like to apply, the duration in seconds needed to complete the
+animation, and how smoothly the animations move between frames. </p>
+<h4 id='--What-are-the-features-of-SC-View-animate--'>1.2 -   What are the features of SC.View#animate?
+</h4>
+
+
+<p><tt>SC.View#animate</tt> uses CSS3 animations and javascript as a fallback when
+needed.  Animations can be combined with multiple types, synchronized and
+executed at once or executed concurrently.  When using <tt>SC.View#animate</tt>, the
+property of a view animates and changes without redrawing the view.  Therefore,
+the views properties change during the animation.</p>
+<div class='warning'><p> The JavaScript fallback has not yet been implemented.
+
+</p></div>
+
+
+
+<h4 id='--What-are-the-benefits-of-SC-View-animate--'>1.3 -   What are the benefits of SC.View#animate?
+</h4>
+
+
+<p>Using <tt>SC.View#animate</tt> has many benefits.  By using CSS-only timing functions
+of the animations before falling back to JavaScript, allows JavaScript
+performance to not be impacted.  When JavaScript handles the timing functions
+it has to do some semi-heavy calculations each frame.  Using CSS-only timing
+functions gives a graceful degradation of sorts.  This approach allows your
+application to be cross-browser compliant and have optimized performance.</p>
+<p>Furthermore, combing multiple types of animations on one view allows you to
+step outside of the preset effects and enables you to create custom effects.
+While synchronizing multiple views to animate at once enables your application
+to become cinematic or a presentation of sorts.  </p>
+<p>And last, when used with a callback method your animations can become
+concurrent and fluid.  We will explore the aforementioned features and benefits
+of <tt>SC.View#animate</tt> through practical, real-world scenarios towards the end of
+this guide.  But before we do so lets have a detailed look at <tt>SC.View#animate</tt>.</p>
+<h3 id='-A-detailed-look-'>2 -  A detailed look
+</h3>
+
+
+<p>To start with we will explore the syntax for <tt>SC.View#animate</tt>.  Below is a
+basic animation that fades a views opacity from <tt>1.0</tt> down to <tt>0.0</tt>.  The
+duration for how long it takes for the animation to take place is 1.5 seconds
+and the timing is eased in then out.</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">myApp.myView.animate(<span class="string">'opacity'</span>, <span class="number">0.0</span>, {
+  duration:<span class="number">1.5</span>,
+  timing:<span class="string">'ease-in-out'</span>
+});</code></div></pre>
+<h4 id='-Type-of-animation-effects-'>2.1 -  Type of animation effects
+</h4>
+
+
+<p>After you set which view you would like to animate, the first parameter passed
+is the type of animation effect you would like to use.  The following is a list
+of what animation effects you can use:</p>
+<h5 id='--tt-opacity--tt--'>2.1.1 -  <tt>opacity</tt>
+</h5>
+
+
+<p>Opacity has a value of <tt>0.0 - 1.0</tt>.  The value assigned is that of a
+percentage.  Therefore, <tt>0.6</tt> is setting a views opacity to <tt>60%</tt> transparency.
+Opacity is a great way to switch between two views that are stacked on each
+other. </p>
+<h5 id='--tt-scale--tt--'>2.1.2 -  <tt>scale</tt>
+</h5>
+
+
+<p>Scale has a value of <tt>0.0 - infinite</tt>.  The value assigned is that of a
+percentage.  Therefore, <tt>2.0</tt> is setting a views height and width 200% larger
+then its defined properties in your view.  Scale allows you to create bounce
+effects and explore the 3d plane through the z axis.</p>
+<h5 id='--tt-top--tt-----tt-bottom--tt-----tt-left--tt-----tt-right--tt-----tt-height--tt-----tt-width--tt--'>2.1.3 -  <tt>top</tt> / <tt>bottom</tt> / <tt>left</tt> / <tt>right</tt> / <tt>height</tt> / <tt>width</tt>
+</h5>
+
+
+<p><tt>top</tt>, <tt>bottom</tt>, <tt>left</tt>, <tt>right</tt>, <tt>height</tt>, and <tt>width</tt> changes the value of
+each property in your layout.  In order to use <tt>top</tt>, <tt>bottom</tt>, <tt>left</tt>, and/or</p>
+<p><tt>right</tt>, the view in which you are animating must be assigned those values.
+The value assign is that of a pixel.  Therefore, if you have a view with a
+value of <tt>&#39;left:10&#39;</tt> assign to the left property and within your animation you
+adjust the properties value to <tt>&#39;left:100&#39;</tt> then the view will glide to the
+newly assigned <tt>left</tt> value.</p>
+<h5 id='--tt-rotateX--tt-----tt-rotateY--tt-----tt-rotateZ--tt--'>2.1.4 -  <tt>rotateX</tt> / <tt>rotateY</tt> / <tt>rotateZ</tt>
+</h5>
+
+
+<p><tt>rotateX</tt>, <tt>rotateY</tt>, and <tt>rotateZ</tt> allows you to change a views position
+within a 3d plane.  Below is a graph showing how X, Y, and Z interact with a 3d
+plane.</p>
+<div style='text-align: center'> <img src="images/animate/xyz.png" alt="XYZ Rotation"> </div>
+
+
+
+<h4 id='-Duration-of-an-animation-'>2.2 -  Duration of an animation
+</h4>
+
+
+<p>The second parameter passed is pretty straight forward and is the duration of
+the animations effect. It has a value of seconds.</p>
+<h4 id='-Timing-of-an-animation-'>2.3 -  Timing of an animation
+</h4>
+
+
+<p>The third parameter passed relates to the animations timing.  More
+specifically, it allows for animations to change their speed over its duration.
+The values assigned to timing is preset and determined based on what timing
+option you pass. </p>
+<h5 id='--tt-linear--tt--'>2.3.1 -  <tt>linear</tt>
+</h5>
+
+
+<p>The <tt>linear</tt> animation timing function provides and straight-line interpolation
+between the starting value and the final animated value assigned to your view.</p>
+<div style='text-align: center'> <img src="images/animate/linear_graph.png" alt="Linear Graph"> </div>
+
+
+
+<h5 id='--tt-ease-in--tt--'>2.3.2 -  <tt>ease-in</tt>
+</h5>
+
+
+<p>The <tt>ease-in</tt> animation timing function allows the animation to start slow, get
+faster and faster as the animation plays out, and finally become constant
+again.  However, the constant state occurs faster than a basic curve would be.</p>
+<p><tt>ease-in</tt> starts with a shallow slope during the start of the animation.
+During this part of the animation the animated value does not change much, but
+as time goes on, the animated value starts to change more quickly until the
+final value is achieved.  This timing function provides the user with a subtle
+cue and allows the user time to adjust or acknowledge the fact that something
+is changing.  Furthermore, with the animations speed dramatically increasing
+towards the end, the visual cue places an emphasis on the achieved state of the
+animated property value.  </p>
+<div style='text-align: center'> <img src="images/animate/ease_in_graph.png" alt="Ease In Graph"> </div>   
+
+
+
+<h5 id='--tt-ease-out--tt--'>2.3.3 -  <tt>ease-out</tt>
+</h5>
+
+
+<p>The <tt>ease-out</tt> animation is the opposite of ease-in.  Instead of starting slow
+and speeding up, the <tt>ease-out</tt> timing starts off fast and slows down till the
+animated value is reached.  This timing function provides the user with a cue
+that draws their attention to the initial change and gives an emphasis to the
+start of the animation and less to the ending.</p>
+<div style='text-align: center'> <img src="images/animate/ease_out_graph.png" alt="Ease Out Graph"> </div>  
+
+
+
+<h5 id='--tt-ease-in-out--tt--'>2.3.4 -  <tt>ease-in-out</tt>
+</h5>
+
+
+<p>The <tt>ease-in-out</tt> timing function starts off slowly, accelerates in the middle,
+and then slows down again towards the end.  This animation, much like its name
+describes, is a combination between <tt>ease-in</tt> and <tt>ease-out</tt>.  The cue provided
+with <tt>ease-in-out</tt> gives more emphasis on the middle of the animation and less
+towards the beginning and ending.</p>
+<div style='text-align: center'> <img src="images/animate/ease_in_out_graph.png" alt="Ease In Out Graph"> </div>  
+
+
+
+<h3 id='-Using--tt-SC-View-animate--tt---'>3 -  Using <tt>SC.View#animate</tt>:
+</h3>
+
+
+
+
+<h4 id='-Adding-animations-to-an-existing-application-'>3.1 -  Adding animations to an existing application
+</h4>
+
+
+<p><em>TODO: Here we can have a developer grab an existing application from git and
+add the animations to the app.  By having the developer use an existing
+application allows us to walk a developer through with minimal distraction and
+adds an emphasis to the topic at hand... animations.</em></p>
+<h4 id='-Example-animation-one--animating-buttons-on-a-navigation-menu-'>3.2 -  Example animation one: animating buttons on a navigation menu
+</h4>
+
+
+<p><em>TODO: Here we will focus only on the animations part of our application.  The
+code example shown in the guides will only be the animations.</em></p>
+<h4 id='-Example-animation-two---animating-views-for-touch-enabled-devices-'>3.3 -  Example animation two:  animating views for touch enabled devices
+</h4>
+
+
+<p><em>TODO: We would like to show how to use animations with touch enabled devices,
+such as a drill down listview for mobile devices or for a tablets navigation
+menu and navigating through views with a swipe on a tablet.</em></p>
+<h4 id='-Example-animation-three--using-animation-in-a-3d-plane-'>3.4 -  Example animation three: using animation in a 3d plane
+</h4>
+
+
+<p><em>TODO: Here we can have some fun and introduce the developer to animating on a
+3d plane.  This part of animations is great for creating splash pages, and
+ads.</em></p>
+<h3 id='-Changelog-'>4 -  Changelog
+</h3>
+
+
+<ul>
+<li>March 22, 2011: initial version bi <a href="credits.html#ChadEubanks">Chad Eubanks</a>
+and <a href="credits.html#kcarriedo">Kyle Carriedo</a></li>
+<li>March 22, 2011: some cleanup by &quot;Peter Wagenet&quot;:credits.html#wagenet</li>
+<li>July 4, 2013: converted to Markdown format for DocPad guides by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+</ul>
+
+        </div>
+        <!-- TODO: re-add index_items //-->
+        <div id="subCol">
+          <h3 class="chapter"><img src="images/graphics/chapters.png" alt="">Chapters</h3>
+          <ol class='chapters'>
+            
+              <li>
+                <a href='#-Introduction-'><p> Introduction
+</p></a>
+                <ul>
+                  
+                    <li><a href='#--What-is-SC-View-animate--'><p>  What is SC.View#animate?
+</p></a></li>
+                  
+                    <li><a href='#--What-are-the-features-of-SC-View-animate--'><p>  What are the features of SC.View#animate?
+</p></a></li>
+                  
+                    <li><a href='#--What-are-the-benefits-of-SC-View-animate--'><p>  What are the benefits of SC.View#animate?
+</p></a></li>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-A-detailed-look-'><p> A detailed look
+</p></a>
+                <ul>
+                  
+                    <li><a href='#-Type-of-animation-effects-'><p> Type of animation effects
+</p></a></li>
+                  
+                    <li><a href='#-Duration-of-an-animation-'><p> Duration of an animation
+</p></a></li>
+                  
+                    <li><a href='#-Timing-of-an-animation-'><p> Timing of an animation
+</p></a></li>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Using--tt-SC-View-animate--tt---'><p> Using <tt>SC.View#animate</tt>:
+</p></a>
+                <ul>
+                  
+                    <li><a href='#-Adding-animations-to-an-existing-application-'><p> Adding animations to an existing application
+</p></a></li>
+                  
+                    <li><a href='#-Example-animation-one--animating-buttons-on-a-navigation-menu-'><p> Example animation one: animating buttons on a navigation menu
+</p></a></li>
+                  
+                    <li><a href='#-Example-animation-two---animating-views-for-touch-enabled-devices-'><p> Example animation two:  animating views for touch enabled devices
+</p></a></li>
+                  
+                    <li><a href='#-Example-animation-three--using-animation-in-a-3d-plane-'><p> Example animation three: using animation in a 3d plane
+</p></a></li>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Changelog-'><p> Changelog
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <hr class="hide" />
+
+	  <footer>
+	    <div class="container">
+	      <div class="col">
+	        <a href="index.html"><img src="images/footer/sc_logo_medium.png" alt="SproutCore" /></a>
+	        <p id="license">
+	          SproutCore framework is under MIT License.
+	        </p>
+	      </div>
+	      <nav class="col">
+	        <h1>Site Navigation</h1>
+	        <ul>
+	          <li><a href="http://www.sproutcore.com/about/">About</a></li>
+	          <li><a href="http://docs.sproutcore.com">Docs</a></li>
+	          <li><a href="http://blog.sproutcore.com">Blog</a></li>
+	          <li><a href="http://www.sproutcore.com/install/?redirect=1">Download</a></li>
+	          <li><a href="http://www.sproutcore.com/community/">Community</a></li>
+	          <li><a href="https://github.com/sproutcore/sproutcore">GitHub</a></li>
+	          <li><a href="mailto:community@sproutcore.com">Contact Us</a></li>
+	          <li><a href="http://guides.sproutcore.com">Guides</a></li>
+	        </ul>
+	        <a href="http://www.w3.org/html/logo/"><img src="images/footer/html5_tech.png" alt="HTML5 Powered" /></a>
+	      </nav>
+	      <div class="col">
+	        <h1>Get in Touch, Stay Informed</h1>
+	        <ul class="social">
+	          <li><a href="http://twitter.com/sproutcore"><img src="images/footer/twitter.png" alt="Twitter" /></a></li>
+	          <li><a href="http://www.facebook.com/sproutcore"><img src="images/footer/facebook.png" alt="Facebook" /></a></li>
+	          <li><a href="http://groups.google.com/group/sproutcore"><img src="images/footer/google.png" alt="Google Groups" /></a></li>
+						<li><a href="http://groups.google.com/group/sproutcore">Subscribe To Mailing List</a></li>
+	        </ul>
+					<a href="http://eepurl.com/dK1-Y" target="_blank" id="newsletter" class="button secondary">Sign Up For Our Newsletter!</a>
+	<!-- Commented out until we have mailchimp API integration.
+					<h2>Subscribe To Newsletter</h2>
+	        <div id="subscribe">
+	          <form>
+	            <input type="text" name="email" />
+	            <button name="subscribe">Sign-Up</button>
+	            <div class="processing"><img src="/img/spinner.gif"></div>
+	            <div class="error"></div>
+	          </form>
+	        </div>
+	-->
+	      </div>
+	      <a href="#feature" class="top">Back To Top</a>
+	    </div>
+	  </footer>
+
+    <script type='text/javascript' src='/javascripts/jquery.min.js'></script>
+
+    
+
+    <script type='text/javascript'>
+      /*
+       * Make the guides link clickable
+       */
+      function guideMenu(e){
+        if (document.getElementById('guides').style.display == "none") {
+          document.getElementById('guides').style.display = "block";
+          document.getElementById('guidesArrow').innerHTML = "&#9662;";
+          $('body').click(function(e){ guideMenu(e); });
+        } else {
+          document.getElementById('guides').style.display = "none";
+          document.getElementById('guidesArrow').innerHTML = "&#9656;";
+          $('body').unbind('click');
+        }
+        return false;
+      }
+
+      $('#guidesMenu, .guidesMenu').click(guideMenu);
+    </script>
+
+  </body>
+</html>

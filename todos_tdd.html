@@ -1,442 +1,573 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>SproutCore Guides: SproutCore - Development Using TDD</title>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
 
-  <!-- guides styles -->
-  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/guides.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
-  <!--[if lt IE 9]>
-  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
+    <!-- plugin styles -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/highlight-github.css" />
 
-  <!-- syntax highlighting styles -->
-  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/shThemeGuides.css" />
-</head>
-<body class="guide">
+    <!-- guides styles -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/reset.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/main.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/guides.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-  <header role="banner">
-    <div class="container">
-      <h1 id="logo">
-        <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
-      </h1>
-      <nav role="navigation">
-        <ul>
-          <li><a href="http://sproutcore.com/about/">About</a></li>
-          <li><a href="http://showcase.sproutcore.com">Showcase</a></li>
-          <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
-          <li><a href="http://docs.sproutcore.com">Docs</a></li>
-          <li><a href="http://sproutcore.com/community/">Community</a></li>
-          <li><a href="http://blog.sproutcore.com">Blog</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-  <div id="feature">
-    <div class="wrapper">
-      <div class="feature_header">
-        <a href="/"><img src="images/graphics/guides.png"></a>
-        <h2><a href="/">SproutCore Guides</a></h2>
-        <p>These guides are designed to help you write and perfect your code.</p>
+    <meta name="generator" content="DocPad v6.57.0" />
+    
+  </head>
+
+  <body class="guide">
+
+    <header role="banner">
+      <div class="container">
+        <h1 id="logo">
+          <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
+        </h1>
+        <nav role="navigation">
+          <ul>
+            <li><a href="http://sproutcore.com/about/">About</a></li>
+            <li><a href="http://showcase.sproutcore.com">Showcase</a></li>
+            <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
+            <li><a href="http://docs.sproutcore.com">Docs</a></li>
+            <li><a href="http://sproutcore.com/community/">Community</a></li>
+            <li><a href="http://blog.sproutcore.com">Blog</a></li>
+          </ul>
+        </nav>
       </div>
-      <div class="feature_sidebar">
-        <a href="index.html" id="guidesMenu">
-          Guides Index <span id="guidesArrow">&#9656;</span>
-        </a>
-        <div id="guides" class="clearfix" style="display: none;">
-          <a href="index.html" class="guidesMenu">
-            Guides Index <span class="guidesArrow">&#9662;</span>
+    </header>
+
+    <div id="feature">
+      <div class="wrapper">
+        <div class="feature_header">
+          <a href="/"><img src="images/graphics/guides.png"></a>
+          <h2><a href="/">SproutCore Guides</a></h2>
+          <p>These guides are designed to help you write and perfect your code.</p>
+        </div>
+        <div class="feature_sidebar">
+          <a href="index.html" id="guidesMenu">
+            Guides Index <span id="guidesArrow">&#9656;</span>
           </a>
-          <hr style="clear:both;">
-          <dl class="L">
-    <dt>Start Here</dt>
-      <dd><a href="getting_started.html">Getting Started: Part 1</a></dd>
-      <dd><a href="getting_started_2.html">Getting Started: Part 2</a></dd>
-      <dd><a href="getting_started_3.html">Getting Started: Part 3</a></dd>
-      <dd><a href="core_concepts_sc_object.html">Classes and SC.Object</a></dd>
-      <dd><a href="core_concepts_kvo.html">Computed Properties, Observers and Bindings</a></dd>
-    <dt>Views</dt>
-      <dd><a href="views.html">Core View Concepts</a></dd>
-    <dt>Models</dt>
-      <dd><a href="records.html">SproutCore Records</a></dd>
-      <dd><a href="fixtures.html">Using Fixtures</a></dd>
-    <dt>Theming</dt>
-      <dd><a href="chance.html">Using Chance, SproutCore's CSS Framework</a></dd>
-      <dd><a href="theming_app.html">Theming Your App</a></dd>
-    <dt>Testing</dt>
-      <dd><a href="unit_test_framework.html">Unit Testing</a></dd>
-      <dd><a href="adding_unit_test.html">Adding a Unit Test</a></dd>
-      <dd><a href="writing_unit_tests.html">Writing Unit Tests</a></dd>
-      <dd><a href="running_unit_tests.html">Running Unit Tests</a></dd>
-      <dd><a href="todos_tdd.html">SproutCore Development Using TDD</a></dd>
-</dl>
-<dl class="R">
-    <dt>Extras</dt>
-      <dd><a href="build_tools.html">Build Tools</a></dd>
-      <dd><a href="run_loop.html">The Run Loop</a></dd>
-      <dd><a href="enumerables.html">Enumerables</a></dd>
-      <dd><a href="using_handlebars.html">Using Handlebars Templates</a></dd>
-    <dt>Contributing to SproutCore</dt>
-      <dd><a href="style_guide.html">Javascript Style Guide</a></dd>
-      <dd><a href="commit_code.html">Committer Guidelines</a></dd>
-      <dd><a href="documentation_guidelines.html">Documentation Guidelines</a></dd>
-</dl>
+          <div id="guides" class="clearfix" style="display: none;">
+            <a href="index.html" class="guidesMenu">
+              Guides Index <span class="guidesArrow">&#9662;</span>
+            </a>
 
+            <hr style="clear:both;">
 
+            <dl class='L'><dt>Start Here</dt>
+<dd><a href='/getting_started.html'>Getting Started: Part 1</a></dd>
+<dd><a href='/getting_started_2.html'>Getting Started: Part 2</a></dd>
+<dd><a href='/getting_started_3.html'>Getting Started: Part 3</a></dd>
+<dd><a href='/core_concepts_sc_object.html'>Classes and SC.Object</a></dd>
+<dd><a href='/core_concepts_kvo.html'>Computed Properties, Observers and Bindings</a></dd><dt>Views</dt>
+<dd><a href='/views.html'>Core View Concepts</a></dd>
+<dd><a href='/animate.html'>DRAFT - Animation</a></dd><dt>Models</dt>
+<dd><a href='/records.html'>SproutCore Records</a></dd>
+<dd><a href='/fixtures.html'>Using Fixtures</a></dd>
+<dd><a href='/record_lifecycle.html'>DRAFT - Understanding the Record Lifecycle</a></dd>
+<dd><a href='/no_store.html'>DRAFT - No DataStore</a></dd>
+<dd><a href='/data_source.html'>DRAFT - Data Source</a></dd><dt>Theming</dt>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
+<dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
+<dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd>
+<dd><a href='/testing_guidelines.html'>DRAFT - Testing Guidelines</a></dd><dt>Extras</dt>
+<dd><a href='/build_tools.html'>SproutCore's Build Tools</a></dd>
+<dd><a href='/run_loop.html'>The Run Loop</a></dd>
+<dd><a href='/enumerables.html'>Enumerables</a></dd>
+<dd><a href='/connect_server.html'>DRAFT - Connecting to a Server</a></dd><dt>Contributing to SproutCore</dt>
+<dd><a href='/style_guide.html'>Javascript Guidelines</a></dd>
+<dd><a href='/commit_code.html'>Committer Guidelines</a></dd>
+<dd><a href='/documentation_guidelines.html'>Documentation Guidelines</a></dd>
+<dd><a href='/contribute.html'>Contributing Guides</a></dd><dt>Thanks</dt>
+<dd><a href='/credits.html'>Credits</a></dd></dl>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div id="container">
-    <div class="wrapper">
-      <div id="mainCol">
-          <div class="headerSection">
-            <h2>SproutCore &#8211; Development Using <span class="caps">TDD</span></h2>
-<p>This guide covers building the common <span class="caps">TODOS</span> example project using test-driven development (<span class="caps">TDD</span>) techniques.  After reading this guide, you will be able to:</p>
-<ul>
-	<li>Start a new SproutCore project using <span class="caps">TDD</span>.</li>
-	<li>Build code starting from the view and working backwards to controller and model.</li>
-	<li>? Do integration tests by knowing how to simulate fundamental SproutCore internals using run loops judiciously.</li>
-</ul>
+    <div id="container">
+      <div class="wrapper">
+        <div id="mainCol">
+          <div class='headerSection'>
+            
+              <h2>SproutCore Development Using TDD</h2>
+            
 
+            
+              <p>This guide covers building the common TODOS example project using test-driven development (TDD) techniques.  After reading this guide, you will be able to:</p>
+            
+
+            
+              <ul>
+                
+                  <li>Start a new SproutCore project using TDD.</li>
+                
+                  <li>Build code starting from the view and working backwards to controller and model.</li>
+                
+                  <li>? Do integration tests by knowing how to simulate fundamental SproutCore internals using run loops judiciously.</li>
+                
+              </ul>
+            
           </div>
-        <h3 id="getting-started">1 Getting Started</h3>
-<p>Let&#8217;s start with a new project; call it <tt>todos</tt>.  In a console:</p>
-<div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
 
-sc-init todos
+          <h3 id='-Prerequisites-'>1 -  Prerequisites
+</h3>
+
+
+<p><em>TODO: establish learning preparation and what already needs to be installed.</em></p>
+<h3 id='-Getting-Started-'>2 -  Getting Started
+</h3>
+
+
+<p>Let&#39;s start with a new project; call it <tt>todos</tt>.  In a console:</p>
+<pre class="highlighted"><div class="code_container"><code class="bash">sc-init todos
 cd todos
-sc-server
-</pre></div><p>Browse to <a href="localhost:4020/todos">localhost:4020/todos</a> and you should see the &#8220;Welcome to SproutCore!&#8221; window.</p>
-<p>Let&#8217;s also &#8220;sanity-check&#8221; that our test framework is working <span class="caps">AND</span> let&#8217;s anticipate that we&#8217;re going to write integration tests:</p>
+sc-server</code></div></pre>
+<p>Browse to localhost:4020/todos and you should see the &quot;Welcome to SproutCore!&quot; window.</p>
+<p>Let&#39;s also &quot;sanity-check&quot; that our test framework is working AND let&#39;s anticipate that we&#39;re going to write integration tests:</p>
 <ol>
-	<li>Create folder <tt>tests</tt> under <tt>apps/todos</tt>.</li>
-	<li>Create folder <tt>integration</tt> under <tt>app/todos/tests</tt>.</li>
-	<li>Add the following test, <tt>sanity_check.js</tt>, under <tt>apps/todos/tests</tt>:</li>
+<li>Create folder <tt>tests</tt> under <tt>apps/todos</tt>.</li>
+<li>Create folder <tt>integration</tt> under <tt>app/todos/tests</tt>.</li>
+<li>Add the following test, <tt>sanity_check.js</tt>, under <tt>apps/todos/tests</tt>:</li>
 </ol>
-<div class="code_container">
-<div class="filename">apps/todos/tests/sanity_check.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
-module('Sanity Check');
-test('This should pass', function() {
-    ok(true);
-});
-</pre></div><p>Now, browse to <a href="http://localhost:4020/todos/en/current/tests.html">http://localhost:4020/todos/en/current/tests.html</a> and you should see the following:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/tests/sanity_check.js"</span></div></span>
+module(<span class="string">'Sanity Check'</span>);
+test(<span class="string">'This should pass'</span>, <span class="keyword">function</span>() {
+    ok(<span class="literal">true</span>);
+});</code></div></pre>
+<p>Now, browse to <a href="http://localhost:4020/todos/en/current/tests.html">http://localhost:4020/todos/en/current/tests.html</a> and you should see the following:</p>
 <div style='text-align: center;'>
-<p><img src="/images/testing/screenshot_1st_test.png" alt="" /></p>
+<img src="/images/testing/screenshot_1st_test.png" alt="First Test">
 </div>
-<p>If you have this, we&#8217;re all set up and you can proceed; otherwise debug first.</p>
-<h3 id="test-a-view">2 Test a View</h3>
-<p>Let&#8217;s write a test to see the page display an existing task (which doesn&#8217;t, of course, exist yet):</p>
-<div class="code_container">
-<div class="filename">apps/todos/tests/integration/view_task.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
 
-var task;
-module(&quot;Given an existing task&quot;, {
-  setup: function() {
+<p>If you have this, we&#39;re all set up and you can proceed; otherwise debug first.</p>
+<h3 id='-Test-a-View-'>3 -  Test a View
+</h3>
+
+
+<p>Let&#39;s write a test to see the page display an existing task (which doesn&#39;t, of course, exist yet):</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/tests/integration/view_task.js"</span></div></span>
+<span class="keyword">var</span> task;
+module(<span class="string">"Given an existing task"</span>, {
+  setup: <span class="keyword">function</span>() {
     SC.RunLoop.begin();
     Todos.main();
     task = Todos.store.createRecord(Todos.Task, {
-      'description': 'Some Task',
-      'isDone': false
+      <span class="string">'description'</span>: <span class="string">'Some Task'</span>,
+      <span class="string">'isDone'</span>: <span class="literal">false</span>
     });
     SC.RunLoop.end();
   },
 
-  teardown: function() {
+  teardown: <span class="keyword">function</span>() {
     SC.RunLoop.begin();
-    Todos.getPath('mainPage.mainPane').remove();
+    Todos.getPath(<span class="string">'mainPage.mainPane'</span>).remove();
     Todos.store.reset();
     SC.RunLoop.end();
   }
 });
 
-test(&quot;When looking at the list of tasks&quot;, function() {
-  var todosList = Todos.getPath('mainPage.mainPane.middleView.contentView').get('content');
-  equals(todosList.indexOf(task) != -1, true, &quot;Then I should see the task in the list&quot;);
-});
-</pre></div><p>Store the above javascript into <tt>apps/todos/tests/integration/view_task.js</tt>.</p>
-<p>Here&#8217;s what the above test does:</p>
-<p>Within the setup, I&#8217;m starting the actual application within the page, and creating the existing record which I want to display. Within the teardown, there are two steps that I&#8217;ve found are necessary to &#8220;stop&#8221; the application. The first is to remove the pane, and the second is to clear the database.</p>
-<p>To begin with here, in order to check that the item is on the page, I&#8217;m merely testing that it is within the content of the listView which is going to display the item. I could check here the display is showing the description of the item, and that the checkbox is not checked, but that&#8217;s a bit more details than I care about at this point.</p>
+test(<span class="string">"When looking at the list of tasks"</span>, <span class="keyword">function</span>() {
+  <span class="keyword">var</span> todosList = Todos.getPath(<span class="string">'mainPage.mainPane.middleView.contentView'</span>).get(<span class="string">'content'</span>);
+  equals(todosList.indexOf(task) != -<span class="number">1</span>, <span class="literal">true</span>, <span class="string">"Then I should see the task in the list"</span>);
+});</code></div></pre>
+<p>Store the above javascript into <tt>apps/todos/tests/integration/view_task.js</tt>.</p>
+<p>Here&#39;s what the above test does:</p>
+<p>Within the setup, I&#39;m starting the actual application within the page, and
+creating the existing record which I want to display. Within the teardown,
+there are two steps that I&#39;ve found are necessary to &quot;stop&quot; the application.
+The first is to remove the pane, and the second is to clear the database.</p>
+<p>To begin with here, in order to check that the item is on the page, I&#39;m merely
+testing that it is within the content of the listView which is going to display
+the item. I could check here the display is showing the description of the
+item, and that the checkbox is not checked, but that&#39;s a bit more details than
+I care about at this point.</p>
 <p>Rerun the tests and you will see 2 failures:</p>
-<div class="warning"><p>1) Setup exception on integration/view_task.js Given an existing task module: When looking at the list of tasks: TypeError: Cannot read property &#8216;prototype&#8217; of undefined <br /> <br /> 2) Died on test #2: TypeError: Cannot call method &#8216;get&#8217; of undefined</p></div>
-<h4 id="fix-the-first-failure">2.1 Fix the First Failure</h4>
-<p>The first failure is telling me that <tt>Todos.Task</tt> doesn&#8217;t exist, so I have to create it:</p>
-<div class="code_container">
-<div class="filename">apps/todos/models/task.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
+<div class='warning'><p> 1) Setup exception on integration/view_task.js Given an existing task
+module: When looking at the list of tasks: TypeError: Cannot read property
+&#39;prototype&#39; of undefined
+<br />
+<br />
+2) Died on test #2: TypeError: Cannot call method &#39;get&#39; of undefined
 
+</p></div>
+
+
+
+<h4 id='-Fix-the-First-Failure-'>3.1 -  Fix the First Failure
+</h4>
+
+
+<p>The first failure is telling me that <tt>Todos.Task</tt> doesn&#39;t exist, so I have to
+create it:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/models/task.js"</span></div></span>
 Todos.Task = SC.Record.extend({
   isDone: SC.Record.attr(Boolean),
   description: SC.Record.attr(String)
-}) ;
-</pre></div><p>I rerun my tests, and see that the first failure is now passing, leaving me only with the second:</p>
-<div class="warning"><p>1. Died on test #2: TypeError: Cannot call method &#8216;get&#8217; of undefined</p></div>
-<p>This failing test tells me the path for the requested view does not exist, so I have to modify apps/todos/resources/main_page.js to include it:</p>
-<div class="code_container">
-<div class="filename">apps/todos/resources/main_page.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
+}) ;</code></div></pre>
+<p>I rerun my tests, and see that the first failure is now passing, leaving me
+only with the second:</p>
+<div class='warning'><p> 1. Died on test #2: TypeError: Cannot call method &#39;get&#39; of undefined
 
+</p></div>
+
+<p>This failing test tells me the path for the requested view does not exist, so I
+have to modify apps/todos/resources/main_page.js to include it:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/resources/main_page.js"</span></div></span>
 Todos.mainPage = SC.Page.design({
   mainPane: SC.MainPane.design({
-    childViews: 'middleView'.w(),
+    childViews: <span class="string">'middleView'</span>.w(),
 
     middleView: SC.ScrollView.design({
-      childViews: 'contentView'.w(),
+      childViews: <span class="string">'contentView'</span>.w(),
 
       contentView: SC.ListView.design({
 
       })
     })
   })
-});
-</pre></div><p>This changes the failure to the following:</p>
-<div class="warning"><p>Died on Test #1: TypeError: Result of expression &#8216;todosList&#8217;[null] is not an object</p></div>
-<p>This is telling me that the content of the ListView is null. So what I need to do is bind the contentView to a controller for the tasks, so I do that by modifying the main_page again:</p>
-<div class="code_container">
-<div class="filename">apps/todos/resources/main_page.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
+});</code></div></pre>
+<p>This changes the failure to the following:</p>
+<div class='warning'><p> Died on Test #1: TypeError: Result of expression &#39;todosList&#39;[null] is not an object
 
+</p></div>
+
+<p>This is telling me that the content of the ListView is null. So what I need to
+do is bind the contentView to a controller for the tasks, so I do that by
+modifying the main_page again:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/resources/main_page.js"</span></div></span>
 Todos.mainPage = SC.Page.design({
   mainPane: SC.MainPane.design({
-    childViews: 'middleView'.w(),
+    childViews: <span class="string">'middleView'</span>.w(),
 
     middleView: SC.ScrollView.design({
-      childViews: 'contentView'.w(),
+      childViews: <span class="string">'contentView'</span>.w(),
 
       contentView: SC.ListView.design({
-        contentBinding: 'Todos.tasksController.arrangedObjects' //ADDED THIS
+        contentBinding: <span class="string">'Todos.tasksController.arrangedObjects'</span> <span class="comment">//ADDED THIS</span>
       })
     })
   })
-});
-</pre></div><p>Now the error is:</p>
-<div class="warning"><p>Died on test #1: TypeError: Cannot call method &#8216;indexOf&#8217; of null</p></div>
-<p>Hmm. <tt>todosList</tt> is null.  There isn&#8217;t any content, so the binding isn&#8217;t working.  Examining <tt>main_page.js</tt> reveals that no controller has been set up yet, so create it in <tt>apps/todos/controllers/tasks.js</tt>:</p>
-<div class="code_container">
-<div class="filename">apps/todos/controllers/tasks.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
+});</code></div></pre>
+<p>Now the error is:</p>
+<div class='warning'><p> Died on test #1: TypeError: Cannot call method &#39;indexOf&#39; of null
 
+</p></div>
+
+<p>Hmm. <tt>todosList</tt> is null.  There isn&#39;t any content, so the binding isn&#39;t
+working.  Examining <tt>main_page.js</tt> reveals that no controller has been set up
+yet, so create it in <tt>apps/todos/controllers/tasks.js</tt>:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/controllers/tasks.js"</span></div></span>
 Todos.tasksController = SC.ArrayController.create({
-}) ;
-</pre></div><p>Rerunning the test yields the error:</p>
-<div class="warning"><p>Then I should see the task in the list, expected: true result: false</p></div>
-<p>So now my test is telling me that the item is not found in the view. This is because the controller has not had its content set to use <tt>Todos.task</tt>.</p>
-<h3 id="failure-is-actually-success-time-to-refactor">3 Failure is Actually Success! Time to Refactor!</h3>
-<p>Finally, instead of <span class="caps">ERROR</span>, we&#8217;ve achieved <span class="caps">FAILURE</span>.  Our test assertion failed.  This is expected because we haven&#8217;t provided the controller with a list of task items.  So, in a sense, we have success, in the sense that now might be a good time to refactor.  After refactoring, we should continue to get the same error as above.</p>
-<p>So what should we refactor?</p>
-<p>The first really brittle piece of the code that I noticed is where I was using getPath to reach into the view and find elements. By using a long string like &#8216;mainPage.mainPane.middleView.contentView&#8217; I&#8217;m coupling a good number of my tests to the current structure of my views. In order to fix this, and to give the element a description that is closer to our domain, we can refactor this dependency to use SC.outlet:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
+}) ;</code></div></pre>
+<p>Rerunning the test yields the error:</p>
+<div class='warning'><p> Then I should see the task in the list, expected: true result: false
 
-//Replace instances which look like:
-Todos.getPath('mainPage.mainPane.middleView.contentView')
-//With something that looks like this:
+</p></div>
+
+<p>So now my test is telling me that the item is not found in the view. This is
+because the controller has not had its content set to use <tt>Todos.task</tt>.</p>
+<h3 id='-Failure-is-Actually-Success--Time-to-Refactor--'>4 -  Failure is Actually Success! Time to Refactor!
+</h3>
+
+
+<p>Finally, instead of ERROR, we&#39;ve achieved FAILURE.  Our test assertion failed.
+This is expected because we haven&#39;t provided the controller with a list of task
+items.  So, in a sense, we have success, in the sense that now might be a good
+time to refactor.  After refactoring, we should continue to get the same error
+as above.</p>
+<p>So what should we refactor?</p>
+<p>The first really brittle piece of the code that I noticed is where I was using
+getPath to reach into the view and find elements. By using a long string like
+&#39;mainPage.mainPane.middleView.contentView&#39; I&#39;m coupling a good number of my
+tests to the current structure of my views. In order to fix this, and to give
+the element a description that is closer to our domain, we can refactor this
+dependency to use SC.outlet:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class="comment">//Replace instances which look like:</span>
+Todos.getPath(<span class="string">'mainPage.mainPane.middleView.contentView'</span>)
+<span class="comment">//With something that looks like this:</span>
 Todos.mainPage.todosList();
 
-//And add the following to main_page.js
+<span class="comment">//And add the following to main_page.js</span>
 Todos.mainPage = SC.Page.design({
-  todosList: SC.outlet('mainPane.middleView.contentView'),
-  // ...
-})
-</pre></div><p>What SC.outlet does is generate a computed property that will look up the passed property path the first time you try to get the value. This fixes the anti-pattern by defining the tight coupling in only one place.</p>
-<p>Here&#8217;s the new code:</p>
-<div class="code_container">
-<div class="filename">apps/todos/resources/main_page.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
+  todosList: SC.outlet(<span class="string">'mainPane.middleView.contentView'</span>),
+  <span class="comment">// ...</span>
+})</code></div></pre>
+<p>What SC.outlet does is generate a computed property that will look up the
+passed property path the first time you try to get the value. This fixes the
+anti-pattern by defining the tight coupling in only one place.</p>
+<p>Here&#39;s the new code:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/resources/main_page.js"</span></div></span>
 Todos.mainPage = SC.Page.design({
   mainPane: SC.MainPane.design({
-    childViews: 'middleView'.w(),
+    childViews: <span class="string">'middleView'</span>.w(),
 
     middleView: SC.ScrollView.design({
-      childViews: 'contentView'.w(),
+      childViews: <span class="string">'contentView'</span>.w(),
 
       contentView: SC.ListView.design({
-        contentBinding: 'Todos.tasksController.arrangedObjects' //ADDED THIS
+        contentBinding: <span class="string">'Todos.tasksController.arrangedObjects'</span> <span class="comment">//ADDED THIS</span>
       })
     })
   }),
-  todosList: SC.outlet('mainPane.middleView.contentView')
-});
-</pre></div>
-<div class="code_container">
-<div class="filename">apps/todos/tests/integration/view_tasks.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
-var task;
-module(&quot;Given an existing task&quot;, {
-  setup: function() {
+  todosList: SC.outlet(<span class="string">'mainPane.middleView.contentView'</span>)
+});</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/tests/integration/view_tasks.js"</span></div></span>
+<span class="keyword">var</span> task;
+module(<span class="string">"Given an existing task"</span>, {
+  setup: <span class="keyword">function</span>() {
     SC.RunLoop.begin();
     Todos.main();
     task = Todos.store.createRecord(Todos.Task, {
-      'description': 'Some Task',
-      'isDone': false
+      <span class="string">'description'</span>: <span class="string">'Some Task'</span>,
+      <span class="string">'isDone'</span>: <span class="literal">false</span>
     });
     SC.RunLoop.end();
   },
 
-  teardown: function() {
+  teardown: <span class="keyword">function</span>() {
     SC.RunLoop.begin();
-    Todos.getPath('mainPage.mainPane').remove();
+    Todos.getPath(<span class="string">'mainPage.mainPane'</span>).remove();
     Todos.store.reset();
     SC.RunLoop.end();
   }
 });
 
-test(&quot;When looking at the list of tasks&quot;, function() {
-  var todosList = Todos.mainPage.todosList().get('content');
-  equals(todosList.indexOf(task) != -1, true, &quot;Then I should see the task in the list&quot;);
-});
-</pre></div><p>Rerunning the tests yields the same <span class="caps">FAILURE</span>, so we achieved our refactoring.</p>
-<h3 id="add-a-unit-test">4 Add a Unit Test</h3>
-<p>The test fails because the controller has not had it&#8217;s content to be set to use Todos.task. In order to ensure that controller has not had it&#8217;s content to be set to use Todos.task, I write the following unit test:</p>
-<div class="code_container">
-<div class="filename">apps/todos/tests/main_test.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
+test(<span class="string">"When looking at the list of tasks"</span>, <span class="keyword">function</span>() {
+  <span class="keyword">var</span> todosList = Todos.mainPage.todosList().get(<span class="string">'content'</span>);
+  equals(todosList.indexOf(task) != -<span class="number">1</span>, <span class="literal">true</span>, <span class="string">"Then I should see the task in the list"</span>);
+});</code></div></pre>
+<p>Rerunning the tests yields the same FAILURE, so we achieved our refactoring.</p>
+<h3 id='-Add-a-Unit-Test-'>5 -  Add a Unit Test
+</h3>
 
-var mockedFindFunction, findMockObject;
 
-module(&quot;Todos.main&quot;, {
-  setup: function() {
+<p>The test fails because the controller has not had it&#39;s content to be set to use
+Todos.task. In order to ensure that controller has not had it&#39;s content to be
+set to use Todos.task, I write the following unit test:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/tests/main_test.js"</span></div></span>
+<span class="keyword">var</span> mockedFindFunction, findMockObject;
+
+module(<span class="string">"Todos.main"</span>, {
+  setup: <span class="keyword">function</span>() {
     mockedFindFunction = Todos.store.find;
-    findMockObject = CoreTest.stub('Todos.store.find', function() { return YES; });
+    findMockObject = CoreTest.stub(<span class="string">'Todos.store.find'</span>, <span class="keyword">function</span>() { <span class="keyword">return</span> YES; });
     Todos.store.find = findMockObject;
   },
 
-  teardown: function() {
+  teardown: <span class="keyword">function</span>() {
     Todos.store.find = mockedFindFunction;
   }
 });
 
-test(&quot;setup finding tasks&quot;, function() {
+test(<span class="string">"setup finding tasks"</span>, <span class="keyword">function</span>() {
   Todos.main();
-  equals(findMockObject.callCount, 1, &quot;Should delegate to the store to find the tasks&quot;);
-  Todos.getPath('mainPage.mainPane').remove();
-});
-</pre></div>
-<div class="warning"><p>Should delegate to the store to find the tasks, expected: 1 result: 0</p></div>
-<p>In order to make this pass, within the setup I delegate to the store to find the proper object:</p>
-<div class="code_container">
-<div class="filename">apps/todos/main.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
+  equals(findMockObject.callCount, <span class="number">1</span>, <span class="string">"Should delegate to the store to find the tasks"</span>);
+  Todos.getPath(<span class="string">'mainPage.mainPane'</span>).remove();
+});</code></div></pre>
+<div class='warning'><p> Should delegate to the store to find the tasks, expected: 1 result: 0
 
-Todos.main = function main() {
-  Todos.getPath('mainPage.mainPane').append() ;
-  var tasks = Todos.store.find(Todos.Task); //ADDED THIS
+</p></div>
+
+<p>In order to make this pass, within the setup I delegate to the store to find
+the proper object:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/main.js"</span></div></span>
+Todos.main = <span class="function"><span class="keyword">function</span> <span class="title">main</span><span class="params">()</span> {</span>
+  Todos.getPath(<span class="string">'mainPage.mainPane'</span>).append() ;
+  <span class="keyword">var</span> tasks = Todos.store.find(Todos.Task); <span class="comment">//ADDED THIS</span>
 } ;
 
-function main() { Todos.main(); }
-</pre></div><p>That makes the unit test that we wrote pass, but the integration test is still failing, so we need to delegate to the controller to set it&#8217;s content. Here&#8217;s the unit test to specify that:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
-var mockedSetFunction, mockedFindFunction, setMockObject, findMockObject;
-module(&quot;Todos.main&quot;, {
-  setup: function() {
-    mockedSetFunction = Todos.tasksController.set; //ADDED THIS
-    setMockObject = CoreTest.stub('Todos.tasksController.set', function() { return YES; }); //ADDED THIS
-    Todos.tasksController.set = setMockObject; //ADDED THIS
+<span class="function"><span class="keyword">function</span> <span class="title">main</span><span class="params">()</span> {</span> Todos.main(); }</code></div></pre>
+<p>That makes the unit test that we wrote pass, but the integration test is still
+failing, so we need to delegate to the controller to set it&#39;s content. Here&#39;s
+the unit test to specify that:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/tests/controllers/tasks_test.js"</span></div></span>
+<span class="keyword">var</span> mockedSetFunction, mockedFindFunction, setMockObject, findMockObject;
+module(<span class="string">"Todos.main"</span>, {
+  setup: <span class="keyword">function</span>() {
+    mockedSetFunction = Todos.tasksController.set; <span class="comment">//ADDED THIS</span>
+    setMockObject = CoreTest.stub(<span class="string">'Todos.tasksController.set'</span>, <span class="keyword">function</span>() { <span class="keyword">return</span> YES; }); <span class="comment">//ADDED THIS</span>
+    Todos.tasksController.set = setMockObject; <span class="comment">//ADDED THIS</span>
 
     mockedFindFunction = Todos.store.find;
-    findMockObject = CoreTest.stub('Todos.store.find', function() { return YES; });
+    findMockObject = CoreTest.stub(<span class="string">'Todos.store.find'</span>, <span class="keyword">function</span>() { <span class="keyword">return</span> YES; });
     Todos.store.find = findMockObject;
     Todos.main();
   },
 
-  teardown: function() {
-    Todos.getPath('mainPage.mainPane').remove();
-    Todos.tasksController.set = mockedSetFunction;//ADDED THIS
+  teardown: <span class="keyword">function</span>() {
+    Todos.getPath(<span class="string">'mainPage.mainPane'</span>).remove();
+    Todos.tasksController.set = mockedSetFunction;<span class="comment">//ADDED THIS</span>
     Todos.store.find = mockedFindFunction;
   }
 });
 
-test(&quot;setup finding tasks&quot;, function() {
-  equals(findMockObject.callCount, 1, &quot;Should delegate to the store to find the tasks&quot;);
+test(<span class="string">"setup finding tasks"</span>, <span class="keyword">function</span>() {
+  equals(findMockObject.callCount, <span class="number">1</span>, <span class="string">"Should delegate to the store to find the tasks"</span>);
 });
 
-test(&quot;setup tasksController content&quot;, function() {
-  equals(setMockObject.callCount, 1, &quot;Should delegate to the tasksController to setup content&quot;); //ADDED THIS
-});
-</pre></div><p>And to make this pass, I need to implement that delegation (<tt>app/todos/main.js</tt>):</p>
-<div class="code_container">
-<div class="filename">apps/todos/main.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
-Todos.main = function main() {
-  Todos.getPath('mainPage.mainPane').append() ;
-  var tasks = Todos.store.find(Todos.Task);
-  Todos.tasksController.set('content', tasks); //ADDED THIS
+test(<span class="string">"setup tasksController content"</span>, <span class="keyword">function</span>() {
+  equals(setMockObject.callCount, <span class="number">1</span>, <span class="string">"Should delegate to the tasksController to setup content"</span>); <span class="comment">//ADDED THIS</span>
+});</code></div></pre>
+<p>And to make this pass, I need to implement that delegation (<tt>app/todos/main.js</tt>):</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/main.js"</span></div></span>
+Todos.main = <span class="function"><span class="keyword">function</span> <span class="title">main</span><span class="params">()</span> {</span>
+  Todos.getPath(<span class="string">'mainPage.mainPane'</span>).append() ;
+  <span class="keyword">var</span> tasks = Todos.store.find(Todos.Task);
+  Todos.tasksController.set(<span class="string">'content'</span>, tasks); <span class="comment">//ADDED THIS</span>
 };
 
-function main() { Todos.main(); }
-</pre></div><p>And that makes all of our existing tests (both unit and integration) pass.</p>
-<h3 id="reflection-on-mocking-problems">5 Reflection on mocking problems.</h3>
-<p>To be honest, I&#8217;m not entirely happy with the mocking that I just did, because I wasn&#8217;t able to validate what was contained within the messages that were going between the objects. The mock really should be able to do something like wasCalledWith, and give it a parameter. That&#8217;s what I would generally do in something like Jasmine, but I haven&#8217;t worked out how to integrate a solid mocking or spying framework with SproutCore yet.</p>
-<p>Also, I really should have written the delegation to the controller first, but since I knew I couldn&#8217;t validate what it was called with it would have missed testing that the main function delegated to the store to find the tasks, so I broke the true <span class="caps">BDD</span> cycle there. But, I guess it works for now.</p>
-<h3 id="one-last-thing-before-moving-on">6 One last thing before moving on</h3>
-<p>At this point, the view &#8211; although it is fully functional &#8211; is still quite ugly. Since this is purly aesthetic, I like to wait to style until all my tests are passing. I change main_page.js to be the following:</p>
-<div class="code_container">
-<div class="filename">apps/todos/resources/main_page.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
+<span class="function"><span class="keyword">function</span> <span class="title">main</span><span class="params">()</span> {</span> Todos.main(); }</code></div></pre>
+<p>And that makes all of our existing tests (both unit and integration) pass.</p>
+<h3 id='-Reflection-on-mocking-problems--'>6 -  Reflection on mocking problems.
+</h3>
 
+
+<p>To be honest, I&#39;m not entirely happy with the mocking that I just did, because
+I wasn&#39;t able to validate what was contained within the messages that were
+going between the objects. The mock really should be able to do something like
+wasCalledWith, and give it a parameter. That&#39;s what I would generally do in
+something like Jasmine, but I haven&#39;t worked out how to integrate a solid
+mocking or spying framework with SproutCore yet.</p>
+<p>Also, I really should have written the delegation to the controller first, but
+since I knew I couldn&#39;t validate what it was called with it would have missed
+testing that the main function delegated to the store to find the tasks, so I
+broke the true BDD cycle there. But, I guess it works for now.</p>
+<h3 id='-One-last-thing-before-moving-on-'>7 -  One last thing before moving on
+</h3>
+
+
+<p>At this point, the view - although it is fully functional - is still quite
+ugly. Since this is purly aesthetic, I like to wait to style until all my tests
+are passing. I change main_page.js to be the following:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/resources/main_page.js"</span></div></span>
 Todos.mainPage = SC.Page.design({
   mainPane: SC.MainPane.design({
-    childViews: 'middleView'.w(),
+    childViews: <span class="string">'middleView'</span>.w(),
 
     middleView: SC.ScrollView.design({
-      hasHorizontalScroller: NO, //ADDED THIS
-      layout: { top: 36, bottom: 32, left: 0, right: 0 }, //ADDED THIS
-      backgroundColor: 'white', //ADDED THIS
-      childViews: 'contentView'.w(),
+      hasHorizontalScroller: NO, <span class="comment">//ADDED THIS</span>
+      layout: { top: <span class="number">36</span>, bottom: <span class="number">32</span>, left: <span class="number">0</span>, right: <span class="number">0</span> }, <span class="comment">//ADDED THIS</span>
+      backgroundColor: <span class="string">'white'</span>, <span class="comment">//ADDED THIS</span>
+      childViews: <span class="string">'contentView'</span>.w(),
 
       contentView: SC.ListView.design({
-        contentBinding: 'Todos.tasksController.arrangedObjects',
-        contentValueKey: 'description', //ADDED THIS
-        contentCheckboxKey: 'isDone' //ADDED THIS
+        contentBinding: <span class="string">'Todos.tasksController.arrangedObjects'</span>,
+        contentValueKey: <span class="string">'description'</span>, <span class="comment">//ADDED THIS</span>
+        contentCheckboxKey: <span class="string">'isDone'</span> <span class="comment">//ADDED THIS</span>
       })
     }),
   })
-});
-</pre></div><p>Generally, since I tend to think of the binding to the description and the value as functionality, I think I would want an integration test which checks both of those values. However for the sake of brevity, I&#8217;ll leave out those tests.</p>
-<h3 id="changelog">7 Changelog</h3>
+});</code></div></pre>
+<p>Generally, since I tend to think of the binding to the description and the
+value as functionality, I think I would want an integration test which checks
+both of those values. However for the sake of brevity, I&#39;ll leave out those
+tests.</p>
+<h3 id='-Changelog-'>8 -  Changelog
+</h3>
+
+
+
 <ul>
-	<li>January 10, 2010: initial <a href="http://gmoeck.github.com/2010/01/10/bdd-in-sproutcore-part-1.html">blog post</a> by <a href="credits.html#gmoeck">Greg Moeck</a></li>
-	<li>February 15, 2011: initial guides adaptation by <a href="credits.html#ssmith">Scott Smith</a> and <a href="credits.html#veebs">Vibul Imtarnasan</a></li>
-	<li>March     2, 2011: added filenames and added error wrappers by <a href="credits.html#topherfangio">Topher Fangio</a></li>
-	<li>February 17, 2012: added attribution for Greg Moeck in the changelog by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+<li>January 10, 2010: initial <a href="http://gmoeck.github.com/2010/01/10/bdd-in-sproutcore-part-1.html">blog post</a> by <a href="credits.html#gmoeck">Greg Moeck</a></li>
+<li>February 15, 2011: initial guides adaptation by <a href="credits.html#oldfartdeveloper">Scott Smith</a> and <a href="credits.html#veebs">Vibul Imtarnasan</a></li>
+<li>March 2, 2011: added filenames and added error wrappers by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+<li>February 17, 2012: added attribution for Greg Moeck in the changelog by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+<li>August 13, 2013: converted to Markdown format for DocPad guides by <a href="credits.html#topherfangio">Topher Fangio</a></li>
 </ul>
 
-      </div>
+        </div>
+        <!-- TODO: re-add index_items //-->
         <div id="subCol">
-          <h3 class="chapter"><img src="images/graphics/chapters.png" alt="" />Chapters</h3>
-          <ol class="chapters">
-            <li><a href="#getting-started"><p>Getting Started</p>
-</a></li><li><a href="#test-a-view"><p>Test a View</p>
-</a><ul><li><a href="#fix-the-first-failure"><p>Fix the First Failure</p>
-</a></li></ul></li><li><a href="#failure-is-actually-success-time-to-refactor"><p>Failure is Actually Success! Time to Refactor!</p>
-</a></li><li><a href="#add-a-unit-test"><p>Add a Unit Test</p>
-</a></li><li><a href="#reflection-on-mocking-problems"><p>Reflection on mocking problems.</p>
-</a></li><li><a href="#one-last-thing-before-moving-on"><p>One last thing before moving on</p>
-</a></li><li><a href="#changelog"><p>Changelog</p>
-</a></li>
+          <h3 class="chapter"><img src="images/graphics/chapters.png" alt="">Chapters</h3>
+          <ol class='chapters'>
+            
+              <li>
+                <a href='#-Prerequisites-'><p> Prerequisites
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Getting-Started-'><p> Getting Started
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Test-a-View-'><p> Test a View
+</p></a>
+                <ul>
+                  
+                    <li><a href='#-Fix-the-First-Failure-'><p> Fix the First Failure
+</p></a></li>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Failure-is-Actually-Success--Time-to-Refactor--'><p> Failure is Actually Success! Time to Refactor!
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Add-a-Unit-Test-'><p> Add a Unit Test
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Reflection-on-mocking-problems--'><p> Reflection on mocking problems.
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-One-last-thing-before-moving-on-'><p> One last thing before moving on
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Changelog-'><p> Changelog
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
           </ol>
         </div>
+      </div>
     </div>
-  </div>
 
-  <hr class="hide" />
+    <hr class="hide" />
+
 	  <footer>
 	    <div class="container">
 	      <div class="col">
@@ -484,33 +615,29 @@ Todos.mainPage = SC.Page.design({
 	    </div>
 	  </footer>
 
-  <script src="http://code.jquery.com/jquery-1.6.min.js" type="text/javascript" charset="utf-8"></script>
-  <script type="text/javascript" src="javascripts/sproutGuides.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushJScript.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushCss.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
-  <script type="text/javascript">
-    SyntaxHighlighter.all()
+    <script type='text/javascript' src='/javascripts/jquery.min.js'></script>
 
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-19584397-1']);
-    _gaq.push(['_setDomainName', '.sproutcore.com']);
-    _gaq.push(['_setAllowHash', false]);
-    _gaq.push(['_setAllowLinker', true]);
-    _gaq.push(['_trackPageview']);
+    
 
-    (function() {
-      var ga = document.createElement('script');
-      ga.type = 'text/javascript';
-      ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl': 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-</body>
+    <script type='text/javascript'>
+      /*
+       * Make the guides link clickable
+       */
+      function guideMenu(e){
+        if (document.getElementById('guides').style.display == "none") {
+          document.getElementById('guides').style.display = "block";
+          document.getElementById('guidesArrow').innerHTML = "&#9662;";
+          $('body').click(function(e){ guideMenu(e); });
+        } else {
+          document.getElementById('guides').style.display = "none";
+          document.getElementById('guidesArrow').innerHTML = "&#9656;";
+          $('body').unbind('click');
+        }
+        return false;
+      }
+
+      $('#guidesMenu, .guidesMenu').click(guideMenu);
+    </script>
+
+  </body>
 </html>

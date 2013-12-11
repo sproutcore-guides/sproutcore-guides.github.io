@@ -1,633 +1,962 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>SproutCore Guides: SproutCore Records</title>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
 
-  <!-- guides styles -->
-  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/guides.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
-  <!--[if lt IE 9]>
-  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
+    <!-- plugin styles -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/highlight-github.css" />
 
-  <!-- syntax highlighting styles -->
-  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/shThemeGuides.css" />
-</head>
-<body class="guide">
+    <!-- guides styles -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/reset.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/main.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/guides.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-  <header role="banner">
-    <div class="container">
-      <h1 id="logo">
-        <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
-      </h1>
-      <nav role="navigation">
-        <ul>
-          <li><a href="http://sproutcore.com/about/">About</a></li>
-          <li><a href="http://showcase.sproutcore.com">Showcase</a></li>
-          <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
-          <li><a href="http://docs.sproutcore.com">Docs</a></li>
-          <li><a href="http://sproutcore.com/community/">Community</a></li>
-          <li><a href="http://blog.sproutcore.com">Blog</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-  <div id="feature">
-    <div class="wrapper">
-      <div class="feature_header">
-        <a href="/"><img src="images/graphics/guides.png"></a>
-        <h2><a href="/">SproutCore Guides</a></h2>
-        <p>These guides are designed to help you write and perfect your code.</p>
+    <meta name="generator" content="DocPad v6.57.0" />
+    
+  </head>
+
+  <body class="guide">
+
+    <header role="banner">
+      <div class="container">
+        <h1 id="logo">
+          <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
+        </h1>
+        <nav role="navigation">
+          <ul>
+            <li><a href="http://sproutcore.com/about/">About</a></li>
+            <li><a href="http://showcase.sproutcore.com">Showcase</a></li>
+            <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
+            <li><a href="http://docs.sproutcore.com">Docs</a></li>
+            <li><a href="http://sproutcore.com/community/">Community</a></li>
+            <li><a href="http://blog.sproutcore.com">Blog</a></li>
+          </ul>
+        </nav>
       </div>
-      <div class="feature_sidebar">
-        <a href="index.html" id="guidesMenu">
-          Guides Index <span id="guidesArrow">&#9656;</span>
-        </a>
-        <div id="guides" class="clearfix" style="display: none;">
-          <a href="index.html" class="guidesMenu">
-            Guides Index <span class="guidesArrow">&#9662;</span>
+    </header>
+
+    <div id="feature">
+      <div class="wrapper">
+        <div class="feature_header">
+          <a href="/"><img src="images/graphics/guides.png"></a>
+          <h2><a href="/">SproutCore Guides</a></h2>
+          <p>These guides are designed to help you write and perfect your code.</p>
+        </div>
+        <div class="feature_sidebar">
+          <a href="index.html" id="guidesMenu">
+            Guides Index <span id="guidesArrow">&#9656;</span>
           </a>
-          <hr style="clear:both;">
-          <dl class="L">
-    <dt>Start Here</dt>
-      <dd><a href="getting_started.html">Getting Started: Part 1</a></dd>
-      <dd><a href="getting_started_2.html">Getting Started: Part 2</a></dd>
-      <dd><a href="getting_started_3.html">Getting Started: Part 3</a></dd>
-      <dd><a href="core_concepts_sc_object.html">Classes and SC.Object</a></dd>
-      <dd><a href="core_concepts_kvo.html">Computed Properties, Observers and Bindings</a></dd>
-    <dt>Views</dt>
-      <dd><a href="views.html">Core View Concepts</a></dd>
-    <dt>Models</dt>
-      <dd><a href="records.html">SproutCore Records</a></dd>
-      <dd><a href="fixtures.html">Using Fixtures</a></dd>
-    <dt>Theming</dt>
-      <dd><a href="chance.html">Using Chance, SproutCore's CSS Framework</a></dd>
-      <dd><a href="theming_app.html">Theming Your App</a></dd>
-    <dt>Testing</dt>
-      <dd><a href="unit_test_framework.html">Unit Testing</a></dd>
-      <dd><a href="adding_unit_test.html">Adding a Unit Test</a></dd>
-      <dd><a href="writing_unit_tests.html">Writing Unit Tests</a></dd>
-      <dd><a href="running_unit_tests.html">Running Unit Tests</a></dd>
-      <dd><a href="todos_tdd.html">SproutCore Development Using TDD</a></dd>
-</dl>
-<dl class="R">
-    <dt>Extras</dt>
-      <dd><a href="build_tools.html">Build Tools</a></dd>
-      <dd><a href="run_loop.html">The Run Loop</a></dd>
-      <dd><a href="enumerables.html">Enumerables</a></dd>
-      <dd><a href="using_handlebars.html">Using Handlebars Templates</a></dd>
-    <dt>Contributing to SproutCore</dt>
-      <dd><a href="style_guide.html">Javascript Style Guide</a></dd>
-      <dd><a href="commit_code.html">Committer Guidelines</a></dd>
-      <dd><a href="documentation_guidelines.html">Documentation Guidelines</a></dd>
-</dl>
+          <div id="guides" class="clearfix" style="display: none;">
+            <a href="index.html" class="guidesMenu">
+              Guides Index <span class="guidesArrow">&#9662;</span>
+            </a>
 
+            <hr style="clear:both;">
 
+            <dl class='L'><dt>Start Here</dt>
+<dd><a href='/getting_started.html'>Getting Started: Part 1</a></dd>
+<dd><a href='/getting_started_2.html'>Getting Started: Part 2</a></dd>
+<dd><a href='/getting_started_3.html'>Getting Started: Part 3</a></dd>
+<dd><a href='/core_concepts_sc_object.html'>Classes and SC.Object</a></dd>
+<dd><a href='/core_concepts_kvo.html'>Computed Properties, Observers and Bindings</a></dd><dt>Views</dt>
+<dd><a href='/views.html'>Core View Concepts</a></dd>
+<dd><a href='/animate.html'>DRAFT - Animation</a></dd><dt>Models</dt>
+<dd><a href='/records.html'>SproutCore Records</a></dd>
+<dd><a href='/fixtures.html'>Using Fixtures</a></dd>
+<dd><a href='/record_lifecycle.html'>DRAFT - Understanding the Record Lifecycle</a></dd>
+<dd><a href='/no_store.html'>DRAFT - No DataStore</a></dd>
+<dd><a href='/data_source.html'>DRAFT - Data Source</a></dd><dt>Theming</dt>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
+<dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
+<dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd>
+<dd><a href='/testing_guidelines.html'>DRAFT - Testing Guidelines</a></dd><dt>Extras</dt>
+<dd><a href='/build_tools.html'>SproutCore's Build Tools</a></dd>
+<dd><a href='/run_loop.html'>The Run Loop</a></dd>
+<dd><a href='/enumerables.html'>Enumerables</a></dd>
+<dd><a href='/connect_server.html'>DRAFT - Connecting to a Server</a></dd><dt>Contributing to SproutCore</dt>
+<dd><a href='/style_guide.html'>Javascript Guidelines</a></dd>
+<dd><a href='/commit_code.html'>Committer Guidelines</a></dd>
+<dd><a href='/documentation_guidelines.html'>Documentation Guidelines</a></dd>
+<dd><a href='/contribute.html'>Contributing Guides</a></dd><dt>Thanks</dt>
+<dd><a href='/credits.html'>Credits</a></dd></dl>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div id="container">
-    <div class="wrapper">
-      <div id="mainCol">
-          <div class="headerSection">
-            <h2>SproutCore Records</h2>
-<p>This guide covers the basics of SproutCore&#8217;s model layer. By referring to this guide, you will be able to:</p>
-<ul>
-	<li>Understand the anatomy of records.</li>
-	<li>Define your application specific models and relations between them.</li>
-	<li>Create and manage records.</li>
-	<li>Understand how the store manages your data.</li>
-	<li>Query the store for data.</li>
-</ul>
+    <div id="container">
+      <div class="wrapper">
+        <div id="mainCol">
+          <div class='headerSection'>
+            
+              <h2>SproutCore Records</h2>
+            
 
+            
+              <p>This guide covers the basics of SproutCore's model layer. By referring to this guide, you will be able to:</p>
+            
+
+            
+              <ul>
+                
+                  <li>Understand the anatomy of records.</li>
+                
+                  <li>Define your application specific models and relations between them.</li>
+                
+                  <li>Create and manage records.</li>
+                
+                  <li>Understand how the store manages your data.</li>
+                
+                  <li>Query the store for data.</li>
+                
+              </ul>
+            
           </div>
-        <h3 id="models-records-and-the-store">1 Models, Records and the Store</h3>
-<p>In SproutCore the model layer is the lowest application layer and holds all your data as well as the business logic of your application. The controller layer calls into the model layer to modify data and retrieves data from the model layer. Generally, controllers use bindings to perform these functions.</p>
-<p>The model layer is also responsible for talking to your server, fetching and committing data when necessary. The server communication aspect of the model layer is not covered in this guide, but in the guide about using data sources.</p>
-<p>Models are a blueprint for your data, defining the data schema of your application. This data schema is generally similar to the data schema of your back-end application.</p>
-<p>In SproutCore, models are defined by subclassing <tt>SC.Record</tt>. When you actually want to create a data record from one of your blueprints, you use <tt>SC.Store</tt> to create an instance of a <tt>SC.Record</tt> class. Your application&#8217;s store manages the lifecycle and the data of your records in a central place. When you retrieve or update a property from a record, the record actually uses the store to access the underlying data hash.</p>
-<p>All the classes of SproutCore&#8217;s model layer are located in the <strong>datastore</strong> folder inside the main sproutcore folder. Have a look at the source code there if you want to have more in-depth information. The code has plenty of inline documentation and can be a valuable resource to gain deeper insights in how the store works.</p>
-<h3 id="anatomy-of-records">2 Anatomy of Records</h3>
+
+          <h3 id='-Models--Records-and-the-Store-'>1 -  Models, Records and the Store
+</h3>
+
+
+<p>In SproutCore the model layer is the lowest application layer and holds all
+your data as well as the business logic of your application. The controller
+layer calls into the model layer to modify data and retrieves data from the
+model layer. Generally, controllers use bindings to perform these functions. </p>
+<p>The model layer is also responsible for talking to your server, fetching and
+committing data when necessary. The server communication aspect of the model
+layer is not covered in this guide, but in the guide about using data sources.</p>
+<p>Models are a blueprint for your data, defining the data schema of your
+application. This data schema is generally similar to the data schema of your
+back-end application. </p>
+<p>In SproutCore, models are defined by subclassing <tt>SC.Record</tt>. When you actually
+want to create a data record from one of your blueprints, you use <tt>SC.Store</tt> to
+create an instance of a <tt>SC.Record</tt> class. Your application&#39;s store manages the
+lifecycle and the data of your records in a central place. When you retrieve or
+update a property from a record, the record actually uses the store to access
+the underlying data hash.</p>
+<p>All the classes of SproutCore&#39;s model layer are located in the <em>datastore</em>
+folder inside the main sproutcore folder. Have a look at the source code there
+if you want to have more in-depth information. The code has plenty of inline
+documentation and can be a valuable resource to gain deeper insights in how the
+store works.</p>
+<h3 id='-Anatomy-of-Records-'>2 -  Anatomy of Records
+</h3>
+
+
 <p>A SproutCore record consists of four main components:</p>
 <ul>
-	<li>Store key</li>
-	<li>ID</li>
-	<li>Status</li>
-	<li>Data hash</li>
+<li>Store key</li>
+<li>ID</li>
+<li>Status</li>
+<li>Data hash</li>
 </ul>
-<p>Each record has a unique <em>store key</em> which is assigned when the record is created. The store key is a unique record identifier in the whole store and is used internally to relate IDs, statuses and data hashes to each other in an unambiguous way. The store key is the only one of the four components which is actually a property of <tt>SC.Record</tt>. The other three components are stored centrally in the store and mapped to the individual records using the store key.</p>
-<div style='text-align: center;'>
-<p><img src="images/records/record_anatomy.png" alt="" /></p>
-</div>
-<p>All records of a given type have a unique <em>ID</em>, as usual in relational database systems. In fact the IDs of SproutCore records usually are the same as the primary keys of your data in the backend. Therefore, unlike the store key, the ID is not automatically created. Instead, it is your responsibility to assign a unique ID when creating or loading records.</p>
-<p>The <em>status</em> of a record represents its current state with respect to the corresponding record on the server. The store uses the status property to determine which operations can be performed on the record, for instance, if a record can be edited safely and which records need to be committed back to the server.</p>
-<p>Last but not least, the actual <em>data</em> of a record is stored in a plain <a href="http://www.json.org"><span class="caps">JSON</span></a> data hash. When you get or set a property on a record, the value of this property is read from or written to the data hash.</p>
-<h4 id="primary-record-states">2.1 Primary Record States</h4>
+<p>Each record has a unique <em>store key</em> which is assigned when the record is
+created. The store key is a unique record identifier in the whole store and is
+used internally to relate IDs, statuses and data hashes to each other in an
+unambiguous way. The store key is the only one of the four components which is
+actually a property of <tt>SC.Record</tt>. The other three components are stored
+centrally in the store and mapped to the individual records using the store
+key.</p>
+<div style='text-align: center'> <img src="images/records/record_anatomy.png" alt="Record Anatomy"> </div>
+
+<p>All records of a given type have a unique <em>ID</em>, as usual in relational database
+systems. In fact the IDs of SproutCore records usually are the same as the
+primary keys of your data in the backend. Therefore, unlike the store key, the
+ID is not automatically created. Instead, it is your responsibility to assign a
+unique ID when creating or loading records.</p>
+<p>The <em>status</em> of a record represents its current state with respect to the
+corresponding record on the server. The store uses the status property to
+determine which operations can be performed on the record, for instance, if a
+record can be edited safely and which records need to be committed back to the
+server. </p>
+<p>Last but not least, the actual <em>data</em> of a record is stored in a plain
+<a href="http://www.json.org">JSON</a> data hash. When you get or set a property on a
+record, the value of this property is read from or written to the data hash. </p>
+<h4 id='-Primary-Record-States-'>2.1 -  Primary Record States
+</h4>
+
+
 <p>There are five primary record status codes in SproutCore:</p>
 <ul>
-	<li><tt>SC.Record.EMPTY</tt></li>
-	<li><tt>SC.Record.READY</tt></li>
-	<li><tt>SC.Record.BUSY</tt></li>
-	<li><tt>SC.Record.DESTROYED</tt></li>
-	<li><tt>SC.Record.ERROR</tt></li>
-</ul>
-<p>The names of these states are pretty self explanatory: <tt>EMPTY</tt> indicates a non-existent record. <tt>READY</tt> indicates that the record can be safely edited. <tt>BUSY</tt> indicates that the record is currently locked for write operations, mostly because of an ongoing communication with the server. Finally <tt>DESTROYED</tt> is the state of destroyed records and <tt>ERROR</tt> indicates that something went wrong while processing this record.</p>
-<p>The three main states <tt>READY</tt>, <tt>BUSY</tt> and <tt>DESTROYED</tt> have several sub-states. You will learn more about these sub-states below when you actually start working with records. You can also refer to the complete overview of record states in the last section of this guide.</p>
-<h3 id="defining-your-models">3 Defining Your Models</h3>
-<p>Defining a model in SproutCore is as easy as subclassing <tt>SC.Record</tt>:</p>
-<div class="code_container">
-<div class="filename">apps/app/models/contact.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
+<li><tt>SC.Record.EMPTY</tt></li>
+<li><tt>SC.Record.READY</tt></li>
+<li><tt>SC.Record.BUSY</tt></li>
+<li><tt>SC.Record.DESTROYED</tt></li>
+<li><tt>SC.Record.ERROR</tt>
 
+</li>
+</ul>
+<p>The names of these states are pretty self explanatory: <tt>EMPTY</tt> indicates a
+non-existent record. <tt>READY</tt> indicates that the record can be safely edited.</p>
+<p><tt>BUSY</tt> indicates that the record is currently locked for write operations,
+mostly because of an ongoing communication with the server. Finally <tt>DESTROYED</tt>
+is the state of destroyed records and <tt>ERROR</tt> indicates that something went
+wrong while processing this record.</p>
+<p>The three main states <tt>READY</tt>, <tt>BUSY</tt> and <tt>DESTROYED</tt> have several sub-states.
+You will learn more about these sub-states below when you actually start
+working with records. You can also refer to the complete overview of record
+states in the last section of this guide.</p>
+<h3 id='-Defining-Your-Models-'>3 -  Defining Your Models
+</h3>
+
+
+<p>Defining a model in SproutCore is as easy as subclassing <tt>SC.Record</tt>:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/app/models/contact.js</div></span>
 App.Contact = SC.Record.extend({
 
-});
-</pre></div><p>You just have created your custom <tt>App.Contact</tt> model class. However, this empty model is only of limited use, so let&#8217;s add some record attributes.</p>
-<div class="code_container">
-<div class="filename">apps/app/models/contact.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
+});</code></div></pre>
+<p>You just have created your custom <tt>App.Contact</tt> model class. However, this
+empty model is only of limited use, so let&#39;s add some record attributes.</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/app/models/contact.js</div></span>
 App.Contact = SC.Record.extend({
   firstName: SC.Record.attr(String),
   lastName: SC.Record.attr(String),
   age: SC.Record.attr(Number)
-});
-</pre></div>
-<div class="warning"><p>Property names defined on <ins>SC.Record</ins> itself are reserved names, meaning they cannot be used for custom record attributes. Please refer to the <a href="http://docs.sproutcore.com/symbols/SC.Record.html">documentation of SC.Record</a> for a list of all reserved names.</p></div>
-<p>We have used the <tt>SC.Record.attr</tt> helper to add the <tt>firstName</tt>, <tt>lastName</tt> and <tt>age</tt> attributes with the type of each attribute as first argument. The optional second argument of <tt>SC.Record.attr</tt> is an option hash. E.g. we can add some default values to our attributes:</p>
-<div class="code_container">
-<div class="filename">apps/app/models/contact.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
+});</code></div></pre>
+<div class='warning'><p> Property names defined on <tt>SC.Record</tt> itself are reserved names,
+meaning they cannot be used for custom record attributes. Please refer to the
+<a href="http://docs.sproutcore.com/symbols/SC.Record.html">documentation of SC.Record</a>
+for a list of all reserved names.
 
-App.Contact = SC.Record.extend({
-  firstName: SC.Record.attr(String, { defaultValue: 'Unspecified' }),
-  lastName: SC.Record.attr(String, { defaultValue: 'Unspecified' }),
-  age: SC.Record.attr(Number, { defaultValue: 0 })
-});
-</pre></div><p>Whenever you specify a <tt>defaultValue</tt> option on an attribute, it will return this default value if that attribute is  <tt>null</tt> or <tt>undefined</tt> for a given instance.</p>
-<div class="note"><p>The <ins>defaultValue</ins> will not be written to the underlying data hash and therefore not committed back to the server. </p></div>
-<p>If the name of the model&#8217;s attribute property differs from the name you want to use in the data hash, you can specify a custom key for each attribute which will be used to access the data hash:</p>
-<div class="code_container">
-<div class="filename">apps/app/models/contact.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
+</p></div>
 
+<p>We have used the <tt>SC.Record.attr</tt> helper to add the <tt>firstName</tt>, <tt>lastName</tt>
+and <tt>age</tt> attributes with the type of each attribute as first argument. The
+optional second argument of <tt>SC.Record.attr</tt> is an option hash. E.g. we can add
+some default values to our attributes:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/app/models/contact.js</div></span>
 App.Contact = SC.Record.extend({
-  firstName: SC.Record.attr(String, { key: 'first_name' }),
-  lastName: SC.Record.attr(String, { key: 'last_name' }),
+  firstName: SC.Record.attr(String, { defaultValue: <span class="string">'Unspecified'</span> }),
+  lastName: SC.Record.attr(String, { defaultValue: <span class="string">'Unspecified'</span> }),
+  age: SC.Record.attr(Number, { defaultValue: <span class="number">0</span> })
+});</code></div></pre>
+<p>Whenever you specify a <tt>defaultValue</tt> option on an attribute, it will return
+this default value if that attribute is  <tt>null</tt> or <tt>undefined</tt> for a given
+instance.</p>
+<div class='note'><p> The <tt>defaultValue</tt> will not be written to the underlying data hash and
+therefore not committed back to the server. 
+
+</p></div>
+
+<p>If the name of the model&#39;s attribute property differs from the name you want to
+use in the data hash, you can specify a custom key for each attribute which
+will be used to access the data hash:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/app/models/contact.js</div></span>
+App.Contact = SC.Record.extend({
+  firstName: SC.Record.attr(String, { key: <span class="string">'first_name'</span> }),
+  lastName: SC.Record.attr(String, { key: <span class="string">'last_name'</span> }),
   age: SC.Record.attr(Number)
-});
-</pre></div><h4 id="attribute-types">3.1 Attribute Types</h4>
-<p>All basic JavaScript data types can be used as attribute types:</p>
+});</code></div></pre>
+<h4 id='-Attribute-Types-'>3.1 -  Attribute Types
+</h4>
+
+
+<p>All basic JavaScript data types can be used as attribute types: </p>
 <ul>
-	<li>String</li>
-	<li>Number</li>
-	<li>Boolean</li>
-	<li>Array</li>
-	<li>Object</li>
+<li>String</li>
+<li>Number</li>
+<li>Boolean</li>
+<li>Array</li>
+<li>Object</li>
 </ul>
-<p>Additionally SproutCore comes with a predefined attribute helper for date and time values.</p>
-<div class="code_container">
-<div class="filename">in apps/app/models/contact.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
+<p>Additionally SproutCore comes with a predefined attribute helper for date and
+time values. </p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="keyword">in</span> apps/app/models/contact.js</div></span>
 App.Contact = SC.Record.extend({
-  dateOfBirth: SC.Record.attr(SC.DateTime, { format: 'YY-mm-dd' })
-});
-</pre></div><p>For a reference of how to specify your custom date format check the documentation of  <a href="http://docs.sproutcore.com/symbols/SC.DateTime.html#toFormattedString">SC.DateTime#toFormattedString</a>.</p>
-<h4 id="record-ids">3.2 Record Ids</h4>
-<p>In SproutCore you don&#8217;t define the primary key property of your models explicitly like you defined your custom attributes above. The records&#8217; primary keys are managed by the store, so every record inherently has an ID property. However, you can specify the identifier of this ID property. This is where it can become a bit confusing at first&#8230; but let&#8217;s clear it up step by step.</p>
-<p>First of all, by default SproutCore uses the identifier &#8220;guid&#8221; for the primary key. You can change this identifier by defining a <tt>primaryKey</tt> property in your model:</p>
-<div class="code_container">
-<div class="filename">in apps/app/models/contact.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
+  dateOfBirth: SC.Record.attr(SC.DateTime, { format: <span class="string">'YY-mm-dd'</span> })
+});</code></div></pre>
+<p>For a reference of how to specify your custom date format check the documentation of
+<a href="http://docs.sproutcore.com/symbols/SC.DateTime.html#toFormattedString">SC.DateTime#toFormattedString</a>.</p>
+<h4 id='-Record-Ids-'>3.2 -  Record Ids
+</h4>
 
+
+<p>In SproutCore you don&#39;t define the primary key property of your models
+explicitly like you defined your custom attributes above. The records&#39; primary
+keys are managed by the store, so every record inherently has an ID property.
+However, you can specify the identifier of this ID property. This is where it
+can become a bit confusing at first... but let&#39;s clear it up step by step.</p>
+<p>First of all, by default SproutCore uses the identifier &quot;guid&quot; for the primary
+key. You can change this identifier by defining a <tt>primaryKey</tt> property in your
+model:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="keyword">in</span> apps/app/models/contact.js</div></span>
 App.Contact = SC.Record.extend({
-  primaryKey: 'uid'
-});
-</pre></div>
-<div class="note"><p>If you want to use your custom ID identifier in all your models, you can make your life a bit easier and your code more maintainable by defining a custom record base class, where you define the <ins>primaryKey</ins> property. Then you can subclass this custom base class to create your models.</p></div>
-<p>However, this primary key identifier is only used to identify the ID property in the underlying data hash, but not to get or set the ID on a record. For example if you create a record and pass a hash with initial values, then SproutCore will now look for a property called &#8220;uid&#8221; in the hash when you don&#8217;t explicitly specify an ID. If you want to get or set the ID of a record though, you always use <tt>id</tt> independent of the <tt>primaryKey</tt>&#8217;s value:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
+  primaryKey: <span class="string">'uid'</span>
+});</code></div></pre>
+<div class='note'><p> If you want to use your custom ID identifier in all your models, you can
+make your life a bit easier and your code more maintainable by defining a
+custom record base class, where you define the <tt>primaryKey</tt> property. Then you
+can subclass this custom base class to create your models.
 
-myRecord.get('id'); // note: NOT 'uid'
-myRecord.set('id', 1);
-</pre></div>
-<div class="warning"><p>You should never change the ID of an existing record using <ins>set()</ins> like above unless you know what you are doing.</p></div>
-<p>It is a best practice to never include the ID in the data hash, because then you end up with two IDs: the ID property in the data hash and the ID managed by the store. If you receive a <span class="caps">JSON</span> data hash from the server (where the ID is necessarily included) then you should extract and delete the ID from this hash before using it to load the record into the store.</p>
-<h4 id="relations">3.3 Relations</h4>
-<p>Often models don&#8217;t exist completely independently of each other but are related to other models. For example one or more addresses could belong to the <tt>Contact</tt> model we created above. So let&#8217;s define the <tt>Address</tt> model first:</p>
-<div class="code_container">
-<div class="filename">apps/app/models/address.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
+</p></div>
 
+<p>However, this primary key identifier is only used to identify the ID property
+in the underlying data hash, but not to get or set the ID on a record. For
+example if you create a record and pass a hash with initial values, then
+SproutCore will now look for a property called &quot;uid&quot; in the hash when you don&#39;t
+explicitly specify an ID. If you want to get or set the ID of a record though,
+you always use <tt>id</tt> independent of the <tt>primaryKey</tt>&#39;s value:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">myRecord.get(<span class="string">'id'</span>); <span class="comment">// note: NOT 'uid'</span>
+myRecord.set(<span class="string">'id'</span>, <span class="number">1</span>);</code></div></pre>
+<div class='warning'><p> You should never change the ID of an existing record using <tt>set()</tt>
+like above unless you know what you are doing.
+
+</p></div>
+
+<p>It is a best practice to never include the ID in the data hash, because then
+you end up with two IDs: the ID property in the data hash and the ID managed by
+the store. If you receive a JSON data hash from the server (where the ID is
+necessarily included) then you should extract and delete the ID from this hash
+before using it to load the record into the store.</p>
+<h4 id='-Relations-'>3.3 -  Relations
+</h4>
+
+
+<p>Often models don&#39;t exist completely independently of each other but are related
+to other models. For example one or more addresses could belong to
+the <tt>Contact</tt> model we created above. So let&#39;s define the <tt>Address</tt> model first:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/app/models/address.js</div></span>
 App.Address = SC.Record.extend({
   street: SC.Record.attr(String),
   number: SC.Record.attr(Number)
-});
-</pre></div><h5 id="one-to-one-relations">3.3.1 One-to-One Relations</h5>
-<p>If we only need one address to be associated with each contact, then we can use the <tt>toOne</tt> relation helper:</p>
-<div class="code_container">
-<div class="filename">in apps/app/models/contact.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
+});</code></div></pre>
+<h5 id='-One-to-One-Relations-'>3.3.1 -  One-to-One Relations
+</h5>
 
+
+<p>If we only need one address to be associated with each contact, then we can use
+the <tt>toOne</tt> relation helper:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="keyword">in</span> apps/app/models/contact.js</div></span>
 App.Contact = SC.Record.extend({
   address: SC.Record.toOne(
-    'App.Address',
-    { isMaster: YES, inverse: 'contact' }
+    <span class="string">'App.Address'</span>, 
+    { isMaster: YES, inverse: <span class="string">'contact'</span> }
   )
-});
-</pre></div>
-<div class="code_container">
-<div class="filename">in apps/app/models/address.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
+});</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="keyword">in</span> apps/app/models/address.js</div></span>
 App.Address = SC.Record.extend({
   contact: SC.Record.toOne(
-    'App.Contact',
+    <span class="string">'App.Contact'</span>, 
     { isMaster: NO }
   )
-});
-</pre></div><p>Notice the <tt>isMaster</tt> and <tt>inverse</tt> options used with the <tt>toOne</tt> helper. The <tt>isMaster: YES</tt> option on the <tt>address</tt> attribute ensures that the <tt>Contact</tt> record actually gets marked as changed when you assign a different <tt>Address</tt> record to it. You should always set the <tt>isMaster</tt> option to <tt>YES</tt> on one side of the relation and to <tt>NO</tt> on the other to control which record is committed back to the server when you alter the relation.</p>
-<p>The <tt>inverse</tt> option specifies the property name of the inverse relation on the associated model and should be set on the side of the relation where <tt>isMaster</tt> is set to <tt>YES</tt>.</p>
-<p>In the underlying data hash a <tt>toOne</tt> relation is simply represented as the ID of the associated record.</p>
-<div class="note"><p>It is not mandatory to define both directions of the relation if you don&#8217;t need it.</p></div>
-<h5 id="one-to-many-relations">3.3.2 One-to-Many Relations</h5>
-<p>If we want to associate multiple addresses with a certain contact, then we have to use the <tt>toMany</tt> relation helper:</p>
-<div class="code_container">
-<div class="filename">in apps/app/models/contact.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
+});</code></div></pre>
+<p>Notice the <tt>isMaster</tt> and <tt>inverse</tt> options used with the <tt>toOne</tt> helper.
+The <tt>isMaster: YES</tt> option on the <tt>address</tt> attribute ensures that the <tt>Contact</tt>
+record actually gets marked as changed when you assign a different <tt>Address</tt>
+record to it. You should always set the <tt>isMaster</tt> option to <tt>YES</tt> on one side
+of the relation and to <tt>NO</tt> on the other to control which record is committed
+back to the server when you alter the relation. </p>
+<p>The <tt>inverse</tt> option specifies the property name of the inverse relation on the
+associated model and should be set on the side of the relation where <tt>isMaster</tt>
+is set to <tt>YES</tt>.</p>
+<p>In the underlying data hash a <tt>toOne</tt> relation is simply represented as the ID
+of the associated record.</p>
+<div class='note'><p> It is not mandatory to define both directions of the relation if you
+don&#39;t need it.
 
+</p></div>
+
+
+
+<h5 id='-One-to-Many-Relations-'>3.3.2 -  One-to-Many Relations
+</h5>
+
+
+<p>If we want to associate multiple addresses with a certain contact, then we have
+to use the <tt>toMany</tt> relation helper:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="keyword">in</span> apps/app/models/contact.js</div></span>
 App.Contact = SC.Record.extend({
   address: SC.Record.toMany(
-    'App.Address',
-    { isMaster: YES, inverse: 'contact' }
+    <span class="string">'App.Address'</span>, 
+    { isMaster: YES, inverse: <span class="string">'contact'</span> }
   )
-});
-</pre></div>
-<div class="code_container">
-<div class="filename">in apps/app/models/address.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
+});</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="keyword">in</span> apps/app/models/address.js</div></span>
 App.Address = SC.Record.extend({
   contact: SC.Record.toOne(
-    'App.Contact',
+    <span class="string">'App.Contact'</span>, 
     { isMaster: NO }
   )
-});
-</pre></div><p>The only thing that changed compared to the one-to-one example above is the <tt>toMany</tt> keyword in the <tt>Contact</tt> model. The <tt>isMaster</tt> and <tt>inverse</tt> options apply to <tt>toMany</tt> relations in the same way as they do to <tt>toOne</tt> relations.</p>
-<p>In the underlying data hash a <tt>toMany</tt> relation is represented as an array of IDs of the the associated records.</p>
-<div class="note"><p>It is not mandatory to define both directions of the relation if you don&#8217;t need it.</p></div>
-<h5 id="many-to-many-relations">3.3.3 Many-to-Many Relations</h5>
-<p>If we not only want to relate multiple addresses to one contact, but also relate one address to multiple contacts, we have to use <tt>toMany</tt> on both sides of the relation. SproutCore&#8217;s <tt>toMany</tt> helper manages many-to-many relations without a join table, which you would use in a relational database:</p>
-<div class="code_container">
-<div class="filename">in apps/app/models/contact.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
+});</code></div></pre>
+<p>The only thing that changed compared to the one-to-one example above is
+the <tt>toMany</tt> keyword in the <tt>Contact</tt> model. The <tt>isMaster</tt> and <tt>inverse</tt> options
+apply to <tt>toMany</tt> relations in the same way as they do to <tt>toOne</tt> relations.</p>
+<p>In the underlying data hash a <tt>toMany</tt> relation is represented as an array of
+IDs of the the associated records.</p>
+<div class='note'><p> It is not mandatory to define both directions of the relation if you
+don&#39;t need it.
 
+</p></div>
+
+
+
+<h5 id='-Many-to-Many-Relations-'>3.3.3 -  Many-to-Many Relations
+</h5>
+
+
+<p>If we not only want to relate multiple addresses to one contact, but also
+relate one address to multiple contacts, we have to use <tt>toMany</tt> on both sides
+of the relation. SproutCore&#39;s <tt>toMany</tt> helper manages many-to-many relations
+without a join table, which you would use in a relational database:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="keyword">in</span> apps/app/models/contact.js</div></span>
 App.Contact = SC.Record.extend({
   address: SC.Record.toMany(
-    'App.Address',
-    { isMaster: YES, inverse: 'contact' }
+    <span class="string">'App.Address'</span>, 
+    { isMaster: YES, inverse: <span class="string">'contact'</span> }
   )
-});
-</pre></div>
-<div class="code_container">
-<div class="filename">in apps/app/models/address.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
+});</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="keyword">in</span> apps/app/models/address.js</div></span>
 App.Address = SC.Record.extend({
   contact: SC.Record.toMany(
-    'App.Contact',
+    <span class="string">'App.Contact'</span>, 
     { isMaster: NO }
   )
-});
-</pre></div><p>Again the only thing that changed compared to the one-to-many example from above is the use of the <tt>toMany</tt> helper in the <tt>Address</tt> model.</p>
-<p>Since a many-to-many relation effectively is constructed by using <tt>toMany</tt> on both sides, it is represented in the underlying data hashes of both sides of the relation as an array of record IDs.</p>
-<div class="note"><p>It is not mandatory to define both directions of the relation if you don&#8217;t need it.</p></div>
-<h4 id="other-properties-on-model-classes">3.4 Other Properties on Model Classes</h4>
-<p>Any property defined on a model class not using <tt>SC.Record.attr</tt> is a transient property. This means that its value is not passed through to the data hash of the record and therefore is neither committed back to the server nor loaded from incoming <span class="caps">JSON</span> data.</p>
-<div class="code_container">
-<div class="filename">in apps/app/models/contact.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
+});</code></div></pre>
+<p>Again the only thing that changed compared to the one-to-many example from
+above is the use of the <tt>toMany</tt> helper in the <tt>Address</tt> model.</p>
+<p>Since a many-to-many relation effectively is constructed by using <tt>toMany</tt> on
+both sides, it is represented in the underlying data hashes of both sides of
+the relation as an array of record IDs.</p>
+<div class='note'><p> It is not mandatory to define both directions of the relation if you
+don&#39;t need it.
 
+</p></div>
+
+
+
+<h4 id='-Other-Properties-on-Model-Classes-'>3.4 -  Other Properties on Model Classes
+</h4>
+
+
+<p>Any property defined on a model class not using <tt>SC.Record.attr</tt> is a transient
+property. This means that its value is not passed through to the data hash of
+the record and therefore is neither committed back to the server nor loaded
+from incoming JSON data.</p>
+<pre class="highlighted"><div class="code_container"><code class="undefined"><span class='comment'><div class='filename'>in apps/app/models/contact.js</div></span>
 App.Contact = SC.Record.extend({
-  // transient property
-  isContact: YES,
+  // transient property 
+  isContact: YES, 
 
   // transient computed property
   fullName: function() {
-    return this.get('firstName') + ' ' + this.get('lastName');
+    return this.get('firstName') &lt;tt&gt; ' ' &lt;/tt&gt; this.get('lastName');
   }.property('firstName', 'lastName').cacheable()
-});
-</pre></div>
-<div class="note"><p>If you use the <ins>set</ins> method on an undefined property, SproutCore by default will pass the value through to the underlying data hash. You can turn this behavior off by setting <ins>ignoreUnknownProperties: <span class="caps">YES</span></ins> in your model classes.</p></div>
-<h3 id="using-your-models">4 Using Your Models</h3>
-<p>Now that we have defined our <tt>Contact</tt> and <tt>Address</tt> models it&#8217;s time to actually create some records. All records are managed by the store, so we have to make sure first that we have an instance of <tt>SC.Store</tt> available. Usually the store is instantiated somewhere in your application&#8217;s <code>core.js</code> file:</p>
-<div class="code_container">
-<div class="filename">in apps/app/core.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
+});</code></div></pre>
+<div class='note'><p> If you use the <tt>set</tt> method on an undefined property, SproutCore by
+default will pass the value through to the underlying data hash. You can turn
+this behavior off by setting <tt>ignoreUnknownProperties: YES</tt> in your model
+classes.
 
+</p></div>
+
+
+
+<h3 id='-Using-Your-Models-'>4 -  Using Your Models
+</h3>
+
+
+<p>Now that we have defined our <tt>Contact</tt> and <tt>Address</tt> models it&#39;s time to
+actually create some records. All records are managed by the store, so we have
+to make sure first that we have an instance of <tt>SC.Store</tt> available. Usually
+the store is instantiated somewhere in your application&#39;s <code>core.js</code>
+file:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="keyword">in</span> apps/app/core.js</div></span>
 App = SC.Application.create({
   store: SC.Store.create().from(SC.Record.fixtures)
-});
-</pre></div><p>In this example, we create the store with fixtures as data source. You can read more about <a href="fixtures.html">fixtures</a> and other data sources in the respective guides.</p>
-<h4 id="creating-records">4.1 Creating Records</h4>
+});</code></div></pre>
+<p>In this example, we create the store with fixtures as data source. You can read
+more about <a href="fixtures.html">fixtures</a> and other data sources in the respective
+guides.</p>
+<h4 id='-Creating-Records-'>4.1 -  Creating Records
+</h4>
+
+
 <p>You can create records of a previously defined record type like this:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
+<pre class="highlighted"><div class="code_container"><code class="javascript">contact = App.store.createRecord(App.Contact, {});</code></div></pre>
+<p>The first argument of the store&#39;s <tt>createRecord</tt> method is the record type. The
+second argument is a hash with optional initial values. Furthermore you can
+specify the record ID as third argument:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">contact = App.store.createRecord(
+  App.Contact, 
+  { firstName: <span class="string">'Florian'</span>, lastName: <span class="string">'Kugler'</span> },
+  <span class="number">99</span>
+);</code></div></pre>
+<p>Usually you will not specify an ID like this, because either you get the record
+ID from the server, or you want to use some kind of temporary ID on new records
+until they get committed to the server, which then can return a persistent ID.
+So let&#39;s use a temporary ID:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">contact = App.store.createRecord(
+  App.Contact, 
+  { firstName: <span class="string">'Florian'</span>, lastName: <span class="string">'Kugler'</span> },
+  - Math.random(Math.floor(Math.random() * <span class="number">99999999</span>))
+);</code></div></pre>
+<div class='note'><p> IDs are not limited to numbers, but can also be strings.
 
-contact = App.store.createRecord(App.Contact, {});
-</pre></div><p>The first argument of the store&#8217;s <tt>createRecord</tt> method is the record type. The second argument is a hash with optional initial values. Furthermore you can specify the record ID as third argument:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
+</p></div>
 
-contact = App.store.createRecord(
-  App.Contact,
-  { firstName: 'Florian', lastName: 'Kugler' },
-  99
-);
-</pre></div><p>Usually you will not specify an ID like this, because either you get the record ID from the server, or you want to use some kind of temporary ID on new records until they get committed to the server, which then can return a persistent ID. So let&#8217;s use a temporary ID:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
+<p>When you create a record its status will be <tt>READY_NEW</tt>, indicating that the
+record is editable and does not exist on the server yet.</p>
+<h5 id='-Creating-Associated-Records-'>4.1.1 -  Creating Associated Records
+</h5>
 
-contact = App.store.createRecord(
-  App.Contact,
-  { firstName: 'Florian', lastName: 'Kugler' },
-  - Math.random(Math.floor(Math.random() * 99999999))
-);
-</pre></div>
-<div class="note"><p>IDs are not limited to numbers, but can also be strings.</p></div>
-<p>When you create a record its status will be <tt>READY_NEW</tt>, indicating that the record is editable and does not exist on the server yet.</p>
-<h5 id="creating-associated-records">4.1.1 Creating Associated Records</h5>
-<p>When creating associated records, you first have to create the records and afterwards establish the connection between the records.</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
 
-contact = App.store.createRecord(App.Contact, {/*...*/}, 1);
-address = App.store.createRecord(App.Address, {/*...*/}, 1);
+<p>When creating associated records, you first have to create the records and
+afterwards establish the connection between the records.</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">contact = App.store.createRecord(App.Contact, {<span class="comment">/*...*/</span>}, <span class="number">1</span>);
+address = App.store.createRecord(App.Address, {<span class="comment">/*...*/</span>}, <span class="number">1</span>);
 
-// for a toOne relation
-contact.set('address', address);
+<span class="comment">// for a toOne relation</span>
+contact.set(<span class="string">'address'</span>, address); 
 
-// for a toMany relation
-contact.get('address').pushObject(address);
-</pre></div><p>In this case we&#8217;re adding the <tt>Address</tt> record to the <tt>Contact</tt> record, because <tt>Contact</tt> is defined as master in this relation and has the inverse property set. It is important to add the non-master record to the master record in order to set up the connection between these records properly.</p>
-<h4 id="updating-records">4.2 Updating Records</h4>
+<span class="comment">// for a toMany relation</span>
+contact.get(<span class="string">'address'</span>).pushObject(address);</code></div></pre>
+<p>In this case we&#39;re adding the <tt>Address</tt> record to the <tt>Contact</tt> record,
+because <tt>Contact</tt> is defined as master in this relation and has the inverse property
+set. It is important to add the non-master record to the master record in order
+to set up the connection between these records properly.</p>
+<h4 id='-Updating-Records-'>4.2 -  Updating Records
+</h4>
+
+
 <p>Updating record attributes is as easy as calling the <tt>set</tt> method:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
+<pre class="highlighted"><div class="code_container"><code class="javascript">contact.set(<span class="string">'firstName'</span>, <span class="string">'Jack'</span>);</code></div></pre>
+<p>In order to be able to update record attributes the record has to be in
+a <tt>READY</tt> state. If you update an attribute of a newly created record, the status
+will still be <tt>READY_NEW</tt>. If you update an attribute of a record that was
+previously loaded from the server or committed to the server, then the status
+will transition from <tt>READY_CLEAN</tt> to <tt>READY_DIRTY</tt>.</p>
+<div class='note'><p> Dirty states always indicate that the record needs to be committed back
+to the server.
 
-contact.set('firstName', 'Jack');
-</pre></div><p>In order to be able to update record attributes the record has to be in a <tt>READY</tt> state. If you update an attribute of a newly created record, the status will still be <tt>READY_NEW</tt>. If you update an attribute of a record that was previously loaded from the server or committed to the server, then the status will transition from <tt>READY_CLEAN</tt> to <tt>READY_DIRTY</tt>.</p>
-<div class="note"><p>Dirty states always indicate that the record needs to be committed back to the server.</p></div>
-<h4 id="destroying-records">4.3 Destroying Records</h4>
+</p></div>
+
+
+
+<h4 id='-Destroying-Records-'>4.3 -  Destroying Records
+</h4>
+
+
 <p>To delete a certain record, just call the <tt>destroy</tt> method on it:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
+<pre class="highlighted"><div class="code_container"><code class="javascript">contact.destroy();</code></div></pre>
+<p>Just as when updating a record, the record has to be in a <tt>READY</tt> state to be
+able to be destroyed. If you destroy a newly created record (which was not yet
+committed to the server) the status will transition from <tt>READY_NEW</tt>
+to <tt>DESTROYED_CLEAN</tt>, indicating that there is no need to tell the server about
+the destroy, since it never knew about this record in the first place. If you
+destroy a record loaded from the server, then the state will transition
+from <tt>READY_CLEAN</tt>  (or <tt>READY_DIRTY</tt> if you changed it before)
+to <tt>DESTROYED_DIRTY</tt>, indicating that the server needs to be notified about this
+destroy action.</p>
+<h4 id='-Getting-Information-about-Records-'>4.4 -  Getting Information about Records
+</h4>
 
-contact.destroy();
-</pre></div><p>Just as when updating a record, the record has to be in a <tt>READY</tt> state to be able to be destroyed. If you destroy a newly created record (which was not yet committed to the server) the status will transition from <tt>READY_NEW</tt> to <tt>DESTROYED_CLEAN</tt>, indicating that there is no need to tell the server about the destroy, since it never knew about this record in the first place. If you destroy a record loaded from the server, then the state will transition from <tt>READY_CLEAN</tt>  (or <tt>READY_DIRTY</tt> if you changed it before) to <tt>DESTROYED_DIRTY</tt>, indicating that the server needs to be notified about this destroy action.</p>
-<h4 id="getting-information-about-records">4.4 Getting Information about Records</h4>
-<p>You can get the ID, the store key and the status of a record by calling the <tt>get</tt> method on the respective properties:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
 
-id = contact.get('id');
-storeKey = contact.get('storeKey');
-status = contact.get('status');
-</pre></div><p>To test if the record is currently in a certain state, use JavaScript&#8217;s binary operators:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
+<p>You can get the ID, the store key and the status of a record by calling the
+ <tt>get</tt> method on the respective properties:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">id = contact.get(<span class="string">'id'</span>);
+storeKey = contact.get(<span class="string">'storeKey'</span>);
+status = contact.get(<span class="string">'status'</span>);</code></div></pre>
+<p>To test if the record is currently in a certain state, use JavaScript&#39;s binary
+operators:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">status = contact.get(<span class="string">'status'</span>);
 
-status = contact.get('status');
-
-// checks if the record is in any READY state
-if (status &amp; SC.Record.READY) {
+<span class="comment">// checks if the record is in any READY state</span>
+<span class="keyword">if</span> (status &amp; SC.Record.READY) { 
 
 }
 
-// checks if the record is in the READY_NEW state
-if (status === SC.Record.READY_NEW) {
+<span class="comment">// checks if the record is in the READY_NEW state</span>
+<span class="keyword">if</span> (status === SC.Record.READY_NEW) { 
 
-}
-</pre></div>
-<div class="note"><p>For a complete list of record state constants see the <a href="http://docs.sproutcore.com/symbols/SC.Record.html">documentation of the SC.Record class</a>.</p></div>
-<h3 id="finding-records-in-the-store">5 Finding Records in the Store</h3>
-<p>Because the store manages all records in memory, you can query it for records of a certain type, records with a certain ID or more complex search criteria.</p>
-<h4 id="finding-a-specific-record-by-id">5.1 Finding a Specific Record by ID</h4>
-<p>If you know the type and the ID of the record you want to retrieve, you can just hand these two parameters to the store&#8217;s <tt>find</tt> method:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
+}</code></div></pre>
+<div class='note'><p> For a complete list of record state constants see the
+<a href="http://docs.sproutcore.com/symbols/SC.Record.html">documentation of the SC.Record class</a>.
 
-contact = App.store.find(App.Contact, 1);
-</pre></div><p>This statement returns the record of type <tt>App.Contact</tt> with the ID 1. If the record does not exist, then the return value will be <tt>null</tt>.</p>
-<div class="warning"><p>When <ins>find</ins> is called with a record type and an ID as arguments, it only looks for records of exactly this type. It will not return records which type is a subclass of the specified record type.</p></div>
-<h4 id="finding-all-records-of-a-certain-type">5.2 Finding All Records of a Certain Type</h4>
-<p>To find all records of one record type, just pass that type to the <tt>find</tt> method:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
+</p></div>
 
-contacts = App.store.find(App.Contact);
-</pre></div><p>If you want to find all records of several record types, pass an array of record types to the <tt>find</tt> method:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
 
-contactsAndAddresses = App.store.find(
+
+<h3 id='-Finding-Records-in-the-Store-'>5 -  Finding Records in the Store
+</h3>
+
+
+<p>Because the store manages all records in memory, you can query it for records
+of a certain type, records with a certain ID or more complex search criteria.</p>
+<h4 id='-Finding-a-Specific-Record-by-ID-'>5.1 -  Finding a Specific Record by ID
+</h4>
+
+
+<p>If you know the type and the ID of the record you want to retrieve, you can
+just hand these two parameters to the store&#39;s <tt>find</tt> method:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">contact = App.store.find(App.Contact, <span class="number">1</span>);</code></div></pre>
+<p>This statement returns the record of type <tt>App.Contact</tt> with the ID 1. If the
+record does not exist, then the return value will be <tt>null</tt>. </p>
+<div class='warning'><p> When <tt>find</tt> is called with a record type and an ID as arguments, it
+only looks for records of exactly this type. It will not return records which
+type is a subclass of the specified record type.
+
+</p></div>
+
+
+
+<h4 id='-Finding-All-Records-of-a-Certain-Type-'>5.2 -  Finding All Records of a Certain Type
+</h4>
+
+
+<p>To find all records of one record type, just pass that type to the <tt>find</tt>
+method:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">contacts = App.store.find(App.Contact);</code></div></pre>
+<p>If you want to find all records of several record types, pass an array of
+record types to the <tt>find</tt> method:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">contactsAndAddresses = App.store.find(
   [App.Contact, App.Address]
-);
-</pre></div><p>You can also find all records of a certain type and all its subclasses:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
+);</code></div></pre>
+<p>You can also find all records of a certain type and all its subclasses:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">allRecords = App.store.find(SC.Record);</code></div></pre>
+<p>The above statement returns all records in your application, because we are
+asking for all records of type <tt>SC.Record</tt>, which is SproutCore&#39;s base model
+class.</p>
+<p>Internally <tt>find</tt> converts the specified record types to a query. <tt>find</tt> is
+just a convenient method to save some characters of typing required to create
+the query yourself. Read on in the next section how to do this and to learn
+more about the return type of <tt>find</tt>.</p>
+<h4 id='-Using-Queries-'>5.3 -  Using Queries
+</h4>
 
-allRecords = App.store.find(SC.Record);
-</pre></div><p>The above statement returns all records in your application, because we are asking for all records of type <tt>SC.Record</tt>, which is SproutCore&#8217;s base model class.</p>
-<p>Internally <tt>find</tt> converts the specified record types to a query. <tt>find</tt> is just a convenient method to save some characters of typing required to create the query yourself. Read on in the next section how to do this and to learn more about the return type of <tt>find</tt>.</p>
-<h4 id="using-queries">5.3 Using Queries</h4>
-<p>SproutCore features a <span class="caps">SQL</span>-like query language to facilitate more complex queries to the store. To demonstrate, let us first translate the <tt>find</tt> calls of the previous section to using queries, as <tt>find</tt> does internally.</p>
-<p>To build a query which looks for all records of a certain type, you just call <tt>SC.Query.local</tt> with this record type as argument and pass this query to <tt>find</tt>:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
 
-query = SC.Query.local(App.Contact);
-contacts = App.store.find(query);
-</pre></div><p>As you can see, the method from the previous section of directly passing the record type to the <tt>find</tt> method just saves you the call of <tt>SC.Query.local</tt>. Querying for multiple record types or all records follows the same pattern:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
-query = SC.Query.local([App.Contact, App.Address]);
+<p>SproutCore features a SQL-like query language to facilitate more complex
+queries to the store. To demonstrate, let us first translate the <tt>find</tt> calls
+of the previous section to using queries, as <tt>find</tt> does internally. </p>
+<p>To build a query which looks for all records of a certain type, you just
+call <tt>SC.Query.local</tt> with this record type as argument and pass this query
+to <tt>find</tt>:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">query = SC.Query.local(App.Contact);
+contacts = App.store.find(query);</code></div></pre>
+<p>As you can see, the method from the previous section of directly passing the
+record type to the <tt>find</tt> method just saves you the call of <tt>SC.Query.local</tt>.
+Querying for multiple record types or all records follows the same pattern:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">query = SC.Query.local([App.Contact, App.Address]);
 contactsAndAddresses = App.store.find(query);
 
 query = SC.Query.local(SC.Record);
-allRecords = App.store.find(query);
-</pre></div><p>Whenever you call <tt>SC.Store</tt>&#8217;s <tt>find</tt> method with a query (or using one of the convenient ways from the previous section) it returns a <tt>SC.RecordArray</tt>. As the name indicates, <tt>SC.RecordArray</tt> implements <tt>SC.Array</tt> and therefore you can use it like a normal read-only array. For example:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
+allRecords = App.store.find(query);</code></div></pre>
+<p>Whenever you call <tt>SC.Store</tt>&#39;s <tt>find</tt> method with a query (or using one of the
+convenient ways from the previous section) it returns a <tt>SC.RecordArray</tt>. As
+the name indicates, <tt>SC.RecordArray</tt> implements <tt>SC.Array</tt> and therefore you
+can use it like a normal read-only array. For example:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">contacts.firstObject(); <span class="comment">// returns first result</span>
+contacts.objectAt(<span class="number">3</span>); <span class="comment">// returns fourth result</span>
+contacts.lastObject(); <span class="comment">// returns last result</span></code></div></pre>
+<p>Please refer to the <a href="http://docs.sproutcore.com/symbols/SC.Array.html">documentation of SC.Array</a>
+to learn more about the array access methods.</p>
+<div class='note'><p> If the query was not yet fetched from the server, the store automatically
+forwards it to the data source to load the data from the server.
 
-contacts.firstObject(); // returns first result
-contacts.objectAt(3); // returns fourth result
-contacts.lastObject(); // returns last result
-</pre></div><p>Please refer to the <a href="http://docs.sproutcore.com/symbols/SC.Array.html">documentation of SC.Array</a> to learn more about the array access methods.</p>
-<div class="note"><p>If the query was not yet fetched from the server, the store automatically forwards it to the data source to load the data from the server.</p></div>
+</p></div>
 
-<div class="note"><p>Objects in an <ins>SC.RecordArray</ins> are automatically updated by the store when you add or remove records to or from the store which match the corresponding query.</p></div>
-<h5 id="conditions">5.3.1 Conditions</h5>
+
+
+<div class='note'><p> Objects in an <tt>SC.RecordArray</tt> are automatically updated by the store
+when you add or remove records to or from the store which match the
+corresponding query.
+
+</p></div>
+
+
+
+<h5 id='-Conditions-'>5.3.1 -  Conditions
+</h5>
+
+
 <p>You can limit the results of a query to match certain conditions:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
-query = SC.Query.local(App.Contacts, {
-  conditions: 'firstName = &quot;Florian&quot;'
+<pre class="highlighted"><div class="code_container"><code class="javascript">query = SC.Query.local(App.Contacts, { 
+  conditions: <span class="string">'firstName = "Florian"'</span> 
 });
 
-results = App.store.find(query);
-</pre></div><p>The above query returns all records of type <tt>App.Contacts</tt> and subclasses of this type where the <tt>firstName</tt> attribute matches the value &#8220;Florian&#8221;. You can combine several conditions using the logical operators <tt>AND</tt>, <tt>OR</tt> and <tt>NOT</tt> as well as parentheses <tt>(</tt> and <tt>)</tt> for grouping:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
-query = SC.Query.local(App.Contacts, {
-  conditions: 'firstName = &quot;Florian&quot; AND lastName = &quot;Kugler&quot;'
+results = App.store.find(query);</code></div></pre>
+<p>The above query returns all records of type <tt>App.Contacts</tt> and subclasses of
+this type where the <tt>firstName</tt> attribute matches the value &quot;Florian&quot;. You can
+combine several conditions using the logical operators <tt>AND</tt>, <tt>OR</tt> and <tt>NOT</tt> as
+well as parentheses <tt>(</tt> and <tt>)</tt> for grouping:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">query = SC.Query.local(App.Contacts, { 
+  conditions: <span class="string">'firstName = "Florian" AND lastName = "Kugler"'</span> 
 });
 
-query = SC.Query.local(App.Contacts, {
-  conditions: '(firstName = &quot;Florian&quot; AND lastName = &quot;Kugler&quot;) OR age &gt; 30'
-});
-</pre></div><p>However, you will not want to hard-code the query conditions, but to make use of variables containing the desired values. For this you can use query parameters.</p>
-<p>SproutCore handles two different types of query parameters: sequential and named parameters. Let&#8217;s rephrase the above query using sequential parameters:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
-query = SC.Query.local(App.Contacts, {
-  conditions: '(firstName = %@ AND lastName = %@) OR age &gt; %@',
-  parameters: ['Florian', 'Kugler', 30]
-});
-</pre></div><p>The elements of the <tt>parameters</tt> array will be inserted sequentially at the positions of the <tt>%@</tt> placeholders. Now lets do the same with named parameters:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
-query = SC.Query.local(App.Contacts, {
-  conditions: '(firstName = {first} AND lastName = {last}) ' + 'OR age &gt; {age}',
-  parameters: {
-    first: 'Florian',
-    last: 'Kugler',
-    age: 30
+query = SC.Query.local(App.Contacts, { 
+  conditions: <span class="string">'(firstName = "Florian" AND lastName = "Kugler") OR age &gt; 30'</span> 
+});</code></div></pre>
+<p>However, you will not want to hard-code the query conditions, but to make use
+of variables containing the desired values. For this you can use query
+parameters.</p>
+<p>SproutCore handles two different types of query parameters: sequential and
+named parameters. Let&#39;s rephrase the above query using sequential parameters:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">query = SC.Query.local(App.Contacts, { 
+  conditions: <span class="string">'(firstName = %@ AND lastName = %@) OR age &gt; %@'</span>,
+  parameters: [<span class="string">'Florian'</span>, <span class="string">'Kugler'</span>, <span class="number">30</span>]
+});</code></div></pre>
+<p>The elements of the <tt>parameters</tt> array will be inserted sequentially at the
+positions of the <tt>%@</tt> placeholders. Now lets do the same with named parameters:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">query = SC.Query.local(App.Contacts, { 
+  conditions: <span class="string">'(firstName = {first} AND lastName = {last}) '</span> + <span class="string">'OR age &gt; {age}'</span>,
+  parameters: { 
+    first: <span class="string">'Florian'</span>, 
+    last: <span class="string">'Kugler'</span>, 
+    age: <span class="number">30</span>
   }
-});
-</pre></div><p>Which of these methods you use is mainly a matter of personal preference and the complexity of your query.</p>
+});</code></div></pre>
+<p>Which of these methods you use is mainly a matter of personal preference and
+the complexity of your query.</p>
 <p>The arguments inside the query conditions can be of the following types:</p>
 <ul>
-	<li>Attribute names of the record type queried for.</li>
-	<li><tt>null</tt> and <tt>undefined</tt>.</li>
-	<li><tt>true</tt> and <tt>false</tt>.</li>
-	<li>Integer and floating point numbers.</li>
-	<li>Strings (single or double quoted).</li>
+<li>Attribute names of the record type queried for.</li>
+<li><tt>null</tt> and <tt>undefined</tt>.</li>
+<li><tt>true</tt> and <tt>false</tt>.</li>
+<li>Integer and floating point numbers.</li>
+<li>Strings (single or double quoted).</li>
 </ul>
 <p>Furthermore you can use the following comparison operators:</p>
 <ul>
-	<li><tt>=</tt>, <tt>!=</tt>, <tt>&lt;</tt>, <tt>&lt;=</tt>, <tt>&gt;=</tt>.</li>
-	<li><tt>BEGINS_WITH</tt> (checks if a string starts with another one).</li>
-	<li><tt>ENDS_WITH</tt> (checks if a string ends with another one).</li>
-	<li><tt>CONTAINS</tt> (checks if a string contains another one, or if an object is in an array).</li>
-	<li><tt>MATCHES</tt> (checks if a string is matched by a regexp, you will have to use a parameter to insert the regexp).</li>
-	<li><tt>ANY</tt> (checks if the thing on its left is contained in the array on its right, you will have to use a parameter to insert the array).</li>
-	<li><tt>TYPE_IS</tt> (unary operator expecting a string containing the name of a model class on its right side, only records of this type will match).</li>
+<li><tt>=</tt>, <tt>!=</tt>, <tt>&lt;</tt>, <tt>&lt;=</tt>, <tt>&gt;=</tt>.</li>
+<li><tt>BEGINS_WITH</tt> (checks if a string starts with another one).</li>
+<li><tt>ENDS_WITH</tt> (checks if a string ends with another one).</li>
+<li><tt>CONTAINS</tt> (checks if a string contains another one, or if an object is in an array).</li>
+<li><tt>MATCHES</tt> (checks if a string is matched by a regexp, you will have to use a parameter to insert the regexp).</li>
+<li><tt>ANY</tt> (checks if the thing on its left is contained in the array on its right, you will have to use a parameter to insert the array).</li>
+<li><tt>TYPE_IS</tt> (unary operator expecting a string containing the name of a model class on its right side, only records of this type will match).</li>
 </ul>
-<h5 id="sorting">5.3.2 Sorting</h5>
+<h5 id='-Sorting-'>5.3.2 -  Sorting
+</h5>
+
+
 <p>To obtain ordered query results you can simply add the <tt>orderBy</tt> option to your query:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
+<pre class="highlighted"><div class="code_container"><code class="javascript">query = SC.Query.local(App.Contacts, { 
+  conditions: <span class="string">'age &gt; 30'</span>,
+  orderBy: <span class="string">'lastName, firstName ASC'</span>
+});</code></div></pre>
+<p>In this case the results are sorted in an ascending order, first by last name
+and second by first name. If you omit the <tt>ASC</tt> keyword, the results are by
+default sorted in an ascending order. To sort them in descending order, put the
+keyword <tt>DESC</tt> after the name of the property.</p>
+<div class='note'><p> If you need a custom sorting order, you can register your own comparison
+operator for a specific model attribute using <tt>SC.Query.registerComparison</tt>.
+Please refer to the
+<a href="http://docs.sproutcore.com/symbols/SC.Query.html#.registerComparison">documentation</a>
+for further details.
 
-query = SC.Query.local(App.Contacts, {
-  conditions: 'age &gt; 30',
-  orderBy: 'lastName, firstName ASC'
-});
-</pre></div><p>In this case the results are sorted in an ascending order, first by last name and second by first name. If you omit the <tt>ASC</tt> keyword, the results are by default sorted in an ascending order. To sort them in descending order, put the keyword <tt>DESC</tt> after the name of the property.</p>
-<div class="note"><p>If you need a custom sorting order, you can register your own comparison operator for a specific model attribute using <ins>SC.Query.registerComparison</ins>. Please refer to the <a href="http://docs.sproutcore.com/symbols/SC.Query.html#.registerComparison">documentation</a> for further details.</p></div>
-<h5 id="scoped-queries">5.3.3 Scoped Queries</h5>
-<p>All the queries you used until now will cause the store to match all records in memory with the query&#8217;s conditions. You can also build one query on top of another to construct more efficient query trees:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
+</p></div>
 
-query1 = SC.Query.local(App.Contacts, {
-  conditions: 'age &gt; 30',
+
+
+<h5 id='-Scoped-Queries-'>5.3.3 -  Scoped Queries
+</h5>
+
+
+<p>All the queries you used until now will cause the store to match all records in
+memory with the query&#39;s conditions. You can also build one query on top of
+another to construct more efficient query trees:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">query1 = SC.Query.local(App.Contacts, { 
+  conditions: <span class="string">'age &gt; 30'</span>,
 });
 
 aboveThirty = App.store.find(query1);
 
 query2 = SC.Query.local(App.Contacts, {
-	conditions: 'lastName BEGINS_WITH &quot;K&quot;'
+  conditions: <span class="string">'lastName BEGINS_WITH "K"'</span>
 })
 
-results = aboveThirty.find(query2);
-</pre></div><p>The second query is based on the first one by calling <tt>find</tt> on the <tt>RecordArray</tt> of the first query instead of <tt>App.store</tt>. The second query matches the results of the first query against its own conditions. In this case it would return all <tt>Contact</tt> records where <tt>age</tt> is greater than 30 and the last name starts with the letter &#8220;K&#8221;.</p>
-<div class="note"><p>Scope queries can be thought as chained queries using the <span class="caps">AND</span> logical operator.</p></div>
-<h5 id="local-vs-remote-queries">5.3.4 Local vs. Remote Queries</h5>
-<p>You will have noticed the keyword <tt>local</tt> in the <tt>SC.Query.local</tt> call we used until now to create the queries. Actually the keyword <tt>local</tt> is somewhat confusing, because local queries do not act exclusively on the in-memory store but also call the data source to fetch records from the server. The main characteristic of local queries is that the store automatically updates their results whenever the contents of the local in-memory store change.</p>
-<p>Remote queries (build with <tt>SC.Query.remote</tt>), on the other hand, return a <tt>SC.RecordArray</tt> which is not updated automatically. &#8220;Remote&#8221; doesn&#8217;t mean necessarily that the results have to be fetched from a remote server. They could also be loaded from a local browser storage. It&#8217;s admittedly a bad choice of names.</p>
-<div class="warning"><p>You should use local queries in almost all cases unless you know what you&#8217;re doing.</p></div>
-<h4 id="extending-sproutcore-s-query-language">5.4 Extending SproutCore&#8217;s Query Language</h4>
-<p>If SproutCore&#8217;s built-in query operators are not sufficient for your use case, you can easily extend the query language. For example, by default there are no bit-wise operators, so let&#8217;s implement a <tt>BITAND</tt> operator which evaluates to <tt>true</tt> if the bit-wise and of the two arguments is unequal to zero:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
+results = aboveThirty.find(query2);</code></div></pre>
+<p>The second query is based on the first one by calling <tt>find</tt> on
+the <tt>RecordArray</tt> of the first query instead of <tt>App.store</tt>. The second query
+matches the results of the first query against its own conditions. In this case
+it would return all <tt>Contact</tt> records where <tt>age</tt> is greater than 30 and the
+last name starts with the letter &quot;K&quot;.</p>
+<div class='note'><p> Scope queries can be thought as chained queries using the AND logical
+operator.
 
-SC.Query.registerQueryExtension('BITAND', {
-  reservedWord: true,
-  leftType: 'PRIMITIVE',
-  rightType: 'PRIMITIVE',
-  evalType: 'BOOLEAN',
+</p></div>
 
-  evaluate: function (r,w) {
-    var left = this.leftSide.evaluate(r,w);
-    var right = this.rightSide.evaluate(r,w);
-    return (left &amp; right) !== 0;
+
+
+<h5 id='-Local-vs--Remote-Queries-'>5.3.4 -  Local vs. Remote Queries
+</h5>
+
+
+<p>You will have noticed the keyword <tt>local</tt> in the <tt>SC.Query.local</tt> call we used
+until now to create the queries. Actually the keyword <tt>local</tt> is somewhat
+confusing, because local queries do not act exclusively on the in-memory store
+but also call the data source to fetch records from the server. The main
+characteristic of local queries is that the store automatically updates their
+results whenever the contents of the local in-memory store change.</p>
+<p>Remote queries (build with <tt>SC.Query.remote</tt>), on the other hand, return
+a <tt>SC.RecordArray</tt> which is not updated automatically. &quot;Remote&quot; doesn&#39;t mean
+necessarily that the results have to be fetched from a remote server. They
+could also be loaded from a local browser storage. It&#39;s admittedly a bad choice
+of names.</p>
+<div class='warning'><p> You should use local queries in almost all cases unless you know what
+you&#39;re doing.
+
+</p></div>
+
+
+
+<h4 id='-Extending-SproutCore-s-Query-Language-'>5.4 -  Extending SproutCore&#39;s Query Language
+</h4>
+
+
+<p>If SproutCore&#39;s built-in query operators are not sufficient for your use case,
+you can easily extend the query language. For example, by default there are no
+bit-wise operators, so let&#39;s implement a <tt>BITAND</tt> operator which evaluates
+to <tt>true</tt> if the bit-wise and of the two arguments is unequal to zero:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">SC.Query.registerQueryExtension(<span class="string">'BITAND'</span>, {
+  reservedWord: <span class="literal">true</span>,
+  leftType: <span class="string">'PRIMITIVE'</span>,
+  rightType: <span class="string">'PRIMITIVE'</span>,
+  evalType: <span class="string">'BOOLEAN'</span>,
+
+  evaluate: <span class="function"><span class="keyword">function</span> <span class="params">(r,w)</span> {</span>
+    <span class="keyword">var</span> left = <span class="keyword">this</span>.leftSide.evaluate(r,w);
+    <span class="keyword">var</span> right = <span class="keyword">this</span>.rightSide.evaluate(r,w);
+    <span class="keyword">return</span> (left &amp; right) !== <span class="number">0</span>;
   }
-});
-</pre></div><p>We call <tt>SC.Query.registerQueryExtension</tt> to register the new operator with the name <tt>BITAND</tt> as first argument. The key components of the hash passed as second argument are <tt>evalType</tt> and <tt>evaluate</tt>. <tt>evalType</tt> is either <tt>BOOLEAN</tt> (if you return a boolean value in <tt>evaluate</tt>) or <tt>PRIMITIVE</tt> (if you return e.g. a number or a string). The actual operation is implemented in the <tt>evaluate</tt> function after the operands are retrieved by <tt>this.leftSide.evaluate(r,w)</tt> and <tt>this.rightSide.evaluate(r,w)</tt>.</p>
-<div class="note"><p>Look at the <a href="https://github.com/sproutcore/sproutcore/blob/master/frameworks/datastore/system/query.js">source of SC.Query</a> for more examples of how to implement query operators.</p></div>
-<h3 id="changelog">6 Changelog</h3>
+});</code></div></pre>
+<p>We call <tt>SC.Query.registerQueryExtension</tt> to register the new operator with the
+name <tt>BITAND</tt> as first argument. The key components of the hash passed as
+second argument are <tt>evalType</tt> and <tt>evaluate</tt>. <tt>evalType</tt> is either <tt>BOOLEAN</tt>
+(if you return a boolean value in <tt>evaluate</tt>) or <tt>PRIMITIVE</tt> (if you return
+e.g. a number or a string). The actual operation is implemented in
+the <tt>evaluate</tt> function after the operands are retrieved
+by <tt>this.leftSide.evaluate(r,w)</tt> and <tt>this.rightSide.evaluate(r,w)</tt>. </p>
+<div class='note'><p> Look at the
+<a href="https://github.com/sproutcore/sproutcore/blob/master/frameworks/datastore/system/query.js">source of SC.Query</a>
+for more examples of how to implement query operators.
+
+</p></div>
+
+
+
+<h3 id='-Changelog-'>6 -  Changelog
+</h3>
+
+
 <ul>
-	<li>February 6, 2011: initial version by <a href="credits.html#fkugler">Florian Kugler</a></li>
-	<li>March    2, 2011: added filenames and small fixes by <a href="credits.html#topherfangio">Topher Fangio</a></li>
-	<li>March 2, 2011: minor corrections by <a href="credits.html#fkugler">Florian Kugler</a></li>
+<li>February 6, 2011: initial version by <a href="credits.html#dkduck">Florian Kugler</a></li>
+<li>March    2, 2011: added filenames and small fixes by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+<li>March 2, 2011: minor corrections by <a href="credits.html#dkduck">Florian Kugler</a></li>
+<li>October 23, 2013: converted to Markdown format for DocPad guides by <a href="credits.html#topherfangio">Topher Fangio</a></li>
 </ul>
 
-      </div>
+        </div>
+        <!-- TODO: re-add index_items //-->
         <div id="subCol">
-          <h3 class="chapter"><img src="images/graphics/chapters.png" alt="" />Chapters</h3>
-          <ol class="chapters">
-            <li><a href="#models-records-and-the-store"><p>Models, Records and the Store</p>
-</a></li><li><a href="#anatomy-of-records"><p>Anatomy of Records</p>
-</a><ul><li><a href="#primary-record-states"><p>Primary Record States</p>
-</a></li></ul></li><li><a href="#defining-your-models"><p>Defining Your Models</p>
-</a><ul><li><a href="#attribute-types"><p>Attribute Types</p>
-</a></li> <li><a href="#record-ids"><p>Record Ids</p>
-</a></li> <li><a href="#relations"><p>Relations</p>
-</a></li> <li><a href="#other-properties-on-model-classes"><p>Other Properties on Model Classes</p>
-</a></li></ul></li><li><a href="#using-your-models"><p>Using Your Models</p>
-</a><ul><li><a href="#creating-records"><p>Creating Records</p>
-</a></li> <li><a href="#updating-records"><p>Updating Records</p>
-</a></li> <li><a href="#destroying-records"><p>Destroying Records</p>
-</a></li> <li><a href="#getting-information-about-records"><p>Getting Information about Records</p>
-</a></li></ul></li><li><a href="#finding-records-in-the-store"><p>Finding Records in the Store</p>
-</a><ul><li><a href="#finding-a-specific-record-by-id"><p>Finding a Specific Record by ID</p>
-</a></li> <li><a href="#finding-all-records-of-a-certain-type"><p>Finding All Records of a Certain Type</p>
-</a></li> <li><a href="#using-queries"><p>Using Queries</p>
-</a></li> <li><a href="#extending-sproutcore-s-query-language"><p>Extending SproutCore&#8217;s Query Language</p>
-</a></li></ul></li><li><a href="#changelog"><p>Changelog</p>
-</a></li>
+          <h3 class="chapter"><img src="images/graphics/chapters.png" alt="">Chapters</h3>
+          <ol class='chapters'>
+            
+              <li>
+                <a href='#-Models--Records-and-the-Store-'><p> Models, Records and the Store
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Anatomy-of-Records-'><p> Anatomy of Records
+</p></a>
+                <ul>
+                  
+                    <li><a href='#-Primary-Record-States-'><p> Primary Record States
+</p></a></li>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Defining-Your-Models-'><p> Defining Your Models
+</p></a>
+                <ul>
+                  
+                    <li><a href='#-Attribute-Types-'><p> Attribute Types
+</p></a></li>
+                  
+                    <li><a href='#-Record-Ids-'><p> Record Ids
+</p></a></li>
+                  
+                    <li><a href='#-Relations-'><p> Relations
+</p></a></li>
+                  
+                    <li><a href='#-Other-Properties-on-Model-Classes-'><p> Other Properties on Model Classes
+</p></a></li>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Using-Your-Models-'><p> Using Your Models
+</p></a>
+                <ul>
+                  
+                    <li><a href='#-Creating-Records-'><p> Creating Records
+</p></a></li>
+                  
+                    <li><a href='#-Updating-Records-'><p> Updating Records
+</p></a></li>
+                  
+                    <li><a href='#-Destroying-Records-'><p> Destroying Records
+</p></a></li>
+                  
+                    <li><a href='#-Getting-Information-about-Records-'><p> Getting Information about Records
+</p></a></li>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Finding-Records-in-the-Store-'><p> Finding Records in the Store
+</p></a>
+                <ul>
+                  
+                    <li><a href='#-Finding-a-Specific-Record-by-ID-'><p> Finding a Specific Record by ID
+</p></a></li>
+                  
+                    <li><a href='#-Finding-All-Records-of-a-Certain-Type-'><p> Finding All Records of a Certain Type
+</p></a></li>
+                  
+                    <li><a href='#-Using-Queries-'><p> Using Queries
+</p></a></li>
+                  
+                    <li><a href='#-Extending-SproutCore-s-Query-Language-'><p> Extending SproutCore's Query Language
+</p></a></li>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Changelog-'><p> Changelog
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
           </ol>
         </div>
+      </div>
     </div>
-  </div>
 
-  <hr class="hide" />
+    <hr class="hide" />
+
 	  <footer>
 	    <div class="container">
 	      <div class="col">
@@ -675,33 +1004,29 @@ SC.Query.registerQueryExtension('BITAND', {
 	    </div>
 	  </footer>
 
-  <script src="http://code.jquery.com/jquery-1.6.min.js" type="text/javascript" charset="utf-8"></script>
-  <script type="text/javascript" src="javascripts/sproutGuides.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushJScript.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushCss.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
-  <script type="text/javascript">
-    SyntaxHighlighter.all()
+    <script type='text/javascript' src='/javascripts/jquery.min.js'></script>
 
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-19584397-1']);
-    _gaq.push(['_setDomainName', '.sproutcore.com']);
-    _gaq.push(['_setAllowHash', false]);
-    _gaq.push(['_setAllowLinker', true]);
-    _gaq.push(['_trackPageview']);
+    
 
-    (function() {
-      var ga = document.createElement('script');
-      ga.type = 'text/javascript';
-      ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl': 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-</body>
+    <script type='text/javascript'>
+      /*
+       * Make the guides link clickable
+       */
+      function guideMenu(e){
+        if (document.getElementById('guides').style.display == "none") {
+          document.getElementById('guides').style.display = "block";
+          document.getElementById('guidesArrow').innerHTML = "&#9662;";
+          $('body').click(function(e){ guideMenu(e); });
+        } else {
+          document.getElementById('guides').style.display = "none";
+          document.getElementById('guidesArrow').innerHTML = "&#9656;";
+          $('body').unbind('click');
+        }
+        return false;
+      }
+
+      $('#guidesMenu, .guidesMenu').click(guideMenu);
+    </script>
+
+  </body>
 </html>

@@ -102,195 +102,108 @@
         <div id="mainCol">
           <div class='headerSection'>
             
-              <h2>Documentation Guidelines</h2>
+              <h2>Connecting to a Server</h2>
             
 
             
-              <p>This guide will walk you through writing documentation for your SproutCore classes in a format that is friendly to jsdoc-toolkit, the library used for generating documentation from code.</p>
+              <p>There are a number of options for connecting your SproutCore application to a server. Here we give an overview of the options that you have.</p>
             
 
             
           </div>
 
-          <h3 id='-Overview-'>1 -  Overview
-</h3>
-
-
-<p>SproutCore uses the <a href="http://code.google.com/p/jsdoc-toolkit/">jsdoc-toolkit</a> to
-generate its documentation. As such, your SproutCore classes should follow
-strict code-documenting formatting guidelines in order to properly generate
-your HTML documentation. This document outlines the proper format you should
-use.</p>
-<h3 id='-Classes-'>2 -  Classes
-</h3>
-
-
-<p>Classes must always start with an <tt>@class</tt> directive, followed by optional the
-class description. You can use
-<a href="http://daringfireball.net/projects/markdown/">Markdown</a> to style your
-description (add headings, paragraphs, code, etc.)</p>
-<p>JsDoc Toolkit also supports tags in your comments to add metadata about your
-class. For example, you can specify who the author of the class is, what
-classes it inherits from,  what classes are related, and what version of the
-frameworks it’s been available since.</p>
-<h4 id='-Common-and-Supported-Markdown-Syntax-'>2.1 -  Common and Supported Markdown Syntax
-</h4>
-
-
-<ul>
-<li>For code samples, make sure you indent the code block further than the other
-text</li>
-<li>For headers, add three dashes (<tt>---</tt>) for 2nd level headers, and three
-(<tt>===</tt>) for 1st level headers. These go on the subsequent line</li>
-<li>For list, prefix each line with a dash (<tt>-</tt>)</li>
-</ul>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"Sample Class Documentation"</span></div></span>
-<span class="comment">/**
-  @class
-
-  Class Description
-  ======
-
-  Overview
-  ----------
-
-  This is a sample description. Here’s some code:
-
-         SC.Store.find(...)
-
-  And here’s a list:
-
-  - Eggs
-  - Butter
-
-  @deprecated This class has been deprecated. Please use SC.NewRequest
-  @see &lt;a href="http://getfirebug.com/logging.html"&gt;Firebug Logging Reference&lt;/a&gt;
-  @extends SC.Object
-  @author Majd Taby
-  @since SproutCore 1.0
-*/</span>
-
-SC.Request = SC.Object.extend(
- <span class="comment">/** @scope SC.Request.prototype */</span>{
- ...
-});</code></div></pre>
-<p>The <tt>@scope</tt> definition is mandatory, and it defines what class/namespace the
-proceeding code documents.</p>
-<p>You can define multiple <tt>@see</tt>/<tt>extends</tt>/<tt>author</tt> directives for each class, as
-you see fit.</p>
-<p>WARN: You cannot put any javascript between your documentation and the class
-it’s documenting. Otherwise, JsDoc will get confused by what you’re trying to
-document.</p>
-<h4 id='-Instance-Methods-'>2.2 -  Instance Methods
-</h4>
-
-
-<p>Documenting methods follows the same general structure as a class, but with a
-different set of required/optional directives. You start off by describing the
-method’s functionality, followed by the parameters, and then the return types.</p>
-<p>It’s important to keep in mind that the jsdoc toolkit does not parse javascript
-code. This means that you need to put the name of the parameters in the
-documentation, and it’s your responsibility to keep them up to date as you
-update the method. </p>
-<p>In the example below, the response property is marked as optional by wrapping
-the name in square brackets.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"Sample Instance Method Documentation"</span></div></span>
-<span class="comment">/**
-  Method description.
-
-  @param {SC.Request}   request     A copy of the request, frozen.
-  @param {SC.Response} [response]   An optional parameter
-  @param {SC.Response} [foobar]     A sample parameter
-
-  @throws {SC.Exception} SC.RequestNotValidException
-  @returns {Boolean} Yes on success, NO on failure.
-*/</span>
-didSend: <span class="keyword">function</span>(request, response) {},</code></div></pre>
-<h4 id='-Class-Methods-'>2.3 -  Class Methods
-</h4>
-
-
-<p>Class methods are usually implemented by mixing-in extra methods to an existing
-class. For these methods/properties to show up in the same location in the
-generated output, you need to add a <tt>@scope</tt> declaration just as you did with
-the class.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"Sample Class Method Documentation"</span></div></span>
-<span class="comment">/**
-  @class
-
-   ...
-*/</span>
-SC.Store = SC.Object.extend(<span class="comment">/** @scope SC.Store.prototype */</span>{...});
-
-SC.Store.mixin(<span class="comment">/** @scope SC.Store.prototype */</span>{...})</code></div></pre>
-<h4 id='-Properties-'>2.4 -  Properties
-</h4>
-
-
-<p>Properties are arguably the simplest entity to document. You simply need to
-write a description of what the property represents, and what type it is. You
-can optionally provide a default value.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"Sample Property Documentation"</span></div></span>
-<span class="comment">/**
-  Description
-
-  @default YES
-  @type Boolean
-*/</span>
-isAsynchronous: YES,</code></div></pre>
-<div class='note'><p> Constants are documented using <tt>@constant</tt> but they don’t need a default
-value.
+          <div class='warning'><p> This is a Draft Copy, and although the information in here is
+correct, it may be incomplete in places.
 
 </p></div>
 
 
 
-<h4 id='-Computed-Properties-'>2.5 -  Computed Properties
-</h4>
-
-
-<p>Computed Properties are documented just like regular properties but they add
-the <tt>@field</tt> property.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"Sample Computed Property Documentation"</span></div></span>
-<span class="comment">/**
-  Description
-
-  @field
-  @default YES
-  @type Boolean
-*/</span>
-isAsynchronous: <span class="keyword">function</span>(){...</code></div></pre>
-<h3 id='-Testing-and-viewing-your-documentation-during-development-'>3 -  Testing and viewing your documentation during development
+<h3 id='-When-you-have-a-light-app--with-limited-server-needs-'>1 -  When you have a light app, with limited server needs
 </h3>
 
 
-<p>If, during development, you would like to test your documentation and see how
-it looks once it&#39;s generated, then you can use the SproutCore TextMate bundle
-available on &quot;github&quot;:<a href="https://github.com/sproutcore/sproutcore-tmbundle">https://github.com/sproutcore/sproutcore-tmbundle</a> which
-includes a Command to generate documentation for the current file you are
-viewing. To activate it, go to a jsdoc-documented javascript file, and click
-CMD <tt> CTRL </tt> G.</p>
-<div class='note'><p> Generating documentation in TextMate requires the Web Sharing feature
-of Mac OS X to be enabled since it uses apache to display your files.
-
-</p></div>
-
-
-
-<h4 id='-References-'>3.1 -  References
-</h4>
+<p>SproutCore includes a powerful model layer, called the datastore. SproutCore
+has special code in it&#39;s controller and view layers to make the datastore the
+most efficient source of data.</p>
+<p>Nevertheless, you don&#39;t have to use the datastore in your application. Like
+most high-quality frameworks, the datastore is an optional framework in
+SproutCore (though it is &quot;on&quot; by default).</p>
+<p>If you come from a jQuery (or other JS framework), you&#39;re probably used to
+making your own AJAX calls and handling the response yourself. Toolkits like
+<a href="http://backbonejs.org/">BackBone</a> work like this. If you
+have a small app, and feel more comfortable with this approach:</p>
+<p>Follow along with the <a href="no_store.html">Using a server without the store</a> Guide.</p>
+<h3 id='-Using-the-Store-'>2 -  Using the Store
+</h3>
 
 
+<p>However, if you are going to deal with more than a handful of data, or want to
+take advantage of relationships between data, then managing it all on your own
+quickly gets messy. One of SproutCore&#39;s strongest features is it&#39;s Data Store.
+The Store can hold all of your data in memory allowing you to search through
+it with <a href="records.html#using-queries">Queries</a>. It is also the central place
+for your data, allowing you to bind many different views to the same record
+and have changes propagated easily.</p>
+<p>Connecting your store to a server can be one of the most daunting tasks in
+creating your app:</p>
 <ul>
-<li><a href="http://code.google.com/p/jsdoc-toolkit/wiki/TagReference">JSDoc Tag Reference</a></li>
+<li>How do I know when to send a message to the server? </li>
+<li>Do I have to rewrite my server?</li>
 </ul>
-<h3 id='-Changelog-'>4 -  Changelog
+<p>There are some different choices depending on what setup you already have (if
+any).</p>
+<h4 id='-When-you-have-an-existing--server-based-MVC-app-'>2.1 -  When you have an existing, server-based MVC app
+</h4>
+
+
+<p>If you are coming to SproutCore with a server side app that you already have
+running, the fastest way of getting going is to contact your server and update
+the store to match based on the response. For example, if you want to update a
+record in the store, you would ask the server to update the record and when the
+update is successful, you would update the store locally.</p>
+<p>This is possible because SproutCore&#39;s datastore framework allows for nested
+stores. With a nested store, edits are &quot;buffered&quot; in the nested store. You
+would send the changes in the nested store to the server, and when it
+responds, update the base store and clear (or destroy) the nested store.</p>
+<p>This makes your &quot;base&quot; store a read-only copy of the server. You can push new
+data from the server into the base store at any time, update existing data, or
+delete data. Any <em>changes</em> to data are made in a nested store where they can
+easily be aborted or cleared.</p>
+<p>This puts the server 100% in control of the &quot;base&quot; store. There are techniques
+to keep your base store easily up to date, and to refresh parts of the store
+when needed. Very sophisticated apps can be built with this approach, and it
+is the most appropriate way to build a SproutCore application if you already
+have an existing server-based MVC app.</p>
+<p><em>We will have a guide for this soon.</em></p>
+<p>The downside to this approach is that your app will have to wait on responses
+from the server, meaning that you don&#39;t have a truly responsive user
+experience. See the next section if this is a concern.</p>
+<h4 id='-When-you-are-building-a-new-SproutCore-app-from-scratch--without-an-existing-server-'>2.2 -  When you are building a new SproutCore app from scratch, without an existing server
+</h4>
+
+
+<p>The final approach puts a SproutCore datastore in 100% control.</p>
+<p>This method of connecting to the server is to use SproutCore&#39;s default method
+of a DataSource. The Store is designed to interact with the DataSource,
+letting it know when things have changed. When using a data source you can
+treat your Store like a local copy of your server. You can ask for records,
+save records or create records directly in the store, and your dataSource will
+then take care of propogating these changes to your server.</p>
+<p>This method will give you the most interactive setup, allowing your user to
+keep clicking, and not have to wait on your servers responses before moving
+on. If your going for the best user experience in an app, this is the way to
+go.</p>
+<p>Have a look at the <a href="data_source.html">Connecting With a DataSource</a> Guide.</p>
+<h3 id='-Changelog-'>3 -  Changelog
 </h3>
 
 
 <ul>
-<li>March 22, 2011: initial version by <a href="credits.html#jtaby">Majd Taby</a></li>
-<li>August 14, 2013: converted to Markdown format for DocPad guides by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+<li>March 2, 2011: initial version by <a href="credits.html#geoffreyd">Geoffrey Donaldson</a> and <a href="credits.html#erichocean">Erich Ocean</a></li>
+<li>March 22, 2011: minor spelling corrections by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+<li>September 4, 2013: converted to Markdown format for DocPad guides by <a href="credits.html#deeDude">deeDude</a></li>
+<li>September 11, 2013: minor spelling/link corrections and update of Changelog by <a href="credits.html#topherfangio">Topher Fangio</a></li>
 </ul>
 
         </div>
@@ -300,7 +213,7 @@ of Mac OS X to be enabled since it uses apache to display your files.
           <ol class='chapters'>
             
               <li>
-                <a href='#-Overview-'><p> Overview
+                <a href='#-When-you-have-a-light-app--with-limited-server-needs-'><p> When you have a light app, with limited server needs
 </p></a>
                 <ul>
                   
@@ -308,34 +221,14 @@ of Mac OS X to be enabled since it uses apache to display your files.
               </li>
             
               <li>
-                <a href='#-Classes-'><p> Classes
+                <a href='#-Using-the-Store-'><p> Using the Store
 </p></a>
                 <ul>
                   
-                    <li><a href='#-Common-and-Supported-Markdown-Syntax-'><p> Common and Supported Markdown Syntax
+                    <li><a href='#-When-you-have-an-existing--server-based-MVC-app-'><p> When you have an existing, server-based MVC app
 </p></a></li>
                   
-                    <li><a href='#-Instance-Methods-'><p> Instance Methods
-</p></a></li>
-                  
-                    <li><a href='#-Class-Methods-'><p> Class Methods
-</p></a></li>
-                  
-                    <li><a href='#-Properties-'><p> Properties
-</p></a></li>
-                  
-                    <li><a href='#-Computed-Properties-'><p> Computed Properties
-</p></a></li>
-                  
-                </ul>
-              </li>
-            
-              <li>
-                <a href='#-Testing-and-viewing-your-documentation-during-development-'><p> Testing and viewing your documentation during development
-</p></a>
-                <ul>
-                  
-                    <li><a href='#-References-'><p> References
+                    <li><a href='#-When-you-are-building-a-new-SproutCore-app-from-scratch--without-an-existing-server-'><p> When you are building a new SproutCore app from scratch, without an existing server
 </p></a></li>
                   
                 </ul>

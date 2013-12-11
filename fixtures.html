@@ -1,275 +1,374 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>SproutCore Guides: Using Fixtures</title>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
 
-  <!-- guides styles -->
-  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/guides.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
-  <!--[if lt IE 9]>
-  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
+    <!-- plugin styles -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/highlight-github.css" />
 
-  <!-- syntax highlighting styles -->
-  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/shThemeGuides.css" />
-</head>
-<body class="guide">
+    <!-- guides styles -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/reset.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/main.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/guides.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-  <header role="banner">
-    <div class="container">
-      <h1 id="logo">
-        <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
-      </h1>
-      <nav role="navigation">
-        <ul>
-          <li><a href="http://sproutcore.com/about/">About</a></li>
-          <li><a href="http://showcase.sproutcore.com">Showcase</a></li>
-          <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
-          <li><a href="http://docs.sproutcore.com">Docs</a></li>
-          <li><a href="http://sproutcore.com/community/">Community</a></li>
-          <li><a href="http://blog.sproutcore.com">Blog</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-  <div id="feature">
-    <div class="wrapper">
-      <div class="feature_header">
-        <a href="/"><img src="images/graphics/guides.png"></a>
-        <h2><a href="/">SproutCore Guides</a></h2>
-        <p>These guides are designed to help you write and perfect your code.</p>
+    <meta name="generator" content="DocPad v6.57.0" />
+    
+  </head>
+
+  <body class="guide">
+
+    <header role="banner">
+      <div class="container">
+        <h1 id="logo">
+          <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
+        </h1>
+        <nav role="navigation">
+          <ul>
+            <li><a href="http://sproutcore.com/about/">About</a></li>
+            <li><a href="http://showcase.sproutcore.com">Showcase</a></li>
+            <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
+            <li><a href="http://docs.sproutcore.com">Docs</a></li>
+            <li><a href="http://sproutcore.com/community/">Community</a></li>
+            <li><a href="http://blog.sproutcore.com">Blog</a></li>
+          </ul>
+        </nav>
       </div>
-      <div class="feature_sidebar">
-        <a href="index.html" id="guidesMenu">
-          Guides Index <span id="guidesArrow">&#9656;</span>
-        </a>
-        <div id="guides" class="clearfix" style="display: none;">
-          <a href="index.html" class="guidesMenu">
-            Guides Index <span class="guidesArrow">&#9662;</span>
+    </header>
+
+    <div id="feature">
+      <div class="wrapper">
+        <div class="feature_header">
+          <a href="/"><img src="images/graphics/guides.png"></a>
+          <h2><a href="/">SproutCore Guides</a></h2>
+          <p>These guides are designed to help you write and perfect your code.</p>
+        </div>
+        <div class="feature_sidebar">
+          <a href="index.html" id="guidesMenu">
+            Guides Index <span id="guidesArrow">&#9656;</span>
           </a>
-          <hr style="clear:both;">
-          <dl class="L">
-    <dt>Start Here</dt>
-      <dd><a href="getting_started.html">Getting Started: Part 1</a></dd>
-      <dd><a href="getting_started_2.html">Getting Started: Part 2</a></dd>
-      <dd><a href="getting_started_3.html">Getting Started: Part 3</a></dd>
-      <dd><a href="core_concepts_sc_object.html">Classes and SC.Object</a></dd>
-      <dd><a href="core_concepts_kvo.html">Computed Properties, Observers and Bindings</a></dd>
-    <dt>Views</dt>
-      <dd><a href="views.html">Core View Concepts</a></dd>
-    <dt>Models</dt>
-      <dd><a href="records.html">SproutCore Records</a></dd>
-      <dd><a href="fixtures.html">Using Fixtures</a></dd>
-    <dt>Theming</dt>
-      <dd><a href="chance.html">Using Chance, SproutCore's CSS Framework</a></dd>
-      <dd><a href="theming_app.html">Theming Your App</a></dd>
-    <dt>Testing</dt>
-      <dd><a href="unit_test_framework.html">Unit Testing</a></dd>
-      <dd><a href="adding_unit_test.html">Adding a Unit Test</a></dd>
-      <dd><a href="writing_unit_tests.html">Writing Unit Tests</a></dd>
-      <dd><a href="running_unit_tests.html">Running Unit Tests</a></dd>
-      <dd><a href="todos_tdd.html">SproutCore Development Using TDD</a></dd>
-</dl>
-<dl class="R">
-    <dt>Extras</dt>
-      <dd><a href="build_tools.html">Build Tools</a></dd>
-      <dd><a href="run_loop.html">The Run Loop</a></dd>
-      <dd><a href="enumerables.html">Enumerables</a></dd>
-      <dd><a href="using_handlebars.html">Using Handlebars Templates</a></dd>
-    <dt>Contributing to SproutCore</dt>
-      <dd><a href="style_guide.html">Javascript Style Guide</a></dd>
-      <dd><a href="commit_code.html">Committer Guidelines</a></dd>
-      <dd><a href="documentation_guidelines.html">Documentation Guidelines</a></dd>
-</dl>
+          <div id="guides" class="clearfix" style="display: none;">
+            <a href="index.html" class="guidesMenu">
+              Guides Index <span class="guidesArrow">&#9662;</span>
+            </a>
 
+            <hr style="clear:both;">
 
+            <dl class='L'><dt>Start Here</dt>
+<dd><a href='/getting_started.html'>Getting Started: Part 1</a></dd>
+<dd><a href='/getting_started_2.html'>Getting Started: Part 2</a></dd>
+<dd><a href='/getting_started_3.html'>Getting Started: Part 3</a></dd>
+<dd><a href='/core_concepts_sc_object.html'>Classes and SC.Object</a></dd>
+<dd><a href='/core_concepts_kvo.html'>Computed Properties, Observers and Bindings</a></dd><dt>Views</dt>
+<dd><a href='/views.html'>Core View Concepts</a></dd>
+<dd><a href='/animate.html'>DRAFT - Animation</a></dd><dt>Models</dt>
+<dd><a href='/records.html'>SproutCore Records</a></dd>
+<dd><a href='/fixtures.html'>Using Fixtures</a></dd>
+<dd><a href='/record_lifecycle.html'>DRAFT - Understanding the Record Lifecycle</a></dd>
+<dd><a href='/no_store.html'>DRAFT - No DataStore</a></dd>
+<dd><a href='/data_source.html'>DRAFT - Data Source</a></dd><dt>Theming</dt>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
+<dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
+<dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd>
+<dd><a href='/testing_guidelines.html'>DRAFT - Testing Guidelines</a></dd><dt>Extras</dt>
+<dd><a href='/build_tools.html'>SproutCore's Build Tools</a></dd>
+<dd><a href='/run_loop.html'>The Run Loop</a></dd>
+<dd><a href='/enumerables.html'>Enumerables</a></dd>
+<dd><a href='/connect_server.html'>DRAFT - Connecting to a Server</a></dd><dt>Contributing to SproutCore</dt>
+<dd><a href='/style_guide.html'>Javascript Guidelines</a></dd>
+<dd><a href='/commit_code.html'>Committer Guidelines</a></dd>
+<dd><a href='/documentation_guidelines.html'>Documentation Guidelines</a></dd>
+<dd><a href='/contribute.html'>Contributing Guides</a></dd><dt>Thanks</dt>
+<dd><a href='/credits.html'>Credits</a></dd></dl>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div id="container">
-    <div class="wrapper">
-      <div id="mainCol">
-          <div class="headerSection">
-            <h2>Using Fixtures</h2>
-<p>This guide covers the use of fixtures in your application. By referring to this guide, you will be able to:</p>
-<ul>
-	<li>Understand the purpose of fixtures.</li>
-	<li>Write your own fixtures.</li>
-	<li>Set up relationships within fixtures.</li>
-	<li>Use the fixtures data source.</li>
-</ul>
+    <div id="container">
+      <div class="wrapper">
+        <div id="mainCol">
+          <div class='headerSection'>
+            
+              <h2>Using Fixtures</h2>
+            
 
+            
+              <p>This guide covers the use of fixtures in your application. By referring to this guide, you will be able to:</p>
+            
+
+            
+              <ul>
+                
+                  <li>Understand the purpose of fixtures.</li>
+                
+                  <li>Write your own fixtures.</li>
+                
+                  <li>Set up relationships within fixtures.</li>
+                
+                  <li>Use the fixtures data source.</li>
+                
+              </ul>
+            
           </div>
-        <h3 id="the-purpose-of-fixtures">1 The Purpose of Fixtures</h3>
-<p>Fixtures are a quick and easy way to preload your application with sample data without having to write a custom data source. This is especially useful in the early stages of development as it allows you to focus on the general structure without having to be concerned with your application&#8217;s backend.</p>
-<h4 id="how-fixtures-work">1.1 How Fixtures Work</h4>
-<p>Fixtures are defined as an array of hashes with each hash containing the attributes and values for each instance you wish to create.</p>
+
+          <h3 id='-The-Purpose-of-Fixtures-'>1 -  The Purpose of Fixtures
+</h3>
+
+
+<p>Fixtures are a quick and easy way to preload your application with sample data
+without having to write a custom data source. This is especially useful in the
+early stages of development as it allows you to focus on the general structure
+without having to be concerned with your application&#39;s backend.</p>
+<h4 id='-How-Fixtures-Work-'>1.1 -  How Fixtures Work
+</h4>
+
+
+<p>Fixtures are defined as an array of hashes with each hash containing the
+attributes and values for each instance you wish to create.</p>
 <p>A sample fixture looks something like:</p>
-<div class="code_container">
-<div class="filename">apps/app/fixtures/my_model.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/app/fixtures/my_model.js</div></span>
 App.MyModel.FIXTURES = [
-  { guid: 1,
-    firstName: &quot;Michael&quot;,
-    lastName: &quot;Scott&quot; },
+  {
+    guid: <span class="number">1</span>,
+    firstName: <span class="string">"Michael"</span>,
+    lastName: <span class="string">"Scott"</span>
+  },
 
-  { guid: 2,
-    firstName: &quot;Dwight&quot;,
-    lastName: &quot;Schrute&quot; }
-];
-</pre></div><h4 id="defining-fixtures">1.2 Defining Fixtures</h4>
-<p>SproutCore looks for fixtures assigned specifically to a model (i.e. <tt>App.MyModel.FIXTURES</tt> on the above example). By convention, fixtures are defined in the <tt>app/fixtures</tt> folder of your application (i.e. <tt>app/fixtures/my_model.js</tt>). By default fixtures are not included in production builds.</p>
-<div class="note"><p>If you use <ins>sc-gen</ins> to create your models then you may have noticed that some placeholder fixtures already exist. You will still need to modify these fixtures to suit your needs. Read on to learn how.</p></div>
-<h3 id="writing-your-own-fixtures">2 Writing Your Own Fixtures</h3>
-<p>Writing fixtures is relatively straightforward. Each item representing a record gets its own hash in the format of <tt>propertyName: value</tt>. If your model looks like:</p>
-<div class="code_container">
-<div class="filename">apps/app/models/article.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
+  {
+    guid: <span class="number">2</span>,
+    firstName: <span class="string">"Dwight"</span>,
+    lastName: <span class="string">"Schrute"</span>
+  }
+];</code></div></pre>
+<h4 id='-Defining-Fixtures-'>1.2 -  Defining Fixtures
+</h4>
 
+
+<p>SproutCore looks for fixtures assigned specifically to a model (i.e. <tt>App.MyModel.FIXTURES</tt> on the above example). By convention, fixtures are defined
+in the <tt>app/fixtures</tt> folder of your application (i.e. <tt>app/fixtures/my_model.js</tt>). By default fixtures are not included in production builds.</p>
+<div class='note'><p> If you use <tt>sc-gen</tt> to create your models then you may have noticed that some placeholder fixtures already exist. You will still need to modify
+these fixtures to suit your needs. Read on to learn how.
+
+</p></div>
+
+
+
+<h3 id='-Writing-Your-Own-Fixtures-'>2 -  Writing Your Own Fixtures
+</h3>
+
+
+<p>Writing fixtures is relatively straightforward. Each item representing a record gets its own hash in the format of <tt>propertyName: value</tt>. If your
+model looks like:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/app/models/article.js</div></span>
 App.Article = SC.Record.extend({
   title: SC.Record.attr(String),
   body:  SC.Record.attr(String)
-});
-</pre></div><p>Your fixture will look like:</p>
-<div class="code_container">
-<div class="filename">apps/app/fixtures/article.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
+});</code></div></pre>
+<p>Your fixture will look like:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/app/fixtures/article.js</div></span>
 App.Article.FIXTURES = [
-  { guid: 1,
-    title: &quot;Writing a SproutCore app&quot;,
-    body: &quot;Writing a SproutCore app is fun and exciting!&quot; },
+  {
+    guid: <span class="number">1</span>,
+    title: <span class="string">"Writing a SproutCore app"</span>,
+    body: <span class="string">"Writing a SproutCore app is fun and exciting!"</span>
+  },
 
-  { guid: 2,
-    title: &quot;Working with Fixtures&quot;,
-    body:  &quot;Using fixtures can make it easier to get your app started.&quot; }
-];
-</pre></div><p>It is also possible to specify attributes that are not explicity defined in your model, though explicit declaration is encouraged.</p>
-<div class="warning"><p>You must specify a value for the <ins>primaryKey</ins> in your fixtures.</p></div>
-<h4 id="defining-relationships">2.1 Defining Relationships</h4>
-<p>Since relationships are only specified with the foreign key it is quite easy to set them up in your fixtures. If you have model declaration, like the following, where an employee belongs to a company and a company has many employees:</p>
-<div class="code_container">
-<div class="filename">apps/app/models/employee.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
+  {
+    guid: <span class="number">2</span>,
+    title: <span class="string">"Working with Fixtures"</span>,
+    body:  <span class="string">"Using fixtures can make it easier to get your app started."</span> }
+];</code></div></pre>
+<p>It is also possible to specify attributes that are not explicity defined in your model, though explicit declaration is encouraged.</p>
+<div class='warning'><p> You must specify a value for the <tt>primaryKey</tt> in your fixtures.
 
+</p></div>
+
+
+
+<h4 id='-Defining-Relationships-'>2.1 -  Defining Relationships
+</h4>
+
+
+<p>Since relationships are only specified with the foreign key it is quite easy to set them up in your fixtures. If you have model declaration, like the
+following, where an employee belongs to a company and a company has many employees:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/app/models/employee.js</div></span>
 App.Employee = SC.Record.extend({
   firstName: SC.Record.attr(String),
   lastName:  SC.Record.attr(String),
-  company:   SC.Record.toOne(&quot;App.Company&quot;, {
-     inverse: &quot;employees&quot;,
+  company:   SC.Record.toOne(<span class="string">"App.Company"</span>, {
+     inverse: <span class="string">"employees"</span>,
      isMaster: NO
   })
 });
 
 App.Company = SC.Record.extend({
   name:      SC.Record.attr(String),
-  employees: SC.Record.toMany(&quot;App.Employee&quot;, {
-    inverse: &quot;company&quot;,
+  employees: SC.Record.toMany(<span class="string">"App.Employee"</span>, {
+    inverse: <span class="string">"company"</span>,
     isMaster: YES
   })
-});
-</pre></div><p>You would set up your fixtures like:</p>
-<div class="code_container">
-<div class="filename">apps/app/fixtures/employee.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
+});</code></div></pre>
+<p>You would set up your fixtures like:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/app/fixtures/employee.js</div></span>
 App.Employee.FIXTURES = [
-  { guid: 1,
-    firstName: &quot;John&quot;,
-    lastName:  &quot;Smith&quot;,
-    company: 1 }, // SomeCompany, Inc.
+  {
+    guid: <span class="number">1</span>,
+    firstName: <span class="string">"John"</span>,
+    lastName:  <span class="string">"Smith"</span>,
+    company: <span class="number">1</span> <span class="comment">// SomeCompany, Inc.</span>
+  },
 
-  { guid: 2,
-    firstName: &quot;Sally&quot;,
-    lastName:  &quot;Washington&quot;,
-    company: 1 }, // SomeCompany, Inc.
+  {
+    guid: <span class="number">2</span>,
+    firstName: <span class="string">"Sally"</span>,
+    lastName:  <span class="string">"Washington"</span>,
+    company: <span class="number">1</span> <span class="comment">// SomeCompany, Inc.</span>
+  },
 
-  { guid: 3,
-    firstName: &quot;Bernard&quot;,
-    lastName:  &quot;Peterson&quot;,
-    company: 2 } // AnotherCompany, Inc.
+  {
+    guid: <span class="number">3</span>,
+    firstName: <span class="string">"Bernard"</span>,
+    lastName:  <span class="string">"Peterson"</span>,
+    company: <span class="number">2</span> <span class="comment">// AnotherCompany, Inc.</span>
+  }
 ];
 
 App.Company.FIXTURES = [
-  { guid: 1, name: &quot;SomeComany, Inc.&quot;, employees: [1,2] },
-  { guid: 2, name: &quot;AnotherCompany, Inc.&quot;, employees: [3] }
-];
-</pre></div><p>When the fixtures are loaded into your application the relationships automatically take over and point to the appropriate records.</p>
-<div class="warning"><p>Unlike a traditional relational database it is necessary to specify both sides of the relationship.</p></div>
+  { guid: <span class="number">1</span>, name: <span class="string">"SomeComany, Inc."</span>, employees: [<span class="number">1</span>,<span class="number">2</span>] },
+  { guid: <span class="number">2</span>, name: <span class="string">"AnotherCompany, Inc."</span>, employees: [<span class="number">3</span>] }
+];</code></div></pre>
+<p>When the fixtures are loaded into your application the relationships automatically take over and point to the appropriate records.</p>
+<div class='warning'><p> Unlike a traditional relational database it is necessary to specify both sides of the relationship.
 
-<div class="info"><p>When defining the &#8216;many&#8217; side of the fixture record, be certain to include the [ ] around a single value because SproutCore is expecting an array of values.</p></div>
-<h4 id="defining-non-string-values">2.2 Defining Non-String Values</h4>
-<p>The above examples have referred mostly to string values in the fixture. As most data is either passed into the application via <a href="http://www.json.org"><span class="caps">JSON</span></a> or <a href="http://www.w3.org/XML/"><span class="caps">XML</span></a>, <tt>SC.Record</tt> is capable of transforming data from a string into the appropriate object type. See <tt>SC.RecordAttribute.registerTransform</tt> for more information.</p>
-<h3 id="hooking-up-your-fixtures">3 Hooking Up Your Fixtures</h3>
-<p>SproutCore comes with a built-in data source for your fixtures. To use the fixtures data source you merely need to set the following in your application&#8217;s <tt>core.js</tt>.</p>
-<div class="code_container">
-<div class="filename">in apps/app/core.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
+</p></div>
 
+
+
+<div class='info'><p> When defining the &#39;many&#39; side of the fixture record, be certain to include the [ ] around a single value because SproutCore is expecting an array
+of values.
+
+</p></div>
+
+
+
+<h4 id='-Defining-Non-String-Values-'>2.2 -  Defining Non-String Values
+</h4>
+
+
+<p>The above examples have referred mostly to string values in the fixture. As most data is either passed into the application via
+<a href="http://www.json.org">JSON</a> or <a href="http://www.w3.org/XML/">XML</a>, <tt>SC.Record</tt> is capable of transforming data from a string into the appropriate object
+type. See <tt>SC.RecordAttribute.registerTransform</tt> for more information.</p>
+<h3 id='-Hooking-Up-Your-Fixtures-'>3 -  Hooking Up Your Fixtures
+</h3>
+
+
+<p>SproutCore comes with a built-in data source for your fixtures. To use the fixtures data source you merely need to set the following in your
+application&#39;s <tt>core.js</tt>.</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="keyword">in</span> apps/app/core.js</div></span>
 App = SC.Application.create({
   store: SC.Store.create().from(SC.Record.fixtures)
-});
-</pre></div><p>You can extend the built-in fixture data source to simulate real world performance (important in managing user expectations).</p>
-<div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
-
-$ sc-gen data-source App.AppsFixturesDataSource SC.FixturesDataSource
-</pre></div><p>Delete the boilerplate code in the fixture data source so your code looks like:</p>
-<div class="code_container">
-<div class="filename">apps/app/data_sources/apps_fixtures.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
+});</code></div></pre>
+<p>You can extend the built-in fixture data source to simulate real world performance (important in managing user expectations).</p>
+<pre class="highlighted"><div class="code_container"><code class="bash">$ sc-gen data-source App.AppsFixturesDataSource SC.FixturesDataSource</code></div></pre>
+<p>Delete the boilerplate code in the fixture data source so your code looks like:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/app/data_sources/apps_fixtures.js</div></span>
 App.AppsFixturesDataSource = SC.FixturesDataSource.extend({
   simulateRemoteResponse: YES,
 
-  latency: 500 // 500 ms latency
-});
-</pre></div><p>This simulates a remote response with 500 milliseconds round trip latency. Tweak the value to match the performance of your network and servers.</p>
+  latency: <span class="number">500</span> <span class="comment">// 500 ms latency</span>
+});</code></div></pre>
+<p>This simulates a remote response with 500 milliseconds round trip latency. Tweak the value to match the performance of your network and servers.</p>
 <p>Next, point your store to the new fixtures data source.</p>
-<div class="code_container">
-<div class="filename">in apps/app/core.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="keyword">in</span> apps/app/core.js</div></span>
 App = SC.Application.create({
-  store: SC.Store.create().from('App.AppsFixturesDataSource')
-});
-</pre></div>
-<div class="info"><p>Notice the quotes around the data source name?  <ins>App.AppsFixturesDataSource</ins> doesn&#8217;t exist until its instantiated during the loading process.</p></div>
-<h3 id="changelog">4 Changelog</h3>
+  store: SC.Store.create().from(<span class="string">'App.AppsFixturesDataSource'</span>)
+});</code></div></pre>
+<div class='info'><p> Notice the quotes around the data source name?  <tt>App.AppsFixturesDataSource</tt> doesn&#39;t exist until its instantiated during the loading process.
+
+</p></div>
+
+<p>And that&#39;s it! Your fixtures should now be available to your data store!</p>
+<h3 id='-Changelog-'>4 -  Changelog
+</h3>
+
+
 <ul>
-	<li>January 11, 2011: initial version by <a href="credits.html#pwagenet">Peter Wagenet</a></li>
-	<li>March    2, 2011: added filenames and fixed code formatting by <a href="credits.html#topherfangio">Topher Fangio</a></li>
-	<li>July    17, 2011: minor changes by William Estoque</li>
+<li>January 11, 2011: initial version by <a href="credits.html#wagenet">Peter Wagenet</a></li>
+<li>March    2, 2011: added filenames and fixed code formatting by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+<li>July    17, 2011: minor changes by <a href="credits.html#westoque">William Estoque</a></li>
+<li>October 23, 2013: converted to Markdown format for DocPad guides by <a href="credits.html#topherfangio">Topher Fangio</a></li>
 </ul>
 
-      </div>
+        </div>
+        <!-- TODO: re-add index_items //-->
         <div id="subCol">
-          <h3 class="chapter"><img src="images/graphics/chapters.png" alt="" />Chapters</h3>
-          <ol class="chapters">
-            <li><a href="#the-purpose-of-fixtures"><p>The Purpose of Fixtures</p>
-</a><ul><li><a href="#how-fixtures-work"><p>How Fixtures Work</p>
-</a></li> <li><a href="#defining-fixtures"><p>Defining Fixtures</p>
-</a></li></ul></li><li><a href="#writing-your-own-fixtures"><p>Writing Your Own Fixtures</p>
-</a><ul><li><a href="#defining-relationships"><p>Defining Relationships</p>
-</a></li> <li><a href="#defining-non-string-values"><p>Defining Non-String Values</p>
-</a></li></ul></li><li><a href="#hooking-up-your-fixtures"><p>Hooking Up Your Fixtures</p>
-</a></li><li><a href="#changelog"><p>Changelog</p>
-</a></li>
+          <h3 class="chapter"><img src="images/graphics/chapters.png" alt="">Chapters</h3>
+          <ol class='chapters'>
+            
+              <li>
+                <a href='#-The-Purpose-of-Fixtures-'><p> The Purpose of Fixtures
+</p></a>
+                <ul>
+                  
+                    <li><a href='#-How-Fixtures-Work-'><p> How Fixtures Work
+</p></a></li>
+                  
+                    <li><a href='#-Defining-Fixtures-'><p> Defining Fixtures
+</p></a></li>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Writing-Your-Own-Fixtures-'><p> Writing Your Own Fixtures
+</p></a>
+                <ul>
+                  
+                    <li><a href='#-Defining-Relationships-'><p> Defining Relationships
+</p></a></li>
+                  
+                    <li><a href='#-Defining-Non-String-Values-'><p> Defining Non-String Values
+</p></a></li>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Hooking-Up-Your-Fixtures-'><p> Hooking Up Your Fixtures
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Changelog-'><p> Changelog
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
           </ol>
         </div>
+      </div>
     </div>
-  </div>
 
-  <hr class="hide" />
+    <hr class="hide" />
+
 	  <footer>
 	    <div class="container">
 	      <div class="col">
@@ -317,33 +416,29 @@ App = SC.Application.create({
 	    </div>
 	  </footer>
 
-  <script src="http://code.jquery.com/jquery-1.6.min.js" type="text/javascript" charset="utf-8"></script>
-  <script type="text/javascript" src="javascripts/sproutGuides.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushJScript.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushCss.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
-  <script type="text/javascript">
-    SyntaxHighlighter.all()
+    <script type='text/javascript' src='/javascripts/jquery.min.js'></script>
 
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-19584397-1']);
-    _gaq.push(['_setDomainName', '.sproutcore.com']);
-    _gaq.push(['_setAllowHash', false]);
-    _gaq.push(['_setAllowLinker', true]);
-    _gaq.push(['_trackPageview']);
+    
 
-    (function() {
-      var ga = document.createElement('script');
-      ga.type = 'text/javascript';
-      ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl': 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-</body>
+    <script type='text/javascript'>
+      /*
+       * Make the guides link clickable
+       */
+      function guideMenu(e){
+        if (document.getElementById('guides').style.display == "none") {
+          document.getElementById('guides').style.display = "block";
+          document.getElementById('guidesArrow').innerHTML = "&#9662;";
+          $('body').click(function(e){ guideMenu(e); });
+        } else {
+          document.getElementById('guides').style.display = "none";
+          document.getElementById('guidesArrow').innerHTML = "&#9656;";
+          $('body').unbind('click');
+        }
+        return false;
+      }
+
+      $('#guidesMenu, .guidesMenu').click(guideMenu);
+    </script>
+
+  </body>
 </html>

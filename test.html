@@ -102,196 +102,103 @@
         <div id="mainCol">
           <div class='headerSection'>
             
-              <h2>Documentation Guidelines</h2>
+              <h2>Test Page - Making Sure it Works</h2>
             
 
             
-              <p>This guide will walk you through writing documentation for your SproutCore classes in a format that is friendly to jsdoc-toolkit, the library used for generating documentation from code.</p>
+              <p>This is a sample guide designed to test:</p>
             
 
+            
+              <ul>
+                
+                  <li>Proper translation of +something+ to <tt>something</tt></li>
+                
+                  <li>Automatic heading numbering</li>
+                
+                  <li>Generation of Table of Contents</li>
+                
+                  <li>Code blocks with filenames</li>
+                
+                  <li>Provide NOTE/INFO/WARNING shortcuts</li>
+                
+              </ul>
             
           </div>
 
-          <h3 id='-Overview-'>1 -  Overview
+          <h3 id='-I-m-the-first-heading--'>1 -  I&#39;m the first heading!
 </h3>
 
 
-<p>SproutCore uses the <a href="http://code.google.com/p/jsdoc-toolkit/">jsdoc-toolkit</a> to
-generate its documentation. As such, your SproutCore classes should follow
-strict code-documenting formatting guidelines in order to properly generate
-your HTML documentation. This document outlines the proper format you should
-use.</p>
-<h3 id='-Classes-'>2 -  Classes
-</h3>
-
-
-<p>Classes must always start with an <tt>@class</tt> directive, followed by optional the
-class description. You can use
-<a href="http://daringfireball.net/projects/markdown/">Markdown</a> to style your
-description (add headings, paragraphs, code, etc.)</p>
-<p>JsDoc Toolkit also supports tags in your comments to add metadata about your
-class. For example, you can specify who the author of the class is, what
-classes it inherits from,  what classes are related, and what version of the
-frameworks it’s been available since.</p>
-<h4 id='-Common-and-Supported-Markdown-Syntax-'>2.1 -  Common and Supported Markdown Syntax
+<p>This is the first paragraph. It&#39;s nice and short.</p>
+<pre class="highlighted"><div class="code_container"><code class="bash">$ some bash code here
+ ~ Yup...I think this worked...</code></div></pre>
+<p>Another paragraph goes here. I could type for a fairly long time and make some really long sentences
+and keep it going until the end of all days, but I think I shall defer until a better time. That makes
+much more <tt>sense</tt>.</p>
+<p><code>some/one/line/code/here</code></p>
+<p>Here is some more paragraph text.</p>
+<h4 id='-I-m-a-subheading--'>1.1 -  I&#39;m a subheading.
 </h4>
 
 
-<ul>
-<li>For code samples, make sure you indent the code block further than the other
-text</li>
-<li>For headers, add three dashes (<tt>---</tt>) for 2nd level headers, and three
-(<tt>===</tt>) for 1st level headers. These go on the subsequent line</li>
-<li>For list, prefix each line with a dash (<tt>-</tt>)</li>
-</ul>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"Sample Class Documentation"</span></div></span>
-<span class="comment">/**
-  @class
-
-  Class Description
-  ======
-
-  Overview
-  ----------
-
-  This is a sample description. Here’s some code:
-
-         SC.Store.find(...)
-
-  And here’s a list:
-
-  - Eggs
-  - Butter
-
-  @deprecated This class has been deprecated. Please use SC.NewRequest
-  @see &lt;a href="http://getfirebug.com/logging.html"&gt;Firebug Logging Reference&lt;/a&gt;
-  @extends SC.Object
-  @author Majd Taby
-  @since SproutCore 1.0
-*/</span>
-
-SC.Request = SC.Object.extend(
- <span class="comment">/** @scope SC.Request.prototype */</span>{
- ...
-});</code></div></pre>
-<p>The <tt>@scope</tt> definition is mandatory, and it defines what class/namespace the
-proceeding code documents.</p>
-<p>You can define multiple <tt>@see</tt>/<tt>extends</tt>/<tt>author</tt> directives for each class, as
-you see fit.</p>
-<p>WARN: You cannot put any javascript between your documentation and the class
-it’s documenting. Otherwise, JsDoc will get confused by what you’re trying to
-document.</p>
-<h4 id='-Instance-Methods-'>2.2 -  Instance Methods
-</h4>
-
-
-<p>Documenting methods follows the same general structure as a class, but with a
-different set of required/optional directives. You start off by describing the
-method’s functionality, followed by the parameters, and then the return types.</p>
-<p>It’s important to keep in mind that the jsdoc toolkit does not parse javascript
-code. This means that you need to put the name of the parameters in the
-documentation, and it’s your responsibility to keep them up to date as you
-update the method. </p>
-<p>In the example below, the response property is marked as optional by wrapping
-the name in square brackets.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"Sample Instance Method Documentation"</span></div></span>
-<span class="comment">/**
-  Method description.
-
-  @param {SC.Request}   request     A copy of the request, frozen.
-  @param {SC.Response} [response]   An optional parameter
-  @param {SC.Response} [foobar]     A sample parameter
-
-  @throws {SC.Exception} SC.RequestNotValidException
-  @returns {Boolean} Yes on success, NO on failure.
-*/</span>
-didSend: <span class="keyword">function</span>(request, response) {},</code></div></pre>
-<h4 id='-Class-Methods-'>2.3 -  Class Methods
-</h4>
-
-
-<p>Class methods are usually implemented by mixing-in extra methods to an existing
-class. For these methods/properties to show up in the same location in the
-generated output, you need to add a <tt>@scope</tt> declaration just as you did with
-the class.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"Sample Class Method Documentation"</span></div></span>
-<span class="comment">/**
-  @class
-
-   ...
-*/</span>
-SC.Store = SC.Object.extend(<span class="comment">/** @scope SC.Store.prototype */</span>{...});
-
-SC.Store.mixin(<span class="comment">/** @scope SC.Store.prototype */</span>{...})</code></div></pre>
-<h4 id='-Properties-'>2.4 -  Properties
-</h4>
-
-
-<p>Properties are arguably the simplest entity to document. You simply need to
-write a description of what the property represents, and what type it is. You
-can optionally provide a default value.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"Sample Property Documentation"</span></div></span>
-<span class="comment">/**
-  Description
-
-  @default YES
-  @type Boolean
-*/</span>
-isAsynchronous: YES,</code></div></pre>
-<div class='note'><p> Constants are documented using <tt>@constant</tt> but they don’t need a default
-value.
+<p>I&#39;m even more text.</p>
+<div class='warning'><p> Woah! Watch out for me.
 
 </p></div>
 
 
 
-<h4 id='-Computed-Properties-'>2.5 -  Computed Properties
-</h4>
+<h5 id='-I-m-a-sub-subheading--'>1.1.1 -  I&#39;m a sub-subheading.
+</h5>
 
 
-<p>Computed Properties are documented just like regular properties but they add
-the <tt>@field</tt> property.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"Sample Computed Property Documentation"</span></div></span>
-<span class="comment">/**
-  Description
-
-  @field
-  @default YES
-  @type Boolean
-*/</span>
-isAsynchronous: <span class="keyword">function</span>(){...</code></div></pre>
-<h3 id='-Testing-and-viewing-your-documentation-during-development-'>3 -  Testing and viewing your documentation during development
+<p>And here is some more text.</p>
+<h3 id='-I-am-the-second-heading--I-m-not-so-great--'>2 -  I am the second heading. I&#39;m not so great.
 </h3>
 
 
-<p>If, during development, you would like to test your documentation and see how
-it looks once it&#39;s generated, then you can use the SproutCore TextMate bundle
-available on &quot;github&quot;:<a href="https://github.com/sproutcore/sproutcore-tmbundle">https://github.com/sproutcore/sproutcore-tmbundle</a> which
-includes a Command to generate documentation for the current file you are
-viewing. To activate it, go to a jsdoc-documented javascript file, and click
-CMD <tt> CTRL </tt> G.</p>
-<div class='note'><p> Generating documentation in TextMate requires the Web Sharing feature
-of Mac OS X to be enabled since it uses apache to display your files.
+
+
+<div class='note'><p> I&#39;m a pretty cool note!
 
 </p></div>
 
-
-
-<h4 id='-References-'>3.1 -  References
+<p>Woot, we got more text coming right at you!</p>
+<h4 id='-Another-subheading--'>2.1 -  Another subheading.
 </h4>
 
 
-<ul>
-<li><a href="http://code.google.com/p/jsdoc-toolkit/wiki/TagReference">JSDoc Tag Reference</a></li>
-</ul>
-<h3 id='-Changelog-'>4 -  Changelog
-</h3>
+<p>With some more text.</p>
+<div class='info'><p> I&#39;m just here to tell you about something.
+
+</p></div>
+
+<p>And here is some fancy code below:</p>
+<pre class="highlighted"><div class="code_container"><code class="ruby"><span class="comment"><span class='comment'><div class='filename'>/some/ruby/file.rb</span></div></span>
+a = <span class="number">1</span> + <span class="number">2</span>
+b = a / <span class="number">3</span>
+c = a * b
+
+puts a, b, c</code></div></pre>
+<h5 id='-Another-sub-subheading--'>2.1.1 -  Another sub-subheading.
+</h5>
 
 
-<ul>
-<li>March 22, 2011: initial version by <a href="credits.html#jtaby">Majd Taby</a></li>
-<li>August 14, 2013: converted to Markdown format for DocPad guides by <a href="credits.html#topherfangio">Topher Fangio</a></li>
-</ul>
+<p>With even more text/code.</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="regexp">/i/</span>am/some/javascript3.js</div></span>
+{
+  here: {
+    comes: <span class="string">"the bride"</span>,
+    <span class="number">1</span>: <span class="string">"more time"</span>,
+    <span class="string">"something else"</span>: [<span class="number">3</span>, <span class="string">'b'</span>, { fu: <span class="string">'bar'</span> }]
+  }
+}</code></div></pre>
+<h5 id='-Yet-one-more-sub-subheading--'>2.1.2 -  Yet one more sub-subheading.
+</h5>
+
+
+<p>With the last bit of text.</p>
 
         </div>
         <!-- TODO: re-add index_items //-->
@@ -300,51 +207,23 @@ of Mac OS X to be enabled since it uses apache to display your files.
           <ol class='chapters'>
             
               <li>
-                <a href='#-Overview-'><p> Overview
+                <a href='#-I-m-the-first-heading--'><p> I'm the first heading!
 </p></a>
                 <ul>
                   
-                </ul>
-              </li>
-            
-              <li>
-                <a href='#-Classes-'><p> Classes
-</p></a>
-                <ul>
-                  
-                    <li><a href='#-Common-and-Supported-Markdown-Syntax-'><p> Common and Supported Markdown Syntax
-</p></a></li>
-                  
-                    <li><a href='#-Instance-Methods-'><p> Instance Methods
-</p></a></li>
-                  
-                    <li><a href='#-Class-Methods-'><p> Class Methods
-</p></a></li>
-                  
-                    <li><a href='#-Properties-'><p> Properties
-</p></a></li>
-                  
-                    <li><a href='#-Computed-Properties-'><p> Computed Properties
+                    <li><a href='#-I-m-a-subheading--'><p> I'm a subheading.
 </p></a></li>
                   
                 </ul>
               </li>
             
               <li>
-                <a href='#-Testing-and-viewing-your-documentation-during-development-'><p> Testing and viewing your documentation during development
+                <a href='#-I-am-the-second-heading--I-m-not-so-great--'><p> I am the second heading. I'm not so great.
 </p></a>
                 <ul>
                   
-                    <li><a href='#-References-'><p> References
+                    <li><a href='#-Another-subheading--'><p> Another subheading.
 </p></a></li>
-                  
-                </ul>
-              </li>
-            
-              <li>
-                <a href='#-Changelog-'><p> Changelog
-</p></a>
-                <ul>
                   
                 </ul>
               </li>

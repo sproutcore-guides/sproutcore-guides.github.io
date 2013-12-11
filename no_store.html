@@ -1,216 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>SproutCore Guides: MVC -- The model layer.</title>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
 
-  <!-- guides styles -->
-  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/guides.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
-  <!--[if lt IE 9]>
-  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
+    <!-- plugin styles -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/highlight-github.css" />
 
-  <!-- syntax highlighting styles -->
-  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/shThemeGuides.css" />
-</head>
-<body class="guide">
+    <!-- guides styles -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/reset.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/main.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/guides.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-  <header role="banner">
-    <div class="container">
-      <h1 id="logo">
-        <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
-      </h1>
-      <nav role="navigation">
-        <ul>
-          <li><a href="http://sproutcore.com/about/">About</a></li>
-          <li><a href="http://showcase.sproutcore.com">Showcase</a></li>
-          <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
-          <li><a href="http://docs.sproutcore.com">Docs</a></li>
-          <li><a href="http://sproutcore.com/community/">Community</a></li>
-          <li><a href="http://blog.sproutcore.com">Blog</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-  <div id="feature">
-    <div class="wrapper">
-      <div class="feature_header">
-        <a href="/"><img src="images/graphics/guides.png"></a>
-        <h2><a href="/">SproutCore Guides</a></h2>
-        <p>These guides are designed to help you write and perfect your code.</p>
+    <meta name="generator" content="DocPad v6.57.0" />
+    
+  </head>
+
+  <body class="guide">
+
+    <header role="banner">
+      <div class="container">
+        <h1 id="logo">
+          <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
+        </h1>
+        <nav role="navigation">
+          <ul>
+            <li><a href="http://sproutcore.com/about/">About</a></li>
+            <li><a href="http://showcase.sproutcore.com">Showcase</a></li>
+            <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
+            <li><a href="http://docs.sproutcore.com">Docs</a></li>
+            <li><a href="http://sproutcore.com/community/">Community</a></li>
+            <li><a href="http://blog.sproutcore.com">Blog</a></li>
+          </ul>
+        </nav>
       </div>
-      <div class="feature_sidebar">
-        <a href="index.html" id="guidesMenu">
-          Guides Index <span id="guidesArrow">&#9656;</span>
-        </a>
-        <div id="guides" class="clearfix" style="display: none;">
-          <a href="index.html" class="guidesMenu">
-            Guides Index <span class="guidesArrow">&#9662;</span>
+    </header>
+
+    <div id="feature">
+      <div class="wrapper">
+        <div class="feature_header">
+          <a href="/"><img src="images/graphics/guides.png"></a>
+          <h2><a href="/">SproutCore Guides</a></h2>
+          <p>These guides are designed to help you write and perfect your code.</p>
+        </div>
+        <div class="feature_sidebar">
+          <a href="index.html" id="guidesMenu">
+            Guides Index <span id="guidesArrow">&#9656;</span>
           </a>
-          <hr style="clear:both;">
-          <dl class="L">
-    <dt>Start Here</dt>
-      <dd><a href="getting_started.html">Getting Started: Part 1</a></dd>
-      <dd><a href="getting_started_2.html">Getting Started: Part 2</a></dd>
-      <dd><a href="getting_started_3.html">Getting Started: Part 3</a></dd>
-      <dd><a href="core_concepts_sc_object.html">Classes and SC.Object</a></dd>
-      <dd><a href="core_concepts_kvo.html">Computed Properties, Observers and Bindings</a></dd>
-    <dt>Views</dt>
-      <dd><a href="views.html">Core View Concepts</a></dd>
-    <dt>Models</dt>
-      <dd><a href="records.html">SproutCore Records</a></dd>
-      <dd><a href="fixtures.html">Using Fixtures</a></dd>
-    <dt>Theming</dt>
-      <dd><a href="chance.html">Using Chance, SproutCore's CSS Framework</a></dd>
-      <dd><a href="theming_app.html">Theming Your App</a></dd>
-    <dt>Testing</dt>
-      <dd><a href="unit_test_framework.html">Unit Testing</a></dd>
-      <dd><a href="adding_unit_test.html">Adding a Unit Test</a></dd>
-      <dd><a href="writing_unit_tests.html">Writing Unit Tests</a></dd>
-      <dd><a href="running_unit_tests.html">Running Unit Tests</a></dd>
-      <dd><a href="todos_tdd.html">SproutCore Development Using TDD</a></dd>
-</dl>
-<dl class="R">
-    <dt>Extras</dt>
-      <dd><a href="build_tools.html">Build Tools</a></dd>
-      <dd><a href="run_loop.html">The Run Loop</a></dd>
-      <dd><a href="enumerables.html">Enumerables</a></dd>
-      <dd><a href="using_handlebars.html">Using Handlebars Templates</a></dd>
-    <dt>Contributing to SproutCore</dt>
-      <dd><a href="style_guide.html">Javascript Style Guide</a></dd>
-      <dd><a href="commit_code.html">Committer Guidelines</a></dd>
-      <dd><a href="documentation_guidelines.html">Documentation Guidelines</a></dd>
-</dl>
+          <div id="guides" class="clearfix" style="display: none;">
+            <a href="index.html" class="guidesMenu">
+              Guides Index <span class="guidesArrow">&#9662;</span>
+            </a>
 
+            <hr style="clear:both;">
 
+            <dl class='L'><dt>Start Here</dt>
+<dd><a href='/getting_started.html'>Getting Started: Part 1</a></dd>
+<dd><a href='/getting_started_2.html'>Getting Started: Part 2</a></dd>
+<dd><a href='/getting_started_3.html'>Getting Started: Part 3</a></dd>
+<dd><a href='/core_concepts_sc_object.html'>Classes and SC.Object</a></dd>
+<dd><a href='/core_concepts_kvo.html'>Computed Properties, Observers and Bindings</a></dd><dt>Views</dt>
+<dd><a href='/views.html'>Core View Concepts</a></dd>
+<dd><a href='/animate.html'>DRAFT - Animation</a></dd><dt>Models</dt>
+<dd><a href='/records.html'>SproutCore Records</a></dd>
+<dd><a href='/fixtures.html'>Using Fixtures</a></dd>
+<dd><a href='/record_lifecycle.html'>DRAFT - Understanding the Record Lifecycle</a></dd>
+<dd><a href='/no_store.html'>DRAFT - No DataStore</a></dd>
+<dd><a href='/data_source.html'>DRAFT - Data Source</a></dd><dt>Theming</dt>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
+<dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
+<dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd>
+<dd><a href='/testing_guidelines.html'>DRAFT - Testing Guidelines</a></dd><dt>Extras</dt>
+<dd><a href='/build_tools.html'>SproutCore's Build Tools</a></dd>
+<dd><a href='/run_loop.html'>The Run Loop</a></dd>
+<dd><a href='/enumerables.html'>Enumerables</a></dd>
+<dd><a href='/connect_server.html'>DRAFT - Connecting to a Server</a></dd><dt>Contributing to SproutCore</dt>
+<dd><a href='/style_guide.html'>Javascript Guidelines</a></dd>
+<dd><a href='/commit_code.html'>Committer Guidelines</a></dd>
+<dd><a href='/documentation_guidelines.html'>Documentation Guidelines</a></dd>
+<dd><a href='/contribute.html'>Contributing Guides</a></dd><dt>Thanks</dt>
+<dd><a href='/credits.html'>Credits</a></dd></dl>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div id="container">
-    <div class="wrapper">
-      <div id="mainCol">
-          <div class="headerSection">
-            <h2><span class="caps">MVC</span> &#8212; The model layer.</h2>
-<p>SproutCore includes a powerful model layer, called the datastore. SproutCore has special code in it&#8217;s controller and view layers to make the datastore the most efficient source of data.</p>
+    <div id="container">
+      <div class="wrapper">
+        <div id="mainCol">
+          <div class='headerSection'>
+            
+              <h2>No DataStore</h2>
+            
 
+            
+              <p>SproutCore includes a powerful model layer, called the datastore. SproutCore has special code in it's controller and view layers to make the datastore the most efficient source of data.</p>
+            
+
+            
           </div>
 
-<div class="warning"><p>This is a Draft Copy, and although the information in here is correct, it may be incomplete in places.</p></div>
-<p>Nevertheless, you don&#8217;t have to use the datastore in your application. Like most high-quality frameworks, the datastore is an optional framework in SproutCore (though it is &#8220;on&#8221; by default).</p>
-<h3 id="how-to-use-sproutcore-without-a-model-layer">1 How To Use SproutCore Without a Model Layer</h3>
-<p>This is how you do what backbone.js does in SproutCore. It does not use SproutCore&#8217;s datastore.</p>
-<p>See <a href="http://www.jamesyu.org/2011/01/27/cloudedit-a-backbone-js-tutorial-by-example/">http://www.jamesyu.org/2011/01/27/cloudedit-a-backbone-js-tutorial-by-example/</a> for an example.</p>
-<div class="code_container">
-<div class="filename">apps/my_app/core.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
+          <h3 id='-MVC----The-model-layer--'>1 -  MVC -- The model layer.
+</h3>
 
-var MyApp = SC.Application.create({
 
-  newTask: function() {
-    // optional: clear the values in the fields
+
+
+<div class='warning'><p> This is a Draft Copy, and although the information in here is correct,
+it may be incomplete in places.
+
+</p></div>
+
+<p>Nevertheless, you don&#39;t have to use the datastore in your application. Like
+most high-quality frameworks, the datastore is an optional framework in
+SproutCore (though it is &quot;on&quot; by default).</p>
+<h3 id='-How-To-Use-SproutCore-Without-a-Model-Layer-'>2 -  How To Use SproutCore Without a Model Layer
+</h3>
+
+
+<p>This is how you do what backbone.js does in SproutCore. It does not use
+SproutCore&#39;s datastore.</p>
+<p>See <a href="http://www.jamesyu.org/2011/01/27/cloudedit-a-backbone-js-tutorial-by-example/">http://www.jamesyu.org/2011/01/27/cloudedit-a-backbone-js-tutorial-by-example/</a>
+for an example.</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/my_app/core.js"</span></div></span>
+<span class="keyword">var</span> MyApp = SC.Application.create({
+
+  newTask: <span class="keyword">function</span>() {
+    <span class="comment">// optional: clear the values in the fields</span>
     MyApp.newTaskPane.append();
   },
 
-  createTask: function() {
-    // 1. Fetch the values from the fields in MyApp.newTaskPane.
-    var name = MyApp.newTaskPane.get('nameField'),
-        description = MyApp.newTaskPane.get('descriptionField');
+  createTask: <span class="keyword">function</span>() {
+    <span class="comment">// 1. Fetch the values from the fields in MyApp.newTaskPane.</span>
+    <span class="keyword">var</span> name = MyApp.newTaskPane.get(<span class="string">'nameField'</span>),
+        description = MyApp.newTaskPane.get(<span class="string">'descriptionField'</span>);
 
-    // 2. Send the values to the remote &quot;create&quot; method
-    //    (disable interaction)
-    SC.Request.postUrl('/tasks')
-              .header({ 'Accept': 'application/json' }).json()
-              .notify(this, '_didCreateTask').send();
+    <span class="comment">// 2. Send the values to the remote "create" method</span>
+    <span class="comment">//    (disable interaction)</span>
+    SC.Request.postUrl(<span class="string">'/tasks'</span>)
+              .header({ <span class="string">'Accept'</span>: <span class="string">'application/json'</span> }).json()
+              .notify(<span class="keyword">this</span>, <span class="string">'_didCreateTask'</span>).send();
   },
 
-  // 3. When the server responds, create the task and add update
-  //    MyApp.tasksController.
-  _didCreateTask: function(response, store, storeKey) {
-    if (SC.ok(response)) {
-      var hash = response.get('body');
+  <span class="comment">// 3. When the server responds, create the task and add update</span>
+  <span class="comment">//    MyApp.tasksController.</span>
+  _didCreateTask: <span class="keyword">function</span>(response, store, storeKey) {
+    <span class="keyword">if</span> (SC.ok(response)) {
+      <span class="keyword">var</span> hash = response.get(<span class="string">'body'</span>);
       MyApp.Task.create(hash);
     }
 
-    // 4. Show the MyApp.editTaskPane
+    <span class="comment">// 4. Show the MyApp.editTaskPane</span>
     MyApp.editTaskPane.append();
   },
 
-  updateTask: function() {
-    // 1. Get the values from MyApp.selectedTaskController
-    var task = MyApp.selectedTaskController.get('content');
+  updateTask: <span class="keyword">function</span>() {
+    <span class="comment">// 1. Get the values from MyApp.selectedTaskController</span>
+    <span class="keyword">var</span> task = MyApp.selectedTaskController.get(<span class="string">'content'</span>);
 
-    // 2. Contact the server and send the updated properties
-    //    for the task (disable interaction)
-    // 3. When the server responds, refresh the task with then
-    //    new properties.
+    <span class="comment">// 2. Contact the server and send the updated properties</span>
+    <span class="comment">//    for the task (disable interaction)</span>
+    <span class="comment">// 3. When the server responds, refresh the task with then</span>
+    <span class="comment">//    new properties.</span>
     MyApp.editTaskPane.append();
   },
 
-  deleteTask: function() {
-    // 1. Search MyApp.tasksController for the task with id = `id`.
-    var task = MyApp.selectedTaskController.get('content');
+  deleteTask: <span class="keyword">function</span>() {
+    <span class="comment">// 1. Search MyApp.tasksController for the task with id = `id`.</span>
+    <span class="keyword">var</span> task = MyApp.selectedTaskController.get(<span class="string">'content'</span>);
 
-    // 2. Contact the server and ask it delete the task with
-    //    id == `id` (disable interaction)
-    // 3. When the server responds, delete the task and remove
-    //    it from the list.
+    <span class="comment">// 2. Contact the server and ask it delete the task with</span>
+    <span class="comment">//    id == `id` (disable interaction)</span>
+    <span class="comment">// 3. When the server responds, delete the task and remove</span>
+    <span class="comment">//    it from the list.</span>
     MyApp.listTasksPane.append();
   },
 
-  showTaskList: function() {
-    // 1. Use SC.Response ajax to contact your server.
-    // You can hardcode the url in here:
-    SC.Request.getUrl('/tasks').json()
-        .notify(this, '_listDidRespond').send();
+  showTaskList: <span class="keyword">function</span>() {
+    <span class="comment">// 1. Use SC.Response ajax to contact your server.</span>
+    <span class="comment">// You can hardcode the url in here:</span>
+    SC.Request.getUrl(<span class="string">'/tasks'</span>).json()
+        .notify(<span class="keyword">this</span>, <span class="string">'_listDidRespond'</span>).send();
     MyApp.listTasksPane.append();
   }
 
-  _listDidRespond: function(res) {
-    // 2. When you get the response, instatiate MyApp.Task objects
-    //    and add them to a new array
-    var newArray = [];
-    var jsonHashesArray = res.get('body');
-    jsonHashesArray.forEach(function(hash) {
-        var task = MyApp.Task.create(hash);
+  _listDidRespond: <span class="keyword">function</span>(res) {
+    <span class="comment">// 2. When you get the response, instatiate MyApp.Task objects</span>
+    <span class="comment">//    and add them to a new array</span>
+    <span class="keyword">var</span> newArray = [];
+    <span class="keyword">var</span> jsonHashesArray = res.get(<span class="string">'body'</span>);
+    jsonHashesArray.forEach(<span class="keyword">function</span>(hash) {
+        <span class="keyword">var</span> task = MyApp.Task.create(hash);
         newArray.push(task);
     });
 
-    // 3. Set the new array as the &quot;content&quot;
-    MyApp.tasksController.set('content', newArray);
+    <span class="comment">// 3. Set the new array as the "content"</span>
+    MyApp.tasksController.set(<span class="string">'content'</span>, newArray);
   }
 
 });
 
-//
-// Define our model class.
-//
+<span class="comment">//</span>
+<span class="comment">// Define our model class.</span>
+<span class="comment">//</span>
 MyApp.Task = SC.Object.extend({
 
-  toJSON: function() {
-    var hash = {}, key, val;
+  toJSON: <span class="keyword">function</span>() {
+    <span class="keyword">var</span> hash = {}, key, val;
 
-    for (key in this) {
-      if (!this.hasOwnKey(key)) continue;
+    <span class="keyword">for</span> (key <span class="keyword">in</span> <span class="keyword">this</span>) {
+      <span class="keyword">if</span> (!<span class="keyword">this</span>.hasOwnKey(key)) <span class="keyword">continue</span>;
 
-      val = this[key];
-      if (val.isProperty) val = this.get('val');
-      hash[key] = this.get(key);
+      val = <span class="keyword">this</span>[key];
+      <span class="keyword">if</span> (val.isProperty) val = <span class="keyword">this</span>.get(<span class="string">'val'</span>);
+      hash[key] = <span class="keyword">this</span>.get(key);
     }
   }
 
-}); // gives us the &quot;create&quot; function.
+}); <span class="comment">// gives us the "create" function.</span>
 
-//
-// Make our Task list available to views.
-//
+<span class="comment">//</span>
+<span class="comment">// Make our Task list available to views.</span>
+<span class="comment">//</span>
 MyApp.tasksController = SC.ArrayController.create({
 
   content: [],
@@ -218,151 +241,181 @@ MyApp.tasksController = SC.ArrayController.create({
 
 });
 
-//
-// Keeps track of the selected task so we can bind to it in
-//our views.
-//
+<span class="comment">//</span>
+<span class="comment">// Keeps track of the selected task so we can bind to it in</span>
+<span class="comment">//our views.</span>
+<span class="comment">//</span>
 MyApp.selectedTaskController = SC.ObjectController.create({
 
  contentBinding: SC.Binding
-                   .single('MyApp.tasksController.selection')
+                   .single(<span class="string">'MyApp.tasksController.selection'</span>)
 
 )};
 
-//
-// Create a pane to display our task list.
-//
+<span class="comment">//</span>
+<span class="comment">// Create a pane to display our task list.</span>
+<span class="comment">//</span>
 MyApp.listTasksPane = SC.MainPane.create({
 
   contentView: SC.View.create({
 
-    childViews: 'list new'.w(),
+    childViews: <span class="string">'list new'</span>.w(),
 
     list: SC.ListView.create({
-      layout: { centerX:0, top:50, width:300, bottom:100 },
+      layout: { centerX:<span class="number">0</span>, top:<span class="number">50</span>, width:<span class="number">300</span>, bottom:<span class="number">100</span> },
 
-      contentBinding: 'MyApp.tasksController.arrangedObjects',
-      selectionBinding: 'MyApp.tasksController.selection'
+      contentBinding: <span class="string">'MyApp.tasksController.arrangedObjects'</span>,
+      selectionBinding: <span class="string">'MyApp.tasksController.selection'</span>
 
       actsOnSelect: YES,
-      action: 'editTask',
+      action: <span class="string">'editTask'</span>,
       target: MyApp
     }),
 
-    new: SC.ButtonView.create({
-      layout: { centerX:60, height:54, width:90, bottom:50 },
-      title: &quot;New Task&quot;,
-      action: 'newTask',
+    <span class="keyword">new</span>: SC.ButtonView.create({
+      layout: { centerX:<span class="number">60</span>, height:<span class="number">54</span>, width:<span class="number">90</span>, bottom:<span class="number">50</span> },
+      title: <span class="string">"New Task"</span>,
+      action: <span class="string">'newTask'</span>,
       target: MyApp
     })
   })
 });
 
-//
-// Create a new task pane.
-//
+<span class="comment">//</span>
+<span class="comment">// Create a new task pane.</span>
+<span class="comment">//</span>
 MyApp.newTaskPane = SC.MainPane.create({
 
-  nameField: SC.outlet('contentView.form.name'),
-  descriptionField: SC.outlet('contentView.form.description'),
+  nameField: SC.outlet(<span class="string">'contentView.form.name'</span>),
+  descriptionField: SC.outlet(<span class="string">'contentView.form.description'</span>),
 
   contentView: SC.View.create({
 
-    childViews: 'form new'.w(),
+    childViews: <span class="string">'form new'</span>.w(),
 
     form: SC.View.create({
-      layout: { centerX:0, top:50, width:300, bottom:100 },
+      layout: { centerX:<span class="number">0</span>, top:<span class="number">50</span>, width:<span class="number">300</span>, bottom:<span class="number">100</span> },
 
-      childViews: 'name description'.w(),
+      childViews: <span class="string">'name description'</span>.w(),
 
       name: SC.TextFieldView.create({
-        layout: { top:10, left:10, right:10, height:80 },
-        hint: &quot;Enter a task  name&quot;
+        layout: { top:<span class="number">10</span>, left:<span class="number">10</span>, right:<span class="number">10</span>, height:<span class="number">80</span> },
+        hint: <span class="string">"Enter a task  name"</span>
       }),
 
       description: SC.TextFieldView.create({
-        layout: { top: 100, left: 10, right: 10, bottom: 10 },
+        layout: { top: <span class="number">100</span>, left: <span class="number">10</span>, right: <span class="number">10</span>, bottom: <span class="number">10</span> },
         allowsMultipleLines: YES
       })
 
     }),
 
-    new: SC.ButtonView.create({
-      layout: { centerX:60, height:54, width:90, bottom:50 },
-      title: &quot;Create&quot;,
-      action: 'createTask',
+    <span class="keyword">new</span>: SC.ButtonView.create({
+      layout: { centerX:<span class="number">60</span>, height:<span class="number">54</span>, width:<span class="number">90</span>, bottom:<span class="number">50</span> },
+      title: <span class="string">"Create"</span>,
+      action: <span class="string">'createTask'</span>,
       target: MyApp
     })
   })
 });
 
-//
-// Create an edit task pane.
-//
+<span class="comment">//</span>
+<span class="comment">// Create an edit task pane.</span>
+<span class="comment">//</span>
 MyApp.editTaskPane = SC.MainPane.create({
 
   contentView: SC.View.create({
 
-    childViews: 'form update delete'.w(),
+    childViews: <span class="string">'form update delete'</span>.w(),
 
     form: SC.View.create({
-      layout: { centerX:0, top:50, width:300, bottom:100 },
+      layout: { centerX:<span class="number">0</span>, top:<span class="number">50</span>, width:<span class="number">300</span>, bottom:<span class="number">100</span> },
 
-      childViews: 'name description'.w(),
+      childViews: <span class="string">'name description'</span>.w(),
 
       name: SC.TextFieldView.create({
-        layout: { top:10, left:10, right:10, height:80 },
-        valueBinding: 'MyApp.selectedTaskController.name'
+        layout: { top:<span class="number">10</span>, left:<span class="number">10</span>, right:<span class="number">10</span>, height:<span class="number">80</span> },
+        valueBinding: <span class="string">'MyApp.selectedTaskController.name'</span>
       }),
 
       description: SC.TextFieldView.create({
-        layout: { top: 100, left: 10, right: 10, bottom: 10 },
+        layout: { top: <span class="number">100</span>, left: <span class="number">10</span>, right: <span class="number">10</span>, bottom: <span class="number">10</span> },
         allowsMultipleLines: YES,
-        valueBinding: 'MyApp.selectedTaskController.description'
+        valueBinding: <span class="string">'MyApp.selectedTaskController.description'</span>
       })
 
     }),
 
     update: SC.ButtonView.create({
-      layout: { right:10, height:54, width:90, bottom:50 },
-      title: &quot;Update&quot;,
-      action: 'updateTask',
+      layout: { right:<span class="number">10</span>, height:<span class="number">54</span>, width:<span class="number">90</span>, bottom:<span class="number">50</span> },
+      title: <span class="string">"Update"</span>,
+      action: <span class="string">'updateTask'</span>,
       target: MyApp
     }),
 
-    delete: SC.ButtonView.create({
-      layout: { right:120, height:54, width:90, bottom:50 },
-      title: &quot;Delete&quot;,
-      action: 'deleteTask',
+    <span class="keyword">delete</span>: SC.ButtonView.create({
+      layout: { right:<span class="number">120</span>, height:<span class="number">54</span>, width:<span class="number">90</span>, bottom:<span class="number">50</span> },
+      title: <span class="string">"Delete"</span>,
+      action: <span class="string">'deleteTask'</span>,
       target: MyApp
     })
   })
 });
 
 main() {
-  MyApp.showTaskList(); // Puts the list on the screen.
-};
+  MyApp.showTaskList(); <span class="comment">// Puts the list on the screen.</span>
+};</code></div></pre>
+<h3 id='-Changelog-'>3 -  Changelog
+</h3>
 
-</pre></div><h3 id="changelog">2 Changelog</h3>
+
 <ul>
-	<li>March 2, 2011: initial version by <a href="credits.html#erichocean">Erich Ocean</a> and <a href="credits.html#geoffreyd">Geoffrey Donaldson</a></li>
-	<li>March 2, 2011: cleanup by <a href="credits.html#pwagenet">Peter Wagenet</a></li>
-	<li>March 7, 2011: small bug fixes and filename addition by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+<li>March 2, 2011: initial version by <a href="credits.html#erichocean">Erich Ocean</a> and
+<a href="credits.html#geoffreyd">Geoffrey Donaldson</a></li>
+<li>March 2, 2011: cleanup by <a href="credits.html#wagenet">Peter Wagenet</a></li>
+<li>March 7, 2011: small bug fixes and filename addition by
+<a href="credits.html#topherfangio">Topher Fangio</a></li>
+<li>August 14, 2013: converted to Markdown format for DocPad guides by
+<a href="credits.html#topherfangio">Topher Fangio</a></li>
 </ul>
 
-      </div>
+        </div>
+        <!-- TODO: re-add index_items //-->
         <div id="subCol">
-          <h3 class="chapter"><img src="images/graphics/chapters.png" alt="" />Chapters</h3>
-          <ol class="chapters">
-            <li><a href="#how-to-use-sproutcore-without-a-model-layer"><p>How To Use SproutCore Without a Model Layer</p>
-</a></li><li><a href="#changelog"><p>Changelog</p>
-</a></li>
+          <h3 class="chapter"><img src="images/graphics/chapters.png" alt="">Chapters</h3>
+          <ol class='chapters'>
+            
+              <li>
+                <a href='#-MVC----The-model-layer--'><p> MVC -- The model layer.
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-How-To-Use-SproutCore-Without-a-Model-Layer-'><p> How To Use SproutCore Without a Model Layer
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Changelog-'><p> Changelog
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
           </ol>
         </div>
+      </div>
     </div>
-  </div>
 
-  <hr class="hide" />
+    <hr class="hide" />
+
 	  <footer>
 	    <div class="container">
 	      <div class="col">
@@ -410,33 +463,29 @@ main() {
 	    </div>
 	  </footer>
 
-  <script src="http://code.jquery.com/jquery-1.6.min.js" type="text/javascript" charset="utf-8"></script>
-  <script type="text/javascript" src="javascripts/sproutGuides.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushJScript.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushCss.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
-  <script type="text/javascript">
-    SyntaxHighlighter.all()
+    <script type='text/javascript' src='/javascripts/jquery.min.js'></script>
 
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-19584397-1']);
-    _gaq.push(['_setDomainName', '.sproutcore.com']);
-    _gaq.push(['_setAllowHash', false]);
-    _gaq.push(['_setAllowLinker', true]);
-    _gaq.push(['_trackPageview']);
+    
 
-    (function() {
-      var ga = document.createElement('script');
-      ga.type = 'text/javascript';
-      ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl': 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-</body>
+    <script type='text/javascript'>
+      /*
+       * Make the guides link clickable
+       */
+      function guideMenu(e){
+        if (document.getElementById('guides').style.display == "none") {
+          document.getElementById('guides').style.display = "block";
+          document.getElementById('guidesArrow').innerHTML = "&#9662;";
+          $('body').click(function(e){ guideMenu(e); });
+        } else {
+          document.getElementById('guides').style.display = "none";
+          document.getElementById('guidesArrow').innerHTML = "&#9656;";
+          $('body').unbind('click');
+        }
+        return false;
+      }
+
+      $('#guidesMenu, .guidesMenu').click(guideMenu);
+    </script>
+
+  </body>
 </html>

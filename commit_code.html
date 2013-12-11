@@ -1,247 +1,370 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>SproutCore Guides: Committing Code</title>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
 
-  <!-- guides styles -->
-  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/guides.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
-  <!--[if lt IE 9]>
-  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
+    <!-- plugin styles -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/highlight-github.css" />
 
-  <!-- syntax highlighting styles -->
-  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/shThemeGuides.css" />
-</head>
-<body class="guide">
+    <!-- guides styles -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/reset.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/main.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/guides.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-  <header role="banner">
-    <div class="container">
-      <h1 id="logo">
-        <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
-      </h1>
-      <nav role="navigation">
-        <ul>
-          <li><a href="http://sproutcore.com/about/">About</a></li>
-          <li><a href="http://showcase.sproutcore.com">Showcase</a></li>
-          <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
-          <li><a href="http://docs.sproutcore.com">Docs</a></li>
-          <li><a href="http://sproutcore.com/community/">Community</a></li>
-          <li><a href="http://blog.sproutcore.com">Blog</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-  <div id="feature">
-    <div class="wrapper">
-      <div class="feature_header">
-        <a href="/"><img src="images/graphics/guides.png"></a>
-        <h2><a href="/">SproutCore Guides</a></h2>
-        <p>These guides are designed to help you write and perfect your code.</p>
+    <meta name="generator" content="DocPad v6.57.0" />
+    
+  </head>
+
+  <body class="guide">
+
+    <header role="banner">
+      <div class="container">
+        <h1 id="logo">
+          <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
+        </h1>
+        <nav role="navigation">
+          <ul>
+            <li><a href="http://sproutcore.com/about/">About</a></li>
+            <li><a href="http://showcase.sproutcore.com">Showcase</a></li>
+            <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
+            <li><a href="http://docs.sproutcore.com">Docs</a></li>
+            <li><a href="http://sproutcore.com/community/">Community</a></li>
+            <li><a href="http://blog.sproutcore.com">Blog</a></li>
+          </ul>
+        </nav>
       </div>
-      <div class="feature_sidebar">
-        <a href="index.html" id="guidesMenu">
-          Guides Index <span id="guidesArrow">&#9656;</span>
-        </a>
-        <div id="guides" class="clearfix" style="display: none;">
-          <a href="index.html" class="guidesMenu">
-            Guides Index <span class="guidesArrow">&#9662;</span>
+    </header>
+
+    <div id="feature">
+      <div class="wrapper">
+        <div class="feature_header">
+          <a href="/"><img src="images/graphics/guides.png"></a>
+          <h2><a href="/">SproutCore Guides</a></h2>
+          <p>These guides are designed to help you write and perfect your code.</p>
+        </div>
+        <div class="feature_sidebar">
+          <a href="index.html" id="guidesMenu">
+            Guides Index <span id="guidesArrow">&#9656;</span>
           </a>
-          <hr style="clear:both;">
-          <dl class="L">
-    <dt>Start Here</dt>
-      <dd><a href="getting_started.html">Getting Started: Part 1</a></dd>
-      <dd><a href="getting_started_2.html">Getting Started: Part 2</a></dd>
-      <dd><a href="getting_started_3.html">Getting Started: Part 3</a></dd>
-      <dd><a href="core_concepts_sc_object.html">Classes and SC.Object</a></dd>
-      <dd><a href="core_concepts_kvo.html">Computed Properties, Observers and Bindings</a></dd>
-    <dt>Views</dt>
-      <dd><a href="views.html">Core View Concepts</a></dd>
-    <dt>Models</dt>
-      <dd><a href="records.html">SproutCore Records</a></dd>
-      <dd><a href="fixtures.html">Using Fixtures</a></dd>
-    <dt>Theming</dt>
-      <dd><a href="chance.html">Using Chance, SproutCore's CSS Framework</a></dd>
-      <dd><a href="theming_app.html">Theming Your App</a></dd>
-    <dt>Testing</dt>
-      <dd><a href="unit_test_framework.html">Unit Testing</a></dd>
-      <dd><a href="adding_unit_test.html">Adding a Unit Test</a></dd>
-      <dd><a href="writing_unit_tests.html">Writing Unit Tests</a></dd>
-      <dd><a href="running_unit_tests.html">Running Unit Tests</a></dd>
-      <dd><a href="todos_tdd.html">SproutCore Development Using TDD</a></dd>
-</dl>
-<dl class="R">
-    <dt>Extras</dt>
-      <dd><a href="build_tools.html">Build Tools</a></dd>
-      <dd><a href="run_loop.html">The Run Loop</a></dd>
-      <dd><a href="enumerables.html">Enumerables</a></dd>
-      <dd><a href="using_handlebars.html">Using Handlebars Templates</a></dd>
-    <dt>Contributing to SproutCore</dt>
-      <dd><a href="style_guide.html">Javascript Style Guide</a></dd>
-      <dd><a href="commit_code.html">Committer Guidelines</a></dd>
-      <dd><a href="documentation_guidelines.html">Documentation Guidelines</a></dd>
-</dl>
+          <div id="guides" class="clearfix" style="display: none;">
+            <a href="index.html" class="guidesMenu">
+              Guides Index <span class="guidesArrow">&#9662;</span>
+            </a>
 
+            <hr style="clear:both;">
 
+            <dl class='L'><dt>Start Here</dt>
+<dd><a href='/getting_started.html'>Getting Started: Part 1</a></dd>
+<dd><a href='/getting_started_2.html'>Getting Started: Part 2</a></dd>
+<dd><a href='/getting_started_3.html'>Getting Started: Part 3</a></dd>
+<dd><a href='/core_concepts_sc_object.html'>Classes and SC.Object</a></dd>
+<dd><a href='/core_concepts_kvo.html'>Computed Properties, Observers and Bindings</a></dd><dt>Views</dt>
+<dd><a href='/views.html'>Core View Concepts</a></dd>
+<dd><a href='/animate.html'>DRAFT - Animation</a></dd><dt>Models</dt>
+<dd><a href='/records.html'>SproutCore Records</a></dd>
+<dd><a href='/fixtures.html'>Using Fixtures</a></dd>
+<dd><a href='/record_lifecycle.html'>DRAFT - Understanding the Record Lifecycle</a></dd>
+<dd><a href='/no_store.html'>DRAFT - No DataStore</a></dd>
+<dd><a href='/data_source.html'>DRAFT - Data Source</a></dd><dt>Theming</dt>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
+<dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
+<dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd>
+<dd><a href='/testing_guidelines.html'>DRAFT - Testing Guidelines</a></dd><dt>Extras</dt>
+<dd><a href='/build_tools.html'>SproutCore's Build Tools</a></dd>
+<dd><a href='/run_loop.html'>The Run Loop</a></dd>
+<dd><a href='/enumerables.html'>Enumerables</a></dd>
+<dd><a href='/connect_server.html'>DRAFT - Connecting to a Server</a></dd><dt>Contributing to SproutCore</dt>
+<dd><a href='/style_guide.html'>Javascript Guidelines</a></dd>
+<dd><a href='/commit_code.html'>Committer Guidelines</a></dd>
+<dd><a href='/documentation_guidelines.html'>Documentation Guidelines</a></dd>
+<dd><a href='/contribute.html'>Contributing Guides</a></dd><dt>Thanks</dt>
+<dd><a href='/credits.html'>Credits</a></dd></dl>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div id="container">
-    <div class="wrapper">
-      <div id="mainCol">
-          <div class="headerSection">
-            <h2>Committing Code</h2>
-<p>So, you&#8217;re ready to push some code into the public repo?  Here&#8217;s a list of things you can do to make sure your code gets past the review process.</p>
+    <div id="container">
+      <div class="wrapper">
+        <div id="mainCol">
+          <div class='headerSection'>
+            
+              <h2>Committer Guidelines</h2>
+            
 
+            
+              <p>So, you're ready to push some code into the public repo?  Here's a list of things you can do to make sure your code gets past the review process.</p>
+            
+
+            
           </div>
-        <h3 id="conform-to-sc-style-guides">1 Conform to SC Style Guides</h3>
-<p>Yeah, this is pretty obvious.  If you haven&#8217;t already go <a href="style_guide.html">read them</a>.</p>
-<h3 id="must-pass-js-lint">2 Must Pass JS lint</h3>
-<p>Javascript can be beautiful and annoying all at the same time.  <a href="http://www.jslint.com">Crockford&#8217;s JSLint</a> is a god send and helps check for common mistakes like:</p>
+
+          <h3 id='-Conform-to-SC-Style-Guides-'>1 -  Conform to SC Style Guides
+</h3>
+
+
+<p>Yeah, this is pretty obvious.  If you haven&#39;t already go <a href="/style_guide.html">read them</a>.</p>
+<h3 id='-Must-Pass-JS-Hint-'>2 -  Must Pass JS Hint
+</h3>
+
+
+<p>Javascript can be beautiful and annoying all at the same time.  <a href="http://jshint.com/">JSHint</a> is a
+god send and helps check for common mistakes like:</p>
 <ul>
-	<li>Undefined global vars</li>
-	<li>use of <tt>==</tt> and <tt>!=</tt> instead of <tt>===</tt> and <tt>!==</tt></li>
-	<li>Extra or missing commas</li>
+<li>Undefined global vars</li>
+<li>use of <tt>==</tt> and <tt>!=</tt> instead of <tt>===</tt> and <tt>!==</tt></li>
+<li>Extra or missing commas</li>
 </ul>
-<p>The following JS lint config can be used in combination with the <a href="https://github.com/sproutit/sproutcore-tmbundle">SproutCore Textmate bundle</a>.</p>
-<p>Install it at <tt>&lt;path to your Textmate bundles&gt;/SproutCore.tmbundle/Support/bin/prefs.js</tt></p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
+<p>The following JS lint config can be used in combination with the <a href="https://github.com/sproutit/sproutcore-tmbundle">SproutCore
+Textmate bundle</a>.</p>
+<p>Install it at <tt><path to your Textmate bundles>/SproutCore.tmbundle/Support/bin/prefs.js</tt></p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class="keyword">var</span> JSLINT_PREFS = {
+    adsafe     : <span class="literal">false</span>, <span class="comment">// if ADsafe should be enforced</span>
+    bitwise    : <span class="literal">false</span>, <span class="comment">// if bitwise operators should not be allowed</span>
+    browser    : <span class="literal">true</span>,  <span class="comment">// if the standard browser globals should be predefined</span>
+    cap        : <span class="literal">false</span>, <span class="comment">// if upper case HTML should be allowed</span>
+    debug      : <span class="literal">true</span>,  <span class="comment">// if debugger statements should be allowed</span>
+    eqeqeq     : <span class="literal">true</span>, <span class="comment">// if === should be required</span>
+    evil       : <span class="literal">false</span>, <span class="comment">// if eval should be allowed</span>
+    forin      : <span class="literal">true</span>,  <span class="comment">// if for in statements must filter</span>
+    fragment   : <span class="literal">false</span>, <span class="comment">// if HTML fragments should be allowed</span>
+    laxbreak   : <span class="literal">true</span>,  <span class="comment">// if line breaks should not be checked</span>
+    nomen      : <span class="literal">false</span>, <span class="comment">// if names should be checked</span>
+    on         : <span class="literal">false</span>, <span class="comment">// if HTML event handlers should be allowed</span>
+    passfail   : <span class="literal">false</span>, <span class="comment">// if the scan should stop on first error</span>
+    plusplus   : <span class="literal">false</span>, <span class="comment">// if increment/decrement should not be allowed</span>
+    regexp     : <span class="literal">true</span>,  <span class="comment">// if the . should not be allowed in regexp literals</span>
+    rhino      : <span class="literal">false</span>, <span class="comment">// if the Rhino environment globals should be predefined</span>
+    undef      : <span class="literal">true</span>,  <span class="comment">// if variables should be declared before used</span>
+    safe       : <span class="literal">false</span>, <span class="comment">// if use of some browser features should be restricted</span>
+    sidebar    : <span class="literal">false</span>, <span class="comment">// if the System object should be predefined</span>
+    sub        : <span class="literal">true</span>,  <span class="comment">// if all forms of subscript notation are tolerated</span>
+    white      : <span class="literal">false</span>, <span class="comment">// if strict whitespace rules apply</span>
+    widget     : <span class="literal">false</span>, <span class="comment">// if the Yahoo Widgets globals should be predefined</span>
+    indent: <span class="number">2</span>,
+    predef: [<span class="string">'SC'</span>, <span class="string">'require'</span>, <span class="string">'sc_super'</span>, <span class="string">'YES'</span>, <span class="string">'NO'</span>, <span class="string">'static_url'</span>, <span class="string">'sc_static'</span>, <span class="string">'sc_resource'</span>, <span class="string">'sc_require'</span>, <span class="string">'module'</span>, <span class="string">'test'</span>, <span class="string">'equals'</span>, <span class="string">'same'</span>, <span class="string">'ok'</span>, <span class="string">'CoreTest'</span>, <span class="string">'SproutCore'</span>, <span class="string">'</span>, <span class="string">'jQuery'</span>, <span class="string">'start'</span>, <span class="string">'stop'</span>, <span class="string">'expect'</span>, <span class="string">'htmlbody'</span>]
+};</code></div></pre>
+<p>TODO: we should have a command line tool that is included in the build tools so
+there is a consistent standard and so all the cool kids using VI have an
+option.</p>
+<h3 id='-Unit-Tests-'>3 -  Unit Tests
+</h3>
 
-var JSLINT_PREFS = {
-    adsafe     : false, // if ADsafe should be enforced
-    bitwise    : false, // if bitwise operators should not be allowed
-    browser    : true,  // if the standard browser globals should be predefined
-    cap        : false, // if upper case HTML should be allowed
-    debug      : true,  // if debugger statements should be allowed
-    eqeqeq     : true, // if === should be required
-    evil       : false, // if eval should be allowed
-    forin      : true,  // if for in statements must filter
-    fragment   : false, // if HTML fragments should be allowed
-    laxbreak   : true,  // if line breaks should not be checked
-    nomen      : false, // if names should be checked
-    on         : false, // if HTML event handlers should be allowed
-    passfail   : false, // if the scan should stop on first error
-    plusplus   : false, // if increment/decrement should not be allowed
-    regexp     : true,  // if the . should not be allowed in regexp literals
-    rhino      : false, // if the Rhino environment globals should be predefined
-    undef      : true,  // if variables should be declared before used
-    safe       : false, // if use of some browser features should be restricted
-    sidebar    : false, // if the System object should be predefined
-    sub        : true,  // if all forms of subscript notation are tolerated
-    white      : false, // if strict whitespace rules apply
-    widget     : false, // if the Yahoo Widgets globals should be predefined
-    indent: 2,
-    predef: ['SC', 'require', 'sc_super', 'YES', 'NO', 'static_url', 'sc_static', 'sc_resource', 'sc_require', 'module', 'test', 'equals', 'same', 'ok', 'CoreTest', 'SproutCore', '$', 'jQuery', 'start', 'stop', 'expect', 'htmlbody']
-};
 
-</pre></div><h3 id="unit-tests">3 Unit Tests</h3>
-<h4 id="don-t-break-anyone-else-s-tests">3.1 Don&#8217;t break anyone else&#8217;s tests</h4>
-<p>On stable builds, all of the unit tests should pass.  On development branches, if there are broken tests because of a major project that someone on the Core Team is doing, you can ignore those failures.</p>
-<h4 id="write-good-tests">3.2 Write good tests</h4>
-<p>Writing good unit tests is something often pontificated on by seasoned developers, so rather than waste time with a long essay I&#8217;ll just show some examples of good and bad unit tests:</p>
-<h5 id="view-unit-tests">3.2.1 View Unit Tests</h5>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
 
-test(&quot;basic&quot;, function() {
-  var view = pane.view('basic');
-  ok(!view.$().hasClass('disabled'), 'should not have disabled class');
-  ok(!view.$().hasClass('sel'), 'should not have sel class');
 
-  var input = view.$();
-  equals(input.attr('aria-checked'), 'false',  'input should not be checked');
+<h4 id='-Don-t-break-anyone-else-s-tests-'>3.1 -  Don&#39;t break anyone else&#39;s tests
+</h4>
 
-  var label = view.$('span.label');
-  equals(label.text(), 'Hello World', 'should have label');
-});
-</pre></div><p>The above test is great because it verifies that the <strong>rendered <span class="caps">DOM</span></strong> is correct.</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
 
-test(&quot;basic&quot;, function() {
-  var view = pane.view('basic');
-  equals(view.get('title'), 'Hello World', 'should have label');
-});
-</pre></div><p>This test sucks because it only verifies that you can set a property on an object.</p>
-<div class="info"><p>For more information see <a href="writing_unit_tests.html">Writing Unit Tests</a>.</p></div>
-<h4 id="running-unit-tests">3.3 Running Unit Tests</h4>
-<p>You can run the unit tests by using the test runner app <tt>http://localhost:4020/sproutcore/tests</tt> or by calling them manually:</p>
+<p>On stable builds, all of the unit tests should pass.  On development branches,
+if there are broken tests because of a major project that someone on the Core
+Team is doing, you can ignore those failures.</p>
+<h4 id='-Write-good-tests-'>3.2 -  Write good tests
+</h4>
+
+
+<p>Writing good unit tests is something often pontificated on by seasoned
+developers, so rather than waste time with a long essay I&#39;ll just show some
+examples of good and bad unit tests:</p>
+<h5 id='-View-Unit-Tests-'>3.2.1 -  View Unit Tests
+</h5>
+
+
+<pre class="highlighted"><div class="code_container"><code class="javascript">test(<span class="string">"basic"</span>, <span class="keyword">function</span>() {
+  <span class="keyword">var</span> view = pane.view(<span class="string">'basic'</span>);
+  ok(!view.$().hasClass(<span class="string">'disabled'</span>), <span class="string">'should not have disabled class'</span>);
+  ok(!view.$().hasClass(<span class="string">'sel'</span>), <span class="string">'should not have sel class'</span>);
+
+  <span class="keyword">var</span> input = view.$();
+  equals(input.attr(<span class="string">'aria-checked'</span>), <span class="string">'false'</span>,  <span class="string">'input should not be checked'</span>);
+
+  <span class="keyword">var</span> label = view.$(<span class="string">'span.label'</span>);
+  equals(label.text(), <span class="string">'Hello World'</span>, <span class="string">'should have label'</span>);
+});</code></div></pre>
+<p>The above test is great because it verifies that the <em>rendered DOM</em> is correct.</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">test(<span class="string">"basic"</span>, <span class="keyword">function</span>() {
+  <span class="keyword">var</span> view = pane.view(<span class="string">'basic'</span>);
+  equals(view.get(<span class="string">'title'</span>), <span class="string">'Hello World'</span>, <span class="string">'should have label'</span>);
+});</code></div></pre>
+<p>This test sucks because it only verifies that you can set a property on an object.</p>
+<div class='info'><p> For more information see <a href="writing_unit_tests.html">Writing Unit Tests</a>.
+
+</p></div>
+
+
+
+<h4 id='-Running-Unit-Tests-'>3.3 -  Running Unit Tests
+</h4>
+
+
+<p>You can run the unit tests by using the test runner app <a href="http://localhost:4020/sproutcore/tests">http://localhost:4020/sproutcore/tests</a>
+or by calling them manually:</p>
 <ul>
-	<li>All Tests:   <code>http://localhost:4020/&lt;framework_or_app_name&gt;/en/current/tests.html</code></li>
+<li><p>All Tests:</p>
+<p><a href="http://localhost:4020/&lt;framework_or_app_name&gt;/en/current/tests.html">http://localhost:4020/&lt;framework_or_app_name&gt;/en/current/tests.html</a></p>
+</li>
 </ul>
 <ul>
-	<li>Specific Tests:   <code>http://localhost:4020/&lt;framework_or_app_name&gt;/en/current/tests/path/to/your/tests.html</code></li>
+<li><p>Specific Tests:</p>
+<p><a href="http://localhost:4020/&lt;framework_or_app_name&gt;/en/current/tests/path/to/your/tests.html">http://localhost:4020/&lt;framework_or_app_name&gt;/en/current/tests/path/to/your/tests.html</a></p>
+</li>
 </ul>
 <p>For example:</p>
 <ul>
-	<li>All of SproutCore&#8217;s datastore tests (<a href="http://localhost:4020/sproutcore/datastore/en/current/tests.html">link</a>):   <code>http://localhost:4020/sproutcore/datastore/en/current/tests.html</code></li>
+<li><p>All of SproutCore&#39;s datastore tests:</p>
+<p><a href="http://localhost:4020/sproutcore/datastore/en/current/tests.html">http://localhost:4020/sproutcore/datastore/en/current/tests.html</a></p>
+</li>
 </ul>
 <ul>
-	<li>Just the tests in the store directory (<a href="http://localhost:4020/sproutcore/datastore/en/current/tests/system/store.html">link</a>):   <code>http://localhost:4020/sproutcore/datastore/en/current/tests/system/store.html</code></li>
+<li><p>Just the tests in the store directory:</p>
+<p><a href="http://localhost:4020/sproutcore/datastore/en/current/tests/system/store.html">http://localhost:4020/sproutcore/datastore/en/current/tests/system/store.html</a></p>
+</li>
 </ul>
 <ul>
-	<li>Just the find tests (<a href="http://localhost:4020/sproutcore/datastore/en/current/tests/system/store/find.html">link</a>):   <code>http://localhost:4020/sproutcore/datastore/en/current/tests/system/store/find.html</code></li>
+<li><p>Just the find tests:</p>
+<p><a href="http://localhost:4020/sproutcore/datastore/en/current/tests/system/store/find.html">http://localhost:4020/sproutcore/datastore/en/current/tests/system/store/find.html</a></p>
+</li>
 </ul>
-<div class="info"><p>For more information see <a href="running_unit_tests.html">Running Unit Tests</a>.</p></div>
-<h3 id="consistency">4 Consistency</h3>
-All code must be consistent with patterns found in the Application and within the Frameworks.
-example: <span class="caps">MVC</span>, Visitor, Statecharts don&#8217;t add special functionality without good reason!
-<h3 id="performance">5 Performance</h3>
-<p>Avoid Known Slow stuff:</p>
+<div class='info'><p> For more information see <a href="running_unit_tests.html">Running Unit Tests</a>.
+
+</p></div>
+
+
+
+<h3 id='-Consistency-'>4 -  Consistency
+</h3>
+
+
+<p>All code must be consistent with patterns found in the Application and within the Frameworks.  example: MVC,
+Visitor, Statecharts don&#39;t add special functionality without good reason!</p>
+<h3 id='-Performance-'>5 -  Performance
+</h3>
+
+
+<p>Avoid things that are known to be slow:</p>
 <ul>
-	<li><tt>.observes</tt></li>
-	<li>nested run loops</li>
-	<li>looping</li>
-	<li>missing <tt>.cacheable()</tt></li>
-	<li>code must be prove-ably fast with <tt>SC.Benchmark</tt></li>
-	<li>keep in mind code size in kb, number of statements(IE!), doing too much on init</li>
+<li><tt>.observes</tt></li>
+<li>nested run loops</li>
+<li>looping</li>
+<li>missing <tt>.cacheable()</tt></li>
+<li>code must be prove-ably fast with <tt>SC.Benchmark</tt></li>
+<li>keep in mind code size in kb, number of statements (Internet Explorer!), doing too much on init</li>
 </ul>
-<h3 id="maintainability">6 Maintainability</h3>
+<h3 id='-Maintainability-'>6 -  Maintainability
+</h3>
+
+
 <ul>
-	<li>Don&#8217;t override private APIs</li>
-	<li>Be consistent and predictable</li>
-	<li>Make your classes extensible for other devs! (comment and modularize)</li>
-	<li>Use good OO practices</li>
-	<li>Reduce coupling between layers (parent classes should not know about their children &#8594; looking at you SC.View)</li>
-	<li>Refactor, don&#8217;t <em>hack</em> &#8594; <strong>make code better not worse!</strong></li>
+<li>Don&#39;t override private APIs</li>
+<li>Be consistent and predictable</li>
+<li>Make your classes extensible for other devs! (comment and modularize)</li>
+<li>Use good OO practices</li>
+<li>Reduce coupling between layers (parent classes should not know about their children -&gt; looking at you SC.View)</li>
+<li>Refactor, don&#39;t <em>hack</em> -&gt; <strong>make code better not worse!</strong></li>
 </ul>
-<h3 id="changelog">7 Changelog</h3>
+<h3 id='-Changelog-'>7 -  Changelog
+</h3>
+
+
 <ul>
-	<li>March 3, 2011: initial version by <a href="credits.html#onkis">Mike Ball</a></li>
-	<li>March 3, 2011: minor adjustments by <a href="credits.html#pwagenet">Peter Wagenet</a></li>
-	<li>March 3, 2011: minor grammatical/formatting changes by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+<li>March 3, 2011: initial version by <a href="credits.html#onkis">Mike Ball</a></li>
+<li>March 3, 2011: minor adjustments by <a href="credits.html#wagenet">Peter Wagenet</a></li>
+<li>March 3, 2011: minor grammatical/formatting changes by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+<li>July 24, 2013: migration to DocPad by <a href="credits.html#topherfangio">Topher Fangio</a></li>
 </ul>
 
-      </div>
+        </div>
+        <!-- TODO: re-add index_items //-->
         <div id="subCol">
-          <h3 class="chapter"><img src="images/graphics/chapters.png" alt="" />Chapters</h3>
-          <ol class="chapters">
-            <li><a href="#conform-to-sc-style-guides"><p>Conform to SC Style Guides</p>
-</a></li><li><a href="#must-pass-js-lint"><p>Must Pass JS lint</p>
-</a></li><li><a href="#unit-tests"><p>Unit Tests</p>
-</a><ul><li><a href="#don-t-break-anyone-else-s-tests"><p>Don&#8217;t break anyone else&#8217;s tests</p>
-</a></li> <li><a href="#write-good-tests"><p>Write good tests</p>
-</a></li> <li><a href="#running-unit-tests"><p>Running Unit Tests</p>
-</a></li></ul></li><li><a href="#consistency"><p>Consistency</p>
-</a></li><li><a href="#performance"><p>Performance</p>
-</a></li><li><a href="#maintainability"><p>Maintainability</p>
-</a></li><li><a href="#changelog"><p>Changelog</p>
-</a></li>
+          <h3 class="chapter"><img src="images/graphics/chapters.png" alt="">Chapters</h3>
+          <ol class='chapters'>
+            
+              <li>
+                <a href='#-Conform-to-SC-Style-Guides-'><p> Conform to SC Style Guides
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Must-Pass-JS-Hint-'><p> Must Pass JS Hint
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Unit-Tests-'><p> Unit Tests
+</p></a>
+                <ul>
+                  
+                    <li><a href='#-Don-t-break-anyone-else-s-tests-'><p> Don't break anyone else's tests
+</p></a></li>
+                  
+                    <li><a href='#-Write-good-tests-'><p> Write good tests
+</p></a></li>
+                  
+                    <li><a href='#-Running-Unit-Tests-'><p> Running Unit Tests
+</p></a></li>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Consistency-'><p> Consistency
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Performance-'><p> Performance
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Maintainability-'><p> Maintainability
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Changelog-'><p> Changelog
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
           </ol>
         </div>
+      </div>
     </div>
-  </div>
 
-  <hr class="hide" />
+    <hr class="hide" />
+
 	  <footer>
 	    <div class="container">
 	      <div class="col">
@@ -289,33 +412,29 @@ example: <span class="caps">MVC</span>, Visitor, Statecharts don&#8217;t add spe
 	    </div>
 	  </footer>
 
-  <script src="http://code.jquery.com/jquery-1.6.min.js" type="text/javascript" charset="utf-8"></script>
-  <script type="text/javascript" src="javascripts/sproutGuides.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushJScript.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushCss.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
-  <script type="text/javascript">
-    SyntaxHighlighter.all()
+    <script type='text/javascript' src='/javascripts/jquery.min.js'></script>
 
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-19584397-1']);
-    _gaq.push(['_setDomainName', '.sproutcore.com']);
-    _gaq.push(['_setAllowHash', false]);
-    _gaq.push(['_setAllowLinker', true]);
-    _gaq.push(['_trackPageview']);
+    
 
-    (function() {
-      var ga = document.createElement('script');
-      ga.type = 'text/javascript';
-      ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl': 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-</body>
+    <script type='text/javascript'>
+      /*
+       * Make the guides link clickable
+       */
+      function guideMenu(e){
+        if (document.getElementById('guides').style.display == "none") {
+          document.getElementById('guides').style.display = "block";
+          document.getElementById('guidesArrow').innerHTML = "&#9662;";
+          $('body').click(function(e){ guideMenu(e); });
+        } else {
+          document.getElementById('guides').style.display = "none";
+          document.getElementById('guidesArrow').innerHTML = "&#9656;";
+          $('body').unbind('click');
+        }
+        return false;
+      }
+
+      $('#guidesMenu, .guidesMenu').click(guideMenu);
+    </script>
+
+  </body>
 </html>

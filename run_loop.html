@@ -1,163 +1,286 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>SproutCore Guides: The Run Loop</title>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
 
-  <!-- guides styles -->
-  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/guides.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
-  <!--[if lt IE 9]>
-  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
+    <!-- plugin styles -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/highlight-github.css" />
 
-  <!-- syntax highlighting styles -->
-  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/shThemeGuides.css" />
-</head>
-<body class="guide">
+    <!-- guides styles -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/reset.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/main.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/guides.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-  <header role="banner">
-    <div class="container">
-      <h1 id="logo">
-        <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
-      </h1>
-      <nav role="navigation">
-        <ul>
-          <li><a href="http://sproutcore.com/about/">About</a></li>
-          <li><a href="http://showcase.sproutcore.com">Showcase</a></li>
-          <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
-          <li><a href="http://docs.sproutcore.com">Docs</a></li>
-          <li><a href="http://sproutcore.com/community/">Community</a></li>
-          <li><a href="http://blog.sproutcore.com">Blog</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-  <div id="feature">
-    <div class="wrapper">
-      <div class="feature_header">
-        <a href="/"><img src="images/graphics/guides.png"></a>
-        <h2><a href="/">SproutCore Guides</a></h2>
-        <p>These guides are designed to help you write and perfect your code.</p>
+    <meta name="generator" content="DocPad v6.57.0" />
+    
+  </head>
+
+  <body class="guide">
+
+    <header role="banner">
+      <div class="container">
+        <h1 id="logo">
+          <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
+        </h1>
+        <nav role="navigation">
+          <ul>
+            <li><a href="http://sproutcore.com/about/">About</a></li>
+            <li><a href="http://showcase.sproutcore.com">Showcase</a></li>
+            <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
+            <li><a href="http://docs.sproutcore.com">Docs</a></li>
+            <li><a href="http://sproutcore.com/community/">Community</a></li>
+            <li><a href="http://blog.sproutcore.com">Blog</a></li>
+          </ul>
+        </nav>
       </div>
-      <div class="feature_sidebar">
-        <a href="index.html" id="guidesMenu">
-          Guides Index <span id="guidesArrow">&#9656;</span>
-        </a>
-        <div id="guides" class="clearfix" style="display: none;">
-          <a href="index.html" class="guidesMenu">
-            Guides Index <span class="guidesArrow">&#9662;</span>
+    </header>
+
+    <div id="feature">
+      <div class="wrapper">
+        <div class="feature_header">
+          <a href="/"><img src="images/graphics/guides.png"></a>
+          <h2><a href="/">SproutCore Guides</a></h2>
+          <p>These guides are designed to help you write and perfect your code.</p>
+        </div>
+        <div class="feature_sidebar">
+          <a href="index.html" id="guidesMenu">
+            Guides Index <span id="guidesArrow">&#9656;</span>
           </a>
-          <hr style="clear:both;">
-          <dl class="L">
-    <dt>Start Here</dt>
-      <dd><a href="getting_started.html">Getting Started: Part 1</a></dd>
-      <dd><a href="getting_started_2.html">Getting Started: Part 2</a></dd>
-      <dd><a href="getting_started_3.html">Getting Started: Part 3</a></dd>
-      <dd><a href="core_concepts_sc_object.html">Classes and SC.Object</a></dd>
-      <dd><a href="core_concepts_kvo.html">Computed Properties, Observers and Bindings</a></dd>
-    <dt>Views</dt>
-      <dd><a href="views.html">Core View Concepts</a></dd>
-    <dt>Models</dt>
-      <dd><a href="records.html">SproutCore Records</a></dd>
-      <dd><a href="fixtures.html">Using Fixtures</a></dd>
-    <dt>Theming</dt>
-      <dd><a href="chance.html">Using Chance, SproutCore's CSS Framework</a></dd>
-      <dd><a href="theming_app.html">Theming Your App</a></dd>
-    <dt>Testing</dt>
-      <dd><a href="unit_test_framework.html">Unit Testing</a></dd>
-      <dd><a href="adding_unit_test.html">Adding a Unit Test</a></dd>
-      <dd><a href="writing_unit_tests.html">Writing Unit Tests</a></dd>
-      <dd><a href="running_unit_tests.html">Running Unit Tests</a></dd>
-      <dd><a href="todos_tdd.html">SproutCore Development Using TDD</a></dd>
-</dl>
-<dl class="R">
-    <dt>Extras</dt>
-      <dd><a href="build_tools.html">Build Tools</a></dd>
-      <dd><a href="run_loop.html">The Run Loop</a></dd>
-      <dd><a href="enumerables.html">Enumerables</a></dd>
-      <dd><a href="using_handlebars.html">Using Handlebars Templates</a></dd>
-    <dt>Contributing to SproutCore</dt>
-      <dd><a href="style_guide.html">Javascript Style Guide</a></dd>
-      <dd><a href="commit_code.html">Committer Guidelines</a></dd>
-      <dd><a href="documentation_guidelines.html">Documentation Guidelines</a></dd>
-</dl>
+          <div id="guides" class="clearfix" style="display: none;">
+            <a href="index.html" class="guidesMenu">
+              Guides Index <span class="guidesArrow">&#9662;</span>
+            </a>
 
+            <hr style="clear:both;">
 
+            <dl class='L'><dt>Start Here</dt>
+<dd><a href='/getting_started.html'>Getting Started: Part 1</a></dd>
+<dd><a href='/getting_started_2.html'>Getting Started: Part 2</a></dd>
+<dd><a href='/getting_started_3.html'>Getting Started: Part 3</a></dd>
+<dd><a href='/core_concepts_sc_object.html'>Classes and SC.Object</a></dd>
+<dd><a href='/core_concepts_kvo.html'>Computed Properties, Observers and Bindings</a></dd><dt>Views</dt>
+<dd><a href='/views.html'>Core View Concepts</a></dd>
+<dd><a href='/animate.html'>DRAFT - Animation</a></dd><dt>Models</dt>
+<dd><a href='/records.html'>SproutCore Records</a></dd>
+<dd><a href='/fixtures.html'>Using Fixtures</a></dd>
+<dd><a href='/record_lifecycle.html'>DRAFT - Understanding the Record Lifecycle</a></dd>
+<dd><a href='/no_store.html'>DRAFT - No DataStore</a></dd>
+<dd><a href='/data_source.html'>DRAFT - Data Source</a></dd><dt>Theming</dt>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
+<dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
+<dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd>
+<dd><a href='/testing_guidelines.html'>DRAFT - Testing Guidelines</a></dd><dt>Extras</dt>
+<dd><a href='/build_tools.html'>SproutCore's Build Tools</a></dd>
+<dd><a href='/run_loop.html'>The Run Loop</a></dd>
+<dd><a href='/enumerables.html'>Enumerables</a></dd>
+<dd><a href='/connect_server.html'>DRAFT - Connecting to a Server</a></dd><dt>Contributing to SproutCore</dt>
+<dd><a href='/style_guide.html'>Javascript Guidelines</a></dd>
+<dd><a href='/commit_code.html'>Committer Guidelines</a></dd>
+<dd><a href='/documentation_guidelines.html'>Documentation Guidelines</a></dd>
+<dd><a href='/contribute.html'>Contributing Guides</a></dd><dt>Thanks</dt>
+<dd><a href='/credits.html'>Credits</a></dd></dl>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div id="container">
-    <div class="wrapper">
-      <div id="mainCol">
-          <div class="headerSection">
-            <h2>The Run Loop</h2>
-<p>The guide covers SproutCore&#8217;s Run Loop. By referring to this guide, you will be able to:</p>
-<ul>
-	<li>Understand the Run Loop</li>
-	<li>Know when to manually trigger a Run Loop (rare).</li>
-	<li>Know how to use invokeOnce(), invokeLast() and invokeNext() to adjust the execution flow of code.</li>
-</ul>
+    <div id="container">
+      <div class="wrapper">
+        <div id="mainCol">
+          <div class='headerSection'>
+            
+              <h2>The Run Loop</h2>
+            
 
+            
+              <p>The guide covers SproutCore's Run Loop. By referring to this guide, you will be able to:</p>
+            
+
+            
+              <ul>
+                
+                  <li>Understand the Run Loop</li>
+                
+                  <li>Know when to manually trigger a Run Loop (rare).</li>
+                
+                  <li>Know how to use invokeOnce(), invokeLast() and invokeNext() to adjust the execution flow of code.</li>
+                
+              </ul>
+            
           </div>
-        <h3 id="the-run-loop">1 The Run Loop</h3>
-<p>The Run Loop coordinates all the events within your application, which includes primarily flushing bindings when observers update. This helps make sure that events stay synchronized and run at the proper times. One of the main ways this will affect your application is that bindings do not propagate unless a Run Loop runs.  Also, Views will only render updates once per Run Loop, thus avoiding unnecessarily touching the <span class="caps">DOM</span>.  This keeps display updates extremely fast even if many properties are changing per Run Loop.</p>
-<p>SproutCore manages the Run Loop for you, automatically starting a Run Loop when it receives any browser events or user input. The only case in which you will have to manage the Run Loop from within your app is <em>if you have a callback from an external library that is not managed by SproutCore</em>. In this circumstance, you will want to trigger a new Run Loop by wrapping the code in <tt>SC.run()</tt>. This will create a new Run Loop for that bit of code and will make sure your application continues to update as expected.</p>
-<p>Here is an example of triggering a Run Loop when a Web Worker message event is fired.</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
 
-worker = new Worker(path);
+          <h3 id='-The-Run-Loop-'>1 -  The Run Loop
+</h3>
 
-worker.onmessage = function(event) {
-  SC.run(function() {
-    // Do something
+
+<p>The Run Loop coordinates all the events within your application, which includes
+primarily flushing bindings when observers update. This helps make sure that
+events stay synchronized and run at the proper times. One of the main ways this
+will affect your application is that bindings do not propagate unless a Run
+Loop runs.  Also, Views will only render updates once per Run Loop, thus
+avoiding unnecessarily touching the DOM.  This keeps display updates extremely
+fast even if many properties are changing per Run Loop.</p>
+<p>SproutCore manages the Run Loop for you, automatically starting a Run Loop when
+it receives any browser events or user input. The only case in which you will
+have to manage the Run Loop from within your app is <em>if you have a callback
+from an external library that is not managed by SproutCore</em>. In this
+circumstance, you will want to trigger a new Run Loop by wrapping the code in</p>
+<p><tt>SC.run()</tt>. This will create a new Run Loop for that bit of code and will make
+sure your application continues to update as expected.</p>
+<p>Here is an example of triggering a Run Loop when a Web Worker message event is
+fired.</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">worker = <span class="keyword">new</span> Worker(path);
+
+worker.onmessage = <span class="keyword">function</span>(event) {
+  SC.run(<span class="keyword">function</span>() {
+    <span class="comment">// Do something</span>
   });
-};
-</pre></div>
-<div class="note"><p>See <ins>SC.Event.addEvent()</ins> for a SproutCore compatible way to add the <code>message</code> event listener in the example above.</p></div>
-<h4 id="using-the-run-loop-in-unit-tests">1.1 Using the Run Loop in Unit Tests</h4>
-<p>When working with unit tests, you will also have situations where you need to force bindings and observers to update so that you can check for the correct results. In these cases, it is completely legitimate to manually invoke the Run Loop. Normally user events would trigger the Run Loop, but since your tests are automated, there are no user events taking place.</p>
-<p>You may also find that when you are working in your browser&#8217;s JavaScript console that, when you set a variable, your application&#8217;s interface doesn&#8217;t update as you expect. This may be caused by a Run Loop not firing (since you aren&#8217;t interacting directly with the application no events are being triggered). In this case you should try invoking the Run Loop manually or just move your mouse over the application to trigger a new event.</p>
-<div class="warning"><p>Remember, you rarely need to manage the Run Loop manually from within your application. If you aren&#8217;t certain of why you are forcing a new Run Loop, then you may be doing something wrong.</p></div>
-<h3 id="the-run-loop-methods-invokelast-invokeonce-invokenext">2 The Run Loop Methods: invokeLast(), invokeOnce(), invokeNext()</h3>
-<p>SC.RunLoop provides three methods for greater control over the execution of code within a Run Loop: <code>invokeOnce()</code>, <code>invokeLast()</code> and <code>invokeNext()</code>.  All methods take the same parameters, a <code>target</code> and a <code>method</code> and, depending on which function is used, the method is called on the target at a specific point in the Run Loop.</p>
-<p>The following describes the execution order:  functions passed to <code>invokeOnce()</code> are run at the beginning of the current Run Loop, functions passed to <code>invokeLast()</code> are run at the end of the current Run Loop and functions passed to <code>invokeNext()</code> are run at the very beginning of the <em>next</em> Run Loop.</p>
-<div class="info"><p>You will likely never call these methods on SC.RunLoop itself, since there are matching convenience methods defined on SC.Object (i.e. in any subclass of SC.Object you can call <code>this.invokeLater(method)</code>).</p></div>
-<p>To best illustrate the different stages of the Run Loop, see the following diagram.</p>
-<div><img src="images/run_loop_diagram.jpg"></div>
-<p>You will notice the recursive &#8220;More changes?&#8221; stages.  These exist because each time a wave of changes is propagated, it may cause several additional observers to fire and more code to be run.  The Run Loop keeps flushing these waves of changes until everything is stable, thus demonstrating another key benefit of using Run Loops; that at the end of each Run Loop and before the next event, the application&#8217;s state is guaranteed to be stabilized.</p>
+};</code></div></pre>
+<div class='note'><p> See <tt>SC.Event.addEvent()</tt> for a SproutCore compatible way to add
+the <code>message</code> event listener in the example above.
+
+</p></div>
+
+
+
+<h4 id='-Using-the-Run-Loop-in-Unit-Tests-'>1.1 -  Using the Run Loop in Unit Tests
+</h4>
+
+
+<p>When working with unit tests, you will also have situations where you need to
+force bindings and observers to update so that you can check for the correct
+results. In these cases, it is completely legitimate to manually invoke the Run
+Loop. Normally user events would trigger the Run Loop, but since your tests are
+automated, there are no user events taking place.</p>
+<p>You may also find that when you are working in your browser&#39;s JavaScript
+console that, when you set a variable, your application&#39;s interface doesn&#39;t
+update as you expect. This may be caused by a Run Loop not firing (since you
+aren&#39;t interacting directly with the application no events are being
+triggered). In this case you should try invoking the Run Loop manually or just
+move your mouse over the application to trigger a new event.</p>
+<div class='warning'><p> Remember, you rarely need to manage the Run Loop manually from within
+your application. If you aren&#39;t certain of why you are forcing a new Run Loop,
+then you may be doing something wrong.
+
+</p></div>
+
+
+
+<h3 id='-The-Run-Loop-Methods--invokeLast----invokeOnce----invokeNext---'>2 -  The Run Loop Methods: invokeLast(), invokeOnce(), invokeNext()
+</h3>
+
+
+<p>SC.RunLoop provides three methods for greater control over the execution of
+code within a Run Loop: <tt>invokeOnce()</tt>, <tt>invokeLast()</tt> and <tt>invokeNext()</tt>.  All
+methods take the same parameters, a <tt>target</tt> and a <tt>method</tt> and, depending on
+which function is used, the method is called on the target at a specific point
+in the Run Loop.</p>
+<p>The following describes the execution order: </p>
+<ul>
+<li>functions passed to <tt>invokeOnce()</tt> are run at the beginning of the current Run Loop,</li>
+<li>functions passed to <tt>invokeLast()</tt> are run at the end of the current Run Loop, and</li>
+<li>functions passed to <tt>invokeNext()</tt> are run at the very beginning of the <em>next</em> Run Loop.</li>
+</ul>
+<div class='info'><p> You will likely never call these methods on SC.RunLoop itself, since
+there are matching convenience methods defined on SC.Object (i.e. in any
+subclass of SC.Object you can call <tt>this.invokeLater(method)</tt>).
+
+</p></div>
+
+<p>To best illustrate the different stages of the Run Loop, see the following
+diagram.</p>
+<p><img src="images/run_loop_diagram.jpg" alt="Run Loop Diagram"></p>
+<p>You will notice the recursive &quot;More changes?&quot; stages.  These exist because each
+time a wave of changes is propagated, it may cause several additional observers
+to fire and more code to be run.  The Run Loop keeps flushing these waves of
+changes until everything is stable, thus demonstrating another key benefit of
+using Run Loops; that at the end of each Run Loop and before the next event,
+the application&#39;s state is guaranteed to be stabilized.</p>
 <p>Here are some typical usage scenarios for each of the Run Loop methods:</p>
 <ul>
-	<li>If you have a function that could be called from multiple places, but you only want it to execute once no matter how many times it was referenced, use <code>invokeOnce()</code>.</li>
-	<li>If you have a function that you want to run after all bindings have flushed and after views have updated, use <code>invokeLast()</code>.</li>
-	<li>If you have a function that you want to defer entirely, such as a View paint, use <code>invokeNext()</code>.</li>
+<li>If you have a function that could be called from multiple places, but you
+only want it to execute once no matter how many times it was referenced,
+use <tt>invokeOnce()</tt>.</li>
+<li>If you have a function that you want to run after all bindings have flushed
+and after views have updated, use <tt>invokeLast()</tt>.</li>
+<li>If you have a function that you want to defer entirely, such as a View paint,
+use <tt>invokeNext()</tt>.</li>
 </ul>
-<p>Therefore, as the previous usage scenarios suggest, you will not typically find the need to use any of these methods.  The most common exception is that you may occasionally use invokeLast() to ensure that your Views have rendered before doing some operation on dependent on their rendered output, such as an animation.</p>
-<div class="note"><p>If you add the same <code>target</code> and <code>method</code> pair multiple times to any of these functions, it will still only be executed once.</p></div>
-<p>.</p>
+<p>Therefore, as the previous usage scenarios suggest, you will not typically find
+the need to use any of these methods.  The most common exception is that you
+may occasionally use invokeLast() to ensure that your Views have rendered
+before doing some operation on dependent on their rendered output, such as an
+animation.</p>
+<div class='note'><p> If you add the same <tt>target</tt> and <tt>method</tt> pair multiple times to any of
+these functions, it will still only be executed once.
 
-      </div>
+</p></div>
+
+
+
+<h3 id='-Changelog-'>3 -  Changelog
+</h3>
+
+
+<ul>
+<li>August 22, 2012: initial version by <a href="credits.html#publickeating">Public Keating</a> </li>
+<li>August 14, 2013: converted to Markdown format for DocPad guides by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+<li>August 14, 2013: minor formatting changes by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+</ul>
+
+        </div>
+        <!-- TODO: re-add index_items //-->
         <div id="subCol">
-          <h3 class="chapter"><img src="images/graphics/chapters.png" alt="" />Chapters</h3>
-          <ol class="chapters">
-            <li><a href="#the-run-loop"><p>The Run Loop</p>
-</a><ul><li><a href="#using-the-run-loop-in-unit-tests"><p>Using the Run Loop in Unit Tests</p>
-</a></li></ul></li><li><a href="#the-run-loop-methods-invokelast-invokeonce-invokenext"><p>The Run Loop Methods: invokeLast(), invokeOnce(), invokeNext()</p>
-</a></li>
+          <h3 class="chapter"><img src="images/graphics/chapters.png" alt="">Chapters</h3>
+          <ol class='chapters'>
+            
+              <li>
+                <a href='#-The-Run-Loop-'><p> The Run Loop
+</p></a>
+                <ul>
+                  
+                    <li><a href='#-Using-the-Run-Loop-in-Unit-Tests-'><p> Using the Run Loop in Unit Tests
+</p></a></li>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-The-Run-Loop-Methods--invokeLast----invokeOnce----invokeNext---'><p> The Run Loop Methods: invokeLast(), invokeOnce(), invokeNext()
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Changelog-'><p> Changelog
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
           </ol>
         </div>
+      </div>
     </div>
-  </div>
 
-  <hr class="hide" />
+    <hr class="hide" />
+
 	  <footer>
 	    <div class="container">
 	      <div class="col">
@@ -205,33 +328,29 @@ worker.onmessage = function(event) {
 	    </div>
 	  </footer>
 
-  <script src="http://code.jquery.com/jquery-1.6.min.js" type="text/javascript" charset="utf-8"></script>
-  <script type="text/javascript" src="javascripts/sproutGuides.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushJScript.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushCss.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
-  <script type="text/javascript">
-    SyntaxHighlighter.all()
+    <script type='text/javascript' src='/javascripts/jquery.min.js'></script>
 
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-19584397-1']);
-    _gaq.push(['_setDomainName', '.sproutcore.com']);
-    _gaq.push(['_setAllowHash', false]);
-    _gaq.push(['_setAllowLinker', true]);
-    _gaq.push(['_trackPageview']);
+    
 
-    (function() {
-      var ga = document.createElement('script');
-      ga.type = 'text/javascript';
-      ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl': 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-</body>
+    <script type='text/javascript'>
+      /*
+       * Make the guides link clickable
+       */
+      function guideMenu(e){
+        if (document.getElementById('guides').style.display == "none") {
+          document.getElementById('guides').style.display = "block";
+          document.getElementById('guidesArrow').innerHTML = "&#9662;";
+          $('body').click(function(e){ guideMenu(e); });
+        } else {
+          document.getElementById('guides').style.display = "none";
+          document.getElementById('guidesArrow').innerHTML = "&#9656;";
+          $('body').unbind('click');
+        }
+        return false;
+      }
+
+      $('#guidesMenu, .guidesMenu').click(guideMenu);
+    </script>
+
+  </body>
 </html>

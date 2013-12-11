@@ -1,119 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>SproutCore Guides: Unit Testing - Adding Unit Test Files</title>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
 
-  <!-- guides styles -->
-  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/guides.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
-  <!--[if lt IE 9]>
-  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
+    <!-- plugin styles -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/highlight-github.css" />
 
-  <!-- syntax highlighting styles -->
-  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/shThemeGuides.css" />
-</head>
-<body class="guide">
+    <!-- guides styles -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/reset.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/main.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/guides.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-  <header role="banner">
-    <div class="container">
-      <h1 id="logo">
-        <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
-      </h1>
-      <nav role="navigation">
-        <ul>
-          <li><a href="http://sproutcore.com/about/">About</a></li>
-          <li><a href="http://showcase.sproutcore.com">Showcase</a></li>
-          <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
-          <li><a href="http://docs.sproutcore.com">Docs</a></li>
-          <li><a href="http://sproutcore.com/community/">Community</a></li>
-          <li><a href="http://blog.sproutcore.com">Blog</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-  <div id="feature">
-    <div class="wrapper">
-      <div class="feature_header">
-        <a href="/"><img src="images/graphics/guides.png"></a>
-        <h2><a href="/">SproutCore Guides</a></h2>
-        <p>These guides are designed to help you write and perfect your code.</p>
+    <meta name="generator" content="DocPad v6.57.0" />
+    
+  </head>
+
+  <body class="guide">
+
+    <header role="banner">
+      <div class="container">
+        <h1 id="logo">
+          <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
+        </h1>
+        <nav role="navigation">
+          <ul>
+            <li><a href="http://sproutcore.com/about/">About</a></li>
+            <li><a href="http://showcase.sproutcore.com">Showcase</a></li>
+            <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
+            <li><a href="http://docs.sproutcore.com">Docs</a></li>
+            <li><a href="http://sproutcore.com/community/">Community</a></li>
+            <li><a href="http://blog.sproutcore.com">Blog</a></li>
+          </ul>
+        </nav>
       </div>
-      <div class="feature_sidebar">
-        <a href="index.html" id="guidesMenu">
-          Guides Index <span id="guidesArrow">&#9656;</span>
-        </a>
-        <div id="guides" class="clearfix" style="display: none;">
-          <a href="index.html" class="guidesMenu">
-            Guides Index <span class="guidesArrow">&#9662;</span>
+    </header>
+
+    <div id="feature">
+      <div class="wrapper">
+        <div class="feature_header">
+          <a href="/"><img src="images/graphics/guides.png"></a>
+          <h2><a href="/">SproutCore Guides</a></h2>
+          <p>These guides are designed to help you write and perfect your code.</p>
+        </div>
+        <div class="feature_sidebar">
+          <a href="index.html" id="guidesMenu">
+            Guides Index <span id="guidesArrow">&#9656;</span>
           </a>
-          <hr style="clear:both;">
-          <dl class="L">
-    <dt>Start Here</dt>
-      <dd><a href="getting_started.html">Getting Started: Part 1</a></dd>
-      <dd><a href="getting_started_2.html">Getting Started: Part 2</a></dd>
-      <dd><a href="getting_started_3.html">Getting Started: Part 3</a></dd>
-      <dd><a href="core_concepts_sc_object.html">Classes and SC.Object</a></dd>
-      <dd><a href="core_concepts_kvo.html">Computed Properties, Observers and Bindings</a></dd>
-    <dt>Views</dt>
-      <dd><a href="views.html">Core View Concepts</a></dd>
-    <dt>Models</dt>
-      <dd><a href="records.html">SproutCore Records</a></dd>
-      <dd><a href="fixtures.html">Using Fixtures</a></dd>
-    <dt>Theming</dt>
-      <dd><a href="chance.html">Using Chance, SproutCore's CSS Framework</a></dd>
-      <dd><a href="theming_app.html">Theming Your App</a></dd>
-    <dt>Testing</dt>
-      <dd><a href="unit_test_framework.html">Unit Testing</a></dd>
-      <dd><a href="adding_unit_test.html">Adding a Unit Test</a></dd>
-      <dd><a href="writing_unit_tests.html">Writing Unit Tests</a></dd>
-      <dd><a href="running_unit_tests.html">Running Unit Tests</a></dd>
-      <dd><a href="todos_tdd.html">SproutCore Development Using TDD</a></dd>
-</dl>
-<dl class="R">
-    <dt>Extras</dt>
-      <dd><a href="build_tools.html">Build Tools</a></dd>
-      <dd><a href="run_loop.html">The Run Loop</a></dd>
-      <dd><a href="enumerables.html">Enumerables</a></dd>
-      <dd><a href="using_handlebars.html">Using Handlebars Templates</a></dd>
-    <dt>Contributing to SproutCore</dt>
-      <dd><a href="style_guide.html">Javascript Style Guide</a></dd>
-      <dd><a href="commit_code.html">Committer Guidelines</a></dd>
-      <dd><a href="documentation_guidelines.html">Documentation Guidelines</a></dd>
-</dl>
+          <div id="guides" class="clearfix" style="display: none;">
+            <a href="index.html" class="guidesMenu">
+              Guides Index <span class="guidesArrow">&#9662;</span>
+            </a>
 
+            <hr style="clear:both;">
 
+            <dl class='L'><dt>Start Here</dt>
+<dd><a href='/getting_started.html'>Getting Started: Part 1</a></dd>
+<dd><a href='/getting_started_2.html'>Getting Started: Part 2</a></dd>
+<dd><a href='/getting_started_3.html'>Getting Started: Part 3</a></dd>
+<dd><a href='/core_concepts_sc_object.html'>Classes and SC.Object</a></dd>
+<dd><a href='/core_concepts_kvo.html'>Computed Properties, Observers and Bindings</a></dd><dt>Views</dt>
+<dd><a href='/views.html'>Core View Concepts</a></dd>
+<dd><a href='/animate.html'>DRAFT - Animation</a></dd><dt>Models</dt>
+<dd><a href='/records.html'>SproutCore Records</a></dd>
+<dd><a href='/fixtures.html'>Using Fixtures</a></dd>
+<dd><a href='/record_lifecycle.html'>DRAFT - Understanding the Record Lifecycle</a></dd>
+<dd><a href='/no_store.html'>DRAFT - No DataStore</a></dd>
+<dd><a href='/data_source.html'>DRAFT - Data Source</a></dd><dt>Theming</dt>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
+<dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
+<dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd>
+<dd><a href='/testing_guidelines.html'>DRAFT - Testing Guidelines</a></dd><dt>Extras</dt>
+<dd><a href='/build_tools.html'>SproutCore's Build Tools</a></dd>
+<dd><a href='/run_loop.html'>The Run Loop</a></dd>
+<dd><a href='/enumerables.html'>Enumerables</a></dd>
+<dd><a href='/connect_server.html'>DRAFT - Connecting to a Server</a></dd><dt>Contributing to SproutCore</dt>
+<dd><a href='/style_guide.html'>Javascript Guidelines</a></dd>
+<dd><a href='/commit_code.html'>Committer Guidelines</a></dd>
+<dd><a href='/documentation_guidelines.html'>Documentation Guidelines</a></dd>
+<dd><a href='/contribute.html'>Contributing Guides</a></dd><dt>Thanks</dt>
+<dd><a href='/credits.html'>Credits</a></dd></dl>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div id="container">
-    <div class="wrapper">
-      <div id="mainCol">
-          <div class="headerSection">
-            <h2>Unit Testing &#8211; Adding Unit Test Files</h2>
-<p>This guide covers unit test file generation and organization. After reading this guide, you will be able to:</p>
-<ul>
-	<li>Automatically generate a unit test file that will be placed in the correct location.</li>
-	<li>Manually create a unit test file from a template.</li>
-	<li>Manually create unit test files.</li>
-	<li>Arrange your unit test files.</li>
-</ul>
+    <div id="container">
+      <div class="wrapper">
+        <div id="mainCol">
+          <div class='headerSection'>
+            
+              <h2>Adding a Unit Test</h2>
+            
 
+            
+              <p>This guide covers unit test file generation and organization. After reading this guide, you will be able to:</p>
+            
+
+            
+              <ul>
+                
+                  <li>Automatically generate a unit test file that will be placed in the correct location.</li>
+                
+                  <li>Manually create a unit test file from a template.</li>
+                
+                  <li>Manually create unit test files.</li>
+                
+                  <li>Arrange your unit test files.</li>
+                
+              </ul>
+            
           </div>
-        <h3 id="creating-a-directory-for-your-unit-test-files">1 Creating a Directory for Your Unit Test Files</h3>
-<p>When you first create your SproutCore application, directories are automatically created for you.</p>
-<div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
 
-$ sc-init MyApp
+          <h3 id='-Creating-a-Directory-for-Your-Unit-Test-Files-'>1 -  Creating a Directory for Your Unit Test Files
+</h3>
+
+
+<p>When you first create your SproutCore application, directories are
+automatically created for you.</p>
+<pre class="highlighted"><div class="code_container"><code class="bash">$ sc-init MyApp
  ~ Created directory at my_app
  ~ Created file at my_app/Buildfile
  ~ Created file at my_app/README
@@ -124,125 +141,200 @@ $ sc-init MyApp
  ~ Created file at apps/my_app/resources/loading.rhtml
  ~ Created file at apps/my_app/core.js
  ~ Created file at apps/my_app/main.js
-Your new SproutCore project is ready!
-</pre></div><p>By convention, SproutCore assumes that all unit tests files are located in the <tt>tests</tt> sub-directory for your application (or framework).</p>
+Your new SproutCore project is ready!</code></div></pre>
+<p>By convention, SproutCore assumes that all unit tests files are located in the <tt>tests</tt>
+sub-directory for your application (or framework).</p>
 <p><code>my_app/apps/my_app/tests</code></p>
 <p>Hence, create the <tt>tests</tt> directory if it is missing.</p>
-<p>Unlike like most folders, SproutCore assumes that each file in the tests directory that ends in <tt>.js</tt> or <tt>.rhtml</tt> is a unit test.  You can load each of these unit tests individually or as a group from the built-in test runner.</p>
-<div class="note"><p>The files in the <ins>tests</ins> directory are omitted from your production deployment.</p></div>
-<h3 id="creating-a-unit-test-file">2 Creating a Unit Test File</h3>
-<p>SproutCore unit test cases are coded and saved into unit test files under the <tt>tests</tt> directory.</p>
-<p>It is good practice to group related unit test cases into a single unit test file. For example, all test cases for a <tt>login</tt> controller class should be saved in a unit test file called <tt>login.js</tt>. This is way, when a change is made to the login controller class, we can run all the unit test cases in <tt>login.js</tt> to verify.</p>
-<p>In addition, it is good practice to group related unit test files into a sub-directory under the <tt>tests</tt> directory. For example, unit test files for controllers should be saved in the <tt>tests/controller</tt>  directory. In this way, if a change is made to all controllers, we run the unit test cases in all unit test files in the <tt>controller</tt> directory to verify.</p>
-<p>There are three ways to create your unit test files.</p>
-<h4 id="automatically-creating-unit-test-files">2.1 Automatically Creating Unit Test Files</h4>
-<p>When you use the <tt>sc-gen</tt> tool to add new source files to your application, it will automatically add a corresponding test file added into the <tt>tests</tt> directory.  For example,</p>
-<div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
+<p>Unlike like most folders, SproutCore assumes that each file in the tests
+directory that ends in <tt>.js</tt> or <tt>.rhtml</tt> is a unit test.  You can load each
+of these unit tests individually or as a group from the built-in test runner.</p>
+<div class='note'><p> The files in the <tt>tests</tt> directory are omitted from your production deployment.
 
-$ sc-gen controller MyApp.LoginController
+</p></div>
+
+
+
+<h3 id='-Creating-a-Unit-Test-File-'>2 -  Creating a Unit Test File
+</h3>
+
+
+<p>SproutCore unit test cases are coded and saved into unit test files under the <tt>tests</tt>
+directory.</p>
+<p>It is good practice to group related unit test cases into a single unit test
+file. For example, all test cases for a <tt>login</tt> controller class should be
+saved in a unit test file called <tt>login.js</tt>.  This is way, when a change is
+made to the login controller class, we can run all the unit test cases in <tt>login.js</tt>
+to verify.</p>
+<p>In addition, it is good practice to group related unit test files into a
+sub-directory under the <tt>tests</tt> directory. For example, unit test files for
+controllers should be saved in the <tt>tests/controller</tt>  directory. In this way,
+if a change is made to all controllers, we run the unit test cases in all unit
+test files in the <tt>controller</tt> directory to verify.</p>
+<p>There are three ways to create your unit test files.</p>
+<h4 id='-Automatically-Creating-Unit-Test-Files-'>2.1 -  Automatically Creating Unit Test Files
+</h4>
+
+
+<p>When you use the <tt>sc-gen</tt> tool to add new source files to your application, it
+will automatically add a corresponding test file added into the <tt>tests</tt>
+directory.  For example,</p>
+<pre class="highlighted"><div class="code_container"><code class="bash">$ sc-gen controller MyApp.LoginController
  ~ Created directory at controllers
  ~ Created file at controllers/login.js
  ~ Created directory at tests
  ~ Created directory at tests/controllers
- ~ Created file at tests/controllers/login.js // &lt;== The generated unit test file
+ ~ Created file at tests/controllers/login.js <span class="comment"># &lt;== Generated unit test file</span>
 
-Your controller is now ready to use!
-</pre></div><p>Notice the creation of <tt>tests/controllers/login.js</tt>.</p>
+Your controller is now ready to use!</code></div></pre>
+<p>Notice the creation of <tt>tests/controllers/login.js</tt>.</p>
 <p>Conveniently, the generated unit test file is built from a template:</p>
-<div class="code_container">
-<div class="filename">apps/my_app/test/controllers/login.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/my_app/test/controllers/login.js</div></span>
+<span class="comment">// ==================================================</span>
+<span class="comment">// Project:   MyApp.loginController Unit Test</span>
+<span class="comment">// Copyright: ©2011 My Company, Inc.</span>
+<span class="comment">// ==================================================</span>
+<span class="comment">/*globals MyApp module test ok equals same stop start */</span>
 
-// ==================================================
-// Project:   MyApp.loginController Unit Test
-// Copyright: ©2011 My Company, Inc.
-// ==================================================
-/*globals MyApp module test ok equals same stop start */
+module(<span class="string">"MyApp.loginController"</span>);
 
-module(&quot;MyApp.loginController&quot;);
+<span class="comment">// TODO: Replace with real unit test for MyApp.loginController</span>
+test(<span class="string">"test description"</span>, <span class="keyword">function</span>() {
+  <span class="keyword">var</span> expected = <span class="string">"test"</span>;
+  <span class="keyword">var</span> result   = <span class="string">"test"</span>;
+  equals(result, expected, <span class="string">"test should equal test"</span>);
+});</code></div></pre>
+<h4 id='-Generating-Unit-Test-Files-'>2.2 -  Generating Unit Test Files
+</h4>
 
-// TODO: Replace with real unit test for MyApp.loginController
-test(&quot;test description&quot;, function() {
-  var expected = &quot;test&quot;;
-  var result   = &quot;test&quot;;
-  equals(result, expected, &quot;test should equal test&quot;);
-});
-</pre></div><h4 id="generating-unit-test-files">2.2 Generating Unit Test Files</h4>
+
 <p>You can also use the <tt>sc-gen</tt> tool to create your unit test file by itself:</p>
-<div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
-
-$ sc-gen test TARGET_NAME PATH/TO/TEST[.js]
-</pre></div><p>For example, if you wanted to add a unit test file named <tt>views/login/render.js</tt> to your application, you would:</p>
-<div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
-
-$ sc-gen test MyApp views/login/render
+<pre class="highlighted"><div class="code_container"><code class="bash">$ sc-gen test TARGET_NAME PATH/TO/TEST[.js]</code></div></pre>
+<p>For example, if you wanted to add a unit test file named <tt>views/login/render.js</tt>
+to your application, you would:</p>
+<pre class="highlighted"><div class="code_container"><code class="bash">$ sc-gen test MyApp views/login/render
  ~ Created file at tests/views/login/render.js
 
-Your unit test has been generated and is now ready to be configured!
-</pre></div><p><tt>render.js</tt> contains a sample unit test case to help you get started.</p>
-<div class="code_container">
-<div class="filename">apps/my_app/tests/views/login/render.js</div>
-<pre class="brush: javascript; gutter: false; toolbar: false">
+Your unit test has been generated and is now ready to be configured!</code></div></pre>
+<p><tt>render.js</tt> contains a sample unit test case to help you get started.</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/my_app/tests/views/login/render.js</div></span>
+<span class="comment">// ==================================================</span>
+<span class="comment">// Project:   MyApp Unit Test</span>
+<span class="comment">// Copyright: ©2011 My Company, Inc.</span>
+<span class="comment">// ==================================================</span>
+<span class="comment">/*globals MyApp module test ok equals same stop start */</span>
 
-// ==================================================
-// Project:   MyApp Unit Test
-// Copyright: ©2011 My Company, Inc.
-// ==================================================
-/*globals MyApp module test ok equals same stop start */
+module(<span class="string">"MyApp"</span>);
 
-module(&quot;MyApp&quot;);
+<span class="comment">// TODO: Replace with real unit test</span>
+test(<span class="string">"test description"</span>, <span class="keyword">function</span>() {
+  <span class="keyword">var</span> expected = <span class="string">"test"</span>;
+  <span class="keyword">var</span> result   = <span class="string">"test"</span>;
+  equals(result, expected, <span class="string">"test should equal test"</span>);
+});</code></div></pre>
+<h4 id='-Manually-Creating-Unit-Test-Files-'>2.3 -  Manually Creating Unit Test Files
+</h4>
 
-// TODO: Replace with real unit test
-test(&quot;test description&quot;, function() {
-  var expected = &quot;test&quot;;
-  var result   = &quot;test&quot;;
-  equals(result, expected, &quot;test should equal test&quot;);
-});
-</pre></div><h4 id="manually-creating-unit-test-files">2.3 Manually Creating Unit Test Files</h4>
-<p>If you cannot or would prefer not to use the <tt>sc-gen</tt> tool, you can always add a unit test manually.</p>
-<p>Just create a new <tt>.js</tt> file in your <tt>tests</tt> directory.  It will be automatically run by the test runner when appropriate.</p>
-<h3 id="how-to-arrange-your-unit-tests">3 How to Arrange Your Unit Tests</h3>
-<p>Unit tests work best if you arrange them into files and directories based on how you might want to run them together.  Often, it is a good practice is to create a directory for each class you add to your app and one unit test file per method you want to test inside that directory.</p>
+
+<p>If you cannot or would prefer not to use the <tt>sc-gen</tt> tool, you can always add
+a unit test manually.</p>
+<p>Just create a new <tt>.js</tt> file in your <tt>tests</tt> directory.  It will be
+automatically run by the test runner when appropriate.</p>
+<h3 id='-How-to-Arrange-Your-Unit-Tests-'>3 -  How to Arrange Your Unit Tests
+</h3>
+
+
+<p>Unit tests work best if you arrange them into files and directories based on
+how you might want to run them together.  Often, it is a good practice is to
+create a directory for each class you add to your app and one unit test file
+per method you want to test inside that directory.</p>
 <p>For example, the unit tests for SC.Object might look something like:</p>
-<div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
-
-tests/system/object/create.js
+<pre class="highlighted"><div class="code_container"><code class="bash">tests/system/object/create.js
 tests/system/object/extend.js
 tests/system/object/kindOf.js
-...
-</pre></div><p>This way you can easily run all of the unit tests for a particular method, all of the unit tests for the SC.Object class itself or all of the unit tests for classes defined in the &#8220;system&#8221; directory of the target.</p>
-<h3 id="moving-on">4 Moving On</h3>
-<p>Once you&#8217;ve added a unit test file, now you need to write some unit test code. Learn more by writing your first unit test.</p>
+...</code></div></pre>
+<p>This way you can easily run all of the unit tests for a particular method, all
+of the unit tests for the SC.Object class itself or all of the unit tests for
+classes defined in the &quot;system&quot; directory of the target.</p>
+<h3 id='-Moving-On-'>4 -  Moving On
+</h3>
+
+
+<p>Once you&#39;ve added a unit test file, now you need to write some unit test code.
+Learn more by writing your first unit test.</p>
 <p>On to <a href="/writing_unit_tests.html">Writing Unit Test Cases »</a></p>
-<h3 id="changelog">5 Changelog</h3>
+<h3 id='-Changelog-'>5 -  Changelog
+</h3>
+
+
 <ul>
-	<li>February 15, 2011: initial version by <a href="credits.html#oldfartdeveloper">Scott Smith</a> and <a href="credits.html#veebs">Vibul Imtarnasan</a></li>
-	<li>March     2, 2011: added filenames, fixed link in credits, changed <tt>&lt;plain&gt;</tt> tags to <tt>&lt;shell&gt;</tt> tags by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+<li>February 15, 2011: initial version by <a href="credits.html#oldfartdeveloper">Scott Smith</a> and <a href="credits.html#veebs">Vibul Imtarnasan</a></li>
+<li>March 2, 2011: added filenames, fixed link in credits, changed <tt><plain></tt> tags to <tt><shell></tt> tags by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+<li>July 4, 2013: converted to Markdown format for DocPad guides by <a href="credits.html#topherfangio">Topher Fangio</a></li>
 </ul>
 
-      </div>
+        </div>
+        <!-- TODO: re-add index_items //-->
         <div id="subCol">
-          <h3 class="chapter"><img src="images/graphics/chapters.png" alt="" />Chapters</h3>
-          <ol class="chapters">
-            <li><a href="#creating-a-directory-for-your-unit-test-files"><p>Creating a Directory for Your Unit Test Files</p>
-</a></li><li><a href="#creating-a-unit-test-file"><p>Creating a Unit Test File</p>
-</a><ul><li><a href="#automatically-creating-unit-test-files"><p>Automatically Creating Unit Test Files</p>
-</a></li> <li><a href="#generating-unit-test-files"><p>Generating Unit Test Files</p>
-</a></li> <li><a href="#manually-creating-unit-test-files"><p>Manually Creating Unit Test Files</p>
-</a></li></ul></li><li><a href="#how-to-arrange-your-unit-tests"><p>How to Arrange Your Unit Tests</p>
-</a></li><li><a href="#moving-on"><p>Moving On</p>
-</a></li><li><a href="#changelog"><p>Changelog</p>
-</a></li>
+          <h3 class="chapter"><img src="images/graphics/chapters.png" alt="">Chapters</h3>
+          <ol class='chapters'>
+            
+              <li>
+                <a href='#-Creating-a-Directory-for-Your-Unit-Test-Files-'><p> Creating a Directory for Your Unit Test Files
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Creating-a-Unit-Test-File-'><p> Creating a Unit Test File
+</p></a>
+                <ul>
+                  
+                    <li><a href='#-Automatically-Creating-Unit-Test-Files-'><p> Automatically Creating Unit Test Files
+</p></a></li>
+                  
+                    <li><a href='#-Generating-Unit-Test-Files-'><p> Generating Unit Test Files
+</p></a></li>
+                  
+                    <li><a href='#-Manually-Creating-Unit-Test-Files-'><p> Manually Creating Unit Test Files
+</p></a></li>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-How-to-Arrange-Your-Unit-Tests-'><p> How to Arrange Your Unit Tests
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Moving-On-'><p> Moving On
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Changelog-'><p> Changelog
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
           </ol>
         </div>
+      </div>
     </div>
-  </div>
 
-  <hr class="hide" />
+    <hr class="hide" />
+
 	  <footer>
 	    <div class="container">
 	      <div class="col">
@@ -290,33 +382,29 @@ tests/system/object/kindOf.js
 	    </div>
 	  </footer>
 
-  <script src="http://code.jquery.com/jquery-1.6.min.js" type="text/javascript" charset="utf-8"></script>
-  <script type="text/javascript" src="javascripts/sproutGuides.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushJScript.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushCss.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
-  <script type="text/javascript">
-    SyntaxHighlighter.all()
+    <script type='text/javascript' src='/javascripts/jquery.min.js'></script>
 
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-19584397-1']);
-    _gaq.push(['_setDomainName', '.sproutcore.com']);
-    _gaq.push(['_setAllowHash', false]);
-    _gaq.push(['_setAllowLinker', true]);
-    _gaq.push(['_trackPageview']);
+    
 
-    (function() {
-      var ga = document.createElement('script');
-      ga.type = 'text/javascript';
-      ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl': 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-</body>
+    <script type='text/javascript'>
+      /*
+       * Make the guides link clickable
+       */
+      function guideMenu(e){
+        if (document.getElementById('guides').style.display == "none") {
+          document.getElementById('guides').style.display = "block";
+          document.getElementById('guidesArrow').innerHTML = "&#9662;";
+          $('body').click(function(e){ guideMenu(e); });
+        } else {
+          document.getElementById('guides').style.display = "none";
+          document.getElementById('guidesArrow').innerHTML = "&#9656;";
+          $('body').unbind('click');
+        }
+        return false;
+      }
+
+      $('#guidesMenu, .guidesMenu').click(guideMenu);
+    </script>
+
+  </body>
 </html>

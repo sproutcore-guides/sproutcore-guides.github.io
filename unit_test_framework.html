@@ -1,174 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>SproutCore Guides: Unit Testing - About Unit Testing</title>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
 
-  <!-- guides styles -->
-  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/guides.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
-  <!--[if lt IE 9]>
-  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
+    <!-- plugin styles -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/highlight-github.css" />
 
-  <!-- syntax highlighting styles -->
-  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/shThemeGuides.css" />
-</head>
-<body class="guide">
+    <!-- guides styles -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/reset.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/main.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/guides.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-  <header role="banner">
-    <div class="container">
-      <h1 id="logo">
-        <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
-      </h1>
-      <nav role="navigation">
-        <ul>
-          <li><a href="http://sproutcore.com/about/">About</a></li>
-          <li><a href="http://showcase.sproutcore.com">Showcase</a></li>
-          <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
-          <li><a href="http://docs.sproutcore.com">Docs</a></li>
-          <li><a href="http://sproutcore.com/community/">Community</a></li>
-          <li><a href="http://blog.sproutcore.com">Blog</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-  <div id="feature">
-    <div class="wrapper">
-      <div class="feature_header">
-        <a href="/"><img src="images/graphics/guides.png"></a>
-        <h2><a href="/">SproutCore Guides</a></h2>
-        <p>These guides are designed to help you write and perfect your code.</p>
+    <meta name="generator" content="DocPad v6.57.0" />
+    
+  </head>
+
+  <body class="guide">
+
+    <header role="banner">
+      <div class="container">
+        <h1 id="logo">
+          <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
+        </h1>
+        <nav role="navigation">
+          <ul>
+            <li><a href="http://sproutcore.com/about/">About</a></li>
+            <li><a href="http://showcase.sproutcore.com">Showcase</a></li>
+            <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
+            <li><a href="http://docs.sproutcore.com">Docs</a></li>
+            <li><a href="http://sproutcore.com/community/">Community</a></li>
+            <li><a href="http://blog.sproutcore.com">Blog</a></li>
+          </ul>
+        </nav>
       </div>
-      <div class="feature_sidebar">
-        <a href="index.html" id="guidesMenu">
-          Guides Index <span id="guidesArrow">&#9656;</span>
-        </a>
-        <div id="guides" class="clearfix" style="display: none;">
-          <a href="index.html" class="guidesMenu">
-            Guides Index <span class="guidesArrow">&#9662;</span>
+    </header>
+
+    <div id="feature">
+      <div class="wrapper">
+        <div class="feature_header">
+          <a href="/"><img src="images/graphics/guides.png"></a>
+          <h2><a href="/">SproutCore Guides</a></h2>
+          <p>These guides are designed to help you write and perfect your code.</p>
+        </div>
+        <div class="feature_sidebar">
+          <a href="index.html" id="guidesMenu">
+            Guides Index <span id="guidesArrow">&#9656;</span>
           </a>
-          <hr style="clear:both;">
-          <dl class="L">
-    <dt>Start Here</dt>
-      <dd><a href="getting_started.html">Getting Started: Part 1</a></dd>
-      <dd><a href="getting_started_2.html">Getting Started: Part 2</a></dd>
-      <dd><a href="getting_started_3.html">Getting Started: Part 3</a></dd>
-      <dd><a href="core_concepts_sc_object.html">Classes and SC.Object</a></dd>
-      <dd><a href="core_concepts_kvo.html">Computed Properties, Observers and Bindings</a></dd>
-    <dt>Views</dt>
-      <dd><a href="views.html">Core View Concepts</a></dd>
-    <dt>Models</dt>
-      <dd><a href="records.html">SproutCore Records</a></dd>
-      <dd><a href="fixtures.html">Using Fixtures</a></dd>
-    <dt>Theming</dt>
-      <dd><a href="chance.html">Using Chance, SproutCore's CSS Framework</a></dd>
-      <dd><a href="theming_app.html">Theming Your App</a></dd>
-    <dt>Testing</dt>
-      <dd><a href="unit_test_framework.html">Unit Testing</a></dd>
-      <dd><a href="adding_unit_test.html">Adding a Unit Test</a></dd>
-      <dd><a href="writing_unit_tests.html">Writing Unit Tests</a></dd>
-      <dd><a href="running_unit_tests.html">Running Unit Tests</a></dd>
-      <dd><a href="todos_tdd.html">SproutCore Development Using TDD</a></dd>
-</dl>
-<dl class="R">
-    <dt>Extras</dt>
-      <dd><a href="build_tools.html">Build Tools</a></dd>
-      <dd><a href="run_loop.html">The Run Loop</a></dd>
-      <dd><a href="enumerables.html">Enumerables</a></dd>
-      <dd><a href="using_handlebars.html">Using Handlebars Templates</a></dd>
-    <dt>Contributing to SproutCore</dt>
-      <dd><a href="style_guide.html">Javascript Style Guide</a></dd>
-      <dd><a href="commit_code.html">Committer Guidelines</a></dd>
-      <dd><a href="documentation_guidelines.html">Documentation Guidelines</a></dd>
-</dl>
+          <div id="guides" class="clearfix" style="display: none;">
+            <a href="index.html" class="guidesMenu">
+              Guides Index <span class="guidesArrow">&#9662;</span>
+            </a>
 
+            <hr style="clear:both;">
 
+            <dl class='L'><dt>Start Here</dt>
+<dd><a href='/getting_started.html'>Getting Started: Part 1</a></dd>
+<dd><a href='/getting_started_2.html'>Getting Started: Part 2</a></dd>
+<dd><a href='/getting_started_3.html'>Getting Started: Part 3</a></dd>
+<dd><a href='/core_concepts_sc_object.html'>Classes and SC.Object</a></dd>
+<dd><a href='/core_concepts_kvo.html'>Computed Properties, Observers and Bindings</a></dd><dt>Views</dt>
+<dd><a href='/views.html'>Core View Concepts</a></dd>
+<dd><a href='/animate.html'>DRAFT - Animation</a></dd><dt>Models</dt>
+<dd><a href='/records.html'>SproutCore Records</a></dd>
+<dd><a href='/fixtures.html'>Using Fixtures</a></dd>
+<dd><a href='/record_lifecycle.html'>DRAFT - Understanding the Record Lifecycle</a></dd>
+<dd><a href='/no_store.html'>DRAFT - No DataStore</a></dd>
+<dd><a href='/data_source.html'>DRAFT - Data Source</a></dd><dt>Theming</dt>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
+<dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
+<dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd>
+<dd><a href='/testing_guidelines.html'>DRAFT - Testing Guidelines</a></dd><dt>Extras</dt>
+<dd><a href='/build_tools.html'>SproutCore's Build Tools</a></dd>
+<dd><a href='/run_loop.html'>The Run Loop</a></dd>
+<dd><a href='/enumerables.html'>Enumerables</a></dd>
+<dd><a href='/connect_server.html'>DRAFT - Connecting to a Server</a></dd><dt>Contributing to SproutCore</dt>
+<dd><a href='/style_guide.html'>Javascript Guidelines</a></dd>
+<dd><a href='/commit_code.html'>Committer Guidelines</a></dd>
+<dd><a href='/documentation_guidelines.html'>Documentation Guidelines</a></dd>
+<dd><a href='/contribute.html'>Contributing Guides</a></dd><dt>Thanks</dt>
+<dd><a href='/credits.html'>Credits</a></dd></dl>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div id="container">
-    <div class="wrapper">
-      <div id="mainCol">
-          <div class="headerSection">
-            <h2>Unit Testing &#8211; About Unit Testing</h2>
-<p>This guide covers the SproutCore unit test <span class="caps">API</span> and some ideas on how to use it.   After reading this guide, you will:</p>
-<ul>
-	<li>Know how to create your unit tests and where to locate them.</li>
-	<li>How to run your tests.</li>
-	<li>How to get the most out of unit testing in SproutCore.</li>
-</ul>
+    <div id="container">
+      <div class="wrapper">
+        <div id="mainCol">
+          <div class='headerSection'>
+            
+              <h2>Unit Testing - About Unit Testing</h2>
+            
 
+            
+              <p>This guide covers the SproutCore unit test API and some ideas on how to use it. After reading this guide, you will:</p>
+            
+
+            
+              <ul>
+                
+                  <li>Know how to create your unit tests and where to locate them.</li>
+                
+                  <li>How to run your tests.</li>
+                
+                  <li>How to get the most out of unit testing in SproutCore.</li>
+                
+              </ul>
+            
           </div>
-        <h3 id="overview">1 Overview</h3>
-<p>Rigorous unit testing is a key principle to modern agile development.  Unit tests not only make it easier for other developers to understand and work with your code, it makes it easier for you to maintain your own code as well.</p>
-<p>In the past, unit testing JavaScript has been a difficult process, primarily because the infrastructure needed to run unit tests required a lot of manual setup.</p>
-<p>SproutCore makes unit testing far easier by bundling an integrated testing framework as well as a test runner right into the build tools.  The testing framework is based on <a href="http://docs.jquery.com/QUnit">jQuery&#8217;s QUint</a>.</p>
-<h3 id="how-it-works">2 How it Works</h3>
-<h4 id="where-unit-test-files-are-stored">2.1 Where Unit Test Files Are Stored</h4>
-<p>Unit test files are stored in a directory, <tt>tests</tt>, under your SproutCore application subfolder. For example, if your application is named <tt>hello_world</tt>, then the <tt>tests</tt> folder will have this project path:</p>
-<p><code>hello_world/apps/hello_world/tests</code></p>
-<p>If this folder doesn&#8217;t already exist for you, then add it at this time.</p>
-<h4 id="adding-unit-test-files">2.2 Adding Unit Test Files</h4>
-<p>When you create a code file using <tt>sc-gen</tt>, it will automatically generate the skeleton for a unit test that you can enhance to test your code file.  Then simply open the test file and write some tests.</p>
+
+          <h3 id='-Overview-'>1 -  Overview
+</h3>
+
+
+<p>Rigorous unit testing is a key principle to modern agile development.  Unit tests not only make it easier for other developers to understand and work
+with your code, it makes it easier for you to maintain your own code as well.</p>
+<p>In the past, unit testing JavaScript has been a difficult process, primarily because the infrastructure needed to run unit tests required a lot of
+manual setup.</p>
+<p>SproutCore makes unit testing far easier by bundling an integrated testing framework as well as a test runner right into the build tools.  The testing
+framework is based on <a href="http://docs.jquery.com/QUnit">jQuery&#39;s QUint</a>.</p>
+<h3 id='-How-it-Works-'>2 -  How it Works
+</h3>
+
+
+
+
+<h4 id='-Where-Unit-Test-Files-Are-Stored-'>2.1 -  Where Unit Test Files Are Stored
+</h4>
+
+
+<p>Unit test files are stored in a directory, <tt>tests</tt>, under your SproutCore application subfolder. For example, if your application is
+named <tt>hello_world</tt>, then the <tt>tests</tt> folder will have this project path: <tt>hello_world/apps/hello_world/tests</tt>.</p>
+<p>If this folder doesn&#39;t already exist for you, then add it at this time.</p>
+<h4 id='-Adding-Unit-Test-Files-'>2.2 -  Adding Unit Test Files
+</h4>
+
+
+<p>When you create a code file using <tt>sc-gen</tt>, it will automatically generate the skeleton for a unit test that you can enhance to test your code file.
+Then simply open the test file and write some tests.</p>
 <p>To add a unit test file manually, simply create it inside the <tt>tests</tt> directory.</p>
 <p>See <a href="/adding_unit_test.html">Adding a Unit Test</a> for more information on this process.</p>
-<h4 id="writing-unit-test-cases">2.3 Writing Unit Test Cases</h4>
-<p>Once you&#8217;ve added a unit test file, write your unit test cases using the QUnit testing <span class="caps">API</span>.  A simple unit test looks like this:</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
+<h4 id='-Writing-Unit-Test-Cases-'>2.3 -  Writing Unit Test Cases
+</h4>
 
-module(&quot;HelloWorld&quot;) ;
-test(&quot;value of 'string' is 'Hello World', function() {
-     ok(HelloWorld.get('string'), 'Hello World',  &quot;has preset string&quot;);
-});
-</pre></div><p>See <a href="/writing_unit_tests.html">Writing a Unit Test Case</a> for more information on this process.</p>
-<h4 id="running-unit-test-cases">2.4 Running Unit Test Cases</h4>
+
+<p>Once you&#39;ve added a unit test file, write your unit test cases using the QUnit testing API.  A simple unit test looks like this:</p>
+<pre class="highlighted"><div class="code_container"><code class="undefined">module("HelloWorld") ;
+test("value of 'string' is 'Hello World', function() {
+     ok(HelloWorld.get('string'), 'Hello World',  "has preset string");
+});</code></div></pre>
+<p>See <a href="/writing_unit_tests.html">Writing a Unit Test Case</a> for more information on this process.</p>
+<h4 id='-Running-Unit-Test-Cases-'>2.4 -  Running Unit Test Cases
+</h4>
+
+
 <p>The test runner is activated when you launch <tt>sc_server</tt>.</p>
-<p>You run all the tests by simply browsing to <a href="http://localhost:4020/sproutcore/tests">http://localhost:4020/sproutcore/tests</a>.</p>
+<p>You run all the tests by simply browsing to <a href="http://localhost:4020/sproutcore/tests"><a href="http://localhost:4020/sproutcore/tests">http://localhost:4020/sproutcore/tests</a></a>.</p>
 <p>You can also test a subset of unit tests; see <a href="/running_unit_test.html">Running Unit Test Cases</a> for more information.</p>
-<div class="warning"><p>The test runner is not currently operational on 1.5. Unit tests have to be run manually. This will be fixed prior to release. See the above link for more information.</p></div>
-<h3 id="getting-the-most-out-of-unit-testing">3 Getting the Most Out of Unit Testing</h3>
-<p>To get the best results out of your test running, you should get into the habit of adding unit tests for every major function in your application.  It is not necessary to add unit tests for every single method you write, but you should make sure your unit tests cover the major pieces of your app that are stitched together with bindings.  This is especially important for any complicated engines or for components with a large number of moving parts since they tend to break easily.</p>
-<p>Assuming you have good unit tests, you should also make sure everyone in your team runs all of the unit tests at least once before committing any changes to your source repository.  Try to never commit source changes that leave tests failing.  This way unit tests will remain a useful check for every developer on the project to ensure they have not broken another piece of the code.</p>
-<p>In order to achieve the best test coverage, you need to run your unit tests in every target web browser you intend to run your application in.  For example, when we write SproutCore code, we will load the test runner in IE6, IE7, IE8, Safari, Chrome, and Firefox.  Since running unit tests this many times can become very labor intensive if you try to do it before every checkin, usually the best thing to do is to run your unit tests before every checkin in only one or two browsers such as Firefox and Safari.  Periodically you should set milestones in your project development where you will run through the unit tests on all browsers and fix anything that breaks unit tests for continuing with your development.</p>
-<p>Above all, the most important thing about unit testing is to write and run your unit tests regularly.  Unit tests are only useful if you maintain them.  If you write too much code that is not covered by unit tests, they will not prevent enough errors for people on your team to use them regularly.  Likewise, if you let your unit tests failing for too long, developers will look at test failures as &#8220;noise&#8221; and tend to ignore them.</p>
-<h3 id="moving-on">4 Moving On</h3>
-<p>Now that you know the basics of how to use unit tests, it&#8217;s time to start adding unit tests to your project.</p>
+<h3 id='-Getting-the-Most-Out-of-Unit-Testing-'>3 -  Getting the Most Out of Unit Testing
+</h3>
+
+
+<p>To get the best results out of your test running, you should get into the habit of adding unit tests for every major function in your application.  It
+is not necessary to add unit tests for every single method you write, but you should make sure your unit tests cover the major pieces of your app that
+are stitched together with bindings.  This is especially important for any complicated engines or for components with a large number of moving parts
+since they tend to break easily.</p>
+<p>Assuming you have good unit tests, you should also make sure everyone in your team runs all of the unit tests at least once before committing any
+changes to your source repository.  Try to never commit source changes that leave tests failing.  This way unit tests will remain a useful check for
+every developer on the project to ensure they have not broken another piece of the code.</p>
+<p>In order to achieve the best test coverage, you need to run your unit tests in every target web browser you intend to run your application in.  For
+example, when we write SproutCore code, we will load the test runner in IE6, IE7, IE8, Safari, Chrome, and Firefox.  Since running unit tests this
+many times can become very labor intensive if you try to do it before every checkin, usually the best thing to do is to run your unit tests before
+every checkin in only one or two browsers such as Firefox and Safari.  Periodically you should set milestones in your project development where you
+will run through the unit tests on all browsers and fix anything that breaks unit tests for continuing with your development.</p>
+<p>Above all, the most important thing about unit testing is to write and run your unit tests regularly.  Unit tests are only useful if you maintain
+them.  If you write too much code that is not covered by unit tests, they will not prevent enough errors for people on your team to use them
+regularly.  Likewise, if you let your unit tests failing for too long, developers will look at test failures as &quot;noise&quot; and tend to ignore them.</p>
+<h3 id='-Moving-On-'>4 -  Moving On
+</h3>
+
+
+<p>Now that you know the basics of how to use unit tests, it&#39;s time to start adding unit tests to your project.</p>
 <p>See <a href="/adding_unit_test.html">Adding Unit Test Files »</a></p>
-<h3 id="changelog">5 Changelog</h3>
+<h3 id='-Changelog-'>5 -  Changelog
+</h3>
+
+
 <ul>
-	<li>February 15, 2011: initial version by <a href="credits.html#ssmith">Scott Smith</a> and <a href="credits.html#veebs">Vibul Imtarnasan</a></li>
-	<li>March     2, 2011: paragraph formamtting by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+<li>February 15, 2011: initial version by <a href="credits.html#oldfartdeveloper">Scott Smith</a> and <a href="credits.html#veebs">Vibul Imtarnasan</a></li>
+<li>March 2, 2011: paragraph formamtting by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+<li>August 7, 2013: converted to Markdown format for DocPad guides by <a href="credits.html#topherfangio">Topher Fangio</a></li>
 </ul>
 
-      </div>
+        </div>
+        <!-- TODO: re-add index_items //-->
         <div id="subCol">
-          <h3 class="chapter"><img src="images/graphics/chapters.png" alt="" />Chapters</h3>
-          <ol class="chapters">
-            <li><a href="#overview"><p>Overview</p>
-</a></li><li><a href="#how-it-works"><p>How it Works</p>
-</a><ul><li><a href="#where-unit-test-files-are-stored"><p>Where Unit Test Files Are Stored</p>
-</a></li> <li><a href="#adding-unit-test-files"><p>Adding Unit Test Files</p>
-</a></li> <li><a href="#writing-unit-test-cases"><p>Writing Unit Test Cases</p>
-</a></li> <li><a href="#running-unit-test-cases"><p>Running Unit Test Cases</p>
-</a></li></ul></li><li><a href="#getting-the-most-out-of-unit-testing"><p>Getting the Most Out of Unit Testing</p>
-</a></li><li><a href="#moving-on"><p>Moving On</p>
-</a></li><li><a href="#changelog"><p>Changelog</p>
-</a></li>
+          <h3 class="chapter"><img src="images/graphics/chapters.png" alt="">Chapters</h3>
+          <ol class='chapters'>
+            
+              <li>
+                <a href='#-Overview-'><p> Overview
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-How-it-Works-'><p> How it Works
+</p></a>
+                <ul>
+                  
+                    <li><a href='#-Where-Unit-Test-Files-Are-Stored-'><p> Where Unit Test Files Are Stored
+</p></a></li>
+                  
+                    <li><a href='#-Adding-Unit-Test-Files-'><p> Adding Unit Test Files
+</p></a></li>
+                  
+                    <li><a href='#-Writing-Unit-Test-Cases-'><p> Writing Unit Test Cases
+</p></a></li>
+                  
+                    <li><a href='#-Running-Unit-Test-Cases-'><p> Running Unit Test Cases
+</p></a></li>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Getting-the-Most-Out-of-Unit-Testing-'><p> Getting the Most Out of Unit Testing
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Moving-On-'><p> Moving On
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Changelog-'><p> Changelog
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
           </ol>
         </div>
+      </div>
     </div>
-  </div>
 
-  <hr class="hide" />
+    <hr class="hide" />
+
 	  <footer>
 	    <div class="container">
 	      <div class="col">
@@ -216,33 +317,29 @@ test(&quot;value of 'string' is 'Hello World', function() {
 	    </div>
 	  </footer>
 
-  <script src="http://code.jquery.com/jquery-1.6.min.js" type="text/javascript" charset="utf-8"></script>
-  <script type="text/javascript" src="javascripts/sproutGuides.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushJScript.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushCss.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
-  <script type="text/javascript">
-    SyntaxHighlighter.all()
+    <script type='text/javascript' src='/javascripts/jquery.min.js'></script>
 
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-19584397-1']);
-    _gaq.push(['_setDomainName', '.sproutcore.com']);
-    _gaq.push(['_setAllowHash', false]);
-    _gaq.push(['_setAllowLinker', true]);
-    _gaq.push(['_trackPageview']);
+    
 
-    (function() {
-      var ga = document.createElement('script');
-      ga.type = 'text/javascript';
-      ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl': 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-</body>
+    <script type='text/javascript'>
+      /*
+       * Make the guides link clickable
+       */
+      function guideMenu(e){
+        if (document.getElementById('guides').style.display == "none") {
+          document.getElementById('guides').style.display = "block";
+          document.getElementById('guidesArrow').innerHTML = "&#9662;";
+          $('body').click(function(e){ guideMenu(e); });
+        } else {
+          document.getElementById('guides').style.display = "none";
+          document.getElementById('guidesArrow').innerHTML = "&#9656;";
+          $('body').unbind('click');
+        }
+        return false;
+      }
+
+      $('#guidesMenu, .guidesMenu').click(guideMenu);
+    </script>
+
+  </body>
 </html>

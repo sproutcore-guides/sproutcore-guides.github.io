@@ -1,275 +1,374 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>SproutCore Guides: Classes and SC.Object</title>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
 
-  <!-- guides styles -->
-  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/guides.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
-  <!--[if lt IE 9]>
-  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
+    <!-- plugin styles -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/highlight-github.css" />
 
-  <!-- syntax highlighting styles -->
-  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/shThemeGuides.css" />
-</head>
-<body class="guide">
+    <!-- guides styles -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/reset.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/main.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/guides.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-  <header role="banner">
-    <div class="container">
-      <h1 id="logo">
-        <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
-      </h1>
-      <nav role="navigation">
-        <ul>
-          <li><a href="http://sproutcore.com/about/">About</a></li>
-          <li><a href="http://showcase.sproutcore.com">Showcase</a></li>
-          <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
-          <li><a href="http://docs.sproutcore.com">Docs</a></li>
-          <li><a href="http://sproutcore.com/community/">Community</a></li>
-          <li><a href="http://blog.sproutcore.com">Blog</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-  <div id="feature">
-    <div class="wrapper">
-      <div class="feature_header">
-        <a href="/"><img src="images/graphics/guides.png"></a>
-        <h2><a href="/">SproutCore Guides</a></h2>
-        <p>These guides are designed to help you write and perfect your code.</p>
+    <meta name="generator" content="DocPad v6.57.0" />
+    
+  </head>
+
+  <body class="guide">
+
+    <header role="banner">
+      <div class="container">
+        <h1 id="logo">
+          <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
+        </h1>
+        <nav role="navigation">
+          <ul>
+            <li><a href="http://sproutcore.com/about/">About</a></li>
+            <li><a href="http://showcase.sproutcore.com">Showcase</a></li>
+            <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
+            <li><a href="http://docs.sproutcore.com">Docs</a></li>
+            <li><a href="http://sproutcore.com/community/">Community</a></li>
+            <li><a href="http://blog.sproutcore.com">Blog</a></li>
+          </ul>
+        </nav>
       </div>
-      <div class="feature_sidebar">
-        <a href="index.html" id="guidesMenu">
-          Guides Index <span id="guidesArrow">&#9656;</span>
-        </a>
-        <div id="guides" class="clearfix" style="display: none;">
-          <a href="index.html" class="guidesMenu">
-            Guides Index <span class="guidesArrow">&#9662;</span>
+    </header>
+
+    <div id="feature">
+      <div class="wrapper">
+        <div class="feature_header">
+          <a href="/"><img src="images/graphics/guides.png"></a>
+          <h2><a href="/">SproutCore Guides</a></h2>
+          <p>These guides are designed to help you write and perfect your code.</p>
+        </div>
+        <div class="feature_sidebar">
+          <a href="index.html" id="guidesMenu">
+            Guides Index <span id="guidesArrow">&#9656;</span>
           </a>
-          <hr style="clear:both;">
-          <dl class="L">
-    <dt>Start Here</dt>
-      <dd><a href="getting_started.html">Getting Started: Part 1</a></dd>
-      <dd><a href="getting_started_2.html">Getting Started: Part 2</a></dd>
-      <dd><a href="getting_started_3.html">Getting Started: Part 3</a></dd>
-      <dd><a href="core_concepts_sc_object.html">Classes and SC.Object</a></dd>
-      <dd><a href="core_concepts_kvo.html">Computed Properties, Observers and Bindings</a></dd>
-    <dt>Views</dt>
-      <dd><a href="views.html">Core View Concepts</a></dd>
-    <dt>Models</dt>
-      <dd><a href="records.html">SproutCore Records</a></dd>
-      <dd><a href="fixtures.html">Using Fixtures</a></dd>
-    <dt>Theming</dt>
-      <dd><a href="chance.html">Using Chance, SproutCore's CSS Framework</a></dd>
-      <dd><a href="theming_app.html">Theming Your App</a></dd>
-    <dt>Testing</dt>
-      <dd><a href="unit_test_framework.html">Unit Testing</a></dd>
-      <dd><a href="adding_unit_test.html">Adding a Unit Test</a></dd>
-      <dd><a href="writing_unit_tests.html">Writing Unit Tests</a></dd>
-      <dd><a href="running_unit_tests.html">Running Unit Tests</a></dd>
-      <dd><a href="todos_tdd.html">SproutCore Development Using TDD</a></dd>
-</dl>
-<dl class="R">
-    <dt>Extras</dt>
-      <dd><a href="build_tools.html">Build Tools</a></dd>
-      <dd><a href="run_loop.html">The Run Loop</a></dd>
-      <dd><a href="enumerables.html">Enumerables</a></dd>
-      <dd><a href="using_handlebars.html">Using Handlebars Templates</a></dd>
-    <dt>Contributing to SproutCore</dt>
-      <dd><a href="style_guide.html">Javascript Style Guide</a></dd>
-      <dd><a href="commit_code.html">Committer Guidelines</a></dd>
-      <dd><a href="documentation_guidelines.html">Documentation Guidelines</a></dd>
-</dl>
+          <div id="guides" class="clearfix" style="display: none;">
+            <a href="index.html" class="guidesMenu">
+              Guides Index <span class="guidesArrow">&#9662;</span>
+            </a>
 
+            <hr style="clear:both;">
 
+            <dl class='L'><dt>Start Here</dt>
+<dd><a href='/getting_started.html'>Getting Started: Part 1</a></dd>
+<dd><a href='/getting_started_2.html'>Getting Started: Part 2</a></dd>
+<dd><a href='/getting_started_3.html'>Getting Started: Part 3</a></dd>
+<dd><a href='/core_concepts_sc_object.html'>Classes and SC.Object</a></dd>
+<dd><a href='/core_concepts_kvo.html'>Computed Properties, Observers and Bindings</a></dd><dt>Views</dt>
+<dd><a href='/views.html'>Core View Concepts</a></dd>
+<dd><a href='/animate.html'>DRAFT - Animation</a></dd><dt>Models</dt>
+<dd><a href='/records.html'>SproutCore Records</a></dd>
+<dd><a href='/fixtures.html'>Using Fixtures</a></dd>
+<dd><a href='/record_lifecycle.html'>DRAFT - Understanding the Record Lifecycle</a></dd>
+<dd><a href='/no_store.html'>DRAFT - No DataStore</a></dd>
+<dd><a href='/data_source.html'>DRAFT - Data Source</a></dd><dt>Theming</dt>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
+<dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
+<dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd>
+<dd><a href='/testing_guidelines.html'>DRAFT - Testing Guidelines</a></dd><dt>Extras</dt>
+<dd><a href='/build_tools.html'>SproutCore's Build Tools</a></dd>
+<dd><a href='/run_loop.html'>The Run Loop</a></dd>
+<dd><a href='/enumerables.html'>Enumerables</a></dd>
+<dd><a href='/connect_server.html'>DRAFT - Connecting to a Server</a></dd><dt>Contributing to SproutCore</dt>
+<dd><a href='/style_guide.html'>Javascript Guidelines</a></dd>
+<dd><a href='/commit_code.html'>Committer Guidelines</a></dd>
+<dd><a href='/documentation_guidelines.html'>Documentation Guidelines</a></dd>
+<dd><a href='/contribute.html'>Contributing Guides</a></dd><dt>Thanks</dt>
+<dd><a href='/credits.html'>Credits</a></dd></dl>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div id="container">
-    <div class="wrapper">
-      <div id="mainCol">
-          <div class="headerSection">
-            <h2>Classes and SC.Object</h2>
-<p>The guide covers some of the core concepts of object-oriented programming with the SproutCore framework. By referring to this guide, you will be able to:</p>
-<ul>
-	<li>Understand how Classes work, including SC.Object.</li>
-	<li>Write your own subclasses based on SC.Object.</li>
-	<li>Create mixins to share functionality between Classes.</li>
-	<li>Add Class properties and functions.</li>
-</ul>
+    <div id="container">
+      <div class="wrapper">
+        <div id="mainCol">
+          <div class='headerSection'>
+            
+              <h2>Classes and SC.Object</h2>
+            
 
+            
+              <p>The guide covers some of the core concepts of object-oriented programming with the SproutCore framework. By referring to this guide, you will be able to:</p>
+            
+
+            
+              <ul>
+                
+                  <li>Understand how Classes work, including SC.Object.</li>
+                
+                  <li>Write your own subclasses based on SC.Object.</li>
+                
+                  <li>Create mixins to share functionality between Classes.</li>
+                
+                  <li>Add Class properties and functions</li>
+                
+              </ul>
+            
           </div>
-        <h3 id="sc-object">1 SC.Object</h3>
-<p>SproutCore uses a traditional class-based <a href="http://en.wikipedia.org/wiki/Object-oriented_programming">object-oriented programming</a> style based on the <tt>SC.Object</tt> Class. In this style, <code>SC.Object</code> becomes the base for all &#8220;Classes&#8221; in SproutCore and provides powerful extensions to regular JavaScript objects. These extensions include computed properties, automatic bindings, observers and more, which will be described in detail below.</p>
-<h4 id="creating-an-sc-object-instance">1.1 Creating an SC.Object Instance</h4>
+
+          <h3 id='-SC-Object-'>1 -  SC.Object
+</h3>
+
+
+<p>SproutCore uses a traditional class-based <a href="http://en.wikipedia.org/wiki/Object-oriented_programming">object-oriented
+programming</a> style
+based on the <tt>SC.Object</tt> Class. In this style, <code>SC.Object</code> becomes
+the base for all &quot;Classes&quot; in SproutCore and provides powerful extensions to
+regular JavaScript objects. These extensions include computed properties,
+automatic bindings, observers and more, which will be described in detail below.</p>
+<h4 id='-Creating-an-SC-Object-Instance-'>1.1 -  Creating an SC.Object Instance
+</h4>
+
+
 <p>Creation of an <code>SC.Object</code> instance is straightforward.</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
-var obj = SC.Object.create()
-</pre></div><p>In most cases you will want to create your <code>SC.Object</code> with some pre-set properties. You accomplish this by providing the properties in a hash.  The following example creates a new SC.Object to represent a person.</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
-// Create an SC.Object to represent a person.
-var person = SC.Object.create({
-  firstName: 'Peter',
-  lastName:  'Wagenet'
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class="keyword">var</span> obj = SC.Object.create()</code></div></pre>
+<p>In most cases you will want to create your <code>SC.Object</code> with some pre-
+set properties. You accomplish this by providing the properties in a hash.  The
+following example creates a new SC.Object to represent a person.</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class="comment">// Create an SC.Object to represent a person.</span>
+<span class="keyword">var</span> person = SC.Object.create({
+  firstName: <span class="string">'Peter'</span>,
+  lastName:  <span class="string">'Wagenet'</span>
 });
 
-// Access our object's properties
-person.get('firstName'); // 'Peter'
-person.get('lastName');  // 'Wagenet'
-</pre></div>
-<div class="note"><p>The <ins>get()</ins> and <ins>set()</ins> functions allow for Key-Value observing which is described in more detail below. For now, trust that they are important and you should make a habit of always using them to access properties on SC.Object and its subclasses.</p></div>
-<h4 id="creating-an-sc-object-subclass">1.2 Creating an SC.Object Subclass</h4>
-<p>In many cases you will want to create subclasses of <code>SC.Object</code> rather than direct instances. In the above example, we created a new <code>SC.Object</code> to represent a person, but it often makes more sense to define a unique <code>Person</code> Class, and to create instances of it.  Doing so allows us to define default properties on the Class and to include related helper functions.  To do this, we simply call <tt>extend()</tt> on <code>SC.Object</code> as the next example shows.</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
+<span class="comment">// Access our object's properties</span>
+person.get(<span class="string">'firstName'</span>); <span class="comment">// 'Peter'</span>
+person.get(<span class="string">'lastName'</span>);  <span class="comment">// 'Wagenet'</span></code></div></pre>
+<div class='note'><p> The <tt>get()</tt> and <tt>set()</tt> functions allow for Key-Value observing which is
+described in more detail below. For now, trust that they are important and you
+should make a habit of always using them to access properties on SC.Object and
+its subclasses.
 
-MyApp.Person = SC.Object.extend({
-  firstName: null,
-  lastName:  null,
-  permissions: 'none',
+</p></div>
 
-  fullName: function() {
-    return [this.get('firstName'), this.get('lastName')].compact().join(' ');
+
+
+<h4 id='-Creating-an-SC-Object-Subclass-'>1.2 -  Creating an SC.Object Subclass
+</h4>
+
+
+<p>In many cases you will want to create subclasses of <code>SC.Object</code>
+rather than direct instances. In the above example, we created a new
+<code>SC.Object</code> to represent a person, but it often makes more sense to
+define a unique <code>Person</code> Class, and to create instances of it.  Doing
+so allows us to define default properties on the Class and to include related
+helper functions.  To do this, we simply call <tt>extend()</tt> on
+<code>SC.Object</code> as the next example shows.</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">MyApp.Person = SC.Object.extend({
+  firstName: <span class="literal">null</span>,
+  lastName:  <span class="literal">null</span>,
+  permissions: <span class="string">'none'</span>,
+
+  fullName: <span class="keyword">function</span>() {
+    <span class="keyword">return</span> [<span class="keyword">this</span>.get(<span class="string">'firstName'</span>), <span class="keyword">this</span>.get(<span class="string">'lastName'</span>)].compact().join(<span class="string">' '</span>);
   }
+});</code></div></pre>
+<p>After defining the <code>Person</code> Class, we can now create new
+<code>Person</code> objects and each will contain the properties
+<code>firstName</code>, <code>lastName</code> and <code>permissions</code> as
+well as the simple <code>fullName()</code> function.  The following example
+shows this.</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class="keyword">var</span> person = MyApp.Person.create({
+  firstName: <span class="string">'Peter'</span>,
+  lastName:  <span class="string">'Wagenet'</span>
 });
-</pre></div><p>After defining the <code>Person</code> Class, we can now create new <code>Person</code> objects and each will contain the properties <code>firstName</code>, <code>lastName</code> and <code>permissions</code> as well as the simple <code>fullName()</code> function.  The following example shows this.</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
 
-var person = MyApp.Person.create({
-  firstName: 'Peter',
-  lastName:  'Wagenet'
-});
+person.fullName(); <span class="comment">// 'Peter Wagenet'</span>
+person.get(<span class="string">'permissions'</span>); <span class="comment">// 'none'</span></code></div></pre>
+<h5 id='-Calling-superclass-methods-with-sc-super-'>1.2.1 -  Calling superclass methods with sc_super
+</h5>
 
-person.fullName(); // 'Peter Wagenet'
-person.get('permissions'); // 'none'
-</pre></div><h5 id="calling-superclass-methods-with-sc_super">1.2.1 Calling superclass methods with sc_super</h5>
-<p>In some cases when you subclass a Class you will want to augment a method of the parent Class without completely overriding it. In this case, SproutCore provides the <tt>sc_super</tt> method which calls the original function. For those familiar with Ruby&#8217;s <code>super</code> method, <code>sc_super</code> is very similar.  Here is an example of a subclass of <code>Person</code> that extends and uses the superclass&#8217;s <code>fullName()</code> method.</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
 
-// Define a new subclass of MyApp.Person
+<p>In some cases when you subclass a Class you will want to augment a method of
+the parent Class without completely overriding it. In this case, SproutCore
+provides the <tt>sc_super</tt> method which calls the original function. For those
+familiar with Ruby&#39;s <code>super</code> method, <code>sc_super</code> is very
+similar.  Here is an example of a subclass of <code>Person</code> that extends
+and uses the superclass&#39;s <code>fullName()</code> method.</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class="comment">// Define a new subclass of MyApp.Person</span>
 MyApp.FormalPerson = MyApp.Person.extend({
-  title: null,
+  title: <span class="literal">null</span>,
 
-  fullName: function() {
-    // Joins `title` with the result of `fullName()` on the superclass.
-    return [this.get('title'), sc_super()].compact().join(' ');
+  fullName: <span class="keyword">function</span>() {
+    <span class="comment">// Joins `title` with the result of `fullName()` on the superclass.</span>
+    <span class="keyword">return</span> [<span class="keyword">this</span>.get(<span class="string">'title'</span>), sc_super()].compact().join(<span class="string">' '</span>);
   }
 });
 
-// Create a MyApp.FormalPerson object
-var person = MyApp.FormalPerson.create({
-  title:     'Mr.',
-  firstName: 'Peter',
-  lastName:  'Wagenet'
+<span class="comment">// Create a MyApp.FormalPerson object</span>
+<span class="keyword">var</span> person = MyApp.FormalPerson.create({
+  title:     <span class="string">'Mr.'</span>,
+  firstName: <span class="string">'Peter'</span>,
+  lastName:  <span class="string">'Wagenet'</span>
 });
 
-person.fullName(); // Mr. Peter Wagenet
-person.get('permissions'); // 'none'
-</pre></div>
-<div class="note"><p><ins>sc_super</ins> is one of the rare exceptions in SproutCore in that it is not actually a JavaScript function. It&#8217;s just a pre-processor directive that gets replaced with <code>arguments.callee.base.apply(this, arguments)</code> by the Build Tools.</p></div>
-<h5 id="the-init-method">1.2.2 The init method</h5>
-<p>Whenever an instance of an <code>SC.Object</code> is created, its <tt>init()</tt> method is called first. This function can be overridden when you need to perform additional setup each time one of your objects is created.  The next example uses <code>init()</code> to ensure that a calculation is performed each time a new MyApp.Calculation object is created.</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
+person.fullName(); <span class="comment">// Mr. Peter Wagenet</span>
+person.get(<span class="string">'permissions'</span>); <span class="comment">// 'none'</span></code></div></pre>
+<div class='note'><p> <tt>sc_super</tt> is one of the rare exceptions in SproutCore in that it is not
+actually a JavaScript function. It&#39;s just a pre-processor directive that gets
+replaced with <code>arguments.callee.base.apply(this, arguments)</code> by the
+Build Tools.
 
-MyApp.Calculation = SC.Object.extend({
-  input: null,
-  result: null,
+</p></div>
 
-  _calculate: function() {
-    // Do expensive calculation
-    this.set('result', this.get('input') * 2);
+
+
+<h5 id='-The-init-method-'>1.2.2 -  The init method
+</h5>
+
+
+<p>Whenever an instance of an <code>SC.Object</code> is created, its <tt>init()</tt>
+method is called first. This function can be overridden when you need to
+perform additional setup each time one of your objects is created.  The next
+example uses <code>init()</code> to ensure that a calculation is performed
+each time a new MyApp.Calculation object is created.</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">MyApp.Calculation = SC.Object.extend({
+  input: <span class="literal">null</span>,
+  result: <span class="literal">null</span>,
+
+  _calculate: <span class="keyword">function</span>() {
+    <span class="comment">// Do expensive calculation</span>
+    <span class="keyword">this</span>.set(<span class="string">'result'</span>, <span class="keyword">this</span>.get(<span class="string">'input'</span>) * <span class="number">2</span>);
   },
 
-  init: function() {
-    sc_super();  // Warning: Always invoke SC.Object's init() method!
-    this._calculate();
+  init: <span class="keyword">function</span>() {
+    sc_super();  <span class="comment">// Warning: Always invoke SC.Object's init() method!</span>
+    <span class="keyword">this</span>._calculate();
   }
 });
 
-var calc = MyApp.Calculation.create({ input: 5 });
-calc.get('result'); // 10
-</pre></div>
-<div class="warning"><p>When overriding the <code>init()</code> method it is important that you call <code>sc_super</code> at the start of your custom <code>init()</code> method. This will ensure that all internal object initialization takes place as expected.</p></div>
-<h5 id="using-mixins">1.2.3 Using Mixins</h5>
-<p>Mixins are an easy way to extend multiple classes, that don&#8217;t share an inheritance tree, with similar functionality.  Mixins are simply a hash with a series of properties that will be added to the objects you create.  The next example defines the <code>MyApp.Introducable</code> mixin, which can then be shared between many different Classes.</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
+<span class="keyword">var</span> calc = MyApp.Calculation.create({ input: <span class="number">5</span> });
+calc.get(<span class="string">'result'</span>); <span class="comment">// 10</span></code></div></pre>
+<div class='warning'><p> When overriding the <code>init()</code> method it is important that
+you call <code>sc_super</code> at the start of your custom <code>init()</code>
+method. This will ensure that all internal object initialization takes place
+as expected.
 
-MyApp.Introducable = {
-  sayHello: function() {
-    return 'Hello, my name is ' + this.name;
+</p></div>
+
+
+
+<h5 id='-Using-Mixins-'>1.2.3 -  Using Mixins
+</h5>
+
+
+<p>Mixins are an easy way to extend multiple classes, that don&#39;t share an
+inheritance tree, with similar functionality.  Mixins are simply a hash with a
+series of properties that will be added to the objects you create.  The next
+example defines the <code>MyApp.Introducable</code> mixin, which can then be
+shared between many different Classes.</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">MyApp.Introducable = {
+  sayHello: <span class="keyword">function</span>() {
+    <span class="keyword">return</span> <span class="string">'Hello, my name is '</span> + <span class="keyword">this</span>.name;
   }
-};
-</pre></div><p>To add one or more mixins to a Class, add them as parameters to extend.  For example,</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
+};</code></div></pre>
+<p>To add one or more mixins to a Class, add them as parameters to extend.  For
+example,</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">MyApp.Person = SC.Object.extend(MyApp.Introducable, { name: <span class="string">''</span>; });
 
-MyApp.Person = SC.Object.extend(MyApp.Introducable, { name: ''; });
+<span class="keyword">var</span> person = MyApp.Person.create({ name: <span class="string">'Bob'</span> });
+person.sayHello(); <span class="comment">// Hello, my name is Bob</span></code></div></pre>
+<p>As you may have guessed, <code>SC.Object.extend</code> just takes a <em>series of
+hashes</em> and mixes them all in to a newly created class.</p>
+<h5 id='-Class-methods-'>1.2.4 -  Class methods
+</h5>
 
-var person = MyApp.Person.create({ name: 'Bob' });
-person.sayHello(); // Hello, my name is Bob
-</pre></div><p>As you may have guessed, <code>SC.Object.extend</code> just takes a <em>series of hashes</em> and mixes them all in to a newly created class.</p>
-<h5 id="class-methods">1.2.4 Class methods</h5>
-<p>You can also define Class methods on your custom Classes. If you need to add a single Class method to a Class, you can do it in the traditional JavaScript manner.  For example, the following adds a <code>quickCreate()</code> helper function to <code>MyApp.Person</code>.</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
 
-MyApp.Person.quickCreate = function(firstName, lastName){
-  return MyApp.Person.create({
+<p>You can also define Class methods on your custom Classes. If you need to add a
+single Class method to a Class, you can do it in the traditional JavaScript
+manner.  For example, the following adds a <code>quickCreate()</code> helper
+function to <code>MyApp.Person</code>.</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">MyApp.Person.quickCreate = <span class="keyword">function</span>(firstName, lastName){
+  <span class="keyword">return</span> MyApp.Person.create({
     firstName: firstName,
     lastName: lastName
   });
 };
 
-var person = MyApp.Person.quickCreate('Peter', 'Wagenet');
-person.fullName(); // Peter Wagenet
-</pre></div><p>However, sometimes you may want to add a series of Class methods and properties. In this case you can use the <tt>mixin()</tt> method.</p>
-<div class="code_container">
-<pre class="brush: javascript; gutter: false; toolbar: false">
-
-MyApp.Person.mixin({
-  quickCreate: function(firstName, lastName){
-    return MyApp.Person.create({
+<span class="keyword">var</span> person = MyApp.Person.quickCreate(<span class="string">'Peter'</span>, <span class="string">'Wagenet'</span>);
+person.fullName(); <span class="comment">// Peter Wagenet</span></code></div></pre>
+<p>However, sometimes you may want to add a series of Class methods and
+properties. In this case you can use the <tt>mixin()</tt> method.</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">MyApp.Person.mixin({
+  quickCreate: <span class="keyword">function</span>(firstName, lastName){
+    <span class="keyword">return</span> MyApp.Person.create({
       firstName: firstName,
       lastName: lastName
     });
   }),
 });
 
-person = MyApp.Person.quickCreate('Mary', 'Shelley');
-person.fullName(); // Mary Shelley
-</pre></div><p>Note that the <code>mixin()</code> method is different from the Mixins described above. The <code>mixin()</code> method will add the properties and methods within the block as <em>Class properties and methods</em>. Mixins themselves add <em>instance variables and methods</em>.</p>
+person = MyApp.Person.quickCreate(<span class="string">'Mary'</span>, <span class="string">'Shelley'</span>);
+person.fullName(); <span class="comment">// Mary Shelley</span></code></div></pre>
+<p>Note that the <code>mixin()</code> method is different from the Mixins
+described above. The <code>mixin()</code> method will add the properties and
+methods within the block as <em>Class properties and methods</em>. Mixins themselves
+add <em>instance variables and methods</em>.</p>
+<h3 id='-Changelog-'>2 -  Changelog
+</h3>
 
-      </div>
+
+<ul>
+<li>January 12, 2011: initial partial version by <a href="credits.html#wagenet">Peter Wagenet</a></li>
+<li>January 19, 2011: further updates by <a href="credits.html#wagenet">Peter Wagenet</a></li>
+<li>January 20, 2011: corrections to &quot;The <tt>init</tt> Method&quot; and &quot;The Run Loop&quot; by <a href="credits.html#wagenet">Peter Wagenet</a></li>
+<li>July 19, 2013: added &quot;Changelog&quot; by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+<li>August 27, 2013: converted to Markdown format for DocPad guides by <a href="credits.html#deeDude">deeDude</a></li>
+</ul>
+
+        </div>
+        <!-- TODO: re-add index_items //-->
         <div id="subCol">
-          <h3 class="chapter"><img src="images/graphics/chapters.png" alt="" />Chapters</h3>
-          <ol class="chapters">
-            <li><a href="#sc-object"><p>SC.Object</p>
-</a><ul><li><a href="#creating-an-sc-object-instance"><p>Creating an SC.Object Instance</p>
-</a></li> <li><a href="#creating-an-sc-object-subclass"><p>Creating an SC.Object Subclass</p>
-</a></li></ul></li>
+          <h3 class="chapter"><img src="images/graphics/chapters.png" alt="">Chapters</h3>
+          <ol class='chapters'>
+            
+              <li>
+                <a href='#-SC-Object-'><p> SC.Object
+</p></a>
+                <ul>
+                  
+                    <li><a href='#-Creating-an-SC-Object-Instance-'><p> Creating an SC.Object Instance
+</p></a></li>
+                  
+                    <li><a href='#-Creating-an-SC-Object-Subclass-'><p> Creating an SC.Object Subclass
+</p></a></li>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Changelog-'><p> Changelog
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
           </ol>
         </div>
+      </div>
     </div>
-  </div>
 
-  <hr class="hide" />
+    <hr class="hide" />
+
 	  <footer>
 	    <div class="container">
 	      <div class="col">
@@ -317,33 +416,29 @@ person.fullName(); // Mary Shelley
 	    </div>
 	  </footer>
 
-  <script src="http://code.jquery.com/jquery-1.6.min.js" type="text/javascript" charset="utf-8"></script>
-  <script type="text/javascript" src="javascripts/sproutGuides.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushJScript.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushCss.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
-  <script type="text/javascript">
-    SyntaxHighlighter.all()
+    <script type='text/javascript' src='/javascripts/jquery.min.js'></script>
 
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-19584397-1']);
-    _gaq.push(['_setDomainName', '.sproutcore.com']);
-    _gaq.push(['_setAllowHash', false]);
-    _gaq.push(['_setAllowLinker', true]);
-    _gaq.push(['_trackPageview']);
+    
 
-    (function() {
-      var ga = document.createElement('script');
-      ga.type = 'text/javascript';
-      ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl': 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-</body>
+    <script type='text/javascript'>
+      /*
+       * Make the guides link clickable
+       */
+      function guideMenu(e){
+        if (document.getElementById('guides').style.display == "none") {
+          document.getElementById('guides').style.display = "block";
+          document.getElementById('guidesArrow').innerHTML = "&#9662;";
+          $('body').click(function(e){ guideMenu(e); });
+        } else {
+          document.getElementById('guides').style.display = "none";
+          document.getElementById('guidesArrow').innerHTML = "&#9656;";
+          $('body').unbind('click');
+        }
+        return false;
+      }
+
+      $('#guidesMenu, .guidesMenu').click(guideMenu);
+    </script>
+
+  </body>
 </html>

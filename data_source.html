@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <!-- plugin styles -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/highlight-github.css" />
+
+    <!-- guides styles -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/reset.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/main.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/guides.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/overrides.style.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/overrides.print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+    <meta name="generator" content="DocPad v6.57.0" />
+    
+  </head>
+
+  <body class="guide">
+
+    <header role="banner">
+      <div class="container">
+        <h1 id="logo">
+          <a href="http://www.sproutcore.com"><img src="images/header/logo.png" alt="SproutCore" /></a>
+        </h1>
+        <nav role="navigation">
+          <ul>
+            <li><a href="http://sproutcore.com/about/">About</a></li>
+            <li><a href="http://showcase.sproutcore.com">Showcase</a></li>
+            <li class="active"><a href="http://guides.sproutcore.com">Guides</a></li>
+            <li><a href="http://docs.sproutcore.com">Docs</a></li>
+            <li><a href="http://sproutcore.com/community/">Community</a></li>
+            <li><a href="http://blog.sproutcore.com">Blog</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div id="feature">
+      <div class="wrapper">
+        <div class="feature_header">
+          <a href="/"><img src="images/graphics/guides.png"></a>
+          <h2><a href="/">SproutCore Guides</a></h2>
+          <p>These guides are designed to help you write and perfect your code.</p>
+        </div>
+        <div class="feature_sidebar">
+          <a href="index.html" id="guidesMenu">
+            Guides Index <span id="guidesArrow">&#9656;</span>
+          </a>
+          <div id="guides" class="clearfix" style="display: none;">
+            <a href="index.html" class="guidesMenu">
+              Guides Index <span class="guidesArrow">&#9662;</span>
+            </a>
+
+            <hr style="clear:both;">
+
+            <dl class='L'><dt>Start Here</dt>
+<dd><a href='/getting_started.html'>Getting Started: Part 1</a></dd>
+<dd><a href='/getting_started_2.html'>Getting Started: Part 2</a></dd>
+<dd><a href='/getting_started_3.html'>Getting Started: Part 3</a></dd>
+<dd><a href='/core_concepts_sc_object.html'>Classes and SC.Object</a></dd>
+<dd><a href='/core_concepts_kvo.html'>Computed Properties, Observers and Bindings</a></dd><dt>Views</dt>
+<dd><a href='/views.html'>Core View Concepts</a></dd>
+<dd><a href='/animate.html'>DRAFT - Animation</a></dd><dt>Models</dt>
+<dd><a href='/records.html'>SproutCore Records</a></dd>
+<dd><a href='/fixtures.html'>Using Fixtures</a></dd>
+<dd><a href='/record_lifecycle.html'>DRAFT - Understanding the Record Lifecycle</a></dd>
+<dd><a href='/no_store.html'>DRAFT - No DataStore</a></dd>
+<dd><a href='/data_source.html'>DRAFT - Data Source</a></dd><dt>Theming</dt>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
+<dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
+<dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd>
+<dd><a href='/testing_guidelines.html'>DRAFT - Testing Guidelines</a></dd><dt>Extras</dt>
+<dd><a href='/build_tools.html'>SproutCore's Build Tools</a></dd>
+<dd><a href='/run_loop.html'>The Run Loop</a></dd>
+<dd><a href='/enumerables.html'>Enumerables</a></dd>
+<dd><a href='/connect_server.html'>DRAFT - Connecting to a Server</a></dd><dt>Contributing to SproutCore</dt>
+<dd><a href='/style_guide.html'>Javascript Guidelines</a></dd>
+<dd><a href='/commit_code.html'>Committer Guidelines</a></dd>
+<dd><a href='/documentation_guidelines.html'>Documentation Guidelines</a></dd>
+<dd><a href='/contribute.html'>Contributing Guides</a></dd><dt>Thanks</dt>
+<dd><a href='/credits.html'>Credits</a></dd></dl>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="container">
+      <div class="wrapper">
+        <div id="mainCol">
+          <div class='headerSection'>
+            
+              <h2>Data Source - Connecting with a Data Soure</h2>
+            
+
+            
+              <p>This guide covers how to write a DataSource using the API's in SproutCore 1.0&ndash;1.10. After reading this guide, you will be able to:</p>
+            
+
+            
+              <ul>
+                
+                  <li>Understand what a DataSource is, and where it fits into the SproutCore Data Stream</li>
+                
+                  <li>Create your own DataSource and link it to your App</li>
+                
+              </ul>
+            
+          </div>
+
+          <div class='note'><p> If you are looking for other methods of talking to the server,
+<a href="connect_server.html">look here</a>.
+
+</p></div>
+
+
+
+<div class='warning'><p> This is a Draft Copy, and although the information in here is correct,
+it may be incomplete in places.
+
+</p></div>
+
+
+
+<h3 id='-What-is-a-DataSource--'>1 -  What is a DataSource?
+</h3>
+
+
+<p>A DataSource is the layer that sits between your SproutCore application&#39;s
+<a href="records.html#models-records-and-the-store">store</a> and your backend. To start
+out, your app will probably be setup to use <a href="fixtures.html">fixtures</a>. This
+will populate your app with data without having to hit your server in
+development.  When you are ready to interact with your backend, you can create
+your own DataSource that will send and receive data to and from your backend.</p>
+<div class='note'><p> A DataSource is different from the Store. The Store is the in memory
+storage for your records, while the DataSource is the communication layer
+linking the store to your backend.
+
+</p></div>
+
+<p>TODO: A diagram will be nice, showing the layers of a SproutCore application,
+with the datasource highlighted to show where it fits in.</p>
+<h3 id='-When-should-I-make-my-own-DataSource--'>2 -  When should I make my own DataSource?
+</h3>
+
+
+<p>If you want to be able to persist the data that your users enter, over
+sessions, then you&#39;ll want to save it, either to a server or to local storage.
+The beauty of SproutCore&#39;s data layers is that you can write your app and
+seamlessly move from one data source to another and nothing but your DataSource
+will need to be changed.</p>
+<h3 id='-A-look-at-the-API-'>3 -  A look at the API
+</h3>
+
+
+<p>Here we will look at an example API from the server.  Creating the server side
+code is a &quot;digging deeper topic&quot;.  For now you can have a look at the numerous
+examples in the
+<a href="http://wiki.sproutcore.com/w/page/12413020/Todos%2006-Building%20the%20Backend">todo app tutorial</a>.</p>
+<p>For the purpose of this guide, we are going to assume that we have a server
+that will provide us with a basic
+<a href="http://en.wikipedia.org/wiki/Representational_State_Transfer#RESTful_web_services">RESTful API</a>.
+If we wanted to get a list of all ToDo items, we would send a GET request to:</p>
+<pre class="highlighted"><div class="code_container"><code class="bash">GET: /todos/</code></div></pre>
+<p>Which will return a <a href="http://en.wikipedia.org/wiki/Json">JSON</a> array like:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">[
+  {
+    <span class="string">"id"</span>: <span class="number">1</span>,
+    <span class="string">"title"</span>: <span class="string">"Learn to use SproutCore"</span>,
+    <span class="string">"done"</span>: <span class="literal">false</span>
+  },
+  {
+    <span class="string">"id"</span>: <span class="number">2</span>,
+    <span class="string">"title"</span>: <span class="string">"Something"</span>,
+    <span class="string">"done"</span>: <span class="literal">false</span>
+  }
+]</code></div></pre>
+<p>To create a new ToDo item, we can POST to this URL with JSON in the body.</p>
+<pre class="highlighted"><div class="code_container"><code class="bash">POST: /todos/
+{
+  <span class="string">"title"</span>: <span class="string">"Profit!"</span>,
+  <span class="string">"done"</span>: <span class="literal">false</span>
+}</code></div></pre>
+<p>The server will return the new ID for us.</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">{
+  <span class="string">"id"</span>: <span class="number">3</span>
+}</code></div></pre>
+<p>If we specify an ID in the url:</p>
+<pre class="highlighted"><div class="code_container"><code class="bash">GET: /todos/3</code></div></pre>
+<p>You&#39;ll see just one object returned:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">{
+  <span class="string">"id"</span>: <span class="number">3</span>,
+  <span class="string">"title"</span>: <span class="string">"Profit!"</span>,
+  <span class="string">"done"</span>: <span class="literal">false</span>
+}</code></div></pre>
+<p>The API also allows us to send a PUT to update an existing ToDo item and DELETE
+to remove it.</p>
+<p>A PUT or DELETE response will not have a body, we will know that everything is
+ok if HTTP status is 200</p>
+<p>With this basic understanding of how the server works, we can get started
+writing our DataSource.</p>
+<h3 id='-Setup-'>4 -  Setup
+</h3>
+
+
+
+
+<h4 id='-Creating-a-DataSource-'>4.1 -  Creating a DataSource
+</h4>
+
+
+<p>To generate a DataSource, use the command:</p>
+<pre class="highlighted"><div class="code_container"><code class="bash">sc-gen data-source MyApp.RESTDataSource</code></div></pre>
+<div class='note'><p> Anywhere you see MyApp, replace this with the name of the application
+that you&#39;re building.
+
+</p></div>
+
+<p>This will make a file in <tt>apps/my_app/data_sources/rest.js</tt>. This file will be
+stubbed with the default functions that will get called by the store.</p>
+<h4 id='-Linking-to-the-Store-'>4.2 -  Linking to the Store
+</h4>
+
+
+<p>The next step is linking the new DataSource to the store. By default, the store
+will be using <a href="fixtures.html">Fixtures</a>. In <tt>core.js</tt> you&#39;ll see:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">  store: SC.Store.create().from(SC.Record.fixtures)</code></div></pre>
+<p>Replace this with the newly created DataSource:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">  store: SC.Store.create().from(<span class="string">'MyApp.RESTDataSource'</span>)</code></div></pre>
+<p>This will tell the store to use the new DataSource when trying to find data.</p>
+<div class='note'><p> As you can see we are replacing a JavaScript Object: <tt>SC.Record.fixtures</tt>
+with a string <tt>&#39;MyApp.RESTDataSource&#39;</tt>. This is because our DataSource won&#39;t
+have been initialised. The first time the store tries to access the DataSource
+it will convert the string to an object and save it for future reference. See
+<a href="core_concepts.html#property-paths">Core Concepts</a> for more information.
+
+</p></div>
+
+
+
+<h3 id='-Writing-The-DataSource-'>5 -  Writing The DataSource
+</h3>
+
+
+
+
+<h4 id='-Our-First-Fetch-'>5.1 -  Our First Fetch
+</h4>
+
+
+<p>The first thing that your app will likely do is to fetch a bunch of data. This
+is usually done via a <a href="records.html#using-queries">query</a>. The query for
+finding all ToDo&#39;s will look like:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">  MyApp.QUERY_ALL_TODOS = SC.Query.local(MyApp.Todo)</code></div></pre>
+<div class='note'><p> Our DataSource will be written assuming that
+<a href="records.html#local-vs-remote-queries">local queries</a> are being used. Local
+queries are what you will be using most of the time. Remote queries will be
+covered in a separate guide.
+
+</p></div>
+
+<p>When you call <tt>App.store.find(MyApp.QUERY_ALL_TODOS)</tt>, the store will return a
+<a href="http://docs.sproutcore.com/symbols/SC.RecordArray.html">RecordArray</a>
+containing matching records (or an empty recordArray, if nothing matches). This
+RecordArray is linked to the query so that it will automatically update any
+time the query conditions match a new record. After it has returned, the store
+will call &#39;fetch&#39; on its attached DataSource. </p>
+<p>This is when we get to take action. The generated DataSource will already
+contain the following code:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">  fetch: <span class="keyword">function</span>(store, query) {
+
+    <span class="comment">// TODO: Add handlers to fetch data for specific queries.  </span>
+    <span class="comment">// call store.dataSourceDidFetchQuery(query) when done.</span>
+
+    <span class="keyword">return</span> NO ; <span class="comment">// return YES if you handled the query</span>
+  },</code></div></pre>
+<p>Currently, this DataSource will not do anything except return NO. This tells
+the store that we are not going to handle this query.</p>
+<p>We are also given a hint of what we need to do next. When the server responds,
+we will call <tt>store.dataSourceDidFetchQuery(query)</tt> to let the store know that
+this query has been updated.</p>
+<p>Now we want to fetch all the Todo&#39;s</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">fetch: <span class="keyword">function</span>(store, query) {
+  SC.Request.getUrl(<span class="string">'/todos/'</span>).json()
+    .notify(<span class="keyword">this</span>, <span class="string">'fetchDidComplete'</span>, store, query)
+    .send()
+
+  <span class="keyword">return</span> YES;
+},
+
+fetchDidComplete: <span class="keyword">function</span>(response, store, query) {
+  <span class="keyword">if</span>(SC.ok(response)) {
+    <span class="keyword">var</span> recordType = query.get(<span class="string">'recordType'</span>),
+        records = response.get(<span class="string">'body'</span>);
+
+    store.loadRecords(recordType, records);
+    store.dataSourceDidFetchQuery(query);
+
+  } <span class="keyword">else</span> {
+    <span class="comment">// Tell the store that your server returned an error</span>
+    store.dataSourceDidErrorQuery(query, response);
+  }
+}</code></div></pre>
+<p>Our <tt>Fetch</tt> function is pretty simple. For now, we are constructing
+a <tt>Request</tt> to send to the server.</p>
+<p><a href="http://docs.sproutcore.com/symbols/SC.Request.html">SC.Request</a> is
+SproutCore&#39;s simple wrapper around an Ajax call.</p>
+<div class='note'><p> You are not restricted to using an SC.Request inside of a DataSource, but
+it is advised that you don&#39;t go making calls to your server from just anywhere
+in your app.
+
+</p></div>
+
+<p><a href="http://docs.sproutcore.com/symbols/SC.Request.html#.getUrl">.getUrl</a> tells our
+request that we want to use the GET method to contact the given url. You can
+also use the following:</p>
+<ul>
+<li><a href="http://docs.sproutcore.com/symbols/SC.Request.html#.putUrl">putUrl</a></li>
+<li><a href="http://docs.sproutcore.com/symbols/SC.Request.html#.postUrl">postUrl</a></li>
+<li><a href="http://docs.sproutcore.com/symbols/SC.Request.html#.deleteUrl">deleteUrl</a></li>
+</ul>
+<p><a href="http://docs.sproutcore.com/symbols/SC.Request.html#json">.json</a> lets the
+request know that we are expecting the server to send back JSON, so it will
+automatically parse it for us. Without this, the return value would be a
+string. We could also have called <tt>.xml()</tt> if your server talks XML.</p>
+<p><a href="http://docs.sproutcore.com/symbols/SC.Request.html#notify">.notify</a> sets the
+callback method. By default SC.Requests are asynchronous, so the app can keep
+running while waiting for the server. The parameters used here are:</p>
+<ol>
+<li><tt>this</tt> {Object} The target object that the action will run on</li>
+<li><tt>&#39;fetchDidComplete&#39;</tt> {String} The name of the function that is located on
+<code>target</code> that will get called</li>
+<li><tt>store, query</tt> {Any Objects} All following parameters will get passed into
+the call back</li>
+</ol>
+<p><a href="http://docs.sproutcore.com/symbols/SC.Request.html#send">.send</a> will now
+actually send the built up request and return immediately (as we have kept the
+default async behaviour), without waiting for the server. </p>
+<div class='note'><p> <tt>.send()</tt> also takes a <tt>String</tt> parameter for the <tt>POST</tt> and <tt>PUT</tt>
+methods to send as the body of the request.
+
+</p></div>
+
+<p>When the server responds to the request, our callback method <tt>fetchDidComplete</tt>
+will get called. The first parameter is the SC.Response related to the Request
+we just sent. Any following parameters are the ones we passed
+into <tt>.notify()</tt>: <tt>store</tt> and <tt>query</tt>.</p>
+<p>First thing we do when the response comes back is check to see if there was an
+error or not.</p>
+<p><a href="http://docs.sproutcore.com/symbols/SC.html#.ok">SC.ok</a> will do this for us.</p>
+<p>If all is good, we can now load the records into the store. First we need to
+get the RecordType that is stored in the query so we can inform the store. For
+us, it will be <tt>MyApp.Todo</tt>.</p>
+<p>Next, we get our records with <tt>response.get(&#39;body&#39;)</tt>.  This is where the JSON
+string is converted into JS objects for us. If we did not call <tt>.json()</tt> on
+the <tt>Request</tt>, it would return a string.</p>
+<p>This works because our server responds with an array at the top level of the
+JSON. If your server returned something like:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">{
+  length: <span class="number">1</span>,
+  records: [
+    {
+      <span class="string">"id"</span>: <span class="number">1</span>,
+      <span class="string">"title"</span>: <span class="string">"Learn to use SproutCore"</span>,
+      <span class="string">"done"</span>: <span class="literal">false</span>
+    }
+  ]
+}</code></div></pre>
+<p>Then we would use this instead:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class="keyword">var</span> body = response.get(<span class="string">'body'</span>)
+    records = body.records;</code></div></pre>
+<div class='note'><p> Note how we didn&#39;t use <tt>.get(&#39;records&#39;)</tt>, this is because the JSON is
+converted into plain JS, not <tt>SC.Object</tt>&#39;s.
+
+</p></div>
+
+<p>Now we call
+<a href="http://docs.sproutcore.com/symbols/SC.Store.html#loadRecords">loadRecords</a> on
+the store to actually put our data into the store. The first parameter is the
+Record Type of the objects you are going to load. The second is an array of
+plain JS object hashes containing your records data.</p>
+<div class='warning'><p> You need to make sure that your data hashes have their
+<a href="records.html#record-ids">primary key</a> properties, in this case &#39;<tt>id</tt>&#39;.
+
+</p></div>
+
+
+
+<div class='note'><p> This is the usual way of calling <tt>loadRecords</tt>, but it can be called with
+a few different signatures. This allows for quite complex behaviour, such as
+loading multiple record types at once. These will be covered by other guides.
+
+</p></div>
+
+<p>Finally, we call
+<a href="http://docs.sproutcore.com/symbols/SC.Store.html#dataSourceDidFetchQuery">.dataSourceDidFetchQuery</a>
+to let the store know that we have finished loading records, and it is now time
+to update the passed in query. The query that we passed in is the one that was
+given to us by <tt>fetch</tt>.  It was passed in through to the callback.</p>
+<p>If the server returned an error, such as <tt>404</tt> Not Found, or the <tt>500</tt> series
+of server errors, then we&#39;ll let the store know with
+<a href="http://docs.sproutcore.com/symbols/SC.Store.html#dataSourceDidErrorQuery">.dataSourceDidErrorQuery</a>.
+This sets the query into an error state, for which you can later check and deal
+with.</p>
+<h4 id='-Gaining-Flexibility-'>5.2 -  Gaining Flexibility
+</h4>
+
+
+<p>This design is simple, but as you can see, not very flexible, it only allows
+for one url. That won&#39;t get us very far. But given that all of our records are
+going to have a very similar URL, it should be simple to dynamically generate
+this URL.</p>
+<p>We can have each of our models know what their URL will be:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">MyApp.Todo = SC.Record.extend(
+<span class="comment">/** @scope MyApp.Todo.prototype */</span> {
+
+  <span class="comment">// TODO: Add your own code here.</span>
+
+}) ;
+
+MyApp.Todo.mixin({
+  resourcePath: <span class="string">'todo'</span>,
+  pluralResourcePath: <span class="string">'todos'</span>
+}) ;</code></div></pre>
+<p>We use a mixin here to set these as class properties. it allows us to get the
+path without an instance. For example: <tt>MyApp.Todo.resourcePath</tt>.</p>
+<p>This will allow our DataSource to find the path needed. We&#39;ll change the fetch
+method to:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">fetch: <span class="keyword">function</span>(store, query) {
+  SC.Request.getUrl(<span class="string">'/%@/'</span>.fmt(query.recordType.pluralResourcePath))
+    .notify(<span class="keyword">this</span>, <span class="string">'fetchDidComplete'</span>, store, query)
+    .json().send()
+
+  <span class="keyword">return</span> YES;
+},</code></div></pre>
+<p>The fetch method will now use a dynamic URL for each record type.  </p>
+<div class='note'><p> The <a href="http://docs.sproutcore.com/symbols/String.html#String#fmt">fmt</a>
+function outputs a formatted string.
+
+</p></div>
+
+
+
+<h4 id='-Change-of-Mind-'>5.3 -  Change of Mind
+</h4>
+
+
+<p>Fetching records is fun but it will only get us so far. Eventually we are going
+to want to make some changes to these records.</p>
+<p>Each time our store wants to commit changes to the server, the <tt>updateRecord</tt>
+method will be called for each of the changed records.</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">updateRecord: <span class="keyword">function</span>(store, storeKey) {
+  <span class="keyword">var</span> recordType = store.recordTypeFor(storeKey),
+      id = store.idFor(storeKey),
+      data = store.readDataHash(storeKey);
+
+  SC.Request.putUrl(<span class="string">"/%@/%@"</span>.fmt(recordType.resourcePath, id))
+    .notify(<span class="keyword">this</span>, <span class="string">'updateRecordDidComplete'</span>, store, storeKey, id)
+    .json().send(data);
+
+  <span class="keyword">return</span> YES;
+},
+
+updateRecordDidComplete: <span class="keyword">function</span>(response, store, storeKey, id) {
+  <span class="keyword">if</span>(SC.ok(response) &amp;&amp; response.get(<span class="string">'status'</span>) === <span class="number">200</span>) {
+    <span class="comment">// Tell the store that we have successfully updated</span>
+    store.dataSourceDidComplete(storeKey);
+  } <span class="keyword">else</span> {
+    <span class="comment">// Tell the store that your server returned an error</span>
+    store.dataSourceDidError(storeKey, response);
+  }
+}</code></div></pre>
+<p>Our API uses the PUT method for making changes, so we use <tt>putUrl()</tt>, the
+string that we are making for the url, will end up looking something
+like: <tt>/todo/1</tt></p>
+<p>This code should look familiar with only a few differences. This time we don&#39;t
+have a query, but instead just a reference to a single record, via
+it&#39;s <tt>storeKey</tt>. With this, we get the <tt>recordType</tt>, <tt>id</tt> and the <tt>data</tt> (the
+actual properties of our record).</p>
+<div class='note'><p> In this instance we call <tt>send()</tt> with an object. This is possible,
+because we also called <tt>json()</tt>. Without this, <tt>send()</tt> would need to be called
+with a string.
+
+</p></div>
+
+<p>Our API will return empty response with status 200 from our PUT command.</p>
+<p>So we test for it:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">response.get(<span class="string">'status'</span>) === <span class="number">200</span></code></div></pre>
+<p>If all is good, then we call <tt>dataSourceDidComplete</tt> to tell the store we are
+done.</p>
+<h5 id='-Server-Processing-'>5.3.1 -  Server Processing
+</h5>
+
+
+<p>If your server needs to process the data, it might need to send back different
+data than what you send up. Your server might send back something like:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">{
+  <span class="string">"record"</span>: {
+    <span class="string">"id"</span>: <span class="number">3</span>,
+    <span class="string">"title"</span>: <span class="string">"Profit!"</span>,
+    <span class="string">"done"</span>: <span class="literal">false</span>,
+    <span class="string">"updatedAt"</span>: <span class="string">"2011-02-20 11:36Z"</span>
+  }
+}</code></div></pre>
+<p>You&#39;ll then need to update your callback to tell the store about it:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">store.dataSourceDidComplete(storeKey, response.get(<span class="string">'body'</span>).record);</code></div></pre>
+<p>This will update the properties on your record with any changes that the server
+makes.</p>
+<h4 id='-Going-for-Creation-'>5.4 -  Going for Creation
+</h4>
+
+
+<p>Creating records is much like updating them, but when you first create a record
+in the store, it does not have an <tt>id</tt>. So when the server responds, with
+the <tt>id</tt>:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">{
+  <span class="string">"id"</span>: <span class="number">3</span>
+}</code></div></pre>
+<p>We tell the store about it:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">createRecord: <span class="keyword">function</span>(store, storeKey) {
+  <span class="keyword">var</span> recordType = store.recordTypeFor(storeKey),
+      data = store.readDataHash(storeKey);
+
+  SC.Request.postUrl(<span class="string">"/%@"</span>.fmt(recordType.pluralResourcePath))
+    .notify(<span class="keyword">this</span>, <span class="string">'createRecordDidComplete'</span>, store, storeKey)
+    .json().send(data);
+
+  <span class="keyword">return</span> YES;
+},
+
+createRecordDidComplete: <span class="keyword">function</span>(response, store, storeKey) {
+  <span class="keyword">var</span> body = response.get(<span class="string">'body'</span>);
+  <span class="keyword">if</span>(SC.ok(response) &amp;&amp; response.get(<span class="string">'status'</span>) === <span class="number">200</span>) {
+    <span class="comment">// Tell the store that we have successfully updated</span>
+    store.dataSourceDidComplete(storeKey, <span class="literal">null</span>, body.id);
+  } <span class="keyword">else</span> {
+    <span class="comment">// Tell the store that your server returned an error</span>
+    store.dataSourceDidError(storeKey, response);
+  }
+}</code></div></pre>
+<h5 id='-Server-Processing-'>5.4.1 -  Server Processing
+</h5>
+
+
+<p>The same deal with server side processing applies here as with updates.</p>
+<h4 id='-Feeling-Destructive-'>5.5 -  Feeling Destructive
+</h4>
+
+
+<p>Things should start feeling pretty familiar now, you can probably guess what&#39;s
+going to come next.</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">destroyRecord: <span class="keyword">function</span>(store, storeKey) {
+  <span class="keyword">var</span> recordType = store.recordTypeFor(storeKey),
+      id = store.idFor(storeKey);
+
+  SC.Request.deleteUrl(<span class="string">"/%@/%@"</span>.fmt(recordType.resourcePath, id))
+    .notify(<span class="keyword">this</span>, <span class="string">'destroyRecordDidComplete'</span>, store, storeKey)
+    .json().send();
+
+  <span class="keyword">return</span> YES;
+},
+
+destroyRecordDidComplete: <span class="keyword">function</span>(response, store, storeKey) {
+  <span class="keyword">var</span> body = response.get(<span class="string">'body'</span>);
+  <span class="keyword">if</span>(SC.ok(response) &amp;&amp; response.get(<span class="string">'status'</span>) === <span class="number">200</span>) {
+    <span class="comment">// Tell the store that we have successfully updated</span>
+    store.dataSourceDidDestroy(storeKey);
+  } <span class="keyword">else</span> {
+    <span class="comment">// Tell the store that your server returned an error</span>
+    store.dataSourceDidError(storeKey, response);
+  }
+}</code></div></pre>
+<p>You should have noticed the 2 differences,</p>
+<ol>
+<li>We&#39;re using <tt>deleteUrl</tt></li>
+<li>We&#39;re calling <tt>dataSourceDidDestroy</tt> in the callback.</li>
+</ol>
+<h4 id='-Ahh--Refreshing-'>5.6 -  Ahh, Refreshing
+</h4>
+
+
+<p>One that that is not always used, but some apps find helpful, is being able to
+refresh a record, to get the latest from the server.</p>
+<p>This is similar to a query, but for only a single record.</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">retrieveRecord: <span class="keyword">function</span>(store, storeKey) {
+  <span class="keyword">var</span> recordType = store.recordTypeFor(storeKey),
+      id = store.idFor(storeKey),
+      data = store.readDataHash(storeKey);
+
+  SC.Request.getUrl(<span class="string">"/%@/%@"</span>.fmt(recordType.resourcePath, id))
+    .notify(<span class="keyword">this</span>, <span class="string">'retrieveRecordDidComplete'</span>, store, storeKey, id)
+    .json().send(data);
+
+  <span class="keyword">return</span> YES;
+},
+
+retrieveRecordDidComplete: <span class="keyword">function</span>(response, store, storeKey, id) {
+  <span class="keyword">if</span>(SC.ok(response) &amp;&amp; response.get(<span class="string">'status'</span>) === <span class="number">200</span>) {
+    <span class="comment">// Tell the store that we have successfully updated</span>
+    store.dataSourceDidComplete(storeKey, response.get(<span class="string">'body'</span>).record);
+  } <span class="keyword">else</span> {
+    <span class="comment">// Tell the store that your server returned an error</span>
+    store.dataSourceDidError(storeKey, response);
+  }
+}</code></div></pre>
+<p>This time, we&#39;ll always be passing the datahash into <tt>dataSourceDidComplete</tt>,
+to make sure that the local record is the same as the server copy.</p>
+<h3 id='-Things-to-Note-'>6 -  Things to Note
+</h3>
+
+
+<p>TODO: Some important things to note will go here.</p>
+<h4 id='-A-Records-PrimaryKey-'>6.1 -  A Records PrimaryKey
+</h4>
+
+
+<p>By default, SproutCore sets the primaryKey property of records to &#39;guid&#39;. A
+common convention of many server side APIs is to use just &#39;id&#39;.  To make your
+records work with this, you can override the default in your Model files.</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">App.Todo = SC.Record.extend({
+  primaryKey:<span class="string">'id'</span>
+})</code></div></pre>
+<p>You may set this to anything that you want, if your server uses, for
+example, <tt>TID</tt> for your todo&#39;s id, you must set <tt>primaryKey:&#39;TID&#39;</tt>. Like normal
+JS properties, this is case sensitive.</p>
+<h4 id='-Prepare-for-a-Change-'>6.2 -  Prepare for a Change
+</h4>
+
+
+<p>The dataSource as we have it now is handy, but as people have been using it, we
+have discovered that there are many improvements that can be made. As a
+courtesy we are just letting you know that a future (yet undecided) version of
+SproutCore is going to have a vastly updated DataSource layer.</p>
+<p>Don&#39;t hold back developing your awesome app now. Just know, and be excited,
+that there are great improvements coming.</p>
+<h3 id='-Advanced-topics-'>7 -  Advanced topics
+</h3>
+
+
+
+
+<h4 id='-Managing-Many-Records-with-a-Bulk-API-'>7.1 -  Managing Many Records with a Bulk API
+</h4>
+
+
+
+
+<h4 id='-Datasource-for-sparseArray-'>7.2 -  Datasource for sparseArray
+</h4>
+
+
+
+
+<h4 id='-Cascading-Datasource-'>7.3 -  Cascading Datasource
+</h4>
+
+
+
+
+<h4 id='-Fetching-a-Query-with-Multiple-Data-Types-'>7.4 -  Fetching a Query with Multiple Data Types
+</h4>
+
+
+
+
+<h4 id='-Datasource-for-Remote-Query-'>7.5 -  Datasource for Remote Query
+</h4>
+
+
+
+
+<h3 id='-Changelog-'>8 -  Changelog
+</h3>
+
+
+<ul>
+<li>March 2, 2011: initial version by <a href="credits.html#geoffreyd">Geoffrey Donaldson</a></li>
+<li>March 2, 2011: minor fixes by <a href="credits.html#wagenet">Peter Wagenet</a></li>
+<li>March 22, 2011: minor fixes/formatting by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+<li>April 18, 2011: corrections and fixes by <a href="credits.html#drogus">Piotr Sarnacki</a></li>
+<li>August 14, 2013: converted to Markdown format for DocPad guides by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+</ul>
+
+        </div>
+        <!-- TODO: re-add index_items //-->
+        <div id="subCol">
+          <h3 class="chapter"><img src="images/graphics/chapters.png" alt="">Chapters</h3>
+          <ol class='chapters'>
+            
+              <li>
+                <a href='#-What-is-a-DataSource--'><p> What is a DataSource?
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-When-should-I-make-my-own-DataSource--'><p> When should I make my own DataSource?
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-A-look-at-the-API-'><p> A look at the API
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Setup-'><p> Setup
+</p></a>
+                <ul>
+                  
+                    <li><a href='#-Creating-a-DataSource-'><p> Creating a DataSource
+</p></a></li>
+                  
+                    <li><a href='#-Linking-to-the-Store-'><p> Linking to the Store
+</p></a></li>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Writing-The-DataSource-'><p> Writing The DataSource
+</p></a>
+                <ul>
+                  
+                    <li><a href='#-Our-First-Fetch-'><p> Our First Fetch
+</p></a></li>
+                  
+                    <li><a href='#-Gaining-Flexibility-'><p> Gaining Flexibility
+</p></a></li>
+                  
+                    <li><a href='#-Change-of-Mind-'><p> Change of Mind
+</p></a></li>
+                  
+                    <li><a href='#-Going-for-Creation-'><p> Going for Creation
+</p></a></li>
+                  
+                    <li><a href='#-Feeling-Destructive-'><p> Feeling Destructive
+</p></a></li>
+                  
+                    <li><a href='#-Ahh--Refreshing-'><p> Ahh, Refreshing
+</p></a></li>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Things-to-Note-'><p> Things to Note
+</p></a>
+                <ul>
+                  
+                    <li><a href='#-A-Records-PrimaryKey-'><p> A Records PrimaryKey
+</p></a></li>
+                  
+                    <li><a href='#-Prepare-for-a-Change-'><p> Prepare for a Change
+</p></a></li>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Advanced-topics-'><p> Advanced topics
+</p></a>
+                <ul>
+                  
+                    <li><a href='#-Managing-Many-Records-with-a-Bulk-API-'><p> Managing Many Records with a Bulk API
+</p></a></li>
+                  
+                    <li><a href='#-Datasource-for-sparseArray-'><p> Datasource for sparseArray
+</p></a></li>
+                  
+                    <li><a href='#-Cascading-Datasource-'><p> Cascading Datasource
+</p></a></li>
+                  
+                    <li><a href='#-Fetching-a-Query-with-Multiple-Data-Types-'><p> Fetching a Query with Multiple Data Types
+</p></a></li>
+                  
+                    <li><a href='#-Datasource-for-Remote-Query-'><p> Datasource for Remote Query
+</p></a></li>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Changelog-'><p> Changelog
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <hr class="hide" />
+
+	  <footer>
+	    <div class="container">
+	      <div class="col">
+	        <a href="index.html"><img src="images/footer/sc_logo_medium.png" alt="SproutCore" /></a>
+	        <p id="license">
+	          SproutCore framework is under MIT License.
+	        </p>
+	      </div>
+	      <nav class="col">
+	        <h1>Site Navigation</h1>
+	        <ul>
+	          <li><a href="http://www.sproutcore.com/about/">About</a></li>
+	          <li><a href="http://docs.sproutcore.com">Docs</a></li>
+	          <li><a href="http://blog.sproutcore.com">Blog</a></li>
+	          <li><a href="http://www.sproutcore.com/install/?redirect=1">Download</a></li>
+	          <li><a href="http://www.sproutcore.com/community/">Community</a></li>
+	          <li><a href="https://github.com/sproutcore/sproutcore">GitHub</a></li>
+	          <li><a href="mailto:community@sproutcore.com">Contact Us</a></li>
+	          <li><a href="http://guides.sproutcore.com">Guides</a></li>
+	        </ul>
+	        <a href="http://www.w3.org/html/logo/"><img src="images/footer/html5_tech.png" alt="HTML5 Powered" /></a>
+	      </nav>
+	      <div class="col">
+	        <h1>Get in Touch, Stay Informed</h1>
+	        <ul class="social">
+	          <li><a href="http://twitter.com/sproutcore"><img src="images/footer/twitter.png" alt="Twitter" /></a></li>
+	          <li><a href="http://www.facebook.com/sproutcore"><img src="images/footer/facebook.png" alt="Facebook" /></a></li>
+	          <li><a href="http://groups.google.com/group/sproutcore"><img src="images/footer/google.png" alt="Google Groups" /></a></li>
+						<li><a href="http://groups.google.com/group/sproutcore">Subscribe To Mailing List</a></li>
+	        </ul>
+					<a href="http://eepurl.com/dK1-Y" target="_blank" id="newsletter" class="button secondary">Sign Up For Our Newsletter!</a>
+	<!-- Commented out until we have mailchimp API integration.
+					<h2>Subscribe To Newsletter</h2>
+	        <div id="subscribe">
+	          <form>
+	            <input type="text" name="email" />
+	            <button name="subscribe">Sign-Up</button>
+	            <div class="processing"><img src="/img/spinner.gif"></div>
+	            <div class="error"></div>
+	          </form>
+	        </div>
+	-->
+	      </div>
+	      <a href="#feature" class="top">Back To Top</a>
+	    </div>
+	  </footer>
+
+    <script type='text/javascript' src='/javascripts/jquery.min.js'></script>
+
+    
+
+    <script type='text/javascript'>
+      /*
+       * Make the guides link clickable
+       */
+      function guideMenu(e){
+        if (document.getElementById('guides').style.display == "none") {
+          document.getElementById('guides').style.display = "block";
+          document.getElementById('guidesArrow').innerHTML = "&#9662;";
+          $('body').click(function(e){ guideMenu(e); });
+        } else {
+          document.getElementById('guides').style.display = "none";
+          document.getElementById('guidesArrow').innerHTML = "&#9656;";
+          $('body').unbind('click');
+        }
+        return false;
+      }
+
+      $('#guidesMenu, .guidesMenu').click(guideMenu);
+    </script>
+
+  </body>
+</html>
