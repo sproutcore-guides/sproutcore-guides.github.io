@@ -20,7 +20,7 @@
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-    <meta name="generator" content="DocPad v6.57.0" />
+    <meta name="generator" content="DocPad v6.55.5" />
     
   </head>
 
@@ -138,7 +138,7 @@ out, your app will probably be setup to use <a href="fixtures.html">fixtures</a>
 will populate your app with data without having to hit your server in
 development.  When you are ready to interact with your backend, you can create
 your own DataSource that will send and receive data to and from your backend.</p>
-<div class='note'><p> A DataSource is different from the Store. The Store is the in memory
+<div class='note'><p> A DataSource is different from the Store. The Store is the in-memory
 storage for your records, while the DataSource is the communication layer
 linking the store to your backend.
 
@@ -202,7 +202,7 @@ If we wanted to get a list of all ToDo items, we would send a GET request to:</p
 <p>The API also allows us to send a PUT to update an existing ToDo item and DELETE
 to remove it.</p>
 <p>A PUT or DELETE response will not have a body, we will know that everything is
-ok if HTTP status is 200</p>
+ok if the HTTP status code is 200 (ok).</p>
 <p>With this basic understanding of how the server works, we can get started
 writing our DataSource.</p>
 <h3 id='-Setup-'>4 -  Setup
@@ -265,7 +265,7 @@ covered in a separate guide.
 
 </p></div>
 
-<p>When you call <tt>App.store.find(MyApp.QUERY_ALL_TODOS)</tt>, the store will return a
+<p>When you call <tt>MyApp.store.find(MyApp.QUERY_ALL_TODOS)</tt>, the store will return a
 <a href="http://docs.sproutcore.com/symbols/SC.RecordArray.html">RecordArray</a>
 containing matching records (or an empty recordArray, if nothing matches). This
 RecordArray is linked to the query so that it will automatically update any
@@ -328,7 +328,7 @@ also use the following:</p>
 <p><a href="http://docs.sproutcore.com/symbols/SC.Request.html#json">.json</a> lets the
 request know that we are expecting the server to send back JSON, so it will
 automatically parse it for us. Without this, the return value would be a
-string. We could also have called <tt>.xml()</tt> if your server talks XML.</p>
+string. We could also have called <tt>.xml()</tt> if your server speaks XML.</p>
 <p><a href="http://docs.sproutcore.com/symbols/SC.Request.html#notify">.notify</a> sets the
 callback method. By default SC.Requests are asynchronous, so the app can keep
 running while waiting for the server. The parameters used here are:</p>
@@ -376,7 +376,7 @@ JSON. If your server returned something like:</p>
 <pre class="highlighted"><div class="code_container"><code class="javascript"><span class="keyword">var</span> body = response.get(<span class="string">'body'</span>)
     records = body.records;</code></div></pre>
 <div class='note'><p> Note how we didn&#39;t use <tt>.get(&#39;records&#39;)</tt>, this is because the JSON is
-converted into plain JS, not <tt>SC.Object</tt>&#39;s.
+converted into plain Javascript objects, not <tt>SC.Object</tt>&#39;s.
 
 </p></div>
 
@@ -402,7 +402,7 @@ loading multiple record types at once. These will be covered by other guides.
 <a href="http://docs.sproutcore.com/symbols/SC.Store.html#dataSourceDidFetchQuery">.dataSourceDidFetchQuery</a>
 to let the store know that we have finished loading records, and it is now time
 to update the passed in query. The query that we passed in is the one that was
-given to us by <tt>fetch</tt>.  It was passed in through to the callback.</p>
+given to us by <tt>fetch</tt>; it was passed as a parameter in the callback.</p>
 <p>If the server returned an error, such as <tt>404</tt> Not Found, or the <tt>500</tt> series
 of server errors, then we&#39;ll let the store know with
 <a href="http://docs.sproutcore.com/symbols/SC.Store.html#dataSourceDidErrorQuery">.dataSourceDidErrorQuery</a>.
@@ -445,8 +445,21 @@ function outputs a formatted string.
 
 </p></div>
 
+<p>Alternatively, you could dynamically generate the path using built-in methods
+such as <a href="http://docs.sproutcore.com/#doc=String&amp;method=decamelize&amp;src=false">decamalize</a>
+and <a href="http://docs.sproutcore.com/#doc=SC.String&amp;method=.pluralize&amp;src=false">pluralize</a>
+as in the code below:</p>
+<pre class="highlighted"><div class="code_container"><code class="javascript">fetch: <span class="keyword">function</span>(store, query) {
+  <span class="keyword">var</span> path = query.recordType.decamalize().pluralize();
 
+  SC.Request.getUrl(<span class="string">'/%@/'</span>.fmt(path))
+    .notify(<span class="keyword">this</span>, <span class="string">'fetchDidComplete'</span>, store, query)
+    .json().send()
 
+  <span class="keyword">return</span> YES;
+},</code></div></pre>
+<p>However, this may not work for more complex scenarios, so specifically defining
+the resource path on the model is a much more robust approach.</p>
 <h4 id='-Change-of-Mind-'>5.3 -  Change of Mind
 </h4>
 
@@ -616,7 +629,7 @@ to make sure that the local record is the same as the server copy.</p>
 
 
 <p>TODO: Some important things to note will go here.</p>
-<h4 id='-A-Records-PrimaryKey-'>6.1 -  A Records PrimaryKey
+<h4 id='-A-Record-s-PrimaryKey-'>6.1 -  A Record&#39;s PrimaryKey
 </h4>
 
 
@@ -685,6 +698,7 @@ that there are great improvements coming.</p>
 <li>March 22, 2011: minor fixes/formatting by <a href="credits.html#topherfangio">Topher Fangio</a></li>
 <li>April 18, 2011: corrections and fixes by <a href="credits.html#drogus">Piotr Sarnacki</a></li>
 <li>August 14, 2013: converted to Markdown format for DocPad guides by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+<li>January 31, 2014: minor updates/additions by <a href="credits.html#topherfangio">Topher Fangio</a></li>
 </ul>
 
         </div>
@@ -762,7 +776,7 @@ that there are great improvements coming.</p>
 </p></a>
                 <ul>
                   
-                    <li><a href='#-A-Records-PrimaryKey-'><p> A Records PrimaryKey
+                    <li><a href='#-A-Record-s-PrimaryKey-'><p> A Record's PrimaryKey
 </p></a></li>
                   
                     <li><a href='#-Prepare-for-a-Change-'><p> Prepare for a Change

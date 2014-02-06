@@ -20,7 +20,7 @@
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-    <meta name="generator" content="DocPad v6.57.0" />
+    <meta name="generator" content="DocPad v6.55.5" />
     
   </head>
 
@@ -388,7 +388,7 @@ but ONLY if the following bit does NOT fit on the same line. Never, ever,
 separate <tt>while</tt>, <tt>for</tt>, or <tt>if</tt> statements from their predicated onto separate
 lines without wrapping in curly braces.  This creates lots of programming
 errors:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class="keyword">if</span> (isReady) readyCount&lt;tt&gt;<span class="xml"><span class="tag">&lt;/<span class="title">tt</span>&gt;</span>;</span>  <span class="comment">// OK - one line</span>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class="keyword">if</span> (isReady) readyCount++;  <span class="comment">// OK - one line</span>
 
 <span class="keyword">if</span> (isReady)
  readyCount = oldReadCount + newReadyCount; <span class="comment">// not OK!</span>
@@ -419,9 +419,9 @@ languages than <em>==</em> or <em>!=</em>.  If you want to see if a value is eit
 <p>When writing <tt>for()</tt> loops, first capture the length you want to iterate
 through like so:</p>
 <pre class="highlighted"><div class="code_container"><code class="javascript"><span class="keyword">var</span> idx;
-<span class="keyword">for</span>(idx = <span class="number">0</span>, len = items.length; idx &lt; len; idx&lt;tt&gt;<span class="xml"><span class="tag">&lt;/<span class="title">tt</span>&gt;</span>) {
-  item = items[idx]; //do stuff...
-}</span></code></div></pre>
+<span class="keyword">for</span>(idx = <span class="number">0</span>, len = items.length; idx &lt; len; idx++) {
+  item = items[idx]; <span class="comment">//do stuff...</span>
+}</code></div></pre>
 <p>Better yet, if the order you iterate does not matter, use a <tt>while</tt> loop like
 below since it is faster than using a for loop:</p>
 <pre class="highlighted"><div class="code_container"><code class="javascript"><span class="keyword">var</span> idx = items.length;
@@ -472,10 +472,10 @@ keyDidChange: <span class="keyword">function</span>(target, key) {
 
 setupObservers: <span class="keyword">function</span>() {
   <span class="keyword">var</span> keys = <span class="keyword">this</span>.OBSERVER_KEYS, len = keys.length, idx;
-  <span class="keyword">for</span>(idx=<span class="number">0</span>;idx&lt;len;idx&lt;tt&gt;<span class="xml"><span class="tag">&lt;/<span class="title">tt</span>&gt;</span>) {
-    this.addObserver(keys[idx], this, this.keyDidChange);
+  <span class="keyword">for</span>(idx=<span class="number">0</span>;idx&lt;len;idx++) {
+    <span class="keyword">this</span>.addObserver(keys[idx], <span class="keyword">this</span>, <span class="keyword">this</span>.keyDidChange);
   }
-}</span></code></div></pre>
+}</code></div></pre>
 <h4 id='-Beware-of-Redefining-Arrays-'>6.4 -  Beware of Redefining Arrays
 </h4>
 
@@ -490,14 +490,14 @@ enqueItems: <span class="keyword">function</span>() {
  <span class="keyword">var</span> items = <span class="keyword">this</span>.get(items), len = items.length, idx;
  <span class="keyword">var</span> cur = [] ; <span class="comment">// we'll reuse this one</span>
 
-  <span class="keyword">for</span>(idx=<span class="number">0</span>;idx&lt;len;idx&lt;tt&gt;<span class="xml"><span class="tag">&lt;/<span class="title">tt</span>&gt;</span>) {
-    var item = items[idx];
-    cur[0] = item.target ;
-    cur[1] = item.method;
-    this.enqueue(cur);
-    cur.length = 0; // reset array
+  <span class="keyword">for</span>(idx=<span class="number">0</span>;idx&lt;len;idx++) {
+    <span class="keyword">var</span> item = items[idx];
+    cur[<span class="number">0</span>] = item.target ;
+    cur[<span class="number">1</span>] = item.method;
+    <span class="keyword">this</span>.enqueue(cur);
+    cur.length = <span class="number">0</span>; <span class="comment">// reset array</span>
   }
-}</span></code></div></pre>
+}</code></div></pre>
 <p>Also, in these coding examples, you have have noticed that the <tt>{}</tt> are not on
 new lines, that is due to the author&#39;s stance and not an official guideline.
 That is up to the developer to choose how to format your curly-braces since

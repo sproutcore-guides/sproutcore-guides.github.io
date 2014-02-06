@@ -20,7 +20,7 @@
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-    <meta name="generator" content="DocPad v6.57.0" />
+    <meta name="generator" content="DocPad v6.55.5" />
     
   </head>
 
@@ -438,15 +438,15 @@ don&#39;t need it.
 property. This means that its value is not passed through to the data hash of
 the record and therefore is neither committed back to the server nor loaded
 from incoming JSON data.</p>
-<pre class="highlighted"><div class="code_container"><code class="undefined"><span class='comment'><div class='filename'>in apps/app/models/contact.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="keyword">in</span> apps/app/models/contact.js</div></span>
 App.Contact = SC.Record.extend({
-  // transient property 
+  <span class="comment">// transient property </span>
   isContact: YES, 
 
-  // transient computed property
-  fullName: function() {
-    return this.get('firstName') &lt;tt&gt; ' ' &lt;/tt&gt; this.get('lastName');
-  }.property('firstName', 'lastName').cacheable()
+  <span class="comment">// transient computed property</span>
+  fullName: <span class="keyword">function</span>() {
+    <span class="keyword">return</span> <span class="keyword">this</span>.get(<span class="string">'firstName'</span>) + <span class="string">' '</span> + <span class="keyword">this</span>.get(<span class="string">'lastName'</span>);
+  }.property(<span class="string">'firstName'</span>, <span class="string">'lastName'</span>).cacheable()
 });</code></div></pre>
 <div class='note'><p> If you use the <tt>set</tt> method on an undefined property, SproutCore by
 default will pass the value through to the underlying data hash. You can turn

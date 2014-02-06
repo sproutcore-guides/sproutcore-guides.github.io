@@ -20,7 +20,7 @@
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-    <meta name="generator" content="DocPad v6.57.0" />
+    <meta name="generator" content="DocPad v6.55.5" />
     
   </head>
 
@@ -309,6 +309,8 @@ needed directories and files. </p>
 </h5>
 
 
+
+
 <pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/theme.js</div></span>
 TodosThree.Theme = SC.AceTheme.create({
   name: <span class="string">'todos-three'</span>
@@ -322,6 +324,8 @@ Ace theme as you wish, or switch it out entirely. In theme.js, TodosThree.Theme 
 and a default &#39;todos-three&#39; namespace is created.</p>
 <h5 id='-core-js--app-root-directory--'>2.1.2 -  core.js (app root directory)
 </h5>
+
+
 
 
 <pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/core.js</div></span>
@@ -346,6 +350,8 @@ to have time to operate as it would in a normal web app situation.</p>
 </h5>
 
 
+
+
 <pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/main.js</div></span>
 TodosThree.main = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
   TodosThree.statechart.initStatechart();
@@ -356,6 +362,8 @@ TodosThree.main = <span class="function"><span class="keyword">function</span> <
 handle the complexity.</p>
 <h5 id='-statechart-js--app-root-directory--'>2.1.4 -  statechart.js (app root directory)
 </h5>
+
+
 
 
 <pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/statechart.js</div></span>
@@ -402,6 +410,8 @@ TodosThree app, but to make it match our file naming pattern, rename it to ready
 
 <h5 id='-READY-State--replace-content-of-renamed-ready-js--'>2.2.1 -  READY State (replace content of renamed ready.js)
 </h5>
+
+
 
 
 <pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/states/ready.js</div></span>
@@ -479,6 +489,8 @@ part of their <em>automatic</em> and <em>always up-to-date</em> aspect.</p>
 </h5>
 
 
+
+
 <pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/states/logging_in.js</div></span>
 TodosThree.LOGGING_IN = SC.State.design({             
   initialSubstate: <span class="string">"SHOWING_LOGIN"</span>,
@@ -505,6 +517,8 @@ TodosThree.LOGGING_IN = SC.State.design({
 </h5>
 
 
+
+
 <pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/states/showing_app.js</div></span>
 TodosThree.SHOWING_APP = SC.State.design({
   enterState: <span class="keyword">function</span>() {
@@ -516,26 +530,28 @@ TodosThree.SHOWING_APP = SC.State.design({
   },
 
   addTodo: <span class="function"><span class="keyword">function</span> <span class="params">(view)</span> {</span>
-    <span class="keyword">var</span> todo = (view.get(<span class="string">'value'</span>)&lt;<span class="regexp">/td&gt;&lt;td&gt;&lt;/</span>td&gt;<span class="xml"><span class="tag">&lt;<span class="title">td</span>&gt;</span>'').trim();
-    if (todo !== '') {
+    <span class="keyword">var</span> todo = (view.get(<span class="string">'value'</span>) || <span class="string">''</span>).trim();
+    <span class="keyword">if</span> (todo !== <span class="string">''</span>) {
       TodosThree.store.createRecord(TodosThree.Todo, {
         title: todo,
         timestamp: SC.DateTime.create()
       });
-      view.set('value', '');
+      view.set(<span class="string">'value'</span>, <span class="string">''</span>);
     }
   },
 
-  clearCompletedTodos: function() {
-    this.gotoState('SHOWING_DESTROY_CONFIRMATION');
+  clearCompletedTodos: <span class="keyword">function</span>() {
+    <span class="keyword">this</span>.gotoState(<span class="string">'SHOWING_DESTROY_CONFIRMATION'</span>);
   }
-});</span></code></div></pre>
+});</code></div></pre>
 <p>In the SHOWING_APP/enterState() function, we want a blinking cursor in the new todo text field. This is
 accomplished by setting this field to become first responder in the events system.</p>
 <p>This state handles two actions, addTodo and clearCompletedTodos. There are references to view code (view.)
 which we will see in the mainPage view in the resources directory.</p>
 <h5 id='-SHOWING-DESTROY-CONFIRMATION-State-'>2.2.4 -  SHOWING_DESTROY_CONFIRMATION State
 </h5>
+
+
 
 
 <pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/states/showing_destroy_confirmation.js</div></span>
@@ -615,82 +631,84 @@ directory:</p>
 </h5>
 
 
-<pre class="highlighted"><div class="code_container"><code class="undefined"><span class='comment'><div class='filename'>apps/todos_three/resources/main_page.js</div></span>
-//sc_require('resources/todo_item'); // Not used. See comments below about exampleView.
+
+
+<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/resources/main_page.js</div></span>
+<span class="comment">//sc_require('resources/todo_item'); // Not used. See comments below about exampleView.</span>
 
 TodosThree.mainPage = SC.Page.design({
-  field: SC.outlet('mainPane.newTodoField.field'),
+  field: SC.outlet(<span class="string">'mainPane.newTodoField.field'</span>),
 
   mainPane: SC.MainPane.design({
-    childViews: ['header', 'newTodoField', 'todosList', 'footer'],
-    defaultResponder: "TodosThree.statechart", 
+    childViews: [<span class="string">'header'</span>, <span class="string">'newTodoField'</span>, <span class="string">'todosList'</span>, <span class="string">'footer'</span>],
+    defaultResponder: <span class="string">"TodosThree.statechart"</span>,
 
     header: SC.ToolbarView.design({
-      layout: { centerX: 0, width: 500, top: 0, height: 36 },
+      layout: { centerX: <span class="number">0</span>, width: <span class="number">500</span>, top: <span class="number">0</span>, height: <span class="number">36</span> },
 
-      childViews: ['title', 'completeAll'],
+      childViews: [<span class="string">'title'</span>, <span class="string">'completeAll'</span>],
 
       completeAll: SC.CheckboxView.design(SC.AutoResize, {
-        autoResizePadding: { width: 47 },
-        title: 'Mark all as done',
-        valueBinding: 'TodosThree.completedTodosController.areAllCompleted'
+        autoResizePadding: { width: <span class="number">47</span> },
+        title: <span class="string">'Mark all as done'</span>,
+        valueBinding: <span class="string">'TodosThree.completedTodosController.areAllCompleted'</span>
       }),
 
       title: SC.LabelView.design({
-        layout: { left: 0, right: 0, top: 0, bottom: 0 },
+        layout: { left: <span class="number">0</span>, right: <span class="number">0</span>, top: <span class="number">0</span>, bottom: <span class="number">0</span> },
 
-        totalTodosBinding: SC.Binding.oneWay('TodosThree.todosController.length'),
-        completedTodosBinding: SC.Binding.oneWay('TodosThree.completedTodosController.length'),
+        totalTodosBinding: SC.Binding.oneWay(<span class="string">'TodosThree.todosController.length'</span>),
+        completedTodosBinding: SC.Binding.oneWay(<span class="string">'TodosThree.completedTodosController.length'</span>),
 
-        value: function () {
-          return 'TodosThree (' &lt;tt&gt; (this.get('totalTodos') - this.get('completedTodos')) &lt;/tt&gt; ')';
-        }.property('totalTodos', 'completedTodos').cacheable()
+        value: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+          <span class="keyword">return</span> <span class="string">'TodosThree ('</span> + (<span class="keyword">this</span>.get(<span class="string">'totalTodos'</span>) - <span class="keyword">this</span>.get(<span class="string">'completedTodos'</span>)) + <span class="string">')'</span>;
+        }.property(<span class="string">'totalTodos'</span>, <span class="string">'completedTodos'</span>).cacheable()
       })
     }),
 
     newTodoField: SC.View.design({
-      classNames: ['new-todo'],
-      layout: { centerX: 0, width: 500, top: 36, height: 36 },
-      childViews: ['field', 'button'],
+      classNames: [<span class="string">'new-todo'</span>],
+      layout: { centerX: <span class="number">0</span>, width: <span class="number">500</span>, top: <span class="number">36</span>, height: <span class="number">36</span> },
+      childViews: [<span class="string">'field'</span>, <span class="string">'button'</span>],
 
       field: SC.TextFieldView.design({
-        hint: 'What needs to be done?'
+        hint: <span class="string">'What needs to be done?'</span>
       }),
 
       button: SC.ButtonView.design(SC.AutoResize, {
         controlSize: SC.HUGE_CONTROL_SIZE,
-        layout: { centerY: 0, height: 30, right: 12, zIndex: 100 },
-        title: 'Add',
-        action: 'addTodo',
-        valueBinding: '.page.field.value',
-        isDefaultBinding: '.page.field.focused'
+        layout: { centerY: <span class="number">0</span>, height: <span class="number">30</span>, right: <span class="number">12</span>, zIndex: <span class="number">100</span> },
+        title: <span class="string">'Add'</span>,
+        action: <span class="string">'addTodo'</span>,
+        valueBinding: <span class="string">'.page.field.value'</span>,
+        isDefaultBinding: <span class="string">'.page.field.focused'</span>
       })
     }),
 
     todosList: SC.ScrollView.design({
-      layout: { centerX: 0, width: 500, top: 72, bottom: 36 },
+      layout: { centerX: <span class="number">0</span>, width: <span class="number">500</span>, top: <span class="number">72</span>, bottom: <span class="number">36</span> },
       contentView: SC.ListView.design({
-        contentBinding: SC.Binding.oneWay('TodosThree.todosController'),
-        rowHeight: 36,
-        // exampleView: TodosThree.TodoItemView // If pulled in from external file.
+        contentBinding: SC.Binding.oneWay(<span class="string">'TodosThree.todosController'</span>),
+        rowHeight: <span class="number">36</span>,
+        <span class="comment">// exampleView: TodosThree.TodoItemView // If pulled in from external file.</span>
         exampleView: SC.CheckboxView.design({
-          classNames: ['todo-item'],
-          valueBinding: '.content.isCompleted',
-          titleBinding: SC.Binding.oneWay('.content.title')
+          classNames: [<span class="string">'todo-item'</span>],
+          valueBinding: <span class="string">'.content.isCompleted'</span>,
+          titleBinding: SC.Binding.oneWay(<span class="string">'.content.title'</span>)
         })
       })
     }),
 
     footer: SC.ToolbarView.design({
-      layout: { centerX: 0, width: 500, bottom: 0, height: 36 },
+      layout: { centerX: <span class="number">0</span>, width: <span class="number">500</span>, bottom: <span class="number">0</span>, height: <span class="number">36</span> },
 
-      childViews: ['clearCompletedTodos'],
+      childViews: [<span class="string">'clearCompletedTodos'</span>],
       clearCompletedTodos: SC.ButtonView.design(SC.AutoResize, {
         controlSize: SC.HUGE_CONTROL_SIZE,
-        layout: { centerY: 0, height: 30, right: 12, zIndex: 100 },
-        isEnabledBinding: SC.Binding.oneWay('TodosThree.completedTodosController.length').bool(),
-        title: 'Clear completed todos',
-        action: 'clearCompletedTodos'
+        layout: { centerY: <span class="number">0</span>, height: <span class="number">30</span>, right: <span class="number">12</span>, zIndex: <span class="number">100</span> },
+        isEnabledBinding: SC.Binding.oneWay(<span class="string">'TodosThree.completedTodosController.length'</span>).bool(),
+        title: <span class="string">'Clear completed todos'</span>,
+        action: <span class="string">'clearCompletedTodos'</span>
       })
     })
   })
@@ -760,6 +778,8 @@ contentBinding property of the list is set to TodosThree.todosController. </p>
 </h5>
 
 
+
+
 <pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/resources/todo_item.js</div></span>
 TodosThree.TodoItemView = SC.CheckboxView.design({
   classNames: [<span class="string">'todo-item'</span>],
@@ -791,6 +811,8 @@ of a todo item. Likewise, titleBinding is bound to the title property of a list 
 
 <h5 id='--theme-css--resources-directory--'>2.3.3 -  _theme.css (resources directory)
 </h5>
+
+
 
 
 <pre class="highlighted"><div class="code_container"><code class="undefined"><span class='comment'><div class='filename'>apps/todos_three/resources/_theme.css</div></span>
@@ -839,6 +861,8 @@ problems, such as the case of having bad math that results in one view obscuring
 
 <h6 id='--styles-css--resources-directory---'>2.3.4.1 -  <em>styles.css (resources directory)</em>
 </h6>
+
+
 
 
 <pre class="highlighted"><div class="code_container"><code class="undefined"><span class='comment'><div class='filename'>apps/todos_three/resources/styles.css</div></span>
@@ -954,6 +978,8 @@ processing functionality.
 </h5>
 
 
+
+
 <pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/models/todo.js</div></span>
 sc_require(<span class="string">'core'</span>);
 
@@ -994,6 +1020,8 @@ $ cd ~/development/sproutcore/getting_started/apps/todos_three/controllers</code
 </h5>
 
 
+
+
 <pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/controllers/todos.js</div></span>
 sc_require(<span class="string">'core'</span>);
 
@@ -1001,6 +1029,8 @@ TodosThree.todosController = SC.ArrayController.create({
 });</code></div></pre>
 <h5 id='-completed-todos-js--controllers-directory--'>2.5.2 -  completed_todos.js (controllers directory)
 </h5>
+
+
 
 
 <pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/controllers/completed_todos.js</div></span>
@@ -1074,6 +1104,8 @@ $ cd ~/development/sproutcore/getting_started/apps/todos_three/fixtures</code></
 
 <h5 id='-todo-js--fixtures-directory--'>2.6.1 -  todo.js (fixtures directory)
 </h5>
+
+
 
 
 <pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/fixtures/todo.js</div></span>
