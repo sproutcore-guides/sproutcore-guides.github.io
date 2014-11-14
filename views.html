@@ -136,9 +136,9 @@ param.
 
 <pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/addressbook/resources/main_page.js</div></span>
 AddressBook.mainPage = SC.Page.design({
-  mainPane: SC.MainPane.exend({
+  mainPane: SC.MainPane.extend({
     childViews: <span class="string">'labelView'</span>.w(),
-    labelView: SC.LabelView.exend({
+    labelView: SC.LabelView.extend({
       layout: { centerX: <span class="number">0</span>, centerY: <span class="number">0</span>, width: <span class="number">200</span>, height: <span class="number">18</span> },
       textAlign: SC.ALIGN_CENTER,
       tagName: <span class="string">"h1"</span>, 
