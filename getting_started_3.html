@@ -20,7 +20,7 @@
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-    <meta name="generator" content="DocPad v6.55.5" />
+    <meta name="generator" content="DocPad v6.79.0" />
     
   </head>
 
@@ -136,7 +136,7 @@ code (or to copy and paste it), because it will register in your mind solidly. T
 if you would add the app in this manual fashion, although you surely might prefer instead to get the finished 
 source code and read along as if you had done it manually:</p>
 <p>You may wish to clone with <strong>git clone git://github.com/sproutcore/getting-started.git getting_started</strong> from <a href="https://github.com/sproutcore/getting-started">Github</a> into your work area.</p>
-<div class='info'><p>Reminder: These &quot;Getting Started&quot; guides attempt to strike a matter-of-fact tone that doesn&#39;t sugar-coat
+<div class='info'><p>Reminder: These "Getting Started" guides attempt to strike a matter-of-fact tone that doesn't sugar-coat
 complexity too much, but tries not to overwhelm. We are ramping up to inherently more challenging concepts, however. 
 If you need help, please ask questions in IRC or on the mailing list, with references to the numeric heading 
 for relevant sections of this guide page.
@@ -223,9 +223,9 @@ views, etc. We&#39;ll be looking at the underlying machinery.</p>
 <li><strong>statechart.js</strong></td><td><em>Contains main app states and substates</em></li>
 <li><strong>states/</strong><ul>
 <li><strong>ready.js</strong></td><td><em>A single state, the READY state, which plugs in to the app&#39;s statechart</em></li>
-<li><strong>logging_in.js</strong></td><td><em>The LOGGING_IN state (not used in TodosThree, but there for illustration)</em></li>
-<li><strong>showing_app.js</strong></td><td><em>The SHOWING_APP state, the general state for responding to user actions</em></li>
-<li><strong>showing_destroy_confirmation</strong></td><td><em>The SHOWING_DESTROY_CONFIRMATION state</em></li>
+<li><strong>logging_in.js</strong></td><td><em>The LOGGING</em>IN state (not used in TodosThree, but there for illustration)_</li>
+<li><strong>showing_app.js</strong></td><td><em>The SHOWING</em>APP state, the general state for responding to user actions_</li>
+<li><strong>showing_destroy_confirmation</strong></td><td><em>The SHOWING</em>DESTROY_CONFIRMATION state_</li>
 </ul>
 </li>
 <li><strong>resources/</strong><ul>
@@ -263,7 +263,7 @@ take it one step at a time.
 
 <p>We can use the <strong>sproutcore gen</strong> command again, to create part of the directory structure shown above for our
 TodosThree app (You should be in the ~/development/sproutcore/getting_started project directory):</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">$ cd ~/development/sproutcore/getting_started
+<pre class="highlight"><code class="hljs bash">$ <span class="hljs-built_in">cd</span> ~/development/sproutcore/getting_started
 
   sproutcore gen statechart_app TodosThree
 
@@ -281,8 +281,9 @@ TodosThree app (You should be in the ~/development/sproutcore/getting_started pr
  ~ Created file at apps/todos_three/states/ready_state.js
  ~ Created file at apps/todos_three/theme.js
 
-Your application target is now ready to use!</code></div></pre>
-<div class='note'><p> <strong>GIT</strong>: git add apps/todos<em>three &amp; git commit -a -m &#39;Added todos_three app with _sproutcore gen statechart_app TodosThree</em> command.&#39;
+Your application target is now ready to use!
+</code></div></pre>
+<div class='note'><p> **GIT**: git add apps/todos_three & git commit -a -m 'Added todos_three app with _sproutcore gen statechart_app TodosThree_ command.'
 
 </p></div>
 
@@ -311,14 +312,14 @@ needed directories and files. </p>
 
 
 
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/theme.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_three/theme.js</div></span>
 TodosThree.Theme = SC.AceTheme.create({
-  name: <span class="string">'todos-three'</span>
+  name: 'todos-three'
 });
 
 SC.Theme.addTheme(TodosThree.Theme);
 
-SC.defaultTheme = <span class="string">'todos-three'</span>;</code></div></pre>
+SC.defaultTheme = 'todos-three';</code></div></pre>
 <p>TodosThree.Theme is a derivative of SC.AceTheme, a very nice professional theme. You can override parts of the
 Ace theme as you wish, or switch it out entirely. In theme.js, TodosThree.Theme is registered with the system,
 and a default &#39;todos-three&#39; namespace is created.</p>
@@ -328,16 +329,16 @@ and a default &#39;todos-three&#39; namespace is created.</p>
 
 
 
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/core.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_three/core.js</div></span>
 TodosThree = SC.Application.create(
-  <span class="comment">/** @scope TodosThree.prototype */</span> {
+  /** @scope TodosThree.prototype */ {
 
-  NAMESPACE: <span class="string">'TodosThree'</span>,
-  VERSION: <span class="string">'0.1.0'</span>,
+  NAMESPACE: 'TodosThree',
+  VERSION: '0.1.0',
 
   store: SC.Store.create().from(SC.FixturesDataSource.create({
     simulateRemoteResponse: YES,
-    latency: <span class="number">250</span>
+    latency: 250
   }))
 });</code></div></pre>
 <p>The code in core.js sets up TodosThree as an instance of SC.Application.</p>
@@ -352,12 +353,12 @@ to have time to operate as it would in a normal web app situation.</p>
 
 
 
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/main.js</div></span>
-TodosThree.main = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_three/main.js</div></span>
+TodosThree.main = function () {
   TodosThree.statechart.initStatechart();
 };
 
-<span class="function"><span class="keyword">function</span> <span class="title">main</span><span class="params">()</span> {</span> TodosThree.main(); }</code></div></pre>
+function main() { TodosThree.main(); }</code></div></pre>
 <p>The main.js file for TodosThree is very simple; we just initialize our application&#39;s statechart and let it
 handle the complexity.</p>
 <h5 id='-statechart-js--app-root-directory--'>2.1.4 -  statechart.js (app root directory)
@@ -366,25 +367,25 @@ handle the complexity.</p>
 
 
 
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/statechart.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_three/statechart.js</div></span>
 TodosThree.statechart = SC.Statechart.create({
 
   trace: YES,
 
   rootState: SC.State.design({
-    initialSubstate: <span class="string">"READY"</span>,
+    initialSubstate: "READY",
 
-    READY: SC.State.plugin(<span class="string">'TodosThree.READY'</span>),
+    READY: SC.State.plugin('TodosThree.READY'),
 
-    LOGGING_IN: SC.State.plugin(<span class="string">'TodosThree.LOGGING_IN'</span>),
+    LOGGING_IN: SC.State.plugin('TodosThree.LOGGING_IN'),
 
-    SHOWING_APP: SC.State.plugin(<span class="string">'TodosThree.SHOWING_APP'</span>),
+    SHOWING_APP: SC.State.plugin('TodosThree.SHOWING_APP'),
 
-    SHOWING_DESTROY_CONFIRMATION: SC.State.plugin(<span class="string">'TodosThree.SHOWING_DESTROY_CONFIRMATION'</span>)
+    SHOWING_DESTROY_CONFIRMATION: SC.State.plugin('TodosThree.SHOWING_DESTROY_CONFIRMATION')
   })
 
 });</code></div></pre>
-<div class='note'><p> <strong>GIT</strong>: git commit -a -m &#39;Edited files in the root app directory.&#39;
+<div class='note'><p> **GIT**: git commit -a -m 'Edited files in the root app directory.'
 
 </p></div>
 
@@ -398,10 +399,10 @@ SHOWING_DESTROY_CONFIRMATION. These are defined in individual files in the state
 
 
 <p>Code for individual states is held in the states directory. Change to that directory:</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">$ cd ~/development/sproutcore/getting_started/apps/todos_three/states</code></div></pre>
+<pre class="highlight"><code class="hljs bash">$ <span class="hljs-built_in">cd</span> ~/development/sproutcore/getting_started/apps/todos_three/states</code></div></pre>
 <p><em>sproutcore gen</em> created a file called ready_state.js in the states directory. We are going to use it for the
 TodosThree app, but to make it match our file naming pattern, rename it to ready.js:</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">$ mv ready_state.js ready.js</code></div></pre>
+<pre class="highlight"><code class="hljs bash">$ mv ready_state.js ready.js</code></div></pre>
 <p>Files to edit or add in the apps/todos_three/states directory are:</p>
 <table><tr><td> ready.js</td><td>logging_in.js</td><td>showing_app.js</td><td>showing_destroy_confirmation.js </td></tr></table>
 
@@ -414,27 +415,27 @@ TodosThree app, but to make it match our file naming pattern, rename it to ready
 
 
 
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/states/ready.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_three/states/ready.js</div></span>
 TodosThree.READY = SC.State.design({
-  enterState: <span class="keyword">function</span>() {
-    <span class="keyword">if</span> (SC.instanceOf(TodosThree.store.dataSource, SC.FixturesDataSource)) {
-      TodosThree.todosController.set(<span class="string">'content'</span>,
-        TodosThree.store.find(SC.Query.local(TodosThree.Todo, { orderBy: <span class="string">'timestamp DESC'</span> })));
-      TodosThree.completedTodosController.set(<span class="string">'content'</span>,
-        TodosThree.store.find(SC.Query.local(TodosThree.Todo, <span class="string">'isCompleted = true'</span>)));
-    } <span class="keyword">else</span> {
-      <span class="keyword">this</span>.gotoState(<span class="string">'LOGGING_IN'</span>);
+  enterState: function() {
+    if (SC.instanceOf(TodosThree.store.dataSource, SC.FixturesDataSource)) {
+      TodosThree.todosController.set('content',
+        TodosThree.store.find(SC.Query.local(TodosThree.Todo, { orderBy: 'timestamp DESC' })));
+      TodosThree.completedTodosController.set('content',
+        TodosThree.store.find(SC.Query.local(TodosThree.Todo, 'isCompleted = true')));
+    } else {
+      this.gotoState('LOGGING_IN');
     }
   },
 
-  didLoad: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-    <span class="keyword">if</span> (TodosThree.todosController.get(<span class="string">'status'</span>) === SC.Record.READY_CLEAN) {
-      <span class="keyword">this</span>.gotoState(<span class="string">'SHOWING_APP'</span>);
+  didLoad: function () {
+    if (TodosThree.todosController.get('status') === SC.Record.READY_CLEAN) {
+      this.gotoState('SHOWING_APP');
     }
-  }.stateObserves(<span class="string">'TodosThree.todosController.status'</span>),
+  }.stateObserves('TodosThree.todosController.status'),
 
-  exitState: <span class="keyword">function</span>() {
-    <span class="comment">// Nothing to worry about here.</span>
+  exitState: function() {
+    // Nothing to worry about here.
   }
 });</code></div></pre>
 <div class='note'><p> You have seen different conventions for naming states. The style used here makes the state names
@@ -463,7 +464,7 @@ There are nuances to learn about specifying paths in observer declarations, such
 vs. relative paths (.b.c), and how to use chained absolute (a<em>b.c) vs. chained relative (</em>b.c) paths. We will
 leave the details for other documentation, where a full coverage can be given to how each use specifies a different
 set of triggers for an observer update.</p>
-<h6 id='--Initialization-of-the-Controllers--'>2.2.1.1 -  <em>Initialization of the Controllers</em>
+<h6 id='--Initialization-of-the-Controllers--'>2.2.1.1 -  *Initialization of the Controllers*
 </h6>
 
 
@@ -479,7 +480,7 @@ For the completedTodosController, we search for all the todos for which isComple
 <p>These aren&#39;t &quot;one-time searches.&quot; They are associations set between the &#39;content&#39; property of a
 controller and a store.find() query. This is a very powerful construct, explaining how SproutCore apps get
 part of their <em>automatic</em> and <em>always up-to-date</em> aspect.</p>
-<div class='note'><p> <strong>GIT</strong>: git commit -a -m &#39;Renamed ready_state.js file to ready.js. Edited to add controller content setting code.&#39;
+<div class='note'><p> **GIT**: git commit -a -m 'Renamed ready_state.js file to ready.js. Edited to add controller content setting code.'
 
 </p></div>
 
@@ -491,23 +492,23 @@ part of their <em>automatic</em> and <em>always up-to-date</em> aspect.</p>
 
 
 
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/states/logging_in.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_three/states/logging_in.js</div></span>
 TodosThree.LOGGING_IN = SC.State.design({             
-  initialSubstate: <span class="string">"SHOWING_LOGIN"</span>,
+  initialSubstate: "SHOWING_LOGIN",
 
   SHOWING_LOGIN: SC.State.design({
 
-    enterState: <span class="keyword">function</span>() {
+    enterState: function() {
     },
 
-    exitState: <span class="keyword">function</span>() {
+    exitState: function() {
     },
 
-    authenticate: <span class="keyword">function</span>() {
+    authenticate: function() {
     }
   })
 });</code></div></pre>
-<div class='info'><p>We won&#39;t use the LOGGING_IN state in TodosThree, but have it here for illustration.
+<div class='info'><p>We won't use the LOGGING_IN state in TodosThree, but have it here for illustration.
 
 </p></div>
 
@@ -519,29 +520,29 @@ TodosThree.LOGGING_IN = SC.State.design({
 
 
 
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/states/showing_app.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_three/states/showing_app.js</div></span>
 TodosThree.SHOWING_APP = SC.State.design({
-  enterState: <span class="keyword">function</span>() {
-    TodosThree.mainPage.get(<span class="string">'mainPane'</span>).append();
-    TodosThree.mainPage.get(<span class="string">'field'</span>).becomeFirstResponder();
+  enterState: function() {
+    TodosThree.mainPage.get('mainPane').append();
+    TodosThree.mainPage.get('field').becomeFirstResponder();
   },
 
-  exitState: <span class="keyword">function</span>() {
+  exitState: function() {
   },
 
-  addTodo: <span class="function"><span class="keyword">function</span> <span class="params">(view)</span> {</span>
-    <span class="keyword">var</span> todo = (view.get(<span class="string">'value'</span>) || <span class="string">''</span>).trim();
-    <span class="keyword">if</span> (todo !== <span class="string">''</span>) {
+  addTodo: function (view) {
+    var todo = (view.get('value') || '').trim();
+    if (todo !== '') {
       TodosThree.store.createRecord(TodosThree.Todo, {
         title: todo,
         timestamp: SC.DateTime.create()
       });
-      view.set(<span class="string">'value'</span>, <span class="string">''</span>);
+      view.set('value', '');
     }
   },
 
-  clearCompletedTodos: <span class="keyword">function</span>() {
-    <span class="keyword">this</span>.gotoState(<span class="string">'SHOWING_DESTROY_CONFIRMATION'</span>);
+  clearCompletedTodos: function() {
+    this.gotoState('SHOWING_DESTROY_CONFIRMATION');
   }
 });</code></div></pre>
 <p>In the SHOWING_APP/enterState() function, we want a blinking cursor in the new todo text field. This is
@@ -554,44 +555,44 @@ which we will see in the mainPage view in the resources directory.</p>
 
 
 
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/states/showing_destroy_confirmation.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_three/states/showing_destroy_confirmation.js</div></span>
 TodosThree.SHOWING_DESTROY_CONFIRMATION = SC.State.design({
-  _panel: <span class="literal">null</span>,
+  _panel: null,
 
-  enterState: <span class="keyword">function</span>() {
-    <span class="keyword">var</span> displayDescription = <span class="string">"Are you sure that you wish to clear the following tasks?&lt;br /&gt;&lt;br /&gt;"</span>;
-    <span class="keyword">var</span> completedTodos = TodosThree.completedTodosController;
+  enterState: function() {
+    var displayDescription = "Are you sure that you wish to clear the following tasks?&lt;br /&gt;&lt;br /&gt;";
+    var completedTodos = TodosThree.completedTodosController;
 
-    displayDescription += <span class="string">"&lt;ul&gt;"</span>;
-    displayDescription += completedTodos.map(<span class="keyword">function</span>(t) { <span class="keyword">return</span> <span class="string">"&lt;li&gt;%@&lt;/li&gt;"</span>.fmt(t.get(<span class="string">'title'</span>)); }).join(<span class="string">'\n'</span>);
-    displayDescription += <span class="string">"&lt;/ul&gt;"</span>;
+    displayDescription += "&lt;ul&gt;";
+    displayDescription += completedTodos.map(function(t) { return "&lt;li&gt;%@&lt;/li&gt;".fmt(t.get('title')); }).join('\n');
+    displayDescription += "&lt;/ul&gt;";
 
-    <span class="keyword">this</span>._panel = SC.AlertPane.warn({
-      layout: { centerX: <span class="number">0</span>, top: <span class="number">80</span>, width: <span class="number">380</span>, bottom: <span class="number">80</span> },
+    this._panel = SC.AlertPane.warn({
+      layout: { centerX: 0, top: 80, width: 380, bottom: 80 },
 
       defaultResponder: TodosThree.statechart,
 
-      message: <span class="string">"Clear Completed Todos"</span>,
+      message: "Clear Completed Todos",
       displayDescription: displayDescription,
 
       buttons: [
-        { title: <span class="string">'Clear'</span>, action: <span class="string">'confirm'</span> },
-        { title: <span class="string">'Cancel'</span>, action: <span class="string">'cancel'</span> }
+        { title: 'Clear', action: 'confirm' },
+        { title: 'Cancel', action: 'cancel' }
       ]
     });
   },
 
-  exitState: <span class="keyword">function</span>() {
-    <span class="comment">// No need to do anything here, the SC.AlertPane will remove itself.</span>
+  exitState: function() {
+    // No need to do anything here, the SC.AlertPane will remove itself.
   },
 
-  confirm: <span class="keyword">function</span>() {
-    TodosThree.completedTodosController.invoke(<span class="string">'destroy'</span>);
-    <span class="keyword">this</span>.gotoState(<span class="string">'SHOWING_APP'</span>);
+  confirm: function() {
+    TodosThree.completedTodosController.invoke('destroy');
+    this.gotoState('SHOWING_APP');
   },
 
-  cancel: <span class="keyword">function</span>() {
-    <span class="keyword">this</span>.gotoState(<span class="string">'SHOWING_APP'</span>);
+  cancel: function() {
+    this.gotoState('SHOWING_APP');
   }
 });</code></div></pre>
 <p>When the SHOWING_DESTROY_CONFIRMATION state is entered, the current list of completed todos is grabbed and
@@ -607,7 +608,7 @@ to anything external. </p>
 case: in the code for displayDescription, you see where the succinct name completedTodos is used. When we tack Binding 
 onto the end of a property declaration, as with xBinding = something, we are creating a property called x, 
 which works via a binding (completedTodos is x here).</p>
-<div class='note'><p> <strong>GIT</strong>: git add . &amp; git commit -a -m &#39;Added additional states.&#39;
+<div class='note'><p> **GIT**: git add . & git commit -a -m 'Added additional states.'
 
 </p></div>
 
@@ -620,7 +621,7 @@ which works via a binding (completedTodos is x here).</p>
 <p>We&#39;ve covered the highest-level parts of the app defined in the statechart. Let&#39;s add the rest. </p>
 <p>The mainPage view, CSS file, a theme file, and an html page live in a directory called resources.  Go to that
 directory:</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">$ cd ~/development/sproutcore/getting_started/apps/todos_three/resources</code></div></pre>
+<pre class="highlight"><code class="hljs bash">$ <span class="hljs-built_in">cd</span> ~/development/sproutcore/getting_started/apps/todos_three/resources</code></div></pre>
 <p>Files to edit or add in the apps/todos_three/resources directory are:</p>
 <table><tr><td> main_page.js</td><td>todo_item.js</td><td>_theme.css</td><td>styles.css</td><td>loading.rhtml </td></tr></table>
 
@@ -633,82 +634,82 @@ directory:</p>
 
 
 
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/resources/main_page.js</div></span>
-<span class="comment">//sc_require('resources/todo_item'); // Not used. See comments below about exampleView.</span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_three/resources/main_page.js</div></span>
+//sc_require('resources/todo_item'); // Not used. See comments below about exampleView.
 
 TodosThree.mainPage = SC.Page.design({
-  field: SC.outlet(<span class="string">'mainPane.newTodoField.field'</span>),
+  field: SC.outlet('mainPane.newTodoField.field'),
 
   mainPane: SC.MainPane.design({
-    childViews: [<span class="string">'header'</span>, <span class="string">'newTodoField'</span>, <span class="string">'todosList'</span>, <span class="string">'footer'</span>],
-    defaultResponder: <span class="string">"TodosThree.statechart"</span>,
+    childViews: ['header', 'newTodoField', 'todosList', 'footer'],
+    defaultResponder: "TodosThree.statechart",
 
     header: SC.ToolbarView.design({
-      layout: { centerX: <span class="number">0</span>, width: <span class="number">500</span>, top: <span class="number">0</span>, height: <span class="number">36</span> },
+      layout: { centerX: 0, width: 500, top: 0, height: 36 },
 
-      childViews: [<span class="string">'title'</span>, <span class="string">'completeAll'</span>],
+      childViews: ['title', 'completeAll'],
 
       completeAll: SC.CheckboxView.design(SC.AutoResize, {
-        autoResizePadding: { width: <span class="number">47</span> },
-        title: <span class="string">'Mark all as done'</span>,
-        valueBinding: <span class="string">'TodosThree.completedTodosController.areAllCompleted'</span>
+        autoResizePadding: { width: 47 },
+        title: 'Mark all as done',
+        valueBinding: 'TodosThree.completedTodosController.areAllCompleted'
       }),
 
       title: SC.LabelView.design({
-        layout: { left: <span class="number">0</span>, right: <span class="number">0</span>, top: <span class="number">0</span>, bottom: <span class="number">0</span> },
+        layout: { left: 0, right: 0, top: 0, bottom: 0 },
 
-        totalTodosBinding: SC.Binding.oneWay(<span class="string">'TodosThree.todosController.length'</span>),
-        completedTodosBinding: SC.Binding.oneWay(<span class="string">'TodosThree.completedTodosController.length'</span>),
+        totalTodosBinding: SC.Binding.oneWay('TodosThree.todosController.length'),
+        completedTodosBinding: SC.Binding.oneWay('TodosThree.completedTodosController.length'),
 
-        value: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-          <span class="keyword">return</span> <span class="string">'TodosThree ('</span> + (<span class="keyword">this</span>.get(<span class="string">'totalTodos'</span>) - <span class="keyword">this</span>.get(<span class="string">'completedTodos'</span>)) + <span class="string">')'</span>;
-        }.property(<span class="string">'totalTodos'</span>, <span class="string">'completedTodos'</span>).cacheable()
+        value: function () {
+          return 'TodosThree (' + (this.get('totalTodos') - this.get('completedTodos')) + ')';
+        }.property('totalTodos', 'completedTodos').cacheable()
       })
     }),
 
     newTodoField: SC.View.design({
-      classNames: [<span class="string">'new-todo'</span>],
-      layout: { centerX: <span class="number">0</span>, width: <span class="number">500</span>, top: <span class="number">36</span>, height: <span class="number">36</span> },
-      childViews: [<span class="string">'field'</span>, <span class="string">'button'</span>],
+      classNames: ['new-todo'],
+      layout: { centerX: 0, width: 500, top: 36, height: 36 },
+      childViews: ['field', 'button'],
 
       field: SC.TextFieldView.design({
-        hint: <span class="string">'What needs to be done?'</span>
+        hint: 'What needs to be done?'
       }),
 
       button: SC.ButtonView.design(SC.AutoResize, {
         controlSize: SC.HUGE_CONTROL_SIZE,
-        layout: { centerY: <span class="number">0</span>, height: <span class="number">30</span>, right: <span class="number">12</span>, zIndex: <span class="number">100</span> },
-        title: <span class="string">'Add'</span>,
-        action: <span class="string">'addTodo'</span>,
-        valueBinding: <span class="string">'.page.field.value'</span>,
-        isDefaultBinding: <span class="string">'.page.field.focused'</span>
+        layout: { centerY: 0, height: 30, right: 12, zIndex: 100 },
+        title: 'Add',
+        action: 'addTodo',
+        valueBinding: '.page.field.value',
+        isDefaultBinding: '.page.field.focused'
       })
     }),
 
     todosList: SC.ScrollView.design({
-      layout: { centerX: <span class="number">0</span>, width: <span class="number">500</span>, top: <span class="number">72</span>, bottom: <span class="number">36</span> },
+      layout: { centerX: 0, width: 500, top: 72, bottom: 36 },
       contentView: SC.ListView.design({
-        contentBinding: SC.Binding.oneWay(<span class="string">'TodosThree.todosController'</span>),
-        rowHeight: <span class="number">36</span>,
-        <span class="comment">// exampleView: TodosThree.TodoItemView // If pulled in from external file.</span>
+        contentBinding: SC.Binding.oneWay('TodosThree.todosController'),
+        rowHeight: 36,
+        // exampleView: TodosThree.TodoItemView // If pulled in from external file.
         exampleView: SC.CheckboxView.design({
-          classNames: [<span class="string">'todo-item'</span>],
-          valueBinding: <span class="string">'.content.isCompleted'</span>,
-          titleBinding: SC.Binding.oneWay(<span class="string">'.content.title'</span>)
+          classNames: ['todo-item'],
+          valueBinding: '.content.isCompleted',
+          titleBinding: SC.Binding.oneWay('.content.title')
         })
       })
     }),
 
     footer: SC.ToolbarView.design({
-      layout: { centerX: <span class="number">0</span>, width: <span class="number">500</span>, bottom: <span class="number">0</span>, height: <span class="number">36</span> },
+      layout: { centerX: 0, width: 500, bottom: 0, height: 36 },
 
-      childViews: [<span class="string">'clearCompletedTodos'</span>],
+      childViews: ['clearCompletedTodos'],
       clearCompletedTodos: SC.ButtonView.design(SC.AutoResize, {
         controlSize: SC.HUGE_CONTROL_SIZE,
-        layout: { centerY: <span class="number">0</span>, height: <span class="number">30</span>, right: <span class="number">12</span>, zIndex: <span class="number">100</span> },
-        isEnabledBinding: SC.Binding.oneWay(<span class="string">'TodosThree.completedTodosController.length'</span>).bool(),
-        title: <span class="string">'Clear completed todos'</span>,
-        action: <span class="string">'clearCompletedTodos'</span>
+        layout: { centerY: 0, height: 30, right: 12, zIndex: 100 },
+        isEnabledBinding: SC.Binding.oneWay('TodosThree.completedTodosController.length').bool(),
+        title: 'Clear completed todos',
+        action: 'clearCompletedTodos'
       })
     })
   })
@@ -720,7 +721,7 @@ and a todosList. A user types a new todo in the newTodoField, and when they clic
 the todosList. How does this happen? We see the use of bindings again. Look at the lines that have Binding in 
 the property names. When you write user interface element code, you &quot;wire up&quot; these connections with such 
 binding instructions. </p>
-<h6 id='--Toolbars-in-header-and-footer--'>2.3.1.1 -  <em>Toolbars in header and footer</em>
+<h6 id='--Toolbars-in-header-and-footer--'>2.3.1.1 -  *Toolbars in header and footer*
 </h6>
 
 
@@ -748,7 +749,7 @@ clearCompletedTodos action in the SHOWING_APP state. The isEnabledBinding proper
 (faster, if you don&#39;t need two-way, reciprocal updating) to the length of the completedTodosController array.
 If its length is 0, then isEnabled is false and the button will not be active -- if there aren&#39;t any todos,
 there is nothing to clear.</p>
-<h6 id='--newTodoField--'>2.3.1.2 -  <em>newTodoField</em>
+<h6 id='--newTodoField--'>2.3.1.2 -  *newTodoField*
 </h6>
 
 
@@ -766,7 +767,7 @@ here, this scope.
 
 
 
-<h6 id='--todosList--'>2.3.1.3 -  <em>todosList</em>
+<h6 id='--todosList--'>2.3.1.3 -  *todosList*
 </h6>
 
 
@@ -780,11 +781,11 @@ contentBinding property of the list is set to TodosThree.todosController. </p>
 
 
 
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/resources/todo_item.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_three/resources/todo_item.js</div></span>
 TodosThree.TodoItemView = SC.CheckboxView.design({
-  classNames: [<span class="string">'todo-item'</span>],
-  valueBinding: <span class="string">'.content.isCompleted'</span>,
-  titleBinding: SC.Binding.oneWay(<span class="string">'.content.title'</span>)
+  classNames: ['todo-item'],
+  valueBinding: '.content.isCompleted',
+  titleBinding: SC.Binding.oneWay('.content.title')
 });</code></div></pre>
 <p>This file is not used in the app, but is here for illustration of how you could pull in code from an external
 source file. If you look at resources/main_page.js, you will see that the TodosListView has exampleView set
@@ -815,7 +816,7 @@ of a todo item. Likewise, titleBinding is bound to the title property of a list 
 
 
 
-<pre class="highlighted"><div class="code_container"><code class="undefined"><span class='comment'><div class='filename'>apps/todos_three/resources/_theme.css</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_three/resources/_theme.css</div></span>
 /*
   This defines the global $theme variable for use inside your CSS.
   The $theme variable holds the CSS class names for your theme.
@@ -859,13 +860,13 @@ problems, such as the case of having bad math that results in one view obscuring
 
 
 
-<h6 id='--styles-css--resources-directory---'>2.3.4.1 -  <em>styles.css (resources directory)</em>
+<h6 id='--styles-css--resources-directory---'>2.3.4.1 -  *styles.css (resources directory)*
 </h6>
 
 
 
 
-<pre class="highlighted"><div class="code_container"><code class="undefined"><span class='comment'><div class='filename'>apps/todos_three/resources/styles.css</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_three/resources/styles.css</div></span>
 $theme: '.ace.todos-three';
 
 body { 
@@ -938,17 +939,17 @@ $theme.todo-item {
 <p>SproutCore apps can weigh in north of the welterweight class, so while the app is loading we may need to show
 a loading indicator. For TodosThree we don&#39;t have to worry, but in larger apps, this file could need some
 attention.</p>
-<pre class="highlighted"><div class="code_container"><code class="xml"><span class='comment'><div class='filename'>apps/todos_three/resources/loading.rhtml</div></span>
-<span class="vbscript">&lt;% content_for :loading <span class="keyword">do</span> %&gt;</span>
-<span class="vbscript">&lt;% # Any HTML <span class="keyword">in</span> this file will be visible <span class="keyword">on</span> screen <span class="keyword">while</span> your page loads
-   # its application JavaScript.  SproutCore applications are optimized <span class="keyword">for</span> 
-   # caching <span class="keyword">and</span> startup very fast, so your users will often only see this 
-   # content <span class="keyword">for</span> a brief moment <span class="keyword">on</span> their first app load, <span class="keyword">if</span> at all.
+<pre class="highlight"><code class="hljs xml"><span class='comment'><div class='filename'>apps/todos_three/resources/loading.rhtml</div></span>
+<span class="hljs-tag">&lt;<span class="hljs-name">%</span> <span class="hljs-attr">content_for</span> <span class="hljs-attr">:loading</span> <span class="hljs-attr">do</span> %&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">%</span> # <span class="hljs-attr">Any</span> <span class="hljs-attr">HTML</span> <span class="hljs-attr">in</span> <span class="hljs-attr">this</span> <span class="hljs-attr">file</span> <span class="hljs-attr">will</span> <span class="hljs-attr">be</span> <span class="hljs-attr">visible</span> <span class="hljs-attr">on</span> <span class="hljs-attr">screen</span> <span class="hljs-attr">while</span> <span class="hljs-attr">your</span> <span class="hljs-attr">page</span> <span class="hljs-attr">loads</span>
+   # <span class="hljs-attr">its</span> <span class="hljs-attr">application</span> <span class="hljs-attr">JavaScript.</span>  <span class="hljs-attr">SproutCore</span> <span class="hljs-attr">applications</span> <span class="hljs-attr">are</span> <span class="hljs-attr">optimized</span> <span class="hljs-attr">for</span> 
+   # <span class="hljs-attr">caching</span> <span class="hljs-attr">and</span> <span class="hljs-attr">startup</span> <span class="hljs-attr">very</span> <span class="hljs-attr">fast</span>, <span class="hljs-attr">so</span> <span class="hljs-attr">your</span> <span class="hljs-attr">users</span> <span class="hljs-attr">will</span> <span class="hljs-attr">often</span> <span class="hljs-attr">only</span> <span class="hljs-attr">see</span> <span class="hljs-attr">this</span> 
+   # <span class="hljs-attr">content</span> <span class="hljs-attr">for</span> <span class="hljs-attr">a</span> <span class="hljs-attr">brief</span> <span class="hljs-attr">moment</span> <span class="hljs-attr">on</span> <span class="hljs-attr">their</span> <span class="hljs-attr">first</span> <span class="hljs-attr">app</span> <span class="hljs-attr">load</span>, <span class="hljs-attr">if</span> <span class="hljs-attr">at</span> <span class="hljs-attr">all.</span>
 %&gt;</span>
-<span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">"loading"</span>&gt;</span>Loading...<span class="tag">&lt;<span class="title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"loading"</span>&gt;</span>Loading...<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>
 
-<span class="vbscript">&lt;% <span class="keyword">end</span> %&gt;</span></code></div></pre>
-<div class='note'><p> <strong>GIT</strong>: git add . &amp; git commit -a -m &#39;Edited/Added resources files.&#39;
+<span class="hljs-tag">&lt;<span class="hljs-name">%</span> <span class="hljs-attr">end</span> %&gt;</span></code></div></pre>
+<div class='note'><p> **GIT**: git add . & git commit -a -m 'Edited/Added resources files.'
 
 </p></div>
 
@@ -960,9 +961,9 @@ attention.</p>
 
 <p><strong>sproutcore gen</strong> does not make a models directory, so we&#39;ll make it.</p>
 <p>Move to the app root directory, make a models directory, and go there:</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">$ cd ~/development/sproutcore/getting_started/apps/todos_three
+<pre class="highlight"><code class="hljs bash">$ <span class="hljs-built_in">cd</span> ~/development/sproutcore/getting_started/apps/todos_three
 $ mkdir ~/development/sproutcore/getting_started/apps/todos_three/models
-$ cd ~/development/sproutcore/getting_started/apps/todos_three/models</code></div></pre>
+$ <span class="hljs-built_in">cd</span> ~/development/sproutcore/getting_started/apps/todos_three/models</code></div></pre>
 <div class='note'><p> SproutCore models are based on SC.Record, which offers a substantial set of data definition and
 processing functionality.
 
@@ -980,8 +981,8 @@ processing functionality.
 
 
 
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/models/todo.js</div></span>
-sc_require(<span class="string">'core'</span>);
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_three/models/todo.js</div></span>
+sc_require('core');
 
 TodosThree.Todo = SC.Record.extend({
   timestamp: SC.Record.attr(SC.DateTime),
@@ -994,7 +995,7 @@ specified. There is much more that could be done in these property definitions, 
 types and their defaults will suffice.</p>
 <p>Recall discussion of good habits regarding sc_require. The use of sc_require(&#39;core&#39;); here is not
 mandatory, but it is a good habit: TodosThree is defined in core.js.</p>
-<div class='note'><p> <strong>GIT</strong>: git add . &amp; git commit -a -m &#39;Added models directory and todo model file.&#39;
+<div class='note'><p> **GIT**: git add . & git commit -a -m 'Added models directory and todo model file.'
 
 </p></div>
 
@@ -1006,9 +1007,9 @@ mandatory, but it is a good habit: TodosThree is defined in core.js.</p>
 
 <p><strong>sproutcore gen</strong> does not make a controllers directory, so we&#39;ll make it.</p>
 <p>Move to the TodosThree app root directory, make a controllers directory, and go there:</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">$ cd ~/development/sproutcore/getting_started/apps/todos_three
+<pre class="highlight"><code class="hljs bash">$ <span class="hljs-built_in">cd</span> ~/development/sproutcore/getting_started/apps/todos_three
 $ mkdir ~/development/sproutcore/getting_started/apps/todos_three/controllers
-$ cd ~/development/sproutcore/getting_started/apps/todos_three/controllers</code></div></pre>
+$ <span class="hljs-built_in">cd</span> ~/development/sproutcore/getting_started/apps/todos_three/controllers</code></div></pre>
 <p>Controllers mediate communications. We&#39;ll need a couple in the TodosThree app.</p>
 <p>The controllers directory will contain two files: </p>
 <table><tr><td> todos.js</td><td>completed_todos.js </td></tr></table>
@@ -1022,8 +1023,8 @@ $ cd ~/development/sproutcore/getting_started/apps/todos_three/controllers</code
 
 
 
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/controllers/todos.js</div></span>
-sc_require(<span class="string">'core'</span>);
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_three/controllers/todos.js</div></span>
+sc_require('core');
 
 TodosThree.todosController = SC.ArrayController.create({
 });</code></div></pre>
@@ -1033,19 +1034,19 @@ TodosThree.todosController = SC.ArrayController.create({
 
 
 
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/controllers/completed_todos.js</div></span>
-sc_require(<span class="string">'controllers/todos'</span>);
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_three/controllers/completed_todos.js</div></span>
+sc_require('controllers/todos');
 
 TodosThree.completedTodosController = SC.ArrayController.create({
 
-  totalTodosBinding: SC.Binding.oneWay(<span class="string">'TodosThree.todosController.length'</span>),
+  totalTodosBinding: SC.Binding.oneWay('TodosThree.todosController.length'),
 
-  areAllCompleted: <span class="function"><span class="keyword">function</span> <span class="params">(k, v)</span> {</span>
-    <span class="keyword">if</span> (v !== <span class="literal">undefined</span>) {
-      TodosThree.todosController.setEach(<span class="string">'isCompleted'</span>, v);
+  areAllCompleted: function (k, v) {
+    if (v !== undefined) {
+      TodosThree.todosController.setEach('isCompleted', v);
     }
-    <span class="keyword">return</span> <span class="keyword">this</span>.get(<span class="string">'length'</span>) === <span class="keyword">this</span>.get(<span class="string">'totalTodos'</span>);
-  }.property(<span class="string">'length'</span>, <span class="string">'totalTodos'</span>).cacheable()
+    return this.get('length') === this.get('totalTodos');
+  }.property('length', 'totalTodos').cacheable()
 });</code></div></pre>
 <p>The todosController has the simplest default definition as an SC.ArrayController. An array controller has a
 default <em>content</em> reference to the data: you don&#39;t see a content property defined here, but take note, because
@@ -1055,7 +1056,7 @@ function called areAllCompleted(). </p>
 <p>totalTodosBinding is simple enough. It is a one-way binding (we are &quot;pulling&quot;, we don&#39;t care about pushing
 back) to the length of the todosController array controller. We need a local reference to this length, because
 we are about to do something impressive, in part based on it.</p>
-<h6 id='--The-areAllCompleted---Computed-Property--'>2.5.2.1 -  <em>The areAllCompleted() Computed Property</em>
+<h6 id='--The-areAllCompleted---Computed-Property--'>2.5.2.1 -  *The areAllCompleted() Computed Property*
 </h6>
 
 
@@ -1081,7 +1082,7 @@ will be set and all the checkboxes will be checked in the list. That explains wh
 of the array (the local &#39;length&#39;) to the length of the todos array (the local &#39;totalTodos&#39;, which is bound to
 an external source, the full todosController array). If these lengths are the same, then all todos have been
 marked as completed, otherwise no. </p>
-<div class='note'><p> <strong>GIT</strong>: git add . &amp; git commit -a -m &#39;Added controllers directory and controller files.&#39;
+<div class='note'><p> **GIT**: git add . & git commit -a -m 'Added controllers directory and controller files.'
 
 </p></div>
 
@@ -1093,9 +1094,9 @@ marked as completed, otherwise no. </p>
 
 <p><strong>sproutcore gen</strong> does not make a fixtures directory. We&#39;ll make it.</p>
 <p>Move to the TodosThree app root directory, make a fixtures directory, and go there:</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">$ cd ~/development/sproutcore/getting_started/apps/todos_three
+<pre class="highlight"><code class="hljs bash">$ <span class="hljs-built_in">cd</span> ~/development/sproutcore/getting_started/apps/todos_three
 $ mkdir ~/development/sproutcore/getting_started/apps/todos_three/fixtures
-$ cd ~/development/sproutcore/getting_started/apps/todos_three/fixtures</code></div></pre>
+$ <span class="hljs-built_in">cd</span> ~/development/sproutcore/getting_started/apps/todos_three/fixtures</code></div></pre>
 <p>The fixtures directory will contain one file: </p>
 <table><tr><td> todo.js </td></tr></table>
 
@@ -1108,32 +1109,32 @@ $ cd ~/development/sproutcore/getting_started/apps/todos_three/fixtures</code></
 
 
 
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_three/fixtures/todo.js</div></span>
-sc_require(<span class="string">'models/todo'</span>);
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_three/fixtures/todo.js</div></span>
+sc_require('models/todo');
 
 TodosThree.Todo.FIXTURES = [
  {
-   guid: <span class="number">0</span>,
+   guid: 0,
    isCompleted: YES,
-   title: <span class="string">'Add a SHOWING_APP state'</span>
+   title: 'Add a SHOWING_APP state'
  },
  {
-   guid: <span class="number">1</span>,
+   guid: 1,
    isCompleted: YES,
-   title: <span class="string">'Edit the buildfile'</span>
+   title: 'Edit the buildfile'
  },
  {
-   guid: <span class="number">2</span>,
+   guid: 2,
    isCompleted: YES,
-   title: <span class="string">'Add a TodosThree app'</span>
+   title: 'Add a TodosThree app'
  },
  {
-   guid: <span class="number">3</span>,
+   guid: 3,
    isCompleted: YES,
-   title: <span class="string">'Install SproutCore'</span>
+   title: 'Install SproutCore'
  }
 ];</code></div></pre>
-<div class='note'><p> <strong>GIT</strong>: git add . &amp; git commit -a -m &#39;Added fixtures directory and fixture file.&#39;
+<div class='note'><p> **GIT**: git add . & git commit -a -m 'Added fixtures directory and fixture file.'
 
 </p></div>
 
@@ -1145,9 +1146,9 @@ TodosThree.Todo.FIXTURES = [
 
 <p>With all that work done (or if you downloaded the code or cloned it from git) we can run the app, which we
 should do from the project root directory, where the project Buildfile lives:</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">$ cd ~/development/sproutcore/getting_started</code></div></pre>
+<pre class="highlight"><code class="hljs bash">$ <span class="hljs-built_in">cd</span> ~/development/sproutcore/getting_started</code></div></pre>
 <p>And run it!</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">$ sproutcore server</code></div></pre>
+<pre class="highlight"><code class="hljs bash">$ sproutcore server</code></div></pre>
 <p>Visit <a href="http://localhost:4020/">http://localhost:4020/</a> in your favorite modern browser and you should see a list of apps, including
 TodosThree. </p>
 <h3 id='-Where-to-Go-from-Here-'>4 -  Where to Go from Here
@@ -1157,7 +1158,7 @@ TodosThree. </p>
 <p>There are several guides next that treat the build tools, core concepts, several additional pages about
 views, including how to use the alternative system called templates (handlebars), models (records and
 fixtures), theming, and testing.</p>
-<div class='info'><p>The guides page called &quot;Core View Concepts&quot; is being updated to mesh better with the Getting Started
+<div class='info'><p>The guides page called "Core View Concepts" is being updated to mesh better with the Getting Started
 guides.
 
 </p></div>
@@ -1176,7 +1177,7 @@ guides.
 <p>cd ~/development/sproutcore</p>
 <p><strong>sproutcore gen project getting_started</strong></p>
 <p>cd ~/development/sproutcore/getting_started</p>
-<div class='note'><p> git init &amp; git add Buildfile &amp; git add README &amp; git commit -a -m &#39;First Commit. Added getting<em>started project with _sproutcore gen project getting_started</em> command&#39;
+<div class='note'><p> git init & git add Buildfile & git add README & git commit -a -m 'First Commit. Added getting_started project with _sproutcore gen project getting_started_ command'
 
 </p></div>
 
@@ -1187,7 +1188,7 @@ guides.
 
 
 <p><strong>sproutcore gen app TodosOne</strong></p>
-<div class='note'><p> git add apps &amp; git commit -a -m &#39;Added TodosOne app with <em>sproutcore gen app TodosOne</em> command&#39;
+<div class='note'><p> git add apps & git commit -a -m 'Added TodosOne app with _sproutcore gen app TodosOne_ command'
 
 </p></div>
 
@@ -1198,7 +1199,7 @@ guides.
 
 
 <p><strong>sproutcore gen statechart_app TodosTwo</strong></p>
-<div class='note'><p> git add apps/todos<em>two &amp; git commit -a -m &#39;Added TodosTwo app with _sproutcore gen statechart_app TodosTwo</em> command&#39;
+<div class='note'><p> git add apps/todos_two & git commit -a -m 'Added TodosTwo app with _sproutcore gen statechart_app TodosTwo_ command'
 
 </p></div>
 
@@ -1209,7 +1210,7 @@ guides.
 
 
 <p><strong>sproutcore gen statechart_app TodosThree</strong></p>
-<div class='note'><p> git add apps/todos<em>three &amp; git commit -a -m &#39;Added TodosThree app with _sproutcore gen statechart_app TodosThree</em> command&#39;
+<div class='note'><p> git add apps/todos_three & git commit -a -m 'Added TodosThree app with _sproutcore gen statechart_app TodosThree_ command'
 
 </p></div>
 
@@ -1220,7 +1221,7 @@ guides.
 <li><strong>edited file</strong>: apps/todos_three/main.js</li>
 <li><strong>edited file</strong>: apps/todos_three/statechart.js</li>
 </ul>
-<div class='note'><p> git commit -a -m &#39;Edited files in the root app directory.&#39;
+<div class='note'><p> git commit -a -m 'Edited files in the root app directory.'
 
 </p></div>
 
@@ -1229,7 +1230,7 @@ guides.
 <ul>
 <li><strong>edited file</strong>: apps/todos_three/states/ready.js</li>
 </ul>
-<div class='note'><p> git commit -a -m &#39;Renamed ready_state.js file to ready.js. Edited to add controller content setting code.&#39;
+<div class='note'><p> git commit -a -m 'Renamed ready_state.js file to ready.js. Edited to add controller content setting code.'
 
 </p></div>
 
@@ -1238,7 +1239,7 @@ guides.
 <li><strong>edited file</strong>: apps/todos_three/states/showing_app.js</li>
 <li><strong>edited file</strong>: apps/todos_three/states/showing_destroy_confirmation.js</li>
 </ul>
-<div class='note'><p> git commit -a -m &#39;Added additional states.&#39;
+<div class='note'><p> git commit -a -m 'Added additional states.'
 
 </p></div>
 
@@ -1250,7 +1251,7 @@ guides.
 <li><strong>edited file</strong>: apps/todos_three/resources/styles.css</li>
 <li><strong>edited file</strong>: apps/todos_three/resources/loading.rhtml</li>
 </ul>
-<div class='note'><p> git commit -a -m &#39;Added resources files.&#39;
+<div class='note'><p> git commit -a -m 'Added resources files.'
 
 </p></div>
 
@@ -1262,7 +1263,7 @@ guides.
 <ul>
 <li><strong>edited file</strong>: apps/todos_three/models/todo.js</li>
 </ul>
-<div class='note'><p> git add models &amp; git commit -a -m &#39;Added models directory and todo model file.&#39;
+<div class='note'><p> git add models & git commit -a -m 'Added models directory and todo model file.'
 
 </p></div>
 
@@ -1275,7 +1276,7 @@ guides.
 <li><strong>edited file</strong>: apps/todos_three/controllers/todos.js</li>
 <li><strong>edited file</strong>: apps/todos_three/controllers/completed_todos.js</li>
 </ul>
-<div class='note'><p> git add controllers &amp; git commit -a -m &#39;Added controllers directory and controller files.&#39;
+<div class='note'><p> git add controllers & git commit -a -m 'Added controllers directory and controller files.'
 
 </p></div>
 
@@ -1287,7 +1288,7 @@ guides.
 <ul>
 <li><strong>edited file</strong>: apps/todos_three/fixtures/todo.js</li>
 </ul>
-<div class='note'><p> git add fixtures &amp; git commit -a -m &#39;Added fixtures directory and fixture file.&#39;
+<div class='note'><p> git add fixtures & git commit -a -m 'Added fixtures directory and fixture file.'
 
 </p></div>
 

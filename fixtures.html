@@ -20,7 +20,7 @@
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-    <meta name="generator" content="DocPad v6.55.5" />
+    <meta name="generator" content="DocPad v6.79.0" />
     
   </head>
 
@@ -133,18 +133,18 @@ without having to be concerned with your application&#39;s backend.</p>
 <p>Fixtures are defined as an array of hashes with each hash containing the
 attributes and values for each instance you wish to create.</p>
 <p>A sample fixture looks something like:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/app/fixtures/my_model.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/fixtures/my_model.js</div></span>
 App.MyModel.FIXTURES = [
   {
-    guid: <span class="number">1</span>,
-    firstName: <span class="string">"Michael"</span>,
-    lastName: <span class="string">"Scott"</span>
+    guid: 1,
+    firstName: "Michael",
+    lastName: "Scott"
   },
 
   {
-    guid: <span class="number">2</span>,
-    firstName: <span class="string">"Dwight"</span>,
-    lastName: <span class="string">"Schrute"</span>
+    guid: 2,
+    firstName: "Dwight",
+    lastName: "Schrute"
   }
 ];</code></div></pre>
 <h4 id='-Defining-Fixtures-'>1.2 -  Defining Fixtures
@@ -166,24 +166,24 @@ these fixtures to suit your needs. Read on to learn how.
 
 <p>Writing fixtures is relatively straightforward. Each item representing a record gets its own hash in the format of <tt>propertyName: value</tt>. If your
 model looks like:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/app/models/article.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/models/article.js</div></span>
 App.Article = SC.Record.extend({
   title: SC.Record.attr(String),
   body:  SC.Record.attr(String)
 });</code></div></pre>
 <p>Your fixture will look like:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/app/fixtures/article.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/fixtures/article.js</div></span>
 App.Article.FIXTURES = [
   {
-    guid: <span class="number">1</span>,
-    title: <span class="string">"Writing a SproutCore app"</span>,
-    body: <span class="string">"Writing a SproutCore app is fun and exciting!"</span>
+    guid: 1,
+    title: "Writing a SproutCore app",
+    body: "Writing a SproutCore app is fun and exciting!"
   },
 
   {
-    guid: <span class="number">2</span>,
-    title: <span class="string">"Working with Fixtures"</span>,
-    body:  <span class="string">"Using fixtures can make it easier to get your app started."</span> }
+    guid: 2,
+    title: "Working with Fixtures",
+    body:  "Using fixtures can make it easier to get your app started." }
 ];</code></div></pre>
 <p>It is also possible to specify attributes that are not explicity defined in your model, though explicit declaration is encouraged.</p>
 <div class='warning'><p> You must specify a value for the <tt>primaryKey</tt> in your fixtures.
@@ -198,51 +198,51 @@ App.Article.FIXTURES = [
 
 <p>Since relationships are only specified with the foreign key it is quite easy to set them up in your fixtures. If you have model declaration, like the
 following, where an employee belongs to a company and a company has many employees:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/app/models/employee.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/models/employee.js</div></span>
 App.Employee = SC.Record.extend({
   firstName: SC.Record.attr(String),
   lastName:  SC.Record.attr(String),
-  company:   SC.Record.toOne(<span class="string">"App.Company"</span>, {
-     inverse: <span class="string">"employees"</span>,
+  company:   SC.Record.toOne("App.Company", {
+     inverse: "employees",
      isMaster: NO
   })
 });
 
 App.Company = SC.Record.extend({
   name:      SC.Record.attr(String),
-  employees: SC.Record.toMany(<span class="string">"App.Employee"</span>, {
-    inverse: <span class="string">"company"</span>,
+  employees: SC.Record.toMany("App.Employee", {
+    inverse: "company",
     isMaster: YES
   })
 });</code></div></pre>
 <p>You would set up your fixtures like:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/app/fixtures/employee.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/fixtures/employee.js</div></span>
 App.Employee.FIXTURES = [
   {
-    guid: <span class="number">1</span>,
-    firstName: <span class="string">"John"</span>,
-    lastName:  <span class="string">"Smith"</span>,
-    company: <span class="number">1</span> <span class="comment">// SomeCompany, Inc.</span>
+    guid: 1,
+    firstName: "John",
+    lastName:  "Smith",
+    company: 1 // SomeCompany, Inc.
   },
 
   {
-    guid: <span class="number">2</span>,
-    firstName: <span class="string">"Sally"</span>,
-    lastName:  <span class="string">"Washington"</span>,
-    company: <span class="number">1</span> <span class="comment">// SomeCompany, Inc.</span>
+    guid: 2,
+    firstName: "Sally",
+    lastName:  "Washington",
+    company: 1 // SomeCompany, Inc.
   },
 
   {
-    guid: <span class="number">3</span>,
-    firstName: <span class="string">"Bernard"</span>,
-    lastName:  <span class="string">"Peterson"</span>,
-    company: <span class="number">2</span> <span class="comment">// AnotherCompany, Inc.</span>
+    guid: 3,
+    firstName: "Bernard",
+    lastName:  "Peterson",
+    company: 2 // AnotherCompany, Inc.
   }
 ];
 
 App.Company.FIXTURES = [
-  { guid: <span class="number">1</span>, name: <span class="string">"SomeComany, Inc."</span>, employees: [<span class="number">1</span>,<span class="number">2</span>] },
-  { guid: <span class="number">2</span>, name: <span class="string">"AnotherCompany, Inc."</span>, employees: [<span class="number">3</span>] }
+  { guid: 1, name: "SomeComany, Inc.", employees: [1,2] },
+  { guid: 2, name: "AnotherCompany, Inc.", employees: [3] }
 ];</code></div></pre>
 <p>When the fixtures are loaded into your application the relationships automatically take over and point to the appropriate records.</p>
 <div class='warning'><p> Unlike a traditional relational database it is necessary to specify both sides of the relationship.
@@ -251,7 +251,7 @@ App.Company.FIXTURES = [
 
 
 
-<div class='info'><p> When defining the &#39;many&#39; side of the fixture record, be certain to include the [ ] around a single value because SproutCore is expecting an array
+<div class='info'><p> When defining the 'many' side of the fixture record, be certain to include the [ ] around a single value because SproutCore is expecting an array
 of values.
 
 </p></div>
@@ -271,26 +271,26 @@ type. See <tt>SC.RecordAttribute.registerTransform</tt> for more information.</p
 
 <p>SproutCore comes with a built-in data source for your fixtures. To use the fixtures data source you merely need to set the following in your
 application&#39;s <tt>core.js</tt>.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="keyword">in</span> apps/app/core.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/core.js</div></span>
 App = SC.Application.create({
   store: SC.Store.create().from(SC.Record.fixtures)
 });</code></div></pre>
 <p>You can extend the built-in fixture data source to simulate real world performance (important in managing user expectations).</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">$ sc-gen data-source App.AppsFixturesDataSource SC.FixturesDataSource</code></div></pre>
+<pre class="highlight"><code class="hljs bash">$ sc-gen data-source App.AppsFixturesDataSource SC.FixturesDataSource</code></div></pre>
 <p>Delete the boilerplate code in the fixture data source so your code looks like:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/app/data_sources/apps_fixtures.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/data_sources/apps_fixtures.js</div></span>
 App.AppsFixturesDataSource = SC.FixturesDataSource.extend({
   simulateRemoteResponse: YES,
 
-  latency: <span class="number">500</span> <span class="comment">// 500 ms latency</span>
+  latency: 500 // 500 ms latency
 });</code></div></pre>
 <p>This simulates a remote response with 500 milliseconds round trip latency. Tweak the value to match the performance of your network and servers.</p>
 <p>Next, point your store to the new fixtures data source.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="keyword">in</span> apps/app/core.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/core.js</div></span>
 App = SC.Application.create({
-  store: SC.Store.create().from(<span class="string">'App.AppsFixturesDataSource'</span>)
+  store: SC.Store.create().from('App.AppsFixturesDataSource')
 });</code></div></pre>
-<div class='info'><p> Notice the quotes around the data source name?  <tt>App.AppsFixturesDataSource</tt> doesn&#39;t exist until its instantiated during the loading process.
+<div class='info'><p> Notice the quotes around the data source name?  <tt>App.AppsFixturesDataSource</tt> doesn't exist until its instantiated during the loading process.
 
 </p></div>
 

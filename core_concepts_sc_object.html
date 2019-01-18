@@ -20,7 +20,7 @@
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-    <meta name="generator" content="DocPad v6.55.5" />
+    <meta name="generator" content="DocPad v6.79.0" />
     
   </head>
 
@@ -133,19 +133,19 @@ automatic bindings, observers and more, which will be described in detail below.
 
 
 <p>Creation of an <code>SC.Object</code> instance is straightforward.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class="keyword">var</span> obj = SC.Object.create()</code></div></pre>
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> obj = SC.Object.create()</code></div></pre>
 <p>In most cases you will want to create your <code>SC.Object</code> with some pre-
 set properties. You accomplish this by providing the properties in a hash.  The
 following example creates a new SC.Object to represent a person.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class="comment">// Create an SC.Object to represent a person.</span>
-<span class="keyword">var</span> person = SC.Object.create({
-  firstName: <span class="string">'Peter'</span>,
-  lastName:  <span class="string">'Wagenet'</span>
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-comment">// Create an SC.Object to represent a person.</span>
+<span class="hljs-keyword">var</span> person = SC.Object.create({
+  <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Peter'</span>,
+  <span class="hljs-attr">lastName</span>:  <span class="hljs-string">'Wagenet'</span>
 });
 
-<span class="comment">// Access our object's properties</span>
-person.get(<span class="string">'firstName'</span>); <span class="comment">// 'Peter'</span>
-person.get(<span class="string">'lastName'</span>);  <span class="comment">// 'Wagenet'</span></code></div></pre>
+<span class="hljs-comment">// Access our object's properties</span>
+person.get(<span class="hljs-string">'firstName'</span>); <span class="hljs-comment">// 'Peter'</span>
+person.get(<span class="hljs-string">'lastName'</span>);  <span class="hljs-comment">// 'Wagenet'</span></code></div></pre>
 <div class='note'><p> The <tt>get()</tt> and <tt>set()</tt> functions allow for Key-Value observing which is
 described in more detail below. For now, trust that they are important and you
 should make a habit of always using them to access properties on SC.Object and
@@ -166,13 +166,13 @@ define a unique <code>Person</code> Class, and to create instances of it.  Doing
 so allows us to define default properties on the Class and to include related
 helper functions.  To do this, we simply call <tt>extend()</tt> on
 <code>SC.Object</code> as the next example shows.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">MyApp.Person = SC.Object.extend({
-  firstName: <span class="literal">null</span>,
-  lastName:  <span class="literal">null</span>,
-  permissions: <span class="string">'none'</span>,
+<pre class="highlight"><code class="hljs javascript">MyApp.Person = SC.Object.extend({
+  <span class="hljs-attr">firstName</span>: <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">lastName</span>:  <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">permissions</span>: <span class="hljs-string">'none'</span>,
 
-  fullName: <span class="keyword">function</span>() {
-    <span class="keyword">return</span> [<span class="keyword">this</span>.get(<span class="string">'firstName'</span>), <span class="keyword">this</span>.get(<span class="string">'lastName'</span>)].compact().join(<span class="string">' '</span>);
+  <span class="hljs-attr">fullName</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> [<span class="hljs-keyword">this</span>.get(<span class="hljs-string">'firstName'</span>), <span class="hljs-keyword">this</span>.get(<span class="hljs-string">'lastName'</span>)].compact().join(<span class="hljs-string">' '</span>);
   }
 });</code></div></pre>
 <p>After defining the <code>Person</code> Class, we can now create new
@@ -180,13 +180,13 @@ helper functions.  To do this, we simply call <tt>extend()</tt> on
 <code>firstName</code>, <code>lastName</code> and <code>permissions</code> as
 well as the simple <code>fullName()</code> function.  The following example
 shows this.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class="keyword">var</span> person = MyApp.Person.create({
-  firstName: <span class="string">'Peter'</span>,
-  lastName:  <span class="string">'Wagenet'</span>
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> person = MyApp.Person.create({
+  <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Peter'</span>,
+  <span class="hljs-attr">lastName</span>:  <span class="hljs-string">'Wagenet'</span>
 });
 
-person.fullName(); <span class="comment">// 'Peter Wagenet'</span>
-person.get(<span class="string">'permissions'</span>); <span class="comment">// 'none'</span></code></div></pre>
+person.fullName(); <span class="hljs-comment">// 'Peter Wagenet'</span>
+person.get(<span class="hljs-string">'permissions'</span>); <span class="hljs-comment">// 'none'</span></code></div></pre>
 <h5 id='-Calling-superclass-methods-with-sc-super-'>1.2.1 -  Calling superclass methods with sc_super
 </h5>
 
@@ -197,27 +197,27 @@ provides the <tt>sc_super</tt> method which calls the original function. For tho
 familiar with Ruby&#39;s <code>super</code> method, <code>sc_super</code> is very
 similar.  Here is an example of a subclass of <code>Person</code> that extends
 and uses the superclass&#39;s <code>fullName()</code> method.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class="comment">// Define a new subclass of MyApp.Person</span>
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-comment">// Define a new subclass of MyApp.Person</span>
 MyApp.FormalPerson = MyApp.Person.extend({
-  title: <span class="literal">null</span>,
+  <span class="hljs-attr">title</span>: <span class="hljs-literal">null</span>,
 
-  fullName: <span class="keyword">function</span>() {
-    <span class="comment">// Joins `title` with the result of `fullName()` on the superclass.</span>
-    <span class="keyword">return</span> [<span class="keyword">this</span>.get(<span class="string">'title'</span>), sc_super()].compact().join(<span class="string">' '</span>);
+  <span class="hljs-attr">fullName</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-comment">// Joins `title` with the result of `fullName()` on the superclass.</span>
+    <span class="hljs-keyword">return</span> [<span class="hljs-keyword">this</span>.get(<span class="hljs-string">'title'</span>), sc_super()].compact().join(<span class="hljs-string">' '</span>);
   }
 });
 
-<span class="comment">// Create a MyApp.FormalPerson object</span>
-<span class="keyword">var</span> person = MyApp.FormalPerson.create({
-  title:     <span class="string">'Mr.'</span>,
-  firstName: <span class="string">'Peter'</span>,
-  lastName:  <span class="string">'Wagenet'</span>
+<span class="hljs-comment">// Create a MyApp.FormalPerson object</span>
+<span class="hljs-keyword">var</span> person = MyApp.FormalPerson.create({
+  <span class="hljs-attr">title</span>:     <span class="hljs-string">'Mr.'</span>,
+  <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Peter'</span>,
+  <span class="hljs-attr">lastName</span>:  <span class="hljs-string">'Wagenet'</span>
 });
 
-person.fullName(); <span class="comment">// Mr. Peter Wagenet</span>
-person.get(<span class="string">'permissions'</span>); <span class="comment">// 'none'</span></code></div></pre>
+person.fullName(); <span class="hljs-comment">// Mr. Peter Wagenet</span>
+person.get(<span class="hljs-string">'permissions'</span>); <span class="hljs-comment">// 'none'</span></code></div></pre>
 <div class='note'><p> <tt>sc_super</tt> is one of the rare exceptions in SproutCore in that it is not
-actually a JavaScript function. It&#39;s just a pre-processor directive that gets
+actually a JavaScript function. It's just a pre-processor directive that gets
 replaced with <code>arguments.callee.base.apply(this, arguments)</code> by the
 Build Tools.
 
@@ -234,23 +234,23 @@ method is called first. This function can be overridden when you need to
 perform additional setup each time one of your objects is created.  The next
 example uses <code>init()</code> to ensure that a calculation is performed
 each time a new MyApp.Calculation object is created.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">MyApp.Calculation = SC.Object.extend({
-  input: <span class="literal">null</span>,
-  result: <span class="literal">null</span>,
+<pre class="highlight"><code class="hljs javascript">MyApp.Calculation = SC.Object.extend({
+  <span class="hljs-attr">input</span>: <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">result</span>: <span class="hljs-literal">null</span>,
 
-  _calculate: <span class="keyword">function</span>() {
-    <span class="comment">// Do expensive calculation</span>
-    <span class="keyword">this</span>.set(<span class="string">'result'</span>, <span class="keyword">this</span>.get(<span class="string">'input'</span>) * <span class="number">2</span>);
+  <span class="hljs-attr">_calculate</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-comment">// Do expensive calculation</span>
+    <span class="hljs-keyword">this</span>.set(<span class="hljs-string">'result'</span>, <span class="hljs-keyword">this</span>.get(<span class="hljs-string">'input'</span>) * <span class="hljs-number">2</span>);
   },
 
-  init: <span class="keyword">function</span>() {
-    sc_super();  <span class="comment">// Warning: Always invoke SC.Object's init() method!</span>
-    <span class="keyword">this</span>._calculate();
+  <span class="hljs-attr">init</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    sc_super();  <span class="hljs-comment">// Warning: Always invoke SC.Object's init() method!</span>
+    <span class="hljs-keyword">this</span>._calculate();
   }
 });
 
-<span class="keyword">var</span> calc = MyApp.Calculation.create({ input: <span class="number">5</span> });
-calc.get(<span class="string">'result'</span>); <span class="comment">// 10</span></code></div></pre>
+<span class="hljs-keyword">var</span> calc = MyApp.Calculation.create({ <span class="hljs-attr">input</span>: <span class="hljs-number">5</span> });
+calc.get(<span class="hljs-string">'result'</span>); <span class="hljs-comment">// 10</span></code></div></pre>
 <div class='warning'><p> When overriding the <code>init()</code> method it is important that
 you call <code>sc_super</code> at the start of your custom <code>init()</code>
 method. This will ensure that all internal object initialization takes place
@@ -269,17 +269,17 @@ inheritance tree, with similar functionality.  Mixins are simply a hash with a
 series of properties that will be added to the objects you create.  The next
 example defines the <code>MyApp.Introducable</code> mixin, which can then be
 shared between many different Classes.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">MyApp.Introducable = {
-  sayHello: <span class="keyword">function</span>() {
-    <span class="keyword">return</span> <span class="string">'Hello, my name is '</span> + <span class="keyword">this</span>.name;
+<pre class="highlight"><code class="hljs javascript">MyApp.Introducable = {
+  <span class="hljs-attr">sayHello</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-string">'Hello, my name is '</span> + <span class="hljs-keyword">this</span>.name;
   }
 };</code></div></pre>
 <p>To add one or more mixins to a Class, add them as parameters to extend.  For
 example,</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">MyApp.Person = SC.Object.extend(MyApp.Introducable, { name: <span class="string">''</span>; });
+<pre class="highlight"><code class="hljs javascript">MyApp.Person = SC.Object.extend(MyApp.Introducable, { <span class="hljs-attr">name</span>: <span class="hljs-string">''</span>; });
 
-<span class="keyword">var</span> person = MyApp.Person.create({ name: <span class="string">'Bob'</span> });
-person.sayHello(); <span class="comment">// Hello, my name is Bob</span></code></div></pre>
+<span class="hljs-keyword">var</span> person = MyApp.Person.create({ <span class="hljs-attr">name</span>: <span class="hljs-string">'Bob'</span> });
+person.sayHello(); <span class="hljs-comment">// Hello, my name is Bob</span></code></div></pre>
 <p>As you may have guessed, <code>SC.Object.extend</code> just takes a <em>series of
 hashes</em> and mixes them all in to a newly created class.</p>
 <h5 id='-Class-methods-'>1.2.4 -  Class methods
@@ -290,28 +290,28 @@ hashes</em> and mixes them all in to a newly created class.</p>
 single Class method to a Class, you can do it in the traditional JavaScript
 manner.  For example, the following adds a <code>quickCreate()</code> helper
 function to <code>MyApp.Person</code>.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">MyApp.Person.quickCreate = <span class="keyword">function</span>(firstName, lastName){
-  <span class="keyword">return</span> MyApp.Person.create({
-    firstName: firstName,
-    lastName: lastName
+<pre class="highlight"><code class="hljs javascript">MyApp.Person.quickCreate = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">firstName, lastName</span>)</span>{
+  <span class="hljs-keyword">return</span> MyApp.Person.create({
+    <span class="hljs-attr">firstName</span>: firstName,
+    <span class="hljs-attr">lastName</span>: lastName
   });
 };
 
-<span class="keyword">var</span> person = MyApp.Person.quickCreate(<span class="string">'Peter'</span>, <span class="string">'Wagenet'</span>);
-person.fullName(); <span class="comment">// Peter Wagenet</span></code></div></pre>
+<span class="hljs-keyword">var</span> person = MyApp.Person.quickCreate(<span class="hljs-string">'Peter'</span>, <span class="hljs-string">'Wagenet'</span>);
+person.fullName(); <span class="hljs-comment">// Peter Wagenet</span></code></div></pre>
 <p>However, sometimes you may want to add a series of Class methods and
 properties. In this case you can use the <tt>mixin()</tt> method.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">MyApp.Person.mixin({
-  quickCreate: <span class="keyword">function</span>(firstName, lastName){
-    <span class="keyword">return</span> MyApp.Person.create({
-      firstName: firstName,
-      lastName: lastName
+<pre class="highlight"><code class="hljs javascript">MyApp.Person.mixin({
+  <span class="hljs-attr">quickCreate</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">firstName, lastName</span>)</span>{
+    <span class="hljs-keyword">return</span> MyApp.Person.create({
+      <span class="hljs-attr">firstName</span>: firstName,
+      <span class="hljs-attr">lastName</span>: lastName
     });
   }),
 });
 
-person = MyApp.Person.quickCreate(<span class="string">'Mary'</span>, <span class="string">'Shelley'</span>);
-person.fullName(); <span class="comment">// Mary Shelley</span></code></div></pre>
+person = MyApp.Person.quickCreate(<span class="hljs-string">'Mary'</span>, <span class="hljs-string">'Shelley'</span>);
+person.fullName(); <span class="hljs-comment">// Mary Shelley</span></code></div></pre>
 <p>Note that the <code>mixin()</code> method is different from the Mixins
 described above. The <code>mixin()</code> method will add the properties and
 methods within the block as <em>Class properties and methods</em>. Mixins themselves

@@ -20,7 +20,7 @@
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-    <meta name="generator" content="DocPad v6.55.5" />
+    <meta name="generator" content="DocPad v6.79.0" />
     
   </head>
 
@@ -180,9 +180,9 @@ this guide.  But before we do so lets have a detailed look at <tt>SC.View#animat
 basic animation that fades a views opacity from <tt>1.0</tt> down to <tt>0.0</tt>.  The
 duration for how long it takes for the animation to take place is 1.5 seconds
 and the timing is eased in then out.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">myApp.myView.animate(<span class="string">'opacity'</span>, <span class="number">0.0</span>, {
-  duration:<span class="number">1.5</span>,
-  timing:<span class="string">'ease-in-out'</span>
+<pre class="highlight"><code class="hljs javascript">myApp.myView.animate(<span class="hljs-string">'opacity'</span>, <span class="hljs-number">0.0</span>, {
+  <span class="hljs-attr">duration</span>:<span class="hljs-number">1.5</span>,
+  <span class="hljs-attr">timing</span>:<span class="hljs-string">'ease-in-out'</span>
 });</code></div></pre>
 <h4 id='-Type-of-animation-effects-'>2.1 -  Type of animation effects
 </h4>
@@ -212,8 +212,8 @@ effects and explore the 3d plane through the z axis.</p>
 
 
 <p><tt>top</tt>, <tt>bottom</tt>, <tt>left</tt>, <tt>right</tt>, <tt>height</tt>, and <tt>width</tt> changes the value of
-each property in your layout.  In order to use <tt>top</tt>, <tt>bottom</tt>, <tt>left</tt>, and/or</p>
-<p><tt>right</tt>, the view in which you are animating must be assigned those values.
+each property in your layout.  In order to use <tt>top</tt>, <tt>bottom</tt>, <tt>left</tt>, and/or
+<tt>right</tt>, the view in which you are animating must be assigned those values.
 The value assign is that of a pixel.  Therefore, if you have a view with a
 value of <tt>&#39;left:10&#39;</tt> assign to the left property and within your animation you
 adjust the properties value to <tt>&#39;left:100&#39;</tt> then the view will glide to the
@@ -225,7 +225,7 @@ newly assigned <tt>left</tt> value.</p>
 <p><tt>rotateX</tt>, <tt>rotateY</tt>, and <tt>rotateZ</tt> allows you to change a views position
 within a 3d plane.  Below is a graph showing how X, Y, and Z interact with a 3d
 plane.</p>
-<div style='text-align: center'> <img src="images/animate/xyz.png" alt="XYZ Rotation"> </div>
+<div style='text-align: center'> ![XYZ Rotation](images/animate/xyz.png) </div>
 
 
 
@@ -249,7 +249,7 @@ option you pass. </p>
 
 <p>The <tt>linear</tt> animation timing function provides and straight-line interpolation
 between the starting value and the final animated value assigned to your view.</p>
-<div style='text-align: center'> <img src="images/animate/linear_graph.png" alt="Linear Graph"> </div>
+<div style='text-align: center'> ![Linear Graph](images/animate/linear_graph.png) </div>
 
 
 
@@ -268,7 +268,7 @@ cue and allows the user time to adjust or acknowledge the fact that something
 is changing.  Furthermore, with the animations speed dramatically increasing
 towards the end, the visual cue places an emphasis on the achieved state of the
 animated property value.  </p>
-<div style='text-align: center'> <img src="images/animate/ease_in_graph.png" alt="Ease In Graph"> </div>   
+<div style='text-align: center'> ![Ease In Graph](images/animate/ease_in_graph.png) </div>   
 
 
 
@@ -281,7 +281,7 @@ and speeding up, the <tt>ease-out</tt> timing starts off fast and slows down til
 animated value is reached.  This timing function provides the user with a cue
 that draws their attention to the initial change and gives an emphasis to the
 start of the animation and less to the ending.</p>
-<div style='text-align: center'> <img src="images/animate/ease_out_graph.png" alt="Ease Out Graph"> </div>  
+<div style='text-align: center'> ![Ease Out Graph](images/animate/ease_out_graph.png) </div>  
 
 
 
@@ -294,7 +294,7 @@ and then slows down again towards the end.  This animation, much like its name
 describes, is a combination between <tt>ease-in</tt> and <tt>ease-out</tt>.  The cue provided
 with <tt>ease-in-out</tt> gives more emphasis on the middle of the animation and less
 towards the beginning and ending.</p>
-<div style='text-align: center'> <img src="images/animate/ease_in_out_graph.png" alt="Ease In Out Graph"> </div>  
+<div style='text-align: center'> ![Ease In Out Graph](images/animate/ease_in_out_graph.png) </div>  
 
 
 

@@ -20,7 +20,7 @@
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-    <meta name="generator" content="DocPad v6.55.5" />
+    <meta name="generator" content="DocPad v6.79.0" />
     
   </head>
 
@@ -128,106 +128,106 @@ SproutCore (though it is &quot;on&quot; by default).</p>
 SproutCore&#39;s datastore.</p>
 <p>See <a href="http://www.jamesyu.org/2011/01/27/cloudedit-a-backbone-js-tutorial-by-example/">http://www.jamesyu.org/2011/01/27/cloudedit-a-backbone-js-tutorial-by-example/</a>
 for an example.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/my_app/core.js"</span></div></span>
-<span class="keyword">var</span> MyApp = SC.Application.create({
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/my_app/core.js"</div></span>
+var MyApp = SC.Application.create({
 
-  newTask: <span class="keyword">function</span>() {
-    <span class="comment">// optional: clear the values in the fields</span>
+  newTask: function() {
+    // optional: clear the values in the fields
     MyApp.newTaskPane.append();
   },
 
-  createTask: <span class="keyword">function</span>() {
-    <span class="comment">// 1. Fetch the values from the fields in MyApp.newTaskPane.</span>
-    <span class="keyword">var</span> name = MyApp.newTaskPane.get(<span class="string">'nameField'</span>),
-        description = MyApp.newTaskPane.get(<span class="string">'descriptionField'</span>);
+  createTask: function() {
+    // 1. Fetch the values from the fields in MyApp.newTaskPane.
+    var name = MyApp.newTaskPane.get('nameField'),
+        description = MyApp.newTaskPane.get('descriptionField');
 
-    <span class="comment">// 2. Send the values to the remote "create" method</span>
-    <span class="comment">//    (disable interaction)</span>
-    SC.Request.postUrl(<span class="string">'/tasks'</span>)
-              .header({ <span class="string">'Accept'</span>: <span class="string">'application/json'</span> }).json()
-              .notify(<span class="keyword">this</span>, <span class="string">'_didCreateTask'</span>).send();
+    // 2. Send the values to the remote "create" method
+    //    (disable interaction)
+    SC.Request.postUrl('/tasks')
+              .header({ 'Accept': 'application/json' }).json()
+              .notify(this, '_didCreateTask').send();
   },
 
-  <span class="comment">// 3. When the server responds, create the task and add update</span>
-  <span class="comment">//    MyApp.tasksController.</span>
-  _didCreateTask: <span class="keyword">function</span>(response, store, storeKey) {
-    <span class="keyword">if</span> (SC.ok(response)) {
-      <span class="keyword">var</span> hash = response.get(<span class="string">'body'</span>);
+  // 3. When the server responds, create the task and add update
+  //    MyApp.tasksController.
+  _didCreateTask: function(response, store, storeKey) {
+    if (SC.ok(response)) {
+      var hash = response.get('body');
       MyApp.Task.create(hash);
     }
 
-    <span class="comment">// 4. Show the MyApp.editTaskPane</span>
+    // 4. Show the MyApp.editTaskPane
     MyApp.editTaskPane.append();
   },
 
-  updateTask: <span class="keyword">function</span>() {
-    <span class="comment">// 1. Get the values from MyApp.selectedTaskController</span>
-    <span class="keyword">var</span> task = MyApp.selectedTaskController.get(<span class="string">'content'</span>);
+  updateTask: function() {
+    // 1. Get the values from MyApp.selectedTaskController
+    var task = MyApp.selectedTaskController.get('content');
 
-    <span class="comment">// 2. Contact the server and send the updated properties</span>
-    <span class="comment">//    for the task (disable interaction)</span>
-    <span class="comment">// 3. When the server responds, refresh the task with then</span>
-    <span class="comment">//    new properties.</span>
+    // 2. Contact the server and send the updated properties
+    //    for the task (disable interaction)
+    // 3. When the server responds, refresh the task with then
+    //    new properties.
     MyApp.editTaskPane.append();
   },
 
-  deleteTask: <span class="keyword">function</span>() {
-    <span class="comment">// 1. Search MyApp.tasksController for the task with id = `id`.</span>
-    <span class="keyword">var</span> task = MyApp.selectedTaskController.get(<span class="string">'content'</span>);
+  deleteTask: function() {
+    // 1. Search MyApp.tasksController for the task with id = `id`.
+    var task = MyApp.selectedTaskController.get('content');
 
-    <span class="comment">// 2. Contact the server and ask it delete the task with</span>
-    <span class="comment">//    id == `id` (disable interaction)</span>
-    <span class="comment">// 3. When the server responds, delete the task and remove</span>
-    <span class="comment">//    it from the list.</span>
+    // 2. Contact the server and ask it delete the task with
+    //    id == `id` (disable interaction)
+    // 3. When the server responds, delete the task and remove
+    //    it from the list.
     MyApp.listTasksPane.append();
   },
 
-  showTaskList: <span class="keyword">function</span>() {
-    <span class="comment">// 1. Use SC.Response ajax to contact your server.</span>
-    <span class="comment">// You can hardcode the url in here:</span>
-    SC.Request.getUrl(<span class="string">'/tasks'</span>).json()
-        .notify(<span class="keyword">this</span>, <span class="string">'_listDidRespond'</span>).send();
+  showTaskList: function() {
+    // 1. Use SC.Response ajax to contact your server.
+    // You can hardcode the url in here:
+    SC.Request.getUrl('/tasks').json()
+        .notify(this, '_listDidRespond').send();
     MyApp.listTasksPane.append();
   }
 
-  _listDidRespond: <span class="keyword">function</span>(res) {
-    <span class="comment">// 2. When you get the response, instatiate MyApp.Task objects</span>
-    <span class="comment">//    and add them to a new array</span>
-    <span class="keyword">var</span> newArray = [];
-    <span class="keyword">var</span> jsonHashesArray = res.get(<span class="string">'body'</span>);
-    jsonHashesArray.forEach(<span class="keyword">function</span>(hash) {
-        <span class="keyword">var</span> task = MyApp.Task.create(hash);
+  _listDidRespond: function(res) {
+    // 2. When you get the response, instatiate MyApp.Task objects
+    //    and add them to a new array
+    var newArray = [];
+    var jsonHashesArray = res.get('body');
+    jsonHashesArray.forEach(function(hash) {
+        var task = MyApp.Task.create(hash);
         newArray.push(task);
     });
 
-    <span class="comment">// 3. Set the new array as the "content"</span>
-    MyApp.tasksController.set(<span class="string">'content'</span>, newArray);
+    // 3. Set the new array as the "content"
+    MyApp.tasksController.set('content', newArray);
   }
 
 });
 
-<span class="comment">//</span>
-<span class="comment">// Define our model class.</span>
-<span class="comment">//</span>
+//
+// Define our model class.
+//
 MyApp.Task = SC.Object.extend({
 
-  toJSON: <span class="keyword">function</span>() {
-    <span class="keyword">var</span> hash = {}, key, val;
+  toJSON: function() {
+    var hash = {}, key, val;
 
-    <span class="keyword">for</span> (key <span class="keyword">in</span> <span class="keyword">this</span>) {
-      <span class="keyword">if</span> (!<span class="keyword">this</span>.hasOwnKey(key)) <span class="keyword">continue</span>;
+    for (key in this) {
+      if (!this.hasOwnKey(key)) continue;
 
-      val = <span class="keyword">this</span>[key];
-      <span class="keyword">if</span> (val.isProperty) val = <span class="keyword">this</span>.get(<span class="string">'val'</span>);
-      hash[key] = <span class="keyword">this</span>.get(key);
+      val = this[key];
+      if (val.isProperty) val = this.get('val');
+      hash[key] = this.get(key);
     }
   }
 
-}); <span class="comment">// gives us the "create" function.</span>
+}); // gives us the "create" function.
 
-<span class="comment">//</span>
-<span class="comment">// Make our Task list available to views.</span>
-<span class="comment">//</span>
+//
+// Make our Task list available to views.
+//
 MyApp.tasksController = SC.ArrayController.create({
 
   content: [],
@@ -235,129 +235,129 @@ MyApp.tasksController = SC.ArrayController.create({
 
 });
 
-<span class="comment">//</span>
-<span class="comment">// Keeps track of the selected task so we can bind to it in</span>
-<span class="comment">//our views.</span>
-<span class="comment">//</span>
+//
+// Keeps track of the selected task so we can bind to it in
+//our views.
+//
 MyApp.selectedTaskController = SC.ObjectController.create({
 
  contentBinding: SC.Binding
-                   .single(<span class="string">'MyApp.tasksController.selection'</span>)
+                   .single('MyApp.tasksController.selection')
 
 )};
 
-<span class="comment">//</span>
-<span class="comment">// Create a pane to display our task list.</span>
-<span class="comment">//</span>
+//
+// Create a pane to display our task list.
+//
 MyApp.listTasksPane = SC.MainPane.create({
 
   contentView: SC.View.create({
 
-    childViews: <span class="string">'list new'</span>.w(),
+    childViews: 'list new'.w(),
 
     list: SC.ListView.create({
-      layout: { centerX:<span class="number">0</span>, top:<span class="number">50</span>, width:<span class="number">300</span>, bottom:<span class="number">100</span> },
+      layout: { centerX:0, top:50, width:300, bottom:100 },
 
-      contentBinding: <span class="string">'MyApp.tasksController.arrangedObjects'</span>,
-      selectionBinding: <span class="string">'MyApp.tasksController.selection'</span>
+      contentBinding: 'MyApp.tasksController.arrangedObjects',
+      selectionBinding: 'MyApp.tasksController.selection'
 
       actsOnSelect: YES,
-      action: <span class="string">'editTask'</span>,
+      action: 'editTask',
       target: MyApp
     }),
 
-    <span class="keyword">new</span>: SC.ButtonView.create({
-      layout: { centerX:<span class="number">60</span>, height:<span class="number">54</span>, width:<span class="number">90</span>, bottom:<span class="number">50</span> },
-      title: <span class="string">"New Task"</span>,
-      action: <span class="string">'newTask'</span>,
+    new: SC.ButtonView.create({
+      layout: { centerX:60, height:54, width:90, bottom:50 },
+      title: "New Task",
+      action: 'newTask',
       target: MyApp
     })
   })
 });
 
-<span class="comment">//</span>
-<span class="comment">// Create a new task pane.</span>
-<span class="comment">//</span>
+//
+// Create a new task pane.
+//
 MyApp.newTaskPane = SC.MainPane.create({
 
-  nameField: SC.outlet(<span class="string">'contentView.form.name'</span>),
-  descriptionField: SC.outlet(<span class="string">'contentView.form.description'</span>),
+  nameField: SC.outlet('contentView.form.name'),
+  descriptionField: SC.outlet('contentView.form.description'),
 
   contentView: SC.View.create({
 
-    childViews: <span class="string">'form new'</span>.w(),
+    childViews: 'form new'.w(),
 
     form: SC.View.create({
-      layout: { centerX:<span class="number">0</span>, top:<span class="number">50</span>, width:<span class="number">300</span>, bottom:<span class="number">100</span> },
+      layout: { centerX:0, top:50, width:300, bottom:100 },
 
-      childViews: <span class="string">'name description'</span>.w(),
+      childViews: 'name description'.w(),
 
       name: SC.TextFieldView.create({
-        layout: { top:<span class="number">10</span>, left:<span class="number">10</span>, right:<span class="number">10</span>, height:<span class="number">80</span> },
-        hint: <span class="string">"Enter a task  name"</span>
+        layout: { top:10, left:10, right:10, height:80 },
+        hint: "Enter a task  name"
       }),
 
       description: SC.TextFieldView.create({
-        layout: { top: <span class="number">100</span>, left: <span class="number">10</span>, right: <span class="number">10</span>, bottom: <span class="number">10</span> },
+        layout: { top: 100, left: 10, right: 10, bottom: 10 },
         allowsMultipleLines: YES
       })
 
     }),
 
-    <span class="keyword">new</span>: SC.ButtonView.create({
-      layout: { centerX:<span class="number">60</span>, height:<span class="number">54</span>, width:<span class="number">90</span>, bottom:<span class="number">50</span> },
-      title: <span class="string">"Create"</span>,
-      action: <span class="string">'createTask'</span>,
+    new: SC.ButtonView.create({
+      layout: { centerX:60, height:54, width:90, bottom:50 },
+      title: "Create",
+      action: 'createTask',
       target: MyApp
     })
   })
 });
 
-<span class="comment">//</span>
-<span class="comment">// Create an edit task pane.</span>
-<span class="comment">//</span>
+//
+// Create an edit task pane.
+//
 MyApp.editTaskPane = SC.MainPane.create({
 
   contentView: SC.View.create({
 
-    childViews: <span class="string">'form update delete'</span>.w(),
+    childViews: 'form update delete'.w(),
 
     form: SC.View.create({
-      layout: { centerX:<span class="number">0</span>, top:<span class="number">50</span>, width:<span class="number">300</span>, bottom:<span class="number">100</span> },
+      layout: { centerX:0, top:50, width:300, bottom:100 },
 
-      childViews: <span class="string">'name description'</span>.w(),
+      childViews: 'name description'.w(),
 
       name: SC.TextFieldView.create({
-        layout: { top:<span class="number">10</span>, left:<span class="number">10</span>, right:<span class="number">10</span>, height:<span class="number">80</span> },
-        valueBinding: <span class="string">'MyApp.selectedTaskController.name'</span>
+        layout: { top:10, left:10, right:10, height:80 },
+        valueBinding: 'MyApp.selectedTaskController.name'
       }),
 
       description: SC.TextFieldView.create({
-        layout: { top: <span class="number">100</span>, left: <span class="number">10</span>, right: <span class="number">10</span>, bottom: <span class="number">10</span> },
+        layout: { top: 100, left: 10, right: 10, bottom: 10 },
         allowsMultipleLines: YES,
-        valueBinding: <span class="string">'MyApp.selectedTaskController.description'</span>
+        valueBinding: 'MyApp.selectedTaskController.description'
       })
 
     }),
 
     update: SC.ButtonView.create({
-      layout: { right:<span class="number">10</span>, height:<span class="number">54</span>, width:<span class="number">90</span>, bottom:<span class="number">50</span> },
-      title: <span class="string">"Update"</span>,
-      action: <span class="string">'updateTask'</span>,
+      layout: { right:10, height:54, width:90, bottom:50 },
+      title: "Update",
+      action: 'updateTask',
       target: MyApp
     }),
 
-    <span class="keyword">delete</span>: SC.ButtonView.create({
-      layout: { right:<span class="number">120</span>, height:<span class="number">54</span>, width:<span class="number">90</span>, bottom:<span class="number">50</span> },
-      title: <span class="string">"Delete"</span>,
-      action: <span class="string">'deleteTask'</span>,
+    delete: SC.ButtonView.create({
+      layout: { right:120, height:54, width:90, bottom:50 },
+      title: "Delete",
+      action: 'deleteTask',
       target: MyApp
     })
   })
 });
 
 main() {
-  MyApp.showTaskList(); <span class="comment">// Puts the list on the screen.</span>
+  MyApp.showTaskList(); // Puts the list on the screen.
 };</code></div></pre>
 <h3 id='-Changelog-'>3 -  Changelog
 </h3>

@@ -20,7 +20,7 @@
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-    <meta name="generator" content="DocPad v6.55.5" />
+    <meta name="generator" content="DocPad v6.79.0" />
     
   </head>
 
@@ -127,9 +127,9 @@
 Even with all of these extensions, Chance is a superset of CSS. This means that
 all normal CSS will still &quot;just work.&quot;</p>
 <div class='warning'><p> Chance expects to work with a SproutCore theme. Recent releases of the
-SproutCore build tools will set everything up for you, but if your app doesn&#39;t
+SproutCore build tools will set everything up for you, but if your app doesn't
 have a <tt>theme.js</tt> file, you need to follow the directions in
-<a href="theming_app.html#giving-your-app-a-theme">Theming Your App: Giving Your App a Theme</a>
+[Theming Your App: Giving Your App a Theme](theming_app.html#giving-your-app-a-theme)
 
 </p></div>
 
@@ -142,8 +142,8 @@ have a <tt>theme.js</tt> file, you need to follow the directions in
 <p>As much as we&#39;d like to take credit for SCSS, we cannot: it does not stand
 for &quot;SproutCore Stylesheets.&quot; It actually stands for &quot;Sassy CSS&quot; because it
 is part of &quot;Sass:&quot; <a href="http://sass-lang.com/">Syntactically Awesome Stylesheets</a>.</p>
-<div class='note'><p> Although Sass&#39;s own build tool only sends files with the extension
-<tt>.scss</tt> through the SCSS processor, SproutCore sends <em>all</em> CSS, including
+<div class='note'><p> Although Sass's own build tool only sends files with the extension
+<tt>.scss</tt> through the SCSS processor, SproutCore sends _all_ CSS, including
 <tt>.css</tt> files, through SCSS. Give your files the <tt>.css</tt> extension.
 
 </p></div>
@@ -155,7 +155,7 @@ For full reference, refer to the official SCSS documentation.</p>
 
 
 <p>You know those dolls that fit one inside the other? Nesting looks a little like that:</p>
-<pre class="highlighted"><div class="code_container"><code class="undefined">.yo-dawg {
+<pre class="highlight"><code class="hljs undefined">.yo-dawg {
   color: blue;
 
   .i-put-a-rule-in-your-rule {
@@ -168,30 +168,30 @@ For full reference, refer to the official SCSS documentation.</p>
 }</code></div></pre>
 <p>But what does it mean? Well, CSS should roughly map to HTML. So, what might
 some &quot;nested&quot; HTML look like?</p>
-<pre class="highlighted"><div class="code_container"><code class="xml"><span class="tag">&lt;<span class="title">html</span>&gt;</span>
-<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span> = '<span class="attribute">yo-dawg</span>'&gt;</span>
-  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span> = '<span class="attribute">i-put-a-rule-in-your-rule</span>'&gt;</span>
-    <span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span> = '<span class="attribute">im-not-typing-that-long-class----ohwait</span>'&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span>
-  <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">html</span>&gt;</span></code></div></pre>
+<pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span> = <span class="hljs-string">'yo-dawg'</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span> = <span class="hljs-string">'i-put-a-rule-in-your-rule'</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span> = <span class="hljs-string">'im-not-typing-that-long-class----ohwait'</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></div></pre>
 <p>Aside from the <tt>class-that-shall-not-be-typed</tt>, the above HTML is what our example
 CSS is meant to match. The nesting gets converted:</p>
-<pre class="highlighted"><div class="code_container"><code class="css"><span class="class">.you-dawg</span> <span class="rules">{
-  <span class="rule"><span class="attribute">color</span>:<span class="value"> blue;</span></span>
-<span class="rule">}</span></span>
+<pre class="highlight"><code class="hljs css"><span class="hljs-selector-class">.you-dawg</span> {
+  <span class="hljs-attribute">color</span>: blue;
+}
 
-<span class="class">.yo-dawg</span> <span class="class">.i-put-a-rule-in-your-rule</span> <span class="rules">{
-  <span class="rule"><span class="attribute">color</span>:<span class="value"> red;</span></span>
-<span class="rule">}</span></span>
+<span class="hljs-selector-class">.yo-dawg</span> <span class="hljs-selector-class">.i-put-a-rule-in-your-rule</span> {
+  <span class="hljs-attribute">color</span>: red;
+}
 
-<span class="class">.yo-dawg</span> <span class="class">.i-put-a-rule-in-your-rule</span> <span class="class">.you-know-what</span> <span class="rules">{
-  <span class="rule"><span class="attribute">color</span>:<span class="value"> green;</span></span>
-<span class="rule">}</span></span></code></div></pre>
+<span class="hljs-selector-class">.yo-dawg</span> <span class="hljs-selector-class">.i-put-a-rule-in-your-rule</span> <span class="hljs-selector-class">.you-know-what</span> {
+  <span class="hljs-attribute">color</span>: green;
+}</code></div></pre>
 <p>Nesting helps you reduce repetition of class names. The nesting in your CSS matches
 your nesting of HTML elements: if rule B is inside rule A, it will match descendants
 of elements that match rule A.</p>
-<h4 id='--tt---another-rule--tt--'>2.2 -  <tt>&amp;.another-rule</tt>
+<h4 id='--tt---another-rule--tt--'>2.2 -  <tt>&.another-rule</tt>
 </h4>
 
 
@@ -201,7 +201,7 @@ want to use nesting to match a single element?</p>
 selected states. The normal state doesn&#39;t have a class name; the others have
 class names <tt>active</tt>, <tt>sel</tt>, and <tt>active sel</tt>.</p>
 <p>Without nesting, this looks like:</p>
-<pre class="highlighted"><div class="code_container"><code class="undefined">$theme.button {
+<pre class="highlight"><code class="hljs undefined">$theme.button {
   ...
 }
 
@@ -220,7 +220,7 @@ $theme.button.active.sel {
 match the same element!</p>
 <p>SCSS provides <tt>&amp;.</tt> which does exactly what we want, continuing
 the parent selector:</p>
-<pre class="highlighted"><div class="code_container"><code class="undefined">$theme.button{
+<pre class="highlight"><code class="hljs undefined">$theme.button{
   ...
 
   &amp;.active {
@@ -240,16 +240,16 @@ the parent selector:</p>
 
 
 <p>You can define variables:</p>
-<pre class="highlighted"><div class="code_container"><code class="css">$<span class="tag">width</span>: 5<span class="tag">px</span>;
+<pre class="highlight"><code class="hljs undefined">$width: 5px;
 
-<span class="class">.my-thingy</span> <span class="rules">{
-  <span class="rule"><span class="attribute">width</span>:<span class="value"> $width;</span></span>
-<span class="rule">}</span></span></code></div></pre>
+.my-thingy {
+  width: $width;
+}</code></div></pre>
 <p>If you want to share your variable between files, you have to make sure they are loaded
 in the right order. The <tt>sc_require()</tt> function does this:</p>
-<pre class="highlighted"><div class="code_container"><code class="undefined"><span class='comment'><div class='filename'>apps/my_app/resources/stylesheets/file1.css</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/my_app/resources/stylesheets/file1.css</div></span>
 $width: 5px;</code></div></pre>
-<pre class="highlighted"><div class="code_container"><code class="undefined"><span class='comment'><div class='filename'>apps/my_app/resources/stylesheets/file2.css</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/my_app/resources/stylesheets/file2.css</div></span>
 // call sc_require to make sure file1 loads first:
 sc_require("resources/stylesheets/file1.css");
 
@@ -263,10 +263,10 @@ sc_require("resources/stylesheets/file1.css");
 <p>Chance has a special <a href="#variables">variable</a>: <tt>$theme</tt>. It contains your theme&#39;s
 class names. Using <tt>$theme</tt>, you can write just <tt>$theme.button { ... }</tt> to style
 a button.</p>
-<p><tt>$theme</tt> gets its initial value from the <tt>:css_theme</tt> property in your app&#39;s</p>
-<p><tt>Buildfile</tt>:</p>
-<pre class="highlighted"><div class="code_container"><code class="ruby"><span class="comment"><span class='comment'><div class='filename'>Buildfile</span></div></span>
-config <span class="symbol">:my_app</span>, ... <span class="symbol">:css_theme</span> =&gt; <span class="string">"ace.my-app"</span></code></div></pre>
+<p><tt>$theme</tt> gets its initial value from the <tt>:css_theme</tt> property in your app&#39;s
+<tt>Buildfile</tt>:</p>
+<pre class="highlight"><code class="hljs ruby"><span class="hljs-comment"><span class='comment'><div class='filename'>Buildfile</span></div></span>
+config <span class="hljs-symbol">:my_app</span>, ... <span class="hljs-symbol">:css_theme</span> =&gt; <span class="hljs-string">"ace.my-app"</span></code></div></pre>
 <h4 id='--tt--theme--tt--Directive-'>3.1 -  <tt>@theme</tt> Directive
 </h4>
 
@@ -275,11 +275,11 @@ config <span class="symbol">:my_app</span>, ... <span class="symbol">:css_theme<
 app&#39;s error windows, error toolbars, etc. Creating a brand new  theme
 doesn&#39;t make sense: it will still be MyAwesomeTheme, just a version for errors.</p>
 <p>As described in <a href="theming_app.html">Theming Your App</a>, you&#39;ll make a <em>child theme</em>:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/my_app/theme.js</div></span>
-MyAwesomeTheme.Error = MyAwesomeTheme.subtheme(<span class="string">'error'</span>);</code></div></pre>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/my_app/theme.js</div></span>
+MyAwesomeTheme.Error = MyAwesomeTheme.subtheme('error');</code></div></pre>
 <p>Now, any time one of your windows, toolbars, or controls sets <tt>themeName</tt> to <tt>error</tt>:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">MyErrorWindow = SC.Pane.design({
-  themeName: <span class="string">'error'</span>,
+<pre class="highlight"><code class="hljs javascript">MyErrorWindow = SC.Pane.design({
+  <span class="hljs-attr">themeName</span>: <span class="hljs-string">'error'</span>,
   ...
 })</code></div></pre>
 <p>It and all of its children will automatically use your <tt>MyAwesomeTheme.Error</tt> theme,
@@ -287,10 +287,10 @@ and will get class names like <tt>ace my-awesome-theme error</tt>.</p>
 <p><tt>MyAwesomeTheme.Error</tt> is <em><em>nested inside</em></em> <tt>MyAwesomeTheme</tt>. Just like how
 SCSS&#39;s nesting matches DOM structure, Chance has a tool to match this SproutCore
 theme structure:</p>
-<pre class="highlighted"><div class="code_container"><code class="css">$<span class="tag">theme</span><span class="class">.button</span> <span class="rules">{ <span class="comment">/* normal styles here */</span> <span class="rule">}</span></span>
+<pre class="highlight"><code class="hljs undefined">$theme.button { /* normal styles here */ }
 
-<span class="at_rule">@<span class="function">theme(error)</span> </span>{
-  $<span class="tag">theme</span><span class="class">.button</span> <span class="rules">{ <span class="comment">/* error styles here */</span> <span class="rule">}</span></span>
+@theme(error) {
+  $theme.button { /* error styles here */ }
 }</code></div></pre>
 <p>The <tt>@theme(theme name)</tt> directive adds the theme name provided to the current
 theme names stored in <tt>$theme</tt>. All rules inside the <tt>{</tt> and <tt>}</tt> will be part
@@ -303,7 +303,7 @@ of your subtheme.</p>
 include the whole image, or select a portion to extract.  Chance will handle
 details like spriting or embedding as data: urls.</p>
 <p>To include an image, just pass the image name:</p>
-<pre class="highlighted"><div class="code_container"><code class="undefined">.my-image {
+<pre class="highlight"><code class="hljs undefined">.my-image {
   @include slice("my-image.png");
 }</code></div></pre>
 <div class='note'><p> The <tt>@include slice()</tt> directive works just like the CSS <tt>url()</tt>
@@ -311,7 +311,7 @@ directive - linking to images is relative to where your CSS file is located.
 For instance, if your CSS file is located at
  <tt>apps/your_app/resources/stylesheets/your_app.css</tt> and your image is
  <tt>apps/your_app/resources/images/my_image.png</tt>, your URL string would be
- <tt>&quot;../images/my_image.png&quot;</tt>.
+ <tt>"../images/my_image.png"</tt>.
 
 </p></div>
 
@@ -325,7 +325,7 @@ Where does the name come from?</p>
 <p>Chance lets you slice your images directly in your CSS. To include a 
 section of the image rather than the whole thing, pass arguments 
 identifying a rectangle:</p>
-<pre class="highlighted"><div class="code_container"><code class="undefined">.my-image {
+<pre class="highlight"><code class="hljs undefined">.my-image {
   @include slice("my-image.png", $left: 3, $width: 3);
 }</code></div></pre>
 <p>You don&#39;t have to specify all parameters. For instance, if you only specify
@@ -338,7 +338,7 @@ specify a right, it will go from there to the left edge.</p>
 
 <p>Rather than using <tt>background-repeat</tt> for slices, you should use the <tt>$repeat</tt>
 argument:</p>
-<pre class="highlighted"><div class="code_container"><code class="undefined">.my-image {
+<pre class="highlight"><code class="hljs undefined">.my-image {
   @include slice("my-image.png", $left: 3, $width: 1, $repeat: repeat-x);
 }</code></div></pre>
 <p>This lets Chance know that the image repeats, which can impact how it deals
@@ -352,7 +352,7 @@ create separate sprites for each <tt>repeat-x, repeat-y, and repeat</tt>.</p>
 you need to offset the position of a background image, you must use Chance&#39;s
  <tt>$offset</tt> argument.</p>
 <p> <tt>$offset</tt> takes two numbers: an x offset and a y offset. For example:</p>
-<pre class="highlighted"><div class="code_container"><code class="undefined">.my-image {
+<pre class="highlight"><code class="hljs undefined">.my-image {
   @include slice("my-image.png", $width: 3, $offset: -1 0);
 }</code></div></pre>
 <p>This will move the background to the left by 1px.</p>
@@ -369,28 +369,28 @@ multi-slice scalable backgrounds.</p>
 support it.  The HTML they generate follows a standard form that +@include
 slices+ matches.</p>
 <p>For instance, the controls may write:</p>
-<pre class="highlighted"><div class="code_container"><code class="xml"><span class="tag">&lt;<span class="title">html</span>&gt;</span>
-<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span> = '<span class="attribute">left</span>'&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span> = '<span class="attribute">middle</span>'&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span> = '<span class="attribute">right</span>'&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">html</span>&gt;</span></code></div></pre>
+<pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span> = <span class="hljs-string">'left'</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span> = <span class="hljs-string">'middle'</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span> = <span class="hljs-string">'right'</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></div></pre>
 <p>If you use <tt>@include slices</tt> like this:</p>
-<pre class="highlighted"><div class="code_container"><code class="undefined">$theme.button {
+<pre class="highlight"><code class="hljs undefined">$theme.button {
   @include slices("button.png", $left: 3, $right: 3);
 }</code></div></pre>
 <p>The generated CSS may look like this:</p>
-<pre class="highlighted"><div class="code_container"><code class="css"><span class="class">.ace</span><span class="class">.my-app</span><span class="class">.button</span> <span class="class">.left</span> <span class="rules">{
-  <span class="rule"><span class="attribute">background</span>:<span class="value"> ...
-}</span></span></span>
+<pre class="highlight"><code class="hljs css"><span class="hljs-selector-class">.ace</span><span class="hljs-selector-class">.my-app</span><span class="hljs-selector-class">.button</span> <span class="hljs-selector-class">.left</span> {
+  <span class="hljs-attribute">background</span>: ...
+}
 
-<span class="class">.ace</span><span class="class">.my-app</span><span class="class">.button</span> <span class="class">.middle</span> <span class="rules">{
-  <span class="rule"><span class="attribute">background</span>:<span class="value"> ...;</span></span>
-  <span class="rule"><span class="attribute">background-repeat</span>:<span class="value"> repeat-x;</span></span>
-<span class="rule">}</span></span>
+<span class="hljs-selector-class">.ace</span><span class="hljs-selector-class">.my-app</span><span class="hljs-selector-class">.button</span> <span class="hljs-selector-class">.middle</span> {
+  <span class="hljs-attribute">background</span>: ...;
+  <span class="hljs-attribute">background-repeat</span>: repeat-x;
+}
 
-<span class="class">.ace</span><span class="class">.my-app</span><span class="class">.button</span> <span class="class">.right</span> <span class="rules">{
-  <span class="rule"><span class="attribute">background</span>:<span class="value"> ...;</span></span>
-<span class="rule">}</span></span></code></div></pre>
+<span class="hljs-selector-class">.ace</span><span class="hljs-selector-class">.my-app</span><span class="hljs-selector-class">.button</span> <span class="hljs-selector-class">.right</span> {
+  <span class="hljs-attribute">background</span>: ...;
+}</code></div></pre>
 <h4 id='-Slicing-'>5.1 -  Slicing
 </h4>
 
@@ -401,7 +401,7 @@ left, middle, right, bottom-left, bottom, bottom-right+. Only slices that
 actually have content will be generated.</p>
 <p>For instance, the above example defines the following rectangle:</p>
 <div style='text-align:center'>
-<img src="images/theming/button_slice.jpg" alt="Button Slice">
+![Button Slice](images/theming/button_slice.jpg)
 </div>
 
 <p>You may only use four arguments to specify the rectangle: +$left, $top, $right,
@@ -421,7 +421,7 @@ controls this behavior is called <tt>$fill</tt>.</p>
 horizontally, but all the vertical pixels. If you wanted all the horizontal
 pixels as well, you could set <tt>$fill: 0 0</tt>. If you wanted to repeat a 15-pixel
 segment horizontally, you would specify <tt>$fill: 15 0</tt>:</p>
-<pre class="highlighted"><div class="code_container"><code class="undefined">$theme.button {
+<pre class="highlight"><code class="hljs undefined">$theme.button {
   @include slices("button-capsule", $left: 3, $right: 3, $fill: 15 0);
 }</code></div></pre>
 <h4 id='--tt--skip--tt--'>5.3 -  <tt>$skip</tt>
@@ -432,14 +432,14 @@ segment horizontally, you would specify <tt>$fill: 15 0</tt>:</p>
 want to theme a capsule-style button. You only need to override the images for
 the left and right sides: the design for the middle is unchanged.</p>
 <p>To avoid needlessly including the same data twice, skip the middle slice:</p>
-<pre class="highlighted"><div class="code_container"><code class="undefined">@theme(capsule) {
+<pre class="highlight"><code class="hljs undefined">@theme(capsule) {
   $theme.button {
     @include slices("button-capsule", $left: 3, $right: 3, $skip: middle);
   }
 }</code></div></pre>
 <p>You can supply a space-separated list of slices to skip. The possible slice
-names are <tt>top-left</tt>, <tt>top</tt>, <tt>top-right</tt>, <tt>left</tt>, <tt>middle</tt>, <tt>right</tt>,</p>
-<p><tt>bottom-left</tt>, <tt>bottom</tt>, and <tt>bottom-right</tt>.</p>
+names are <tt>top-left</tt>, <tt>top</tt>, <tt>top-right</tt>, <tt>left</tt>, <tt>middle</tt>, <tt>right</tt>,
+<tt>bottom-left</tt>, <tt>bottom</tt>, and <tt>bottom-right</tt>.</p>
 <h3 id='-Changelog-'>6 -  Changelog
 </h3>
 

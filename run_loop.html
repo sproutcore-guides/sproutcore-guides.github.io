@@ -20,7 +20,7 @@
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-    <meta name="generator" content="DocPad v6.55.5" />
+    <meta name="generator" content="DocPad v6.79.0" />
     
   </head>
 
@@ -131,20 +131,20 @@ fast even if many properties are changing per Run Loop.</p>
 it receives any browser events or user input. The only case in which you will
 have to manage the Run Loop from within your app is <em>if you have a callback
 from an external library that is not managed by SproutCore</em>. In this
-circumstance, you will want to trigger a new Run Loop by wrapping the code in</p>
-<p><tt>SC.run()</tt>. This will create a new Run Loop for that bit of code and will make
+circumstance, you will want to trigger a new Run Loop by wrapping the code in
+<tt>SC.run()</tt>. This will create a new Run Loop for that bit of code and will make
 sure your application continues to update as expected.</p>
 <p>Here is an example of triggering a Run Loop when a Web Worker message event is
 fired.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">worker = <span class="keyword">new</span> Worker(path);
+<pre class="highlight"><code class="hljs javascript">worker = <span class="hljs-keyword">new</span> Worker(path);
 
-worker.onmessage = <span class="keyword">function</span>(event) {
-  SC.run(<span class="keyword">function</span>() {
-    <span class="comment">// Do something</span>
+worker.onmessage = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) </span>{
+  SC.run(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-comment">// Do something</span>
   });
 };</code></div></pre>
 <div class='note'><p> See <tt>SC.Event.addEvent()</tt> for a SproutCore compatible way to add
-the <code>message</code> event listener in the example above.
+the `message` event listener in the example above.
 
 </p></div>
 
@@ -166,7 +166,7 @@ aren&#39;t interacting directly with the application no events are being
 triggered). In this case you should try invoking the Run Loop manually or just
 move your mouse over the application to trigger a new event.</p>
 <div class='warning'><p> Remember, you rarely need to manage the Run Loop manually from within
-your application. If you aren&#39;t certain of why you are forcing a new Run Loop,
+your application. If you aren't certain of why you are forcing a new Run Loop,
 then you may be doing something wrong.
 
 </p></div>

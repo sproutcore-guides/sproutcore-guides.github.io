@@ -20,7 +20,7 @@
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-    <meta name="generator" content="DocPad v6.55.5" />
+    <meta name="generator" content="DocPad v6.79.0" />
     
   </head>
 
@@ -146,7 +146,7 @@ mode as well.</p>
 
 <div class='warning'><p> The new Abbot tools do not yet support the test runner.  Until they
 do, you should follow the
-<a href="running_unit_tests.html#running-selected-unit-tests">Running Selected Unit Tests</a> section below.
+[Running Selected Unit Tests](running_unit_tests.html#running-selected-unit-tests) section below.
 
 </p></div>
 
@@ -159,7 +159,8 @@ do, you should follow the
 <p>The easiest way to run unit tests is to simply visit the built-in unit test
 runner by starting your browser and navigating to <a href="http://localhost:4020">http://localhost:4020</a>, then
 selecting <tt>tests</tt> from the application list as shown.</p>
-<p><img src='images/testing/unit_test_2.png' width='610px' alt='Test Runner' /></p>
+<img src='images/testing/unit_test_2.png' width='610px' alt='Test Runner' />
+
 <p>Your unit tests for your application(s) will be listed under <tt>APPS</tt>.  The unit
 tests for SproutCore itself are listed under <tt>SPROUTCORE</tt>.</p>
 <p>For quicker access to this page, bookmark <a href="http://localhost:4020/sproutcore/tests">http://localhost:4020/sproutcore/tests</a>.</p>
@@ -169,15 +170,20 @@ tests for SproutCore itself are listed under <tt>SPROUTCORE</tt>.</p>
 
 <p>Suppose your application is named &quot;my_app&quot;. To see a list of your unit tests,
 in the left hand column under <tt>APPS</tt>, double-click &quot;my_app&quot;:</p>
-<p><img src='images/testing/unit_test_3.png' width='610px' alt='Test Runner Unit Test Files' /></p>
+<img src='images/testing/unit_test_3.png' width='610px' alt='Test Runner Unit Test Files' />
+
 <p>Run all the unit test cases within a file by clicking on it.</p>
-<div class='note'><p> The &quot;<tt>Using Continuous Integration</tt>&quot; checkbox and the &quot;<tt>Run Tests</tt>&quot;
+<div class='note'><p> The "<tt>Using Continuous Integration</tt>" checkbox and the "<tt>Run Tests</tt>"
 button are under construction.
 
 </p></div>
 
 <p>When the test run is complete, the results are displayed as follows:</p>
-<p><img src='images/testing/unit_test_4.png' width='610' alt='Test Runner Unit Test Results' /></p>
+<img src='images/testing/unit_test_4.png' width='610' alt='Test Runner Unit Test Results' />
+
+
+
+
 <h3 id='-Running-Selected-Unit-Tests--'>3 -  Running Selected Unit Tests 
 </h3>
 
@@ -194,8 +200,7 @@ detailed below.</p>
 
 <p>Any unit test file can be run from a browser using a URL in the following
 format:</p>
-<pre class="highlighted"><div class="code_container"><code class="smalltalk"><span class="method">http:</span>//<span class="method">localhost:</span><span class="number">4020</span>/<span class="class">APP_NAME</span>/<span class="class">LANGUAGE</span>/current/tests/<span class="class">PATH</span>/<span class="class">TO</span>/<span class="class">TEST</span>.html@</code></div></pre>
-<p>where:</p>
+<pre class="highlight"><code class="hljs awk">http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">4020</span><span class="hljs-regexp">/APP_NAME/</span>LANGUAGE<span class="hljs-regexp">/current/</span>tests<span class="hljs-regexp">/PATH/</span>TO<span class="hljs-regexp">/TEST.html@</span></code></div></pre><p>where:</p>
 <ul>
 <li><tt>APP_NAME</tt> is your application name.</li>
 <li><tt>LANGUAGE</tt> is the language you want to run tests for. (Usually &#39;en&#39;)</li>
@@ -204,10 +209,8 @@ folder.  It should include the body of the javascript file name but</li>
 <li>not the <tt>.js</tt> extension.</li>
 </ul>
 <p>As an example, suppose you have a unit test file located at:</p>
-<pre class="highlighted"><div class="code_container"><code class="glsl">PROJECT_HOME/apps/my_app/tests/unit/<span class="keyword">sample</span>.js</code></div></pre>
-<p>To run this test, browse:</p>
-<pre class="highlighted"><div class="code_container"><code class="smalltalk"><span class="method">http:</span>//<span class="method">localhost:</span><span class="number">4020</span>/my_app/en/current/tests/unit/sample.html</code></div></pre>
-<h4 id='-Running-All-Unit-Tests-in-a-Directory-'>3.2 -  Running All Unit Tests in a Directory
+<pre class="highlight"><code class="hljs awk">PROJECT_HOME<span class="hljs-regexp">/apps/my</span>_app<span class="hljs-regexp">/tests/u</span>nit<span class="hljs-regexp">/sample.js</span></code></div></pre><p>To run this test, browse:</p>
+<pre class="highlight"><code class="hljs awk">http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">4020</span><span class="hljs-regexp">/my_app/</span>en<span class="hljs-regexp">/current/</span>tests<span class="hljs-regexp">/unit/</span>sample.html</code></div></pre><h4 id='-Running-All-Unit-Tests-in-a-Directory-'>3.2 -  Running All Unit Tests in a Directory
 </h4>
 
 
@@ -215,8 +218,7 @@ folder.  It should include the body of the javascript file name but</li>
 same method described as above, but instead name the directory with an .html
 extension.  For example, to run all of the unit tests in the <tt>tests/unit</tt>
 directory, you could visit:</p>
-<pre class="highlighted"><div class="code_container"><code class="smalltalk"><span class="method">http:</span>//<span class="method">localhost:</span><span class="number">4020</span>/my_app/en/current/tests/unit.html</code></div></pre>
-<p>Note that the HTML file loaded at this URL will contain all of your unit tests
+<pre class="highlight"><code class="hljs awk">http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">4020</span><span class="hljs-regexp">/my_app/</span>en<span class="hljs-regexp">/current/</span>tests<span class="hljs-regexp">/unit.html</span></code></div></pre><p>Note that the HTML file loaded at this URL will contain all of your unit tests
 files concatenated together in a single HTML page.  If your tests are not
 properly isolated, they may interfere with one another when loaded this way,
 though this is rare.</p>
@@ -228,8 +230,7 @@ though this is rare.</p>
 that too.  Instead of naming a directory, just visit a URL with the format
 described above but ending in tests.html.  For example, to load all of the unit
 tests at once for your contact application you could visit:</p>
-<pre class="highlighted"><div class="code_container"><code class="smalltalk"><span class="method">http:</span>//<span class="method">localhost:</span><span class="number">4020</span>/my_app/en/current/tests.html</code></div></pre>
-<p>Note that, like the combined directory tests above, this global test file will
+<pre class="highlight"><code class="hljs awk">http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">4020</span><span class="hljs-regexp">/my_app/</span>en<span class="hljs-regexp">/current/</span>tests.html</code></div></pre><p>Note that, like the combined directory tests above, this global test file will
 contain all of your unit test files concatenated together in a single HTML
 page.  If your tests are not properly isolated, they may interfere with one
 another, causing the unit tests to pass when loaded individually but fail when
@@ -243,8 +244,7 @@ write your test files so that they will not clobber one another at load time.</p
 your nested target like you name it in a config file.  For example, the
 sproutcore framework contains a nested framework called &quot;runtime&quot;.  You could
 load all of the unit tests for the sproutcore/runtime framework by visiting:</p>
-<pre class="highlighted"><div class="code_container"><code class="ruby"><span class="symbol">http:</span>/<span class="regexp">/localhost:4020/sproutcore</span><span class="regexp">/runtime/en</span><span class="regexp">/current/tests</span>.html</code></div></pre>
-<h3 id='-Moving-On-'>4 -  Moving On
+<pre class="highlight"><code class="hljs awk">http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">4020</span><span class="hljs-regexp">/sproutcore/</span>runtime<span class="hljs-regexp">/en/</span>current<span class="hljs-regexp">/tests.html</span></code></div></pre><h3 id='-Moving-On-'>4 -  Moving On
 </h3>
 
 

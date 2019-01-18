@@ -20,7 +20,7 @@
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-    <meta name="generator" content="DocPad v6.55.5" />
+    <meta name="generator" content="DocPad v6.79.0" />
     
   </head>
 
@@ -115,7 +115,7 @@
           </div>
 
           <div class='note'><p> If you are looking for other methods of talking to the server,
-<a href="connect_server.html">look here</a>.
+[look here](connect_server.html).
 
 </p></div>
 
@@ -167,37 +167,37 @@ examples in the
 that will provide us with a basic
 <a href="http://en.wikipedia.org/wiki/Representational_State_Transfer#RESTful_web_services">RESTful API</a>.
 If we wanted to get a list of all ToDo items, we would send a GET request to:</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">GET: /todos/</code></div></pre>
+<pre class="highlight"><code class="hljs bash">GET: /todos/</code></div></pre>
 <p>Which will return a <a href="http://en.wikipedia.org/wiki/Json">JSON</a> array like:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">[
+<pre class="highlight"><code class="hljs javascript">[
   {
-    <span class="string">"id"</span>: <span class="number">1</span>,
-    <span class="string">"title"</span>: <span class="string">"Learn to use SproutCore"</span>,
-    <span class="string">"done"</span>: <span class="literal">false</span>
+    <span class="hljs-string">"id"</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-string">"title"</span>: <span class="hljs-string">"Learn to use SproutCore"</span>,
+    <span class="hljs-string">"done"</span>: <span class="hljs-literal">false</span>
   },
   {
-    <span class="string">"id"</span>: <span class="number">2</span>,
-    <span class="string">"title"</span>: <span class="string">"Something"</span>,
-    <span class="string">"done"</span>: <span class="literal">false</span>
+    <span class="hljs-string">"id"</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-string">"title"</span>: <span class="hljs-string">"Something"</span>,
+    <span class="hljs-string">"done"</span>: <span class="hljs-literal">false</span>
   }
 ]</code></div></pre>
 <p>To create a new ToDo item, we can POST to this URL with JSON in the body.</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">POST: /todos/
+<pre class="highlight"><code class="hljs bash">POST: /todos/
 {
-  <span class="string">"title"</span>: <span class="string">"Profit!"</span>,
-  <span class="string">"done"</span>: <span class="literal">false</span>
+  <span class="hljs-string">"title"</span>: <span class="hljs-string">"Profit!"</span>,
+  <span class="hljs-string">"done"</span>: <span class="hljs-literal">false</span>
 }</code></div></pre>
 <p>The server will return the new ID for us.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">{
-  <span class="string">"id"</span>: <span class="number">3</span>
+<pre class="highlight"><code class="hljs javascript">{
+  <span class="hljs-string">"id"</span>: <span class="hljs-number">3</span>
 }</code></div></pre>
 <p>If we specify an ID in the url:</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">GET: /todos/3</code></div></pre>
+<pre class="highlight"><code class="hljs bash">GET: /todos/3</code></div></pre>
 <p>You&#39;ll see just one object returned:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">{
-  <span class="string">"id"</span>: <span class="number">3</span>,
-  <span class="string">"title"</span>: <span class="string">"Profit!"</span>,
-  <span class="string">"done"</span>: <span class="literal">false</span>
+<pre class="highlight"><code class="hljs javascript">{
+  <span class="hljs-string">"id"</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-string">"title"</span>: <span class="hljs-string">"Profit!"</span>,
+  <span class="hljs-string">"done"</span>: <span class="hljs-literal">false</span>
 }</code></div></pre>
 <p>The API also allows us to send a PUT to update an existing ToDo item and DELETE
 to remove it.</p>
@@ -216,9 +216,9 @@ writing our DataSource.</p>
 
 
 <p>To generate a DataSource, use the command:</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">sc-gen data-source MyApp.RESTDataSource</code></div></pre>
+<pre class="highlight"><code class="hljs bash">sc-gen data-source MyApp.RESTDataSource</code></div></pre>
 <div class='note'><p> Anywhere you see MyApp, replace this with the name of the application
-that you&#39;re building.
+that you're building.
 
 </p></div>
 
@@ -230,15 +230,15 @@ stubbed with the default functions that will get called by the store.</p>
 
 <p>The next step is linking the new DataSource to the store. By default, the store
 will be using <a href="fixtures.html">Fixtures</a>. In <tt>core.js</tt> you&#39;ll see:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">  store: SC.Store.create().from(SC.Record.fixtures)</code></div></pre>
+<pre class="highlight"><code class="hljs javascript">  store: SC.Store.create().from(SC.Record.fixtures)</code></div></pre>
 <p>Replace this with the newly created DataSource:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">  store: SC.Store.create().from(<span class="string">'MyApp.RESTDataSource'</span>)</code></div></pre>
+<pre class="highlight"><code class="hljs javascript">  store: SC.Store.create().from(<span class="hljs-string">'MyApp.RESTDataSource'</span>)</code></div></pre>
 <p>This will tell the store to use the new DataSource when trying to find data.</p>
 <div class='note'><p> As you can see we are replacing a JavaScript Object: <tt>SC.Record.fixtures</tt>
-with a string <tt>&#39;MyApp.RESTDataSource&#39;</tt>. This is because our DataSource won&#39;t
+with a string <tt>'MyApp.RESTDataSource'</tt>. This is because our DataSource won't
 have been initialised. The first time the store tries to access the DataSource
 it will convert the string to an object and save it for future reference. See
-<a href="core_concepts.html#property-paths">Core Concepts</a> for more information.
+[Core Concepts](core_concepts.html#property-paths) for more information.
 
 </p></div>
 
@@ -257,9 +257,9 @@ it will convert the string to an object and save it for future reference. See
 <p>The first thing that your app will likely do is to fetch a bunch of data. This
 is usually done via a <a href="records.html#using-queries">query</a>. The query for
 finding all ToDo&#39;s will look like:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">  MyApp.QUERY_ALL_TODOS = SC.Query.local(MyApp.Todo)</code></div></pre>
+<pre class="highlight"><code class="hljs javascript">  MyApp.QUERY_ALL_TODOS = SC.Query.local(MyApp.Todo)</code></div></pre>
 <div class='note'><p> Our DataSource will be written assuming that
-<a href="records.html#local-vs-remote-queries">local queries</a> are being used. Local
+[local queries](records.html#local-vs-remote-queries) are being used. Local
 queries are what you will be using most of the time. Remote queries will be
 covered in a separate guide.
 
@@ -273,12 +273,12 @@ time the query conditions match a new record. After it has returned, the store
 will call &#39;fetch&#39; on its attached DataSource. </p>
 <p>This is when we get to take action. The generated DataSource will already
 contain the following code:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">  fetch: <span class="keyword">function</span>(store, query) {
+<pre class="highlight"><code class="hljs javascript">  fetch: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">store, query</span>) </span>{
 
-    <span class="comment">// TODO: Add handlers to fetch data for specific queries.  </span>
-    <span class="comment">// call store.dataSourceDidFetchQuery(query) when done.</span>
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Add handlers to fetch data for specific queries.  </span>
+    <span class="hljs-comment">// call store.dataSourceDidFetchQuery(query) when done.</span>
 
-    <span class="keyword">return</span> NO ; <span class="comment">// return YES if you handled the query</span>
+    <span class="hljs-keyword">return</span> NO ; <span class="hljs-comment">// return YES if you handled the query</span>
   },</code></div></pre>
 <p>Currently, this DataSource will not do anything except return NO. This tells
 the store that we are not going to handle this query.</p>
@@ -286,24 +286,24 @@ the store that we are not going to handle this query.</p>
 we will call <tt>store.dataSourceDidFetchQuery(query)</tt> to let the store know that
 this query has been updated.</p>
 <p>Now we want to fetch all the Todo&#39;s</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">fetch: <span class="keyword">function</span>(store, query) {
-  SC.Request.getUrl(<span class="string">'/todos/'</span>).json()
-    .notify(<span class="keyword">this</span>, <span class="string">'fetchDidComplete'</span>, store, query)
+<pre class="highlight"><code class="hljs javascript">fetch: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">store, query</span>) </span>{
+  SC.Request.getUrl(<span class="hljs-string">'/todos/'</span>).json()
+    .notify(<span class="hljs-keyword">this</span>, <span class="hljs-string">'fetchDidComplete'</span>, store, query)
     .send()
 
-  <span class="keyword">return</span> YES;
+  <span class="hljs-keyword">return</span> YES;
 },
 
-fetchDidComplete: <span class="keyword">function</span>(response, store, query) {
-  <span class="keyword">if</span>(SC.ok(response)) {
-    <span class="keyword">var</span> recordType = query.get(<span class="string">'recordType'</span>),
-        records = response.get(<span class="string">'body'</span>);
+<span class="hljs-attr">fetchDidComplete</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">response, store, query</span>) </span>{
+  <span class="hljs-keyword">if</span>(SC.ok(response)) {
+    <span class="hljs-keyword">var</span> recordType = query.get(<span class="hljs-string">'recordType'</span>),
+        records = response.get(<span class="hljs-string">'body'</span>);
 
     store.loadRecords(recordType, records);
     store.dataSourceDidFetchQuery(query);
 
-  } <span class="keyword">else</span> {
-    <span class="comment">// Tell the store that your server returned an error</span>
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// Tell the store that your server returned an error</span>
     store.dataSourceDidErrorQuery(query, response);
   }
 }</code></div></pre>
@@ -312,7 +312,7 @@ a <tt>Request</tt> to send to the server.</p>
 <p><a href="http://docs.sproutcore.com/symbols/SC.Request.html">SC.Request</a> is
 SproutCore&#39;s simple wrapper around an Ajax call.</p>
 <div class='note'><p> You are not restricted to using an SC.Request inside of a DataSource, but
-it is advised that you don&#39;t go making calls to your server from just anywhere
+it is advised that you don't go making calls to your server from just anywhere
 in your app.
 
 </p></div>
@@ -362,21 +362,21 @@ string is converted into JS objects for us. If we did not call <tt>.json()</tt> 
 the <tt>Request</tt>, it would return a string.</p>
 <p>This works because our server responds with an array at the top level of the
 JSON. If your server returned something like:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">{
-  length: <span class="number">1</span>,
-  records: [
+<pre class="highlight"><code class="hljs javascript">{
+  <span class="hljs-attr">length</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">records</span>: [
     {
-      <span class="string">"id"</span>: <span class="number">1</span>,
-      <span class="string">"title"</span>: <span class="string">"Learn to use SproutCore"</span>,
-      <span class="string">"done"</span>: <span class="literal">false</span>
+      <span class="hljs-string">"id"</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-string">"title"</span>: <span class="hljs-string">"Learn to use SproutCore"</span>,
+      <span class="hljs-string">"done"</span>: <span class="hljs-literal">false</span>
     }
   ]
 }</code></div></pre>
 <p>Then we would use this instead:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class="keyword">var</span> body = response.get(<span class="string">'body'</span>)
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> body = response.get(<span class="hljs-string">'body'</span>)
     records = body.records;</code></div></pre>
-<div class='note'><p> Note how we didn&#39;t use <tt>.get(&#39;records&#39;)</tt>, this is because the JSON is
-converted into plain Javascript objects, not <tt>SC.Object</tt>&#39;s.
+<div class='note'><p> Note how we didn't use <tt>.get('records')</tt>, this is because the JSON is
+converted into plain Javascript objects, not <tt>SC.Object</tt>'s.
 
 </p></div>
 
@@ -386,7 +386,7 @@ the store to actually put our data into the store. The first parameter is the
 Record Type of the objects you are going to load. The second is an array of
 plain JS object hashes containing your records data.</p>
 <div class='warning'><p> You need to make sure that your data hashes have their
-<a href="records.html#record-ids">primary key</a> properties, in this case &#39;<tt>id</tt>&#39;.
+[primary key](records.html#record-ids) properties, in this case '<tt>id</tt>'.
 
 </p></div>
 
@@ -417,30 +417,30 @@ for one url. That won&#39;t get us very far. But given that all of our records a
 going to have a very similar URL, it should be simple to dynamically generate
 this URL.</p>
 <p>We can have each of our models know what their URL will be:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">MyApp.Todo = SC.Record.extend(
-<span class="comment">/** @scope MyApp.Todo.prototype */</span> {
+<pre class="highlight"><code class="hljs javascript">MyApp.Todo = SC.Record.extend(
+<span class="hljs-comment">/** @scope MyApp.Todo.prototype */</span> {
 
-  <span class="comment">// TODO: Add your own code here.</span>
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Add your own code here.</span>
 
 }) ;
 
 MyApp.Todo.mixin({
-  resourcePath: <span class="string">'todo'</span>,
-  pluralResourcePath: <span class="string">'todos'</span>
+  <span class="hljs-attr">resourcePath</span>: <span class="hljs-string">'todo'</span>,
+  <span class="hljs-attr">pluralResourcePath</span>: <span class="hljs-string">'todos'</span>
 }) ;</code></div></pre>
 <p>We use a mixin here to set these as class properties. it allows us to get the
 path without an instance. For example: <tt>MyApp.Todo.resourcePath</tt>.</p>
 <p>This will allow our DataSource to find the path needed. We&#39;ll change the fetch
 method to:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">fetch: <span class="keyword">function</span>(store, query) {
-  SC.Request.getUrl(<span class="string">'/%@/'</span>.fmt(query.recordType.pluralResourcePath))
-    .notify(<span class="keyword">this</span>, <span class="string">'fetchDidComplete'</span>, store, query)
+<pre class="highlight"><code class="hljs javascript">fetch: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">store, query</span>) </span>{
+  SC.Request.getUrl(<span class="hljs-string">'/%@/'</span>.fmt(query.recordType.pluralResourcePath))
+    .notify(<span class="hljs-keyword">this</span>, <span class="hljs-string">'fetchDidComplete'</span>, store, query)
     .json().send()
 
-  <span class="keyword">return</span> YES;
+  <span class="hljs-keyword">return</span> YES;
 },</code></div></pre>
 <p>The fetch method will now use a dynamic URL for each record type.  </p>
-<div class='note'><p> The <a href="http://docs.sproutcore.com/symbols/String.html#String#fmt">fmt</a>
+<div class='note'><p> The [fmt](http://docs.sproutcore.com/symbols/String.html#String#fmt)
 function outputs a formatted string.
 
 </p></div>
@@ -449,14 +449,14 @@ function outputs a formatted string.
 such as <a href="http://docs.sproutcore.com/#doc=String&amp;method=decamelize&amp;src=false">decamalize</a>
 and <a href="http://docs.sproutcore.com/#doc=SC.String&amp;method=.pluralize&amp;src=false">pluralize</a>
 as in the code below:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">fetch: <span class="keyword">function</span>(store, query) {
-  <span class="keyword">var</span> path = query.recordType.decamalize().pluralize();
+<pre class="highlight"><code class="hljs javascript">fetch: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">store, query</span>) </span>{
+  <span class="hljs-keyword">var</span> path = query.recordType.decamalize().pluralize();
 
-  SC.Request.getUrl(<span class="string">'/%@/'</span>.fmt(path))
-    .notify(<span class="keyword">this</span>, <span class="string">'fetchDidComplete'</span>, store, query)
+  SC.Request.getUrl(<span class="hljs-string">'/%@/'</span>.fmt(path))
+    .notify(<span class="hljs-keyword">this</span>, <span class="hljs-string">'fetchDidComplete'</span>, store, query)
     .json().send()
 
-  <span class="keyword">return</span> YES;
+  <span class="hljs-keyword">return</span> YES;
 },</code></div></pre>
 <p>However, this may not work for more complex scenarios, so specifically defining
 the resource path on the model is a much more robust approach.</p>
@@ -468,24 +468,24 @@ the resource path on the model is a much more robust approach.</p>
 to want to make some changes to these records.</p>
 <p>Each time our store wants to commit changes to the server, the <tt>updateRecord</tt>
 method will be called for each of the changed records.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">updateRecord: <span class="keyword">function</span>(store, storeKey) {
-  <span class="keyword">var</span> recordType = store.recordTypeFor(storeKey),
+<pre class="highlight"><code class="hljs javascript">updateRecord: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">store, storeKey</span>) </span>{
+  <span class="hljs-keyword">var</span> recordType = store.recordTypeFor(storeKey),
       id = store.idFor(storeKey),
       data = store.readDataHash(storeKey);
 
-  SC.Request.putUrl(<span class="string">"/%@/%@"</span>.fmt(recordType.resourcePath, id))
-    .notify(<span class="keyword">this</span>, <span class="string">'updateRecordDidComplete'</span>, store, storeKey, id)
+  SC.Request.putUrl(<span class="hljs-string">"/%@/%@"</span>.fmt(recordType.resourcePath, id))
+    .notify(<span class="hljs-keyword">this</span>, <span class="hljs-string">'updateRecordDidComplete'</span>, store, storeKey, id)
     .json().send(data);
 
-  <span class="keyword">return</span> YES;
+  <span class="hljs-keyword">return</span> YES;
 },
 
-updateRecordDidComplete: <span class="keyword">function</span>(response, store, storeKey, id) {
-  <span class="keyword">if</span>(SC.ok(response) &amp;&amp; response.get(<span class="string">'status'</span>) === <span class="number">200</span>) {
-    <span class="comment">// Tell the store that we have successfully updated</span>
+<span class="hljs-attr">updateRecordDidComplete</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">response, store, storeKey, id</span>) </span>{
+  <span class="hljs-keyword">if</span>(SC.ok(response) &amp;&amp; response.get(<span class="hljs-string">'status'</span>) === <span class="hljs-number">200</span>) {
+    <span class="hljs-comment">// Tell the store that we have successfully updated</span>
     store.dataSourceDidComplete(storeKey);
-  } <span class="keyword">else</span> {
-    <span class="comment">// Tell the store that your server returned an error</span>
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// Tell the store that your server returned an error</span>
     store.dataSourceDidError(storeKey, response);
   }
 }</code></div></pre>
@@ -504,7 +504,7 @@ with a string.
 
 <p>Our API will return empty response with status 200 from our PUT command.</p>
 <p>So we test for it:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">response.get(<span class="string">'status'</span>) === <span class="number">200</span></code></div></pre>
+<pre class="highlight"><code class="hljs javascript">response.get(<span class="hljs-string">'status'</span>) === <span class="hljs-number">200</span></code></div></pre>
 <p>If all is good, then we call <tt>dataSourceDidComplete</tt> to tell the store we are
 done.</p>
 <h5 id='-Server-Processing-'>5.3.1 -  Server Processing
@@ -513,16 +513,16 @@ done.</p>
 
 <p>If your server needs to process the data, it might need to send back different
 data than what you send up. Your server might send back something like:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">{
-  <span class="string">"record"</span>: {
-    <span class="string">"id"</span>: <span class="number">3</span>,
-    <span class="string">"title"</span>: <span class="string">"Profit!"</span>,
-    <span class="string">"done"</span>: <span class="literal">false</span>,
-    <span class="string">"updatedAt"</span>: <span class="string">"2011-02-20 11:36Z"</span>
+<pre class="highlight"><code class="hljs javascript">{
+  <span class="hljs-string">"record"</span>: {
+    <span class="hljs-string">"id"</span>: <span class="hljs-number">3</span>,
+    <span class="hljs-string">"title"</span>: <span class="hljs-string">"Profit!"</span>,
+    <span class="hljs-string">"done"</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-string">"updatedAt"</span>: <span class="hljs-string">"2011-02-20 11:36Z"</span>
   }
 }</code></div></pre>
 <p>You&#39;ll then need to update your callback to tell the store about it:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">store.dataSourceDidComplete(storeKey, response.get(<span class="string">'body'</span>).record);</code></div></pre>
+<pre class="highlight"><code class="hljs javascript">store.dataSourceDidComplete(storeKey, response.get(<span class="hljs-string">'body'</span>).record);</code></div></pre>
 <p>This will update the properties on your record with any changes that the server
 makes.</p>
 <h4 id='-Going-for-Creation-'>5.4 -  Going for Creation
@@ -532,28 +532,28 @@ makes.</p>
 <p>Creating records is much like updating them, but when you first create a record
 in the store, it does not have an <tt>id</tt>. So when the server responds, with
 the <tt>id</tt>:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">{
-  <span class="string">"id"</span>: <span class="number">3</span>
+<pre class="highlight"><code class="hljs javascript">{
+  <span class="hljs-string">"id"</span>: <span class="hljs-number">3</span>
 }</code></div></pre>
 <p>We tell the store about it:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">createRecord: <span class="keyword">function</span>(store, storeKey) {
-  <span class="keyword">var</span> recordType = store.recordTypeFor(storeKey),
+<pre class="highlight"><code class="hljs javascript">createRecord: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">store, storeKey</span>) </span>{
+  <span class="hljs-keyword">var</span> recordType = store.recordTypeFor(storeKey),
       data = store.readDataHash(storeKey);
 
-  SC.Request.postUrl(<span class="string">"/%@"</span>.fmt(recordType.pluralResourcePath))
-    .notify(<span class="keyword">this</span>, <span class="string">'createRecordDidComplete'</span>, store, storeKey)
+  SC.Request.postUrl(<span class="hljs-string">"/%@"</span>.fmt(recordType.pluralResourcePath))
+    .notify(<span class="hljs-keyword">this</span>, <span class="hljs-string">'createRecordDidComplete'</span>, store, storeKey)
     .json().send(data);
 
-  <span class="keyword">return</span> YES;
+  <span class="hljs-keyword">return</span> YES;
 },
 
-createRecordDidComplete: <span class="keyword">function</span>(response, store, storeKey) {
-  <span class="keyword">var</span> body = response.get(<span class="string">'body'</span>);
-  <span class="keyword">if</span>(SC.ok(response) &amp;&amp; response.get(<span class="string">'status'</span>) === <span class="number">200</span>) {
-    <span class="comment">// Tell the store that we have successfully updated</span>
-    store.dataSourceDidComplete(storeKey, <span class="literal">null</span>, body.id);
-  } <span class="keyword">else</span> {
-    <span class="comment">// Tell the store that your server returned an error</span>
+<span class="hljs-attr">createRecordDidComplete</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">response, store, storeKey</span>) </span>{
+  <span class="hljs-keyword">var</span> body = response.get(<span class="hljs-string">'body'</span>);
+  <span class="hljs-keyword">if</span>(SC.ok(response) &amp;&amp; response.get(<span class="hljs-string">'status'</span>) === <span class="hljs-number">200</span>) {
+    <span class="hljs-comment">// Tell the store that we have successfully updated</span>
+    store.dataSourceDidComplete(storeKey, <span class="hljs-literal">null</span>, body.id);
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// Tell the store that your server returned an error</span>
     store.dataSourceDidError(storeKey, response);
   }
 }</code></div></pre>
@@ -568,24 +568,24 @@ createRecordDidComplete: <span class="keyword">function</span>(response, store, 
 
 <p>Things should start feeling pretty familiar now, you can probably guess what&#39;s
 going to come next.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">destroyRecord: <span class="keyword">function</span>(store, storeKey) {
-  <span class="keyword">var</span> recordType = store.recordTypeFor(storeKey),
+<pre class="highlight"><code class="hljs javascript">destroyRecord: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">store, storeKey</span>) </span>{
+  <span class="hljs-keyword">var</span> recordType = store.recordTypeFor(storeKey),
       id = store.idFor(storeKey);
 
-  SC.Request.deleteUrl(<span class="string">"/%@/%@"</span>.fmt(recordType.resourcePath, id))
-    .notify(<span class="keyword">this</span>, <span class="string">'destroyRecordDidComplete'</span>, store, storeKey)
+  SC.Request.deleteUrl(<span class="hljs-string">"/%@/%@"</span>.fmt(recordType.resourcePath, id))
+    .notify(<span class="hljs-keyword">this</span>, <span class="hljs-string">'destroyRecordDidComplete'</span>, store, storeKey)
     .json().send();
 
-  <span class="keyword">return</span> YES;
+  <span class="hljs-keyword">return</span> YES;
 },
 
-destroyRecordDidComplete: <span class="keyword">function</span>(response, store, storeKey) {
-  <span class="keyword">var</span> body = response.get(<span class="string">'body'</span>);
-  <span class="keyword">if</span>(SC.ok(response) &amp;&amp; response.get(<span class="string">'status'</span>) === <span class="number">200</span>) {
-    <span class="comment">// Tell the store that we have successfully updated</span>
+<span class="hljs-attr">destroyRecordDidComplete</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">response, store, storeKey</span>) </span>{
+  <span class="hljs-keyword">var</span> body = response.get(<span class="hljs-string">'body'</span>);
+  <span class="hljs-keyword">if</span>(SC.ok(response) &amp;&amp; response.get(<span class="hljs-string">'status'</span>) === <span class="hljs-number">200</span>) {
+    <span class="hljs-comment">// Tell the store that we have successfully updated</span>
     store.dataSourceDidDestroy(storeKey);
-  } <span class="keyword">else</span> {
-    <span class="comment">// Tell the store that your server returned an error</span>
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// Tell the store that your server returned an error</span>
     store.dataSourceDidError(storeKey, response);
   }
 }</code></div></pre>
@@ -601,24 +601,24 @@ destroyRecordDidComplete: <span class="keyword">function</span>(response, store,
 <p>One that that is not always used, but some apps find helpful, is being able to
 refresh a record, to get the latest from the server.</p>
 <p>This is similar to a query, but for only a single record.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">retrieveRecord: <span class="keyword">function</span>(store, storeKey) {
-  <span class="keyword">var</span> recordType = store.recordTypeFor(storeKey),
+<pre class="highlight"><code class="hljs javascript">retrieveRecord: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">store, storeKey</span>) </span>{
+  <span class="hljs-keyword">var</span> recordType = store.recordTypeFor(storeKey),
       id = store.idFor(storeKey),
       data = store.readDataHash(storeKey);
 
-  SC.Request.getUrl(<span class="string">"/%@/%@"</span>.fmt(recordType.resourcePath, id))
-    .notify(<span class="keyword">this</span>, <span class="string">'retrieveRecordDidComplete'</span>, store, storeKey, id)
+  SC.Request.getUrl(<span class="hljs-string">"/%@/%@"</span>.fmt(recordType.resourcePath, id))
+    .notify(<span class="hljs-keyword">this</span>, <span class="hljs-string">'retrieveRecordDidComplete'</span>, store, storeKey, id)
     .json().send(data);
 
-  <span class="keyword">return</span> YES;
+  <span class="hljs-keyword">return</span> YES;
 },
 
-retrieveRecordDidComplete: <span class="keyword">function</span>(response, store, storeKey, id) {
-  <span class="keyword">if</span>(SC.ok(response) &amp;&amp; response.get(<span class="string">'status'</span>) === <span class="number">200</span>) {
-    <span class="comment">// Tell the store that we have successfully updated</span>
-    store.dataSourceDidComplete(storeKey, response.get(<span class="string">'body'</span>).record);
-  } <span class="keyword">else</span> {
-    <span class="comment">// Tell the store that your server returned an error</span>
+<span class="hljs-attr">retrieveRecordDidComplete</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">response, store, storeKey, id</span>) </span>{
+  <span class="hljs-keyword">if</span>(SC.ok(response) &amp;&amp; response.get(<span class="hljs-string">'status'</span>) === <span class="hljs-number">200</span>) {
+    <span class="hljs-comment">// Tell the store that we have successfully updated</span>
+    store.dataSourceDidComplete(storeKey, response.get(<span class="hljs-string">'body'</span>).record);
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// Tell the store that your server returned an error</span>
     store.dataSourceDidError(storeKey, response);
   }
 }</code></div></pre>
@@ -629,15 +629,15 @@ to make sure that the local record is the same as the server copy.</p>
 
 
 <p>TODO: Some important things to note will go here.</p>
-<h4 id='-A-Record-s-PrimaryKey-'>6.1 -  A Record&#39;s PrimaryKey
+<h4 id='-A-Record-s-PrimaryKey-'>6.1 -  A Record's PrimaryKey
 </h4>
 
 
 <p>By default, SproutCore sets the primaryKey property of records to &#39;guid&#39;. A
 common convention of many server side APIs is to use just &#39;id&#39;.  To make your
 records work with this, you can override the default in your Model files.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">App.Todo = SC.Record.extend({
-  primaryKey:<span class="string">'id'</span>
+<pre class="highlight"><code class="hljs javascript">App.Todo = SC.Record.extend({
+  <span class="hljs-attr">primaryKey</span>:<span class="hljs-string">'id'</span>
 })</code></div></pre>
 <p>You may set this to anything that you want, if your server uses, for
 example, <tt>TID</tt> for your todo&#39;s id, you must set <tt>primaryKey:&#39;TID&#39;</tt>. Like normal

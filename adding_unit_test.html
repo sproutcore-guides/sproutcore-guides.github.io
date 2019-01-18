@@ -20,7 +20,7 @@
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-    <meta name="generator" content="DocPad v6.55.5" />
+    <meta name="generator" content="DocPad v6.79.0" />
     
   </head>
 
@@ -124,7 +124,7 @@
 
 <p>When you first create your SproutCore application, directories are
 automatically created for you.</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">$ sc-init MyApp
+<pre class="highlight"><code class="hljs bash">$ sc-init MyApp
  ~ Created directory at my_app
  ~ Created file at my_app/Buildfile
  ~ Created file at my_app/README
@@ -173,58 +173,58 @@ test files in the <tt>controller</tt> directory to verify.</p>
 <p>When you use the <tt>sc-gen</tt> tool to add new source files to your application, it
 will automatically add a corresponding test file added into the <tt>tests</tt>
 directory.  For example,</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">$ sc-gen controller MyApp.LoginController
+<pre class="highlight"><code class="hljs bash">$ sc-gen controller MyApp.LoginController
  ~ Created directory at controllers
  ~ Created file at controllers/login.js
  ~ Created directory at tests
  ~ Created directory at tests/controllers
- ~ Created file at tests/controllers/login.js <span class="comment"># &lt;== Generated unit test file</span>
+ ~ Created file at tests/controllers/login.js <span class="hljs-comment"># &lt;== Generated unit test file</span>
 
 Your controller is now ready to use!</code></div></pre>
 <p>Notice the creation of <tt>tests/controllers/login.js</tt>.</p>
 <p>Conveniently, the generated unit test file is built from a template:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/my_app/test/controllers/login.js</div></span>
-<span class="comment">// ==================================================</span>
-<span class="comment">// Project:   MyApp.loginController Unit Test</span>
-<span class="comment">// Copyright: ©2011 My Company, Inc.</span>
-<span class="comment">// ==================================================</span>
-<span class="comment">/*globals MyApp module test ok equals same stop start */</span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/my_app/test/controllers/login.js</div></span>
+// ==================================================
+// Project:   MyApp.loginController Unit Test
+// Copyright: ©2011 My Company, Inc.
+// ==================================================
+/*globals MyApp module test ok equals same stop start */
 
-module(<span class="string">"MyApp.loginController"</span>);
+module("MyApp.loginController");
 
-<span class="comment">// TODO: Replace with real unit test for MyApp.loginController</span>
-test(<span class="string">"test description"</span>, <span class="keyword">function</span>() {
-  <span class="keyword">var</span> expected = <span class="string">"test"</span>;
-  <span class="keyword">var</span> result   = <span class="string">"test"</span>;
-  equals(result, expected, <span class="string">"test should equal test"</span>);
+// TODO: Replace with real unit test for MyApp.loginController
+test("test description", function() {
+  var expected = "test";
+  var result   = "test";
+  equals(result, expected, "test should equal test");
 });</code></div></pre>
 <h4 id='-Generating-Unit-Test-Files-'>2.2 -  Generating Unit Test Files
 </h4>
 
 
 <p>You can also use the <tt>sc-gen</tt> tool to create your unit test file by itself:</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">$ sc-gen test TARGET_NAME PATH/TO/TEST[.js]</code></div></pre>
+<pre class="highlight"><code class="hljs bash">$ sc-gen <span class="hljs-built_in">test</span> TARGET_NAME PATH/TO/TEST[.js]</code></div></pre>
 <p>For example, if you wanted to add a unit test file named <tt>views/login/render.js</tt>
 to your application, you would:</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">$ sc-gen test MyApp views/login/render
+<pre class="highlight"><code class="hljs bash">$ sc-gen <span class="hljs-built_in">test</span> MyApp views/login/render
  ~ Created file at tests/views/login/render.js
 
-Your unit test has been generated and is now ready to be configured!</code></div></pre>
+Your unit <span class="hljs-built_in">test</span> has been generated and is now ready to be configured!</code></div></pre>
 <p><tt>render.js</tt> contains a sample unit test case to help you get started.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/my_app/tests/views/login/render.js</div></span>
-<span class="comment">// ==================================================</span>
-<span class="comment">// Project:   MyApp Unit Test</span>
-<span class="comment">// Copyright: ©2011 My Company, Inc.</span>
-<span class="comment">// ==================================================</span>
-<span class="comment">/*globals MyApp module test ok equals same stop start */</span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/my_app/tests/views/login/render.js</div></span>
+// ==================================================
+// Project:   MyApp Unit Test
+// Copyright: ©2011 My Company, Inc.
+// ==================================================
+/*globals MyApp module test ok equals same stop start */
 
-module(<span class="string">"MyApp"</span>);
+module("MyApp");
 
-<span class="comment">// TODO: Replace with real unit test</span>
-test(<span class="string">"test description"</span>, <span class="keyword">function</span>() {
-  <span class="keyword">var</span> expected = <span class="string">"test"</span>;
-  <span class="keyword">var</span> result   = <span class="string">"test"</span>;
-  equals(result, expected, <span class="string">"test should equal test"</span>);
+// TODO: Replace with real unit test
+test("test description", function() {
+  var expected = "test";
+  var result   = "test";
+  equals(result, expected, "test should equal test");
 });</code></div></pre>
 <h4 id='-Manually-Creating-Unit-Test-Files-'>2.3 -  Manually Creating Unit Test Files
 </h4>
@@ -243,7 +243,7 @@ how you might want to run them together.  Often, it is a good practice is to
 create a directory for each class you add to your app and one unit test file
 per method you want to test inside that directory.</p>
 <p>For example, the unit tests for SC.Object might look something like:</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">tests/system/object/create.js
+<pre class="highlight"><code class="hljs bash">tests/system/object/create.js
 tests/system/object/extend.js
 tests/system/object/kindOf.js
 ...</code></div></pre>

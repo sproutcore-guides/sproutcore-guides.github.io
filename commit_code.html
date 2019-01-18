@@ -20,7 +20,7 @@
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-    <meta name="generator" content="DocPad v6.55.5" />
+    <meta name="generator" content="DocPad v6.79.0" />
     
   </head>
 
@@ -125,31 +125,31 @@ god send and helps check for common mistakes like:</p>
 <p>The following JS lint config can be used in combination with the <a href="https://github.com/sproutit/sproutcore-tmbundle">SproutCore
 Textmate bundle</a>.</p>
 <p>Install it at <tt><path to your Textmate bundles>/SproutCore.tmbundle/Support/bin/prefs.js</tt></p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class="keyword">var</span> JSLINT_PREFS = {
-    adsafe     : <span class="literal">false</span>, <span class="comment">// if ADsafe should be enforced</span>
-    bitwise    : <span class="literal">false</span>, <span class="comment">// if bitwise operators should not be allowed</span>
-    browser    : <span class="literal">true</span>,  <span class="comment">// if the standard browser globals should be predefined</span>
-    cap        : <span class="literal">false</span>, <span class="comment">// if upper case HTML should be allowed</span>
-    debug      : <span class="literal">true</span>,  <span class="comment">// if debugger statements should be allowed</span>
-    eqeqeq     : <span class="literal">true</span>,  <span class="comment">// if === should be required</span>
-    evil       : <span class="literal">false</span>, <span class="comment">// if eval should be allowed</span>
-    forin      : <span class="literal">true</span>,  <span class="comment">// if for in statements must filter</span>
-    fragment   : <span class="literal">false</span>, <span class="comment">// if HTML fragments should be allowed</span>
-    laxbreak   : <span class="literal">true</span>,  <span class="comment">// if line breaks should not be checked</span>
-    nomen      : <span class="literal">false</span>, <span class="comment">// if names should be checked</span>
-    on         : <span class="literal">false</span>, <span class="comment">// if HTML event handlers should be allowed</span>
-    passfail   : <span class="literal">false</span>, <span class="comment">// if the scan should stop on first error</span>
-    plusplus   : <span class="literal">false</span>, <span class="comment">// if increment/decrement should not be allowed</span>
-    regexp     : <span class="literal">true</span>,  <span class="comment">// if the . should not be allowed in regexp literals</span>
-    rhino      : <span class="literal">false</span>, <span class="comment">// if the Rhino environment globals should be predefined</span>
-    undef      : <span class="literal">true</span>,  <span class="comment">// if variables should be declared before used</span>
-    safe       : <span class="literal">false</span>, <span class="comment">// if use of some browser features should be restricted</span>
-    sidebar    : <span class="literal">false</span>, <span class="comment">// if the System object should be predefined</span>
-    sub        : <span class="literal">true</span>,  <span class="comment">// if all forms of subscript notation are tolerated</span>
-    white      : <span class="literal">false</span>, <span class="comment">// if strict whitespace rules apply</span>
-    widget     : <span class="literal">false</span>, <span class="comment">// if the Yahoo Widgets globals should be predefined</span>
-    indent: <span class="number">2</span>,
-    predef: [<span class="string">"SC"</span>, <span class="string">"require"</span>, <span class="string">"sc_super"</span>, <span class="string">"YES"</span>, <span class="string">"NO"</span>, <span class="string">"static_url"</span>, <span class="string">"sc_static"</span>, <span class="string">"sc_resource"</span>, <span class="string">"sc_require"</span>, <span class="string">"module"</span>, <span class="string">"test"</span>, <span class="string">"equals"</span>, <span class="string">"same"</span>, <span class="string">"ok"</span>, <span class="string">"CoreTest"</span>, <span class="string">"SproutCore"</span>, <span class="string">"$"</span>, <span class="string">"jQuery"</span>, <span class="string">"start"</span>, <span class="string">"stop"</span>, <span class="string">"expect"</span>, <span class="string">"htmlbody"</span>]
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> JSLINT_PREFS = {
+    <span class="hljs-attr">adsafe</span>     : <span class="hljs-literal">false</span>, <span class="hljs-comment">// if ADsafe should be enforced</span>
+    bitwise    : <span class="hljs-literal">false</span>, <span class="hljs-comment">// if bitwise operators should not be allowed</span>
+    browser    : <span class="hljs-literal">true</span>,  <span class="hljs-comment">// if the standard browser globals should be predefined</span>
+    cap        : <span class="hljs-literal">false</span>, <span class="hljs-comment">// if upper case HTML should be allowed</span>
+    debug      : <span class="hljs-literal">true</span>,  <span class="hljs-comment">// if debugger statements should be allowed</span>
+    eqeqeq     : <span class="hljs-literal">true</span>,  <span class="hljs-comment">// if === should be required</span>
+    evil       : <span class="hljs-literal">false</span>, <span class="hljs-comment">// if eval should be allowed</span>
+    forin      : <span class="hljs-literal">true</span>,  <span class="hljs-comment">// if for in statements must filter</span>
+    fragment   : <span class="hljs-literal">false</span>, <span class="hljs-comment">// if HTML fragments should be allowed</span>
+    laxbreak   : <span class="hljs-literal">true</span>,  <span class="hljs-comment">// if line breaks should not be checked</span>
+    nomen      : <span class="hljs-literal">false</span>, <span class="hljs-comment">// if names should be checked</span>
+    on         : <span class="hljs-literal">false</span>, <span class="hljs-comment">// if HTML event handlers should be allowed</span>
+    passfail   : <span class="hljs-literal">false</span>, <span class="hljs-comment">// if the scan should stop on first error</span>
+    plusplus   : <span class="hljs-literal">false</span>, <span class="hljs-comment">// if increment/decrement should not be allowed</span>
+    regexp     : <span class="hljs-literal">true</span>,  <span class="hljs-comment">// if the . should not be allowed in regexp literals</span>
+    rhino      : <span class="hljs-literal">false</span>, <span class="hljs-comment">// if the Rhino environment globals should be predefined</span>
+    undef      : <span class="hljs-literal">true</span>,  <span class="hljs-comment">// if variables should be declared before used</span>
+    safe       : <span class="hljs-literal">false</span>, <span class="hljs-comment">// if use of some browser features should be restricted</span>
+    sidebar    : <span class="hljs-literal">false</span>, <span class="hljs-comment">// if the System object should be predefined</span>
+    sub        : <span class="hljs-literal">true</span>,  <span class="hljs-comment">// if all forms of subscript notation are tolerated</span>
+    white      : <span class="hljs-literal">false</span>, <span class="hljs-comment">// if strict whitespace rules apply</span>
+    widget     : <span class="hljs-literal">false</span>, <span class="hljs-comment">// if the Yahoo Widgets globals should be predefined</span>
+    indent: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">predef</span>: [<span class="hljs-string">"SC"</span>, <span class="hljs-string">"require"</span>, <span class="hljs-string">"sc_super"</span>, <span class="hljs-string">"YES"</span>, <span class="hljs-string">"NO"</span>, <span class="hljs-string">"static_url"</span>, <span class="hljs-string">"sc_static"</span>, <span class="hljs-string">"sc_resource"</span>, <span class="hljs-string">"sc_require"</span>, <span class="hljs-string">"module"</span>, <span class="hljs-string">"test"</span>, <span class="hljs-string">"equals"</span>, <span class="hljs-string">"same"</span>, <span class="hljs-string">"ok"</span>, <span class="hljs-string">"CoreTest"</span>, <span class="hljs-string">"SproutCore"</span>, <span class="hljs-string">"$"</span>, <span class="hljs-string">"jQuery"</span>, <span class="hljs-string">"start"</span>, <span class="hljs-string">"stop"</span>, <span class="hljs-string">"expect"</span>, <span class="hljs-string">"htmlbody"</span>]
 };</code></div></pre>
 <p>TODO: we should have a command line tool that is included in the build tools so
 there is a consistent standard and so all the cool kids using VI have an
@@ -160,7 +160,7 @@ option.</p>
 
 
 
-<h4 id='-Don-t-break-anyone-else-s-tests-'>3.1 -  Don&#39;t break anyone else&#39;s tests
+<h4 id='-Don-t-break-anyone-else-s-tests-'>3.1 -  Don't break anyone else's tests
 </h4>
 
 
@@ -180,24 +180,24 @@ examples of good and bad unit tests:</p>
 
 
 
-<pre class="highlighted"><div class="code_container"><code class="javascript">test(<span class="string">"basic"</span>, <span class="keyword">function</span>() {
-  <span class="keyword">var</span> view = pane.view(<span class="string">'basic'</span>);
-  ok(!view.$().hasClass(<span class="string">'disabled'</span>), <span class="string">'should not have disabled class'</span>);
-  ok(!view.$().hasClass(<span class="string">'sel'</span>), <span class="string">'should not have sel class'</span>);
+<pre class="highlight"><code class="hljs javascript">test(<span class="hljs-string">"basic"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">var</span> view = pane.view(<span class="hljs-string">'basic'</span>);
+  ok(!view.$().hasClass(<span class="hljs-string">'disabled'</span>), <span class="hljs-string">'should not have disabled class'</span>);
+  ok(!view.$().hasClass(<span class="hljs-string">'sel'</span>), <span class="hljs-string">'should not have sel class'</span>);
 
-  <span class="keyword">var</span> input = view.$();
-  equals(input.attr(<span class="string">'aria-checked'</span>), <span class="string">'false'</span>,  <span class="string">'input should not be checked'</span>);
+  <span class="hljs-keyword">var</span> input = view.$();
+  equals(input.attr(<span class="hljs-string">'aria-checked'</span>), <span class="hljs-string">'false'</span>,  <span class="hljs-string">'input should not be checked'</span>);
 
-  <span class="keyword">var</span> label = view.$(<span class="string">'span.label'</span>);
-  equals(label.text(), <span class="string">'Hello World'</span>, <span class="string">'should have label'</span>);
+  <span class="hljs-keyword">var</span> label = view.$(<span class="hljs-string">'span.label'</span>);
+  equals(label.text(), <span class="hljs-string">'Hello World'</span>, <span class="hljs-string">'should have label'</span>);
 });</code></div></pre>
 <p>The above test is great because it verifies that the <em>rendered DOM</em> is correct.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">test(<span class="string">"basic"</span>, <span class="keyword">function</span>() {
-  <span class="keyword">var</span> view = pane.view(<span class="string">'basic'</span>);
-  equals(view.get(<span class="string">'title'</span>), <span class="string">'Hello World'</span>, <span class="string">'should have label'</span>);
+<pre class="highlight"><code class="hljs javascript">test(<span class="hljs-string">"basic"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">var</span> view = pane.view(<span class="hljs-string">'basic'</span>);
+  equals(view.get(<span class="hljs-string">'title'</span>), <span class="hljs-string">'Hello World'</span>, <span class="hljs-string">'should have label'</span>);
 });</code></div></pre>
 <p>This test sucks because it only verifies that you can set a property on an object.</p>
-<div class='info'><p> For more information see <a href="writing_unit_tests.html">Writing Unit Tests</a>.
+<div class='info'><p> For more information see [Writing Unit Tests](writing_unit_tests.html).
 
 </p></div>
 
@@ -235,7 +235,7 @@ or by calling them manually:</p>
 <p><a href="http://localhost:4020/sproutcore/datastore/en/current/tests/system/store/find.html">http://localhost:4020/sproutcore/datastore/en/current/tests/system/store/find.html</a></p>
 </li>
 </ul>
-<div class='info'><p> For more information see <a href="running_unit_tests.html">Running Unit Tests</a>.
+<div class='info'><p> For more information see [Running Unit Tests](running_unit_tests.html).
 
 </p></div>
 

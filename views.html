@@ -20,7 +20,7 @@
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-    <meta name="generator" content="DocPad v6.55.5" />
+    <meta name="generator" content="DocPad v6.79.0" />
     
   </head>
 
@@ -126,7 +126,7 @@
 file <tt>main_page.js</tt> in your resources folder. This is the main page that your app
 appends to the DOM in your <tt>main</tt> function. Let&#39;s start by looking at what
 every SproutCore project starts with as its main page:</p>
-<div class='info'><p> The file <tt>main_page.js</tt> is included into the application&#39;s resources
+<div class='info'><p> The file <tt>main_page.js</tt> is included into the application's resources
 folder when using <code>sc-init</code> without the <code>--template</code>
 param.
 
@@ -134,21 +134,21 @@ param.
 
 
 
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/addressbook/resources/main_page.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/addressbook/resources/main_page.js</div></span>
 AddressBook.mainPage = SC.Page.design({
-  mainPane: SC.MainPane.exend({
-    childViews: <span class="string">'labelView'</span>.w(),
-    labelView: SC.LabelView.exend({
-      layout: { centerX: <span class="number">0</span>, centerY: <span class="number">0</span>, width: <span class="number">200</span>, height: <span class="number">18</span> },
+  mainPane: SC.MainPane.extend({
+    childViews: 'labelView'.w(),
+    labelView: SC.LabelView.extend({
+      layout: { centerX: 0, centerY: 0, width: 200, height: 18 },
       textAlign: SC.ALIGN_CENTER,
-      tagName: <span class="string">"h1"</span>, 
-      value: <span class="string">"Welcome to SproutCore!"</span>
+      tagName: "h1", 
+      value: "Welcome to SproutCore!"
     })
   })
 });</code></div></pre>
 <div class='note'><p> <tt>SC.Page</tt> uses <tt>.design()</tt> because it is more akin to <tt>.create()</tt> and you
 are actually intantiating the page object. All other views should use <tt>.extend()</tt>
-since view instantiation is handled by the page or the view&#39;s parent view.
+since view instantiation is handled by the page or the view's parent view.
 
 </p></div>
 
@@ -158,8 +158,8 @@ page. Your application may end up having several &quot;pages&quot; or you may ch
 swap content into and out of a single page. <tt>AddressBook.mainPage</tt> is
 an <tt>SC.Page</tt> which works by lazily configuring itself. The views within a page are
 only awakened when you <tt>get</tt> the page in the <tt>main.js</tt> file:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/addressbook/main.js</div></span>
-AddressBook.getPath(<span class="string">'mainPage.mainPane'</span>).append();</code></div></pre>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/addressbook/main.js</div></span>
+AddressBook.getPath('mainPage.mainPane').append();</code></div></pre>
 <p> <tt>AddressBook.mainPage.mainPane</tt> is an <tt>SC.MainPane</tt> which is itself an
  <tt>SC.Pane</tt>.  There will probably be many panes in your app because a pane is
 just like a regular view except that it doesn&#39;t need to live within a parent
@@ -172,7 +172,7 @@ is no different. Giving it a width and height allows us to place the label
 directly in the center of the page using <tt>centerX</tt> and <tt>centerY</tt>. These
 attributes specify how many pixels offset from the center we&#39;d like the view.</p>
 <div class='note'><p> The <tt>w</tt> function splits a string by spaces and turns it into an array.
-We could have accomplished the same thing by using <tt>childViews:[&#39;labelView&#39;]</tt>.
+We could have accomplished the same thing by using <tt>childViews:['labelView']</tt>.
 
 </p></div>
 
@@ -187,10 +187,10 @@ list of all your contacts that you could scroll through and see contact details
 such as phone numbers and addresses. Let&#39;s start the address book by starting
 an <tt>SC.WorkspaceView</tt> which allows us to have a toolbar on the top and bottom
 and a view between those two toolbars:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/addressbook/resources/main_page.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/addressbook/resources/main_page.js</div></span>
 AddressBook.mainPage = SC.Page.design({
   mainPane: SC.MainPane.extend({
-    childViews: <span class="string">'workspaceView'</span>.w(),
+    childViews: 'workspaceView'.w(),
     workspaceView: SC.WorkspaceView.extend({
       contentView: SC.View
     })
@@ -200,21 +200,22 @@ AddressBook.mainPage = SC.Page.design({
 list of any contacts. If we want a list on the left and details on the right,
 it sounds like <tt>SC.SplitView</tt> is the perfect view to do that, so let&#39;s make
 that our <tt>contentView</tt>:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/addressbook/resources/main_page.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/addressbook/resources/main_page.js</div></span>
 workspaceView: SC.WorkspaceView.extend({
   contentView: SC.SplitView.extend({
-    dividerThickness: <span class="number">1</span>,
-    defaultThickness: <span class="number">300</span>,
-    topLeftView: SC.View,
-    bottomRightView: SC.View
+    childViews: ['leftView','rightView'],
+    dividerThickness: 1,
+    defaultThickness: 300,
+    leftView: SC.View,
+    rightView: SC.View
   })
 })</code></div></pre>
 <p>Our UI is starting to come together. We can see where we&#39;re going to have our
 contacts listed and where their details will be displayed. The
  <tt>dividerThickness</tt> is just a aesthetic property since the default
  <tt>defaultThickness</tt> will make our fixed view--in this case the
- <tt>topLeftView</tt>--300 pixels wide.</p>
-<div class='note'><p> When you use values less than 1 for dimensions in SproutCore they&#39;re
+ <tt>leftView</tt>--300 pixels wide.</p>
+<div class='note'><p> When you use values less than 1 for dimensions in SproutCore they're
 interpreted as percentages. E.g. <tt>width: 0.5</tt> tells SproutCore that you want it
 to be 50% wide.
 
@@ -226,34 +227,34 @@ used for generic lists of stacked information where you know each list item&#39;
 height. Fortunately, SproutCore includes <tt>SC.SourceListView</tt> which not only
 looks great out of the box, but also provides the default behaviors of a source
 list:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/addressbook/resources/main_page.js</div></span>
-topLeftView: SC.SourceListView.extend({
-  content: [<span class="string">"Elizabeth Jones"</span>, <span class="string">"Arnold Washington"</span>, <span class="string">"Pete Matthews"</span>]
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/addressbook/resources/main_page.js</div></span>
+leftView: SC.SourceListView.extend(SC.SplitChild, {
+  content: ["Elizabeth Jones", "Arnold Washington", "Pete Matthews"]
 })</code></div></pre>
 <p>We can then move on to the details of a contact, such as his name, phone phone
 number, and address. We can use <tt>SC.LabelView</tt> for all three in our
- <tt>bottomRightView</tt>:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/addressbook/resources/main_page.js</div></span>
-bottomRightView: SC.View.extend({
-  childViews: <span class="string">'contactDetails'</span>.w(),
+ <tt>rightView</tt>:</p>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/addressbook/resources/main_page.js</div></span>
+rightView: SC.View.extend(SC.SplitChild, {
+  childViews: 'contactDetails'.w(),
 
   contactDetails: SC.View.extend({
-    layout: { top: <span class="number">50</span>, left: <span class="number">50</span>, bottom: <span class="number">50</span>, right: <span class="number">50</span> },
-    childViews: <span class="string">'nameLabel phoneLabel addressLabel'</span>.w(),
+    layout: { top: 50, left: 50, bottom: 50, right: 50 },
+    childViews: 'nameLabel phoneLabel addressLabel'.w(),
 
     nameLabel: SC.LabelView.extend({
-      layout: { width: <span class="number">500</span>, height: <span class="number">18</span> },
-      value: <span class="string">"Contact name"</span>
+      layout: { width: 500, height: 18 },
+      value: "Contact name"
     }),
 
     phoneLabel: SC.LabelView.extend({
-      layout: { top: <span class="number">40</span>, width: <span class="number">500</span>, height: <span class="number">18</span> },
-      value: <span class="string">"Contact phone number"</span>
+      layout: { top: 40, width: 500, height: 18 },
+      value: "Contact phone number"
     }),
 
     addressLabel: SC.LabelView.extend({
-      layout: { top: <span class="number">80</span>, width: <span class="number">500</span>, height: <span class="number">500</span> },
-      value: <span class="string">"Contact address"</span>
+      layout: { top: 80, width: 500, height: 500 },
+      value: "Contact address"
     })
   })
 })</code></div></pre>
@@ -270,29 +271,29 @@ binding.</p>
 <p>Instead of having our source list content and our label values in our views,
 let&#39;s bind them to some controllers. We&#39;ll start by creating an
  <tt>SC.ArrayController</tt> for our list of contacts:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/addressbook/controllers/contacts.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/addressbook/controllers/contacts.js</div></span>
 AddressBook.contactsController = SC.ArrayController.create({
   allowsMultipleSelection: NO,
   content: [
     SC.Object.create({
-      name: <span class="string">"Elizabeth Jones"</span>,
-      phone: <span class="string">"(555) 391-1419"</span>,
-      address: <span class="string">"145 Wandering Way, Austin, TX 78701"</span>,
-      website: <span class="string">'http://www.elizabethjonesproductions.com'</span>
+      name: "Elizabeth Jones",
+      phone: "(555) 391-1419",
+      address: "145 Wandering Way, Austin, TX 78701",
+      website: 'http://www.elizabethjonesproductions.com'
     }),
 
     SC.Object.create({
-      name: <span class="string">"Arnold Washington"</span>,
-      phone: <span class="string">"(453) 749-1585"</span>,
-      address: <span class="string">"378 North 16th St., Ann Arbor, MI 79883"</span>,
-      website: <span class="string">'http://www.arnoldwashingtonmedia.com'</span>
+      name: "Arnold Washington",
+      phone: "(453) 749-1585",
+      address: "378 North 16th St., Ann Arbor, MI 79883",
+      website: 'http://www.arnoldwashingtonmedia.com'
     }),
 
     SC.Object.create({
-      name: <span class="string">"Pete Matthews"</span>,
-      phone: <span class="string">"(343) 856-3750"</span>,
-      address: <span class="string">"935 2nd St., Phoenix, AZ 87435"</span>,
-      website: <span class="string">'http://www.petematthewsfurniture.com'</span>
+      name: "Pete Matthews",
+      phone: "(343) 856-3750",
+      address: "935 2nd St., Phoenix, AZ 87435",
+      website: 'http://www.petematthewsfurniture.com'
     })
   ]
 });</code></div></pre>
@@ -300,49 +301,49 @@ AddressBook.contactsController = SC.ArrayController.create({
  <tt>allowsMultipleSelection: NO</tt> will restrict the ability to select only one
 item.</p>
 <p>And then an <tt>SC.ObjectController</tt> that proxies individual contact objects:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/addressbook/controllers/contact.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/addressbook/controllers/contact.js</div></span>
 AddressBook.contactController = SC.ObjectController.create({
-  contentBinding: <span class="string">'AddressBook.contactsController.selection'</span>
+  contentBinding: 'AddressBook.contactsController.selection'
 });</code></div></pre>
 <div class='note'><p> An object controller will automatically detect if you have a single
-selection and will automatically set it&#39;s content to the only item in the
+selection and will automatically set it's content to the only item in the
 selection set. If you are in the rare case of needing to force a single
-selection, you can use <tt>SC.Binding.single(&#39;AddressBook.contactsController.selection&#39;)</tt>.
+selection, you can use <tt>SC.Binding.single('AddressBook.contactsController.selection')</tt>.
 
 </p></div>
 
 <p>Now we can bind our source list to the <tt>SC.ArrayController</tt> to get a dynamic
 list of contacts and individual contact selection support:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/addressbook/resources/main_page.js</div></span>
-topLeftView: SC.SourceListView.extend({
-  contentValueKey: <span class="string">'name'</span>,
-  contentBinding: <span class="string">'AddressBook.contactsController.arrangedObjects'</span>,
-  selectionBinding: <span class="string">'AddressBook.contactsController.selection'</span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/addressbook/resources/main_page.js</div></span>
+leftView: SC.SourceListView.extend(SC.SplitChild, {
+  contentValueKey: 'name',
+  contentBinding: 'AddressBook.contactsController.arrangedObjects',
+  selectionBinding: 'AddressBook.contactsController.selection'
 })</code></div></pre>
 <p>With the contacts selectable, the only thing missing is dynamic label values
 for the contact&#39;s name, phone, and address:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/addressbook/resources/main_page.js</div></span>
-bottomRightView: SC.View.extend({
-  layout: { top: <span class="number">50</span>, left: <span class="number">50</span>, bottom: <span class="number">50</span>, right: <span class="number">20</span> },
-  childViews: <span class="string">'nameLabel phoneLabel addressLabel'</span>.w(),
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/addressbook/resources/main_page.js</div></span>
+rightView: SC.View.extend(SC.SplitChild, {
+  layout: { top: 50, left: 50, bottom: 50, right: 20 },
+  childViews: 'nameLabel phoneLabel addressLabel'.w(),
 
   nameLabel: SC.LabelView.extend({
-    layout: { width: <span class="number">500</span>, height: <span class="number">18</span> },
-    valueBinding: SC.Binding.oneWay(<span class="string">'AddressBook.contactController.name'</span>)
+    layout: { width: 500, height: 18 },
+    valueBinding: SC.Binding.oneWay('AddressBook.contactController.name')
   }),
 
   phoneLabel: SC.LabelView.extend({
-    layout: { top: <span class="number">40</span>, width: <span class="number">500</span>, height: <span class="number">18</span> },
-    valueBinding: SC.Binding.oneWay(<span class="string">'AddressBook.contactController.phone'</span>)
+    layout: { top: 40, width: 500, height: 18 },
+    valueBinding: SC.Binding.oneWay('AddressBook.contactController.phone')
   }),
 
   addressLabel: SC.LabelView.extend({
-    layout: { top: <span class="number">80</span>, width: <span class="number">500</span>, height: <span class="number">500</span> },
-    valueBinding: SC.Binding.oneWay(<span class="string">'AddressBook.contactController.address'</span>)
+    layout: { top: 80, width: 500, height: 500 },
+    valueBinding: SC.Binding.oneWay('AddressBook.contactController.address')
   })
 })</code></div></pre>
 <div class='note'><p> Using <tt>SC.Binding.oneWay</tt> is not necessary here, but using one way
-bindings when you don&#39;t need changes from the view reflected back to the
+bindings when you don't need changes from the view reflected back to the
 controller--which is the case for these label views--gives better performance.
 
 </p></div>
@@ -364,48 +365,48 @@ use an <tt>SC.RenderDelegate</tt> to render and update all views of the view typ
 <p>Let&#39;s make the interface a bit more visually appealing and user friendly by
 giving a usage hint when no contact has been selected yet. We can create a
 generic view and add the class name <tt>app-usage-hint</tt> to the <tt>classNames</tt> array,
-and then a label view as a child to display the hint. Our <tt>bottomRightView</tt>
+and then a label view as a child to display the hint. Our <tt>rightView</tt>
 should now look like this:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/addressbook/resources/main_page.js</div></span>
-bottomRightView: SC.View.extend({
-  childViews: <span class="string">'usageHint contactDetails'</span>.w(),
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/addressbook/resources/main_page.js</div></span>
+rightView: SC.View.extend(SC.SplitChild, {
+  childViews: 'usageHint contactDetails'.w(),
 
   usageHint: SC.View.extend({
-    classNames: <span class="string">'app-usage-hint'</span>,
-    isVisibleBinding: SC.Binding.not(<span class="string">'AddressBook.contactsController.hasSelection'</span>),
+    classNames: 'app-usage-hint',
+    isVisibleBinding: SC.Binding.not('AddressBook.contactsController.hasSelection'),
 
     childViews: [SC.LabelView.extend({
-      layout: { width: <span class="number">300</span>, height: <span class="number">22</span>, centerX: <span class="number">0</span>, centerY: <span class="number">0</span> },
-      tagName: <span class="string">'h1'</span>,
+      layout: { width: 300, height: 22, centerX: 0, centerY: 0 },
+      tagName: 'h1',
       textAlign: SC.ALIGN_CENTER,
-      value: <span class="string">"Select a contact"</span>
+      value: "Select a contact"
     })]
   }),
 
   contactDetails: SC.View.extend({
-    layout: { top: <span class="number">50</span>, left: <span class="number">50</span>, bottom: <span class="number">50</span>, right: <span class="number">20</span> },
+    layout: { top: 50, left: 50, bottom: 50, right: 20 },
 
-    childViews: <span class="string">'nameLabel phoneLabel addressLabel'</span>.w(),
+    childViews: 'nameLabel phoneLabel addressLabel'.w(),
 
     nameLabel: SC.LabelView.extend({
-      layout: { width: <span class="number">500</span>, height: <span class="number">18</span> },
-      valueBinding: <span class="string">'AddressBook.contactController.name'</span>
+      layout: { width: 500, height: 18 },
+      valueBinding: 'AddressBook.contactController.name'
     }),
 
     phoneLabel: SC.LabelView.extend({
-      layout: { top: <span class="number">40</span>, width: <span class="number">500</span>, height: <span class="number">18</span> },
-      valueBinding: <span class="string">'AddressBook.contactController.phone'</span>
+      layout: { top: 40, width: 500, height: 18 },
+      valueBinding: 'AddressBook.contactController.phone'
     }),
 
     addressLabel: SC.LabelView.extend({
-      layout: { top: <span class="number">80</span>, width: <span class="number">500</span>, height: <span class="number">500</span> },
-      valueBinding: <span class="string">'AddressBook.contactController.address'</span>
+      layout: { top: 80, width: 500, height: 500 },
+      valueBinding: 'AddressBook.contactController.address'
     })
   })
 })</code></div></pre>
 <p>Right now it looks rather small, so let&#39;s add some style to it. Create a file
 in the <tt>resources</tt> directory and name it <tt>theme.css</tt>:</p>
-<pre class="highlighted"><div class="code_container"><code class="undefined"><span class='comment'><div class='filename'>apps/addressbook/resources/theme.css</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/addressbook/resources/theme.css</div></span>
 .app-usage-hint {
   background-color: #eee;
 }
@@ -437,60 +438,60 @@ than a one line function.
 a <tt>context</tt> variable which is an <tt>SC.RenderContext</tt>. <tt>SC.RenderContext</tt> is used
 to queue up and build HTML for a view. You build HTML by calling
  <tt>context.push()</tt> and passing it HTML:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/addressbook/views/person.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/addressbook/views/person.js</div></span>
 AddressBook.PersonView = SC.View.extend({
-  render: <span class="function"><span class="keyword">function</span> <span class="params">(context)</span> {</span>
-    context.push(<span class="string">"&lt;h1&gt;Arnold Washington is 31 years young...&lt;/h1&gt;"</span>);
+  render: function (context) {
+    context.push("&lt;h1&gt;Arnold Washington is 31 years young...&lt;/h1&gt;");
   }
 });</code></div></pre>
 <p>You can also use <tt>context.begin()</tt> and <tt>context.end()</tt> to begin building a tag
 and push arguments that are &quot;stringable&quot; (have a <tt>toString</tt> method) into it:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/addressbook/views/person.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/addressbook/views/person.js</div></span>
 AddressBook.PersonView = SC.View.extend({
-  displayProperties: [<span class="string">'name'</span>, <span class="string">'age'</span>],
-  name: <span class="string">'Arnold Washington'</span>,
-  age: <span class="number">31</span>,
-  render: <span class="function"><span class="keyword">function</span> <span class="params">(context)</span> {</span>
-    <span class="keyword">var</span> name = <span class="keyword">this</span>.get(<span class="string">'name'</span>), age = <span class="keyword">this</span>.get(<span class="string">'age'</span>);
-    <span class="keyword">var</span> context = context.begin(<span class="string">'h1'</span>);
-    context.push(name, <span class="string">' is going to be '</span>, age+<span class="number">1</span>, <span class="string">' years young soon...'</span>);
+  displayProperties: ['name', 'age'],
+  name: 'Arnold Washington',
+  age: 31,
+  render: function (context) {
+    var name = this.get('name'), age = this.get('age');
+    var context = context.begin('h1');
+    context.push(name, ' is going to be ', age+1, ' years young soon...');
     context.end();
   }
 });</code></div></pre>
 <p>The <tt>update</tt> method is passed a jQuery handle of the view&#39;s layer, the DOM
 element that belongs to the view. You can use it and all of jQuery&#39;s API to
 manipulate the DOM and update your view:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/addressbook/views/person.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/addressbook/views/person.js</div></span>
 AddressBook.PersonView = SC.View.extend({
-  displayProperties: [<span class="string">'name'</span>, <span class="string">'age'</span>],
-  name: <span class="string">'Arnold Washington'</span>,
-  age: <span class="number">31</span>,
-  render: <span class="function"><span class="keyword">function</span> <span class="params">(context)</span> {</span>
-    <span class="keyword">var</span> name = <span class="keyword">this</span>.get(<span class="string">'name'</span>), age = <span class="keyword">this</span>.get(<span class="string">'age'</span>);
-    <span class="keyword">var</span> context = context.begin(<span class="string">'h1'</span>);
-    context.push(<span class="string">'&lt;span class="name"&gt;'</span>, name, <span class="string">'&lt;/span&gt;'</span>);
-    context.push(<span class="string">' is going to be '</span>);
-    context.push(<span class="string">'&lt;span class="age"&gt;'</span>, age+<span class="number">1</span>, <span class="string">'&lt;/span&gt;'</span>);
-    context.push(<span class="string">' years young soon...'</span>);
+  displayProperties: ['name', 'age'],
+  name: 'Arnold Washington',
+  age: 31,
+  render: function (context) {
+    var name = this.get('name'), age = this.get('age');
+    var context = context.begin('h1');
+    context.push('&lt;span class="name"&gt;', name, '&lt;/span&gt;');
+    context.push(' is going to be ');
+    context.push('&lt;span class="age"&gt;', age+1, '&lt;/span&gt;');
+    context.push(' years young soon...');
     context.end();
   },
-  update: <span class="function"><span class="keyword">function</span> <span class="params">(jquery)</span> {</span>
-    <span class="keyword">var</span> h1 = jquery.find(<span class="string">'h1'</span>);
-    #find(<span class="string">'.name'</span>).text(<span class="keyword">this</span>.get(<span class="string">'name'</span>));
-    #find(<span class="string">'.age'</span>).text(<span class="keyword">this</span>.get(<span class="string">'age'</span>));
+  update: function (jquery) {
+    var h1 = jquery.find('h1');
+    #find('.name').text(this.get('name'));
+    #find('.age').text(this.get('age'));
   }
 })</code></div></pre>
 <p>Say we wanted to make the name of the contact bigger in the details. To do
 this, let&#39;s create a custom view called <tt>AddressBook.ContactNameView</tt> that will
 put the contact name in an <tt>h1</tt> tag:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/addressbook/views/contact_name.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/addressbook/views/contact_name.js</div></span>
 AddressBook.ContactNameView = SC.View.extend({
-  displayProperties: [<span class="string">'value'</span>],
-  render: <span class="function"><span class="keyword">function</span> <span class="params">(context)</span> {</span>
-    context.push(<span class="string">'&lt;h1&gt;'</span>, <span class="keyword">this</span>.get(<span class="string">'value'</span>), <span class="string">'&lt;/h1&gt;'</span>);
+  displayProperties: ['value'],
+  render: function (context) {
+    context.push('&lt;h1&gt;', this.get('value'), '&lt;/h1&gt;');
   },
-  update: <span class="function"><span class="keyword">function</span> <span class="params">(jquery)</span> {</span>
-    jquery.find(<span class="string">'h1'</span>).text(<span class="keyword">this</span>.get(<span class="string">'value'</span>));
+  update: function (jquery) {
+    jquery.find('h1').text(this.get('value'));
   }
 });</code></div></pre>
 <h4 id='-Render-Delegates-'>4.3 -  Render Delegates
@@ -503,22 +504,22 @@ theme you&#39;re using. Render delegates also have a <tt>render</tt> and <tt>upd
 but their first argument is the <tt>dataSource</tt>, or the view delegating to them.
 Let&#39;s recreate the last scenario using an <tt>SC.RenderDelegate</tt> that we&#39;re going
 to create in <tt>render_delegates/contact_name.js</tt>:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/addressbook/render_delegates/contact_name.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/addressbook/render_delegates/contact_name.js</div></span>
 AddressBook.MyTheme.contactNameRenderDelegate = SC.RenderDelegate.create({
-  render: <span class="function"><span class="keyword">function</span> <span class="params">(dataSource, context)</span> {</span>
-    context.push(<span class="string">'&lt;h1&gt;'</span>, dataSource.get(<span class="string">'value'</span>), <span class="string">'&lt;/h1&gt;'</span>);
+  render: function (dataSource, context) {
+    context.push('&lt;h1&gt;', dataSource.get('value'), '&lt;/h1&gt;');
   },
-  update: <span class="function"><span class="keyword">function</span> <span class="params">(dataSource, jquery)</span> {</span>
-    jquery.find(<span class="string">'h1'</span>).text(dataSource.get(<span class="string">'value'</span>));
+  update: function (dataSource, jquery) {
+    jquery.find('h1').text(dataSource.get('value'));
   }
 });</code></div></pre>
 <p>Now we have to tell our view to use our new render delegate to draw itself:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/addressbook/views/contact_name.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/addressbook/views/contact_name.js</div></span>
 AddressBook.ContactNameView = SC.View.extend({
-  displayProperties: [<span class="string">'value'</span>],
-  renderDelegateName: <span class="string">'contactNameRenderDelegate'</span>
+  displayProperties: ['value'],
+  renderDelegateName: 'contactNameRenderDelegate'
 });</code></div></pre>
-<div class='info'><p> For a more detailed overview of theming see <a href="theming_app.html">Theming Your App</a>
+<div class='info'><p> For a more detailed overview of theming see [Theming Your App](theming_app.html)
 
 </p></div>
 
@@ -532,31 +533,31 @@ AddressBook.ContactNameView = SC.View.extend({
 extends <tt>SC.Responder</tt>, inheriting the ability to react to DOM events such as
  <tt>mouseDown</tt> and <tt>mouseEntered</tt>. Let&#39;s highlight the contact name when it&#39;s
 being hovered over and take the user to the contact&#39;s website if it&#39;s clicked:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/addressbook/views/contact_name_view.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/addressbook/views/contact_name_view.js</div></span>
 AddressBook.ContactNameView = SC.View.extend({
-  displayProperties: [<span class="string">'value'</span>],
-  renderDelegateName: <span class="string">'contactNameRenderDelegate'</span>,
-  mouseEntered: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-    <span class="keyword">var</span> jquery = <span class="keyword">this</span>.$();
-    jquery.css(<span class="string">'cursor'</span>, <span class="string">'pointer'</span>);
-    jquery.css(<span class="string">'color'</span>, <span class="string">'#356aa0'</span>);
-    <span class="keyword">return</span> YES;
+  displayProperties: ['value'],
+  renderDelegateName: 'contactNameRenderDelegate',
+  mouseEntered: function () {
+    var jquery = this.$();
+    jquery.css('cursor', 'pointer');
+    jquery.css('color', '#356aa0');
+    return YES;
   },
-  mouseExited: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-    <span class="keyword">var</span> jquery = <span class="keyword">this</span>.$();
-    jquery.css(<span class="string">'cursor'</span>, <span class="string">'normal'</span>);
-    jquery.css(<span class="string">'color'</span>, <span class="string">'#000'</span>);
-    <span class="keyword">return</span> YES;
+  mouseExited: function () {
+    var jquery = this.$();
+    jquery.css('cursor', 'normal');
+    jquery.css('color', '#000');
+    return YES;
   },
-  mouseDown: <span class="function"><span class="keyword">function</span> <span class="params">(evt)</span> {</span>
+  mouseDown: function (evt) {
     AddressBook.openWebsite();
-    <span class="keyword">return</span> YES;
+    return YES;
   }
 });</code></div></pre>
 <p>And in <tt>core.js</tt>:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/addressbook/core.js</div></span>
-openWebsite: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-  <span class="keyword">var</span> website = AddressBook.contactController.get(<span class="string">'website'</span>);
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/addressbook/core.js</div></span>
+openWebsite: function () {
+  var website = AddressBook.contactController.get('website');
   window.open(website);
 }</code></div></pre>
 <p>You should return <tt>YES</tt> when you&#39;ve handled the event, otherwise it would

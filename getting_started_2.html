@@ -20,7 +20,7 @@
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-    <meta name="generator" content="DocPad v6.55.5" />
+    <meta name="generator" content="DocPad v6.79.0" />
     
   </head>
 
@@ -142,8 +142,8 @@ panel is shown, what could happen while it is showing, and what should happen wh
 logical hierarchical states. Your applications will have many states,
 and each state may have many substates within it. Each state can respond to a certain
 set of actions, the name for events associated with a statechart.</p>
-<div class='note'><p> The term &quot;event&quot; is more generic than the term &quot;action.&quot; We can speak of the event
-system, generally, that includes normal web events like <strong>mouseDown</strong> along with actions in
+<div class='note'><p> The term "event" is more generic than the term "action." We can speak of the event
+system, generally, that includes normal web events like **mouseDown** along with actions in
 the statechart. A statechart action is a type of event.
 
 </p></div>
@@ -197,8 +197,8 @@ the reference is more specific, and is relative to a parent state.
 it is in one of these states, it cannot be in the other. When it is in the LOADING state, the only available 
 action is the <em>loadingFinished</em> action. The statechart/application should not respond to any other events. 
 Once control moves into the LOADED state, it can move to two additional states, substates of the LOADED 
-state: LOGGED<em>OUT or LOGGED_IN. Again, the program can only be in one at a given time, so when the user is 
-&quot;logged out&quot;, after the application has loaded, the only available action is the _login</em> action.</p>
+state: LOGGED_OUT or LOGGED_IN. Again, the program can only be in one at a given time, so when the user is 
+&quot;logged out&quot;, after the application has loaded, the only available action is the <em>login</em> action.</p>
 <p>However, notice that the <em>viewTermsOfService</em> action and the <em>viewPrivacyPolicy</em> action are both available in
 the LOADED state. This means that regardless of whether the program is in the LOGGED_OUT state or the LOGGED_IN
 state, the user should be allowed to view the terms of service or the privacy policy.</p>
@@ -227,7 +227,7 @@ a consistent state and continue to operate. Programming with statecharts can hel
 
 
 <p>Create a statechart-based SproutCore app with the <strong>sproutcore gen statechart_app</strong> command:</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">$ cd ~/development/sproutcore/getting_started
+<pre class="highlight"><code class="hljs bash">$ <span class="hljs-built_in">cd</span> ~/development/sproutcore/getting_started
 $ sproutcore gen statechart_app TodosTwo
    ~ Created directory at apps/todos_two
    ~ Created file at apps/todos_two/Buildfile
@@ -266,7 +266,7 @@ $ sproutcore gen statechart_app TodosTwo
 </ul>
 </li>
 <li><strong><em>states/</em></strong><ul>
-<li><strong><em>ready_state.js</em></strong></li>
+<li><strong><em>ready</em>state.js_</strong></li>
 </ul>
 </li>
 </ul>
@@ -278,20 +278,20 @@ $ sproutcore gen statechart_app TodosTwo
 </ul>
 <p>This structure looks almost identical to the standard app made with the <strong>sproutcore gen app</strong> command, except 
 that you now see two new files, a <em>statechart.js</em> file in the application root directory, and a new 
-<em>states</em> directory with one state file, <em>ready_state.js</em>:</p>
+<em>states</em> directory with one state file, <em>ready</em>state.js_:</p>
 <ul>
 <li><em>statechart.js</em>, and</li>
-<li><em>states/ready_state.js</em></li>
+<li><em>states/ready</em>state.js_</li>
 </ul>
 <p>The <em>statechart.js</em> file describes your statechart and the initial state that should be entered when the
 statechart is first initialized. Open it, and you should see the following:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_two/statechart.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_two/statechart.js</div></span>
 TodosTwo.statechart = SC.Statechart.create({
 
-  initialState: <span class="string">'readyState'</span>,
+  initialState: 'readyState',
 
-  readyState: SC.State.plugin(<span class="string">'TodosTwo.ReadyState'</span>),
-  <span class="comment">// someOtherState: SC.State.plugin('TodosTwo.SomeOtherState')</span>
+  readyState: SC.State.plugin('TodosTwo.ReadyState'),
+  // someOtherState: SC.State.plugin('TodosTwo.SomeOtherState')
 
 });</code></div></pre>
 <div class='note'><p> This example uses CamelCase state names.
@@ -303,16 +303,16 @@ use .extend() when you are defining them, because elsewhere in the system, insta
 Controllers and the statechart use .create() because we need to directly create objects to work with. </p>
 <p>Also note the use of the SC.State.plugin() function. This allows you to put your states in separate files in a
 states directory.</p>
-<p>Open <em>states/ready_state.js</em> and take a look:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_two/states/ready_state.js</div></span>
+<p>Open <em>states/ready</em>state.js_ and take a look:</p>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_two/states/ready_state.js</div></span>
 TodosTwo.ReadyState = SC.State.extend({ 
 
-  enterState: <span class="keyword">function</span>() {
-    TodosTwo.getPath(<span class="string">'mainPage.mainPane'</span>).append();
+  enterState: function() {
+    TodosTwo.getPath('mainPage.mainPane').append();
   },
 
-  exitState: <span class="keyword">function</span>() {
-    TodosTwo.getPath(<span class="string">'mainPage.mainPane'</span>).remove();
+  exitState: function() {
+    TodosTwo.getPath('mainPage.mainPane').remove();
   }
 
 });</code></div></pre>
@@ -327,28 +327,28 @@ page&#39;s main pane. </p>
 
 <p>We&#39;ve covered statecharts, so you know a little bit about how they work. Let&#39;s talk about how statecharts 
 can help organize views and make your code super-clean.</p>
-<p>The <em>resources/main_page.js</em> file defines the main user interface of your application.</p>
+<p>The <em>resources/main</em>page.js_ file defines the main user interface of your application.</p>
 <p>Edit the file to add a second child view, labelView2, taking care to add labelView2 to the
 childViews array of view references, which uses the &#39;space delimited strings&#39;.w() SproutCore idiom
 to make an array:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_two/resources/main_page.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_two/resources/main_page.js</div></span>
 TodosTwo.mainPage = SC.Page.design({
 
   mainPane: SC.MainPane.design({
-    childViews: <span class="string">'labelView labelView2'</span>.w(),
+    childViews: 'labelView labelView2'.w(),
 
     labelView: SC.LabelView.design({
-      layout: { centerX: <span class="number">0</span>, centerY: <span class="number">0</span>, width: <span class="number">200</span>, height: <span class="number">18</span> },
+      layout: { centerX: 0, centerY: 0, width: 200, height: 18 },
       textAlign: SC.ALIGN_CENTER,
-      tagName: <span class="string">"h1"</span>, 
-      value: <span class="string">"Welcome to SproutCore!"</span>
+      tagName: "h1", 
+      value: "Welcome to SproutCore!"
     }),
 
     labelView2: SC.LabelView.design({
-      layout: { centerX: <span class="number">0</span>, centerY: <span class="number">15</span>, width: <span class="number">200</span>, height: <span class="number">18</span> },
+      layout: { centerX: 0, centerY: 15, width: 200, height: 18 },
       textAlign: SC.ALIGN_CENTER,
-      tagName: <span class="string">"h1"</span>, 
-      value: <span class="string">"Now we're rolling!"</span>
+      tagName: "h1", 
+      value: "Now we're rolling!"
     })
   })
 
@@ -365,8 +365,8 @@ A designer tool might be created in the future, but regardless, there is a logic
 wherein you use <em>.design()</em> when you are <strong>using</strong> a view, and <em>.extend()</em> where you 
 are <strong>defining</strong> it. Here we are using <em>.design()</em>, but rest assured that SC.LabelView uses 
 extend where it is defined in the SproutCore codebase. </p>
-<div class='note'><p> When you make your own views, remember to use <em>.extend()</em> when you are making the view 
-in the first place, and <em>.design()</em> elsewhere, where you use it.
+<div class='note'><p> When you make your own views, remember to use _.extend()_ when you are making the view 
+in the first place, and _.design()_ elsewhere, where you use it.
 
 </p></div>
 
@@ -376,51 +376,51 @@ in the first place, and <em>.design()</em> elsewhere, where you use it.
 
 
 <p>Before we get into using views with statecharts, let&#39;s first arrange view files for TodosTwo. 
-Technically, you can put all view code in <em>main<em>page.js</em>, but that will get impractical 
+Technically, you can put all view code in <em>main_page.js</em>, but that will get impractical 
 very fast. Instead you can separate each view into it&#39;s own file. This is accomplished by
-using the special _sc_require()</em> functionality. Modify the mainPane of the mainPage view to
+using the special <em>sc</em>require()_ functionality. Modify the mainPane of the mainPage view to
 have two sc_require() statements at the top, to declare two views as dependencies, and to change
 the childViews of the pane to use these views:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_two/resources/main_page.js</div></span>
-sc_require(<span class="string">'views/welcome'</span>);
-sc_require(<span class="string">'views/rolling'</span>);
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_two/resources/main_page.js</div></span>
+sc_require('views/welcome');
+sc_require('views/rolling');
 
 TodosTwo.mainPage = SC.Page.design({
 
   mainPane: SC.MainPane.design({
-    childViews: <span class="string">'welcomeView rollingView'</span>.w(),
+    childViews: 'welcomeView rollingView'.w(),
 
     welcomeView: TodosTwo.WelcomeView.design(),
     rollingView: TodosTwo.RollingView.design()
   })
 
 });</code></div></pre>
-<p><em>sc_require()</em> functionality:</p>
+<p><em>sc</em>require()_ functionality:</p>
 <ol>
-<li>The file path used in <em>sc_require()</em> is relative to the application&#39;s root directory.</li>
-<li>The reference in <em>sc_require()</em> has the filename sans the .js extension.</li>
+<li>The file path used in <em>sc</em>require()_ is relative to the application&#39;s root directory.</li>
+<li>The reference in <em>sc</em>require()_ has the filename sans the .js extension.</li>
 <li>The load order for javascript files will be alphabetical, unless otherwise controlled with sc_require().  Sometimes you 
 get lucky on the default file loading order, if you omit a sc_require() statement. Sometimes you don&#39;t, and 
 you will get a dependency error.</li>
 </ol>
 <p>Now create the views folder for our new WelcomeView and RollingView:</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">$ cd ~/development/sproutcore/getting_started
+<pre class="highlight"><code class="hljs bash">$ <span class="hljs-built_in">cd</span> ~/development/sproutcore/getting_started
 $ mkdir apps/todos_two/views</code></div></pre>
 <p>Next, add the views. Make sure the files have the following content and are located in the views
 directory:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_two/views/welcome.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_two/views/welcome.js</div></span>
 TodosTwo.WelcomeView = SC.LabelView.extend({
-  layout: { centerX: <span class="number">0</span>, centerY: <span class="number">0</span>, width: <span class="number">200</span>, height: <span class="number">18</span> },
+  layout: { centerX: 0, centerY: 0, width: 200, height: 18 },
   textAlign: SC.ALIGN_CENTER,
-  tagName: <span class="string">"h1"</span>, 
-  value: <span class="string">"Welcome to SproutCore!"</span>
+  tagName: "h1", 
+  value: "Welcome to SproutCore!"
 });</code></div></pre>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_two/views/rolling.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_two/views/rolling.js</div></span>
 TodosTwo.RollingView = SC.LabelView.extend({
-  layout: { centerX: <span class="number">0</span>, centerY: <span class="number">15</span>, width: <span class="number">200</span>, height: <span class="number">18</span> },
+  layout: { centerX: 0, centerY: 15, width: 200, height: 18 },
   textAlign: SC.ALIGN_CENTER,
-  tagName: <span class="string">"h1"</span>, 
-  value: <span class="string">"Now we're rolling!"</span>
+  tagName: "h1", 
+  value: "Now we're rolling!"
 });</code></div></pre>
 <p>If you refresh the page, everything should look exactly as it did before,
 but now your code is cleaner and more manageable.</p>
@@ -430,17 +430,17 @@ but now your code is cleaner and more manageable.</p>
 
 <p>Standard events for a web application include the ubiquitous mouseDown, and many others. Here we add 
 an event to watch for mouseDown in our TodosTwo.RollingView, associating it with a statechart action:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_two/views/rolling.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_two/views/rolling.js</div></span>
 TodosTwo.RollingView = SC.LabelView.design({
-  layout: { centerX: <span class="number">0</span>, centerY: <span class="number">15</span>, width: <span class="number">200</span>, height: <span class="number">18</span> },
+  layout: { centerX: 0, centerY: 15, width: 200, height: 18 },
   textAlign: SC.ALIGN_CENTER,
-  tagName: <span class="string">"h1"</span>, 
-  value: <span class="string">"Now we're rolling!"</span>,
+  tagName: "h1", 
+  value: "Now we're rolling!",
 
-  mouseDown: <span class="keyword">function</span>(evt) {
-    <span class="keyword">var</span> someParam = <span class="string">"Woot!"</span>;
+  mouseDown: function(evt) {
+    var someParam = "Woot!";
 
-    TodosTwo.statechart.sendAction(<span class="string">'proveIt'</span>, someParam);
+    TodosTwo.statechart.sendAction('proveIt', someParam);
   }
 });</code></div></pre>
 <p>We set a <em>proveIt</em> action to happen on the mouseDown event, using the statechart.sendAction() function. We must 
@@ -452,31 +452,31 @@ continue in this manner, bubbling up until either an ancestor state is found tha
 the event, or it will log a warning for the developer.  You can see warnings, as well as other 
 informational messages (such as for state transitions), by turning on tracing on the statechart.</p>
 <p>Do that now:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_two/statechart.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_two/statechart.js</div></span>
 TodosTwo.statechart = SC.Statechart.create({
 
-  trace: YES,   <span class="comment">// &lt;-- Add this line</span>
+  trace: YES,   // &lt;-- Add this line
 
-  initialState: <span class="string">'readyState'</span>,
+  initialState: 'readyState',
 
-  readyState: SC.State.plugin(<span class="string">'TodosTwo.ReadyState'</span>)
+  readyState: SC.State.plugin('TodosTwo.ReadyState')
 
 });</code></div></pre>
 <p>Let&#39;s make our TodosTwo.ReadyState handle the <em>proveIt</em> action that was defined on
 the mouseDown event in TodosTwo.RollingView above:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'>apps/todos_two/states/ready_state.js</div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_two/states/ready_state.js</div></span>
 TodosTwo.ReadyState = SC.State.extend({
 
-  enterState: <span class="keyword">function</span>() {
-    TodosTwo.getPath(<span class="string">'mainPage.mainPane'</span>).append();
+  enterState: function() {
+    TodosTwo.getPath('mainPage.mainPane').append();
   },
 
-  exitState: <span class="keyword">function</span>() {
-    TodosTwo.getPath(<span class="string">'mainPage.mainPane'</span>).remove();
+  exitState: function() {
+    TodosTwo.getPath('mainPage.mainPane').remove();
   },
 
-  <span class="comment">// Prove that we are rolling!</span>
-  proveIt: <span class="keyword">function</span>(someParam) {
+  // Prove that we are rolling!
+  proveIt: function(someParam) {
     alert(someParam);
   }
 

@@ -20,7 +20,7 @@
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-    <meta name="generator" content="DocPad v6.55.5" />
+    <meta name="generator" content="DocPad v6.79.0" />
     
   </head>
 
@@ -126,8 +126,8 @@
 
 
 <p>Let&#39;s start with a new project; call it <tt>todos</tt>.  In a console:</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">sc-init todos
-cd todos
+<pre class="highlight"><code class="hljs bash">sc-init todos
+<span class="hljs-built_in">cd</span> todos
 sc-server</code></div></pre>
 <p>Browse to localhost:4020/todos and you should see the &quot;Welcome to SproutCore!&quot; window.</p>
 <p>Let&#39;s also &quot;sanity-check&quot; that our test framework is working AND let&#39;s anticipate that we&#39;re going to write integration tests:</p>
@@ -136,14 +136,14 @@ sc-server</code></div></pre>
 <li>Create folder <tt>integration</tt> under <tt>app/todos/tests</tt>.</li>
 <li>Add the following test, <tt>sanity_check.js</tt>, under <tt>apps/todos/tests</tt>:</li>
 </ol>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/tests/sanity_check.js"</span></div></span>
-module(<span class="string">'Sanity Check'</span>);
-test(<span class="string">'This should pass'</span>, <span class="keyword">function</span>() {
-    ok(<span class="literal">true</span>);
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/tests/sanity_check.js"</div></span>
+module('Sanity Check');
+test('This should pass', function() {
+    ok(true);
 });</code></div></pre>
 <p>Now, browse to <a href="http://localhost:4020/todos/en/current/tests.html">http://localhost:4020/todos/en/current/tests.html</a> and you should see the following:</p>
 <div style='text-align: center;'>
-<img src="/images/testing/screenshot_1st_test.png" alt="First Test">
+![First Test](/images/testing/screenshot_1st_test.png)
 </div>
 
 <p>If you have this, we&#39;re all set up and you can proceed; otherwise debug first.</p>
@@ -152,30 +152,30 @@ test(<span class="string">'This should pass'</span>, <span class="keyword">funct
 
 
 <p>Let&#39;s write a test to see the page display an existing task (which doesn&#39;t, of course, exist yet):</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/tests/integration/view_task.js"</span></div></span>
-<span class="keyword">var</span> task;
-module(<span class="string">"Given an existing task"</span>, {
-  setup: <span class="keyword">function</span>() {
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/tests/integration/view_task.js"</div></span>
+var task;
+module("Given an existing task", {
+  setup: function() {
     SC.RunLoop.begin();
     Todos.main();
     task = Todos.store.createRecord(Todos.Task, {
-      <span class="string">'description'</span>: <span class="string">'Some Task'</span>,
-      <span class="string">'isDone'</span>: <span class="literal">false</span>
+      'description': 'Some Task',
+      'isDone': false
     });
     SC.RunLoop.end();
   },
 
-  teardown: <span class="keyword">function</span>() {
+  teardown: function() {
     SC.RunLoop.begin();
-    Todos.getPath(<span class="string">'mainPage.mainPane'</span>).remove();
+    Todos.getPath('mainPage.mainPane').remove();
     Todos.store.reset();
     SC.RunLoop.end();
   }
 });
 
-test(<span class="string">"When looking at the list of tasks"</span>, <span class="keyword">function</span>() {
-  <span class="keyword">var</span> todosList = Todos.getPath(<span class="string">'mainPage.mainPane.middleView.contentView'</span>).get(<span class="string">'content'</span>);
-  equals(todosList.indexOf(task) != -<span class="number">1</span>, <span class="literal">true</span>, <span class="string">"Then I should see the task in the list"</span>);
+test("When looking at the list of tasks", function() {
+  var todosList = Todos.getPath('mainPage.mainPane.middleView.contentView').get('content');
+  equals(todosList.indexOf(task) != -1, true, "Then I should see the task in the list");
 });</code></div></pre>
 <p>Store the above javascript into <tt>apps/todos/tests/integration/view_task.js</tt>.</p>
 <p>Here&#39;s what the above test does:</p>
@@ -191,10 +191,10 @@ I care about at this point.</p>
 <p>Rerun the tests and you will see 2 failures:</p>
 <div class='warning'><p> 1) Setup exception on integration/view_task.js Given an existing task
 module: When looking at the list of tasks: TypeError: Cannot read property
-&#39;prototype&#39; of undefined
+'prototype' of undefined
 <br />
 <br />
-2) Died on test #2: TypeError: Cannot call method &#39;get&#39; of undefined
+2) Died on test #2: TypeError: Cannot call method 'get' of undefined
 
 </p></div>
 
@@ -206,26 +206,26 @@ module: When looking at the list of tasks: TypeError: Cannot read property
 
 <p>The first failure is telling me that <tt>Todos.Task</tt> doesn&#39;t exist, so I have to
 create it:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/models/task.js"</span></div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/models/task.js"</div></span>
 Todos.Task = SC.Record.extend({
   isDone: SC.Record.attr(Boolean),
   description: SC.Record.attr(String)
 }) ;</code></div></pre>
 <p>I rerun my tests, and see that the first failure is now passing, leaving me
 only with the second:</p>
-<div class='warning'><p> 1. Died on test #2: TypeError: Cannot call method &#39;get&#39; of undefined
+<div class='warning'><p> 1. Died on test #2: TypeError: Cannot call method 'get' of undefined
 
 </p></div>
 
 <p>This failing test tells me the path for the requested view does not exist, so I
 have to modify apps/todos/resources/main_page.js to include it:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/resources/main_page.js"</span></div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/resources/main_page.js"</div></span>
 Todos.mainPage = SC.Page.design({
   mainPane: SC.MainPane.design({
-    childViews: <span class="string">'middleView'</span>.w(),
+    childViews: 'middleView'.w(),
 
     middleView: SC.ScrollView.design({
-      childViews: <span class="string">'contentView'</span>.w(),
+      childViews: 'contentView'.w(),
 
       contentView: SC.ListView.design({
 
@@ -234,36 +234,36 @@ Todos.mainPage = SC.Page.design({
   })
 });</code></div></pre>
 <p>This changes the failure to the following:</p>
-<div class='warning'><p> Died on Test #1: TypeError: Result of expression &#39;todosList&#39;[null] is not an object
+<div class='warning'><p> Died on Test #1: TypeError: Result of expression 'todosList'[null] is not an object
 
 </p></div>
 
 <p>This is telling me that the content of the ListView is null. So what I need to
 do is bind the contentView to a controller for the tasks, so I do that by
 modifying the main_page again:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/resources/main_page.js"</span></div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/resources/main_page.js"</div></span>
 Todos.mainPage = SC.Page.design({
   mainPane: SC.MainPane.design({
-    childViews: <span class="string">'middleView'</span>.w(),
+    childViews: 'middleView'.w(),
 
     middleView: SC.ScrollView.design({
-      childViews: <span class="string">'contentView'</span>.w(),
+      childViews: 'contentView'.w(),
 
       contentView: SC.ListView.design({
-        contentBinding: <span class="string">'Todos.tasksController.arrangedObjects'</span> <span class="comment">//ADDED THIS</span>
+        contentBinding: 'Todos.tasksController.arrangedObjects' //ADDED THIS
       })
     })
   })
 });</code></div></pre>
 <p>Now the error is:</p>
-<div class='warning'><p> Died on test #1: TypeError: Cannot call method &#39;indexOf&#39; of null
+<div class='warning'><p> Died on test #1: TypeError: Cannot call method 'indexOf' of null
 
 </p></div>
 
 <p>Hmm. <tt>todosList</tt> is null.  There isn&#39;t any content, so the binding isn&#39;t
 working.  Examining <tt>main_page.js</tt> reveals that no controller has been set up
 yet, so create it in <tt>apps/todos/controllers/tasks.js</tt>:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/controllers/tasks.js"</span></div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/controllers/tasks.js"</div></span>
 Todos.tasksController = SC.ArrayController.create({
 }) ;</code></div></pre>
 <p>Rerunning the test yields the error:</p>
@@ -289,59 +289,59 @@ getPath to reach into the view and find elements. By using a long string like
 tests to the current structure of my views. In order to fix this, and to give
 the element a description that is closer to our domain, we can refactor this
 dependency to use SC.outlet:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class="comment">//Replace instances which look like:</span>
-Todos.getPath(<span class="string">'mainPage.mainPane.middleView.contentView'</span>)
-<span class="comment">//With something that looks like this:</span>
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-comment">//Replace instances which look like:</span>
+Todos.getPath(<span class="hljs-string">'mainPage.mainPane.middleView.contentView'</span>)
+<span class="hljs-comment">//With something that looks like this:</span>
 Todos.mainPage.todosList();
 
-<span class="comment">//And add the following to main_page.js</span>
+<span class="hljs-comment">//And add the following to main_page.js</span>
 Todos.mainPage = SC.Page.design({
-  todosList: SC.outlet(<span class="string">'mainPane.middleView.contentView'</span>),
-  <span class="comment">// ...</span>
+  <span class="hljs-attr">todosList</span>: SC.outlet(<span class="hljs-string">'mainPane.middleView.contentView'</span>),
+  <span class="hljs-comment">// ...</span>
 })</code></div></pre>
 <p>What SC.outlet does is generate a computed property that will look up the
 passed property path the first time you try to get the value. This fixes the
 anti-pattern by defining the tight coupling in only one place.</p>
 <p>Here&#39;s the new code:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/resources/main_page.js"</span></div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/resources/main_page.js"</div></span>
 Todos.mainPage = SC.Page.design({
   mainPane: SC.MainPane.design({
-    childViews: <span class="string">'middleView'</span>.w(),
+    childViews: 'middleView'.w(),
 
     middleView: SC.ScrollView.design({
-      childViews: <span class="string">'contentView'</span>.w(),
+      childViews: 'contentView'.w(),
 
       contentView: SC.ListView.design({
-        contentBinding: <span class="string">'Todos.tasksController.arrangedObjects'</span> <span class="comment">//ADDED THIS</span>
+        contentBinding: 'Todos.tasksController.arrangedObjects' //ADDED THIS
       })
     })
   }),
-  todosList: SC.outlet(<span class="string">'mainPane.middleView.contentView'</span>)
+  todosList: SC.outlet('mainPane.middleView.contentView')
 });</code></div></pre>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/tests/integration/view_tasks.js"</span></div></span>
-<span class="keyword">var</span> task;
-module(<span class="string">"Given an existing task"</span>, {
-  setup: <span class="keyword">function</span>() {
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/tests/integration/view_tasks.js"</div></span>
+var task;
+module("Given an existing task", {
+  setup: function() {
     SC.RunLoop.begin();
     Todos.main();
     task = Todos.store.createRecord(Todos.Task, {
-      <span class="string">'description'</span>: <span class="string">'Some Task'</span>,
-      <span class="string">'isDone'</span>: <span class="literal">false</span>
+      'description': 'Some Task',
+      'isDone': false
     });
     SC.RunLoop.end();
   },
 
-  teardown: <span class="keyword">function</span>() {
+  teardown: function() {
     SC.RunLoop.begin();
-    Todos.getPath(<span class="string">'mainPage.mainPane'</span>).remove();
+    Todos.getPath('mainPage.mainPane').remove();
     Todos.store.reset();
     SC.RunLoop.end();
   }
 });
 
-test(<span class="string">"When looking at the list of tasks"</span>, <span class="keyword">function</span>() {
-  <span class="keyword">var</span> todosList = Todos.mainPage.todosList().get(<span class="string">'content'</span>);
-  equals(todosList.indexOf(task) != -<span class="number">1</span>, <span class="literal">true</span>, <span class="string">"Then I should see the task in the list"</span>);
+test("When looking at the list of tasks", function() {
+  var todosList = Todos.mainPage.todosList().get('content');
+  equals(todosList.indexOf(task) != -1, true, "Then I should see the task in the list");
 });</code></div></pre>
 <p>Rerunning the tests yields the same FAILURE, so we achieved our refactoring.</p>
 <h3 id='-Add-a-Unit-Test-'>5 -  Add a Unit Test
@@ -351,25 +351,25 @@ test(<span class="string">"When looking at the list of tasks"</span>, <span clas
 <p>The test fails because the controller has not had it&#39;s content to be set to use
 Todos.task. In order to ensure that controller has not had it&#39;s content to be
 set to use Todos.task, I write the following unit test:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/tests/main_test.js"</span></div></span>
-<span class="keyword">var</span> mockedFindFunction, findMockObject;
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/tests/main_test.js"</div></span>
+var mockedFindFunction, findMockObject;
 
-module(<span class="string">"Todos.main"</span>, {
-  setup: <span class="keyword">function</span>() {
+module("Todos.main", {
+  setup: function() {
     mockedFindFunction = Todos.store.find;
-    findMockObject = CoreTest.stub(<span class="string">'Todos.store.find'</span>, <span class="keyword">function</span>() { <span class="keyword">return</span> YES; });
+    findMockObject = CoreTest.stub('Todos.store.find', function() { return YES; });
     Todos.store.find = findMockObject;
   },
 
-  teardown: <span class="keyword">function</span>() {
+  teardown: function() {
     Todos.store.find = mockedFindFunction;
   }
 });
 
-test(<span class="string">"setup finding tasks"</span>, <span class="keyword">function</span>() {
+test("setup finding tasks", function() {
   Todos.main();
-  equals(findMockObject.callCount, <span class="number">1</span>, <span class="string">"Should delegate to the store to find the tasks"</span>);
-  Todos.getPath(<span class="string">'mainPage.mainPane'</span>).remove();
+  equals(findMockObject.callCount, 1, "Should delegate to the store to find the tasks");
+  Todos.getPath('mainPage.mainPane').remove();
 });</code></div></pre>
 <div class='warning'><p> Should delegate to the store to find the tasks, expected: 1 result: 0
 
@@ -377,53 +377,53 @@ test(<span class="string">"setup finding tasks"</span>, <span class="keyword">fu
 
 <p>In order to make this pass, within the setup I delegate to the store to find
 the proper object:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/main.js"</span></div></span>
-Todos.main = <span class="function"><span class="keyword">function</span> <span class="title">main</span><span class="params">()</span> {</span>
-  Todos.getPath(<span class="string">'mainPage.mainPane'</span>).append() ;
-  <span class="keyword">var</span> tasks = Todos.store.find(Todos.Task); <span class="comment">//ADDED THIS</span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/main.js"</div></span>
+Todos.main = function main() {
+  Todos.getPath('mainPage.mainPane').append() ;
+  var tasks = Todos.store.find(Todos.Task); //ADDED THIS
 } ;
 
-<span class="function"><span class="keyword">function</span> <span class="title">main</span><span class="params">()</span> {</span> Todos.main(); }</code></div></pre>
+function main() { Todos.main(); }</code></div></pre>
 <p>That makes the unit test that we wrote pass, but the integration test is still
 failing, so we need to delegate to the controller to set it&#39;s content. Here&#39;s
 the unit test to specify that:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/tests/controllers/tasks_test.js"</span></div></span>
-<span class="keyword">var</span> mockedSetFunction, mockedFindFunction, setMockObject, findMockObject;
-module(<span class="string">"Todos.main"</span>, {
-  setup: <span class="keyword">function</span>() {
-    mockedSetFunction = Todos.tasksController.set; <span class="comment">//ADDED THIS</span>
-    setMockObject = CoreTest.stub(<span class="string">'Todos.tasksController.set'</span>, <span class="keyword">function</span>() { <span class="keyword">return</span> YES; }); <span class="comment">//ADDED THIS</span>
-    Todos.tasksController.set = setMockObject; <span class="comment">//ADDED THIS</span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/tests/controllers/tasks_test.js"</div></span>
+var mockedSetFunction, mockedFindFunction, setMockObject, findMockObject;
+module("Todos.main", {
+  setup: function() {
+    mockedSetFunction = Todos.tasksController.set; //ADDED THIS
+    setMockObject = CoreTest.stub('Todos.tasksController.set', function() { return YES; }); //ADDED THIS
+    Todos.tasksController.set = setMockObject; //ADDED THIS
 
     mockedFindFunction = Todos.store.find;
-    findMockObject = CoreTest.stub(<span class="string">'Todos.store.find'</span>, <span class="keyword">function</span>() { <span class="keyword">return</span> YES; });
+    findMockObject = CoreTest.stub('Todos.store.find', function() { return YES; });
     Todos.store.find = findMockObject;
     Todos.main();
   },
 
-  teardown: <span class="keyword">function</span>() {
-    Todos.getPath(<span class="string">'mainPage.mainPane'</span>).remove();
-    Todos.tasksController.set = mockedSetFunction;<span class="comment">//ADDED THIS</span>
+  teardown: function() {
+    Todos.getPath('mainPage.mainPane').remove();
+    Todos.tasksController.set = mockedSetFunction;//ADDED THIS
     Todos.store.find = mockedFindFunction;
   }
 });
 
-test(<span class="string">"setup finding tasks"</span>, <span class="keyword">function</span>() {
-  equals(findMockObject.callCount, <span class="number">1</span>, <span class="string">"Should delegate to the store to find the tasks"</span>);
+test("setup finding tasks", function() {
+  equals(findMockObject.callCount, 1, "Should delegate to the store to find the tasks");
 });
 
-test(<span class="string">"setup tasksController content"</span>, <span class="keyword">function</span>() {
-  equals(setMockObject.callCount, <span class="number">1</span>, <span class="string">"Should delegate to the tasksController to setup content"</span>); <span class="comment">//ADDED THIS</span>
+test("setup tasksController content", function() {
+  equals(setMockObject.callCount, 1, "Should delegate to the tasksController to setup content"); //ADDED THIS
 });</code></div></pre>
 <p>And to make this pass, I need to implement that delegation (<tt>app/todos/main.js</tt>):</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/main.js"</span></div></span>
-Todos.main = <span class="function"><span class="keyword">function</span> <span class="title">main</span><span class="params">()</span> {</span>
-  Todos.getPath(<span class="string">'mainPage.mainPane'</span>).append() ;
-  <span class="keyword">var</span> tasks = Todos.store.find(Todos.Task);
-  Todos.tasksController.set(<span class="string">'content'</span>, tasks); <span class="comment">//ADDED THIS</span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/main.js"</div></span>
+Todos.main = function main() {
+  Todos.getPath('mainPage.mainPane').append() ;
+  var tasks = Todos.store.find(Todos.Task);
+  Todos.tasksController.set('content', tasks); //ADDED THIS
 };
 
-<span class="function"><span class="keyword">function</span> <span class="title">main</span><span class="params">()</span> {</span> Todos.main(); }</code></div></pre>
+function main() { Todos.main(); }</code></div></pre>
 <p>And that makes all of our existing tests (both unit and integration) pass.</p>
 <h3 id='-Reflection-on-mocking-problems--'>6 -  Reflection on mocking problems.
 </h3>
@@ -446,21 +446,21 @@ broke the true BDD cycle there. But, I guess it works for now.</p>
 <p>At this point, the view - although it is fully functional - is still quite
 ugly. Since this is purly aesthetic, I like to wait to style until all my tests
 are passing. I change main_page.js to be the following:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"apps/todos/resources/main_page.js"</span></div></span>
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/resources/main_page.js"</div></span>
 Todos.mainPage = SC.Page.design({
   mainPane: SC.MainPane.design({
-    childViews: <span class="string">'middleView'</span>.w(),
+    childViews: 'middleView'.w(),
 
     middleView: SC.ScrollView.design({
-      hasHorizontalScroller: NO, <span class="comment">//ADDED THIS</span>
-      layout: { top: <span class="number">36</span>, bottom: <span class="number">32</span>, left: <span class="number">0</span>, right: <span class="number">0</span> }, <span class="comment">//ADDED THIS</span>
-      backgroundColor: <span class="string">'white'</span>, <span class="comment">//ADDED THIS</span>
-      childViews: <span class="string">'contentView'</span>.w(),
+      hasHorizontalScroller: NO, //ADDED THIS
+      layout: { top: 36, bottom: 32, left: 0, right: 0 }, //ADDED THIS
+      backgroundColor: 'white', //ADDED THIS
+      childViews: 'contentView'.w(),
 
       contentView: SC.ListView.design({
-        contentBinding: <span class="string">'Todos.tasksController.arrangedObjects'</span>,
-        contentValueKey: <span class="string">'description'</span>, <span class="comment">//ADDED THIS</span>
-        contentCheckboxKey: <span class="string">'isDone'</span> <span class="comment">//ADDED THIS</span>
+        contentBinding: 'Todos.tasksController.arrangedObjects',
+        contentValueKey: 'description', //ADDED THIS
+        contentCheckboxKey: 'isDone' //ADDED THIS
       })
     }),
   })

@@ -20,7 +20,7 @@
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-    <meta name="generator" content="DocPad v6.55.5" />
+    <meta name="generator" content="DocPad v6.79.0" />
     
   </head>
 
@@ -131,29 +131,29 @@ verification on your code.</p>
 
 <p>To define a module, call the <tt>module()</tt> method.  For example, in the <a href="/adding_unit_test.html">previous guide</a>, a module called <tt>MyApp.loginController</tt>
 is created.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">module(<span class="string">"MyApp.loginController"</span>);</code></div></pre>
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-built_in">module</span>(<span class="hljs-string">"MyApp.loginController"</span>);</code></div></pre>
 <p>Unit test cases defined after calling <tt>module()</tt> will automatically be grouped into that module until the next <tt>module()</tt> call or the end of the file.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">module(<span class="string">"MyApp.loginController.module1"</span>);
-test (<span class="string">"test1 for MyApp.loginController module 1"</span>, ...);
-test (<span class="string">"test2 for MyApp.loginController module 1"</span>, ...);
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-built_in">module</span>(<span class="hljs-string">"MyApp.loginController.module1"</span>);
+test (<span class="hljs-string">"test1 for MyApp.loginController module 1"</span>, ...);
+test (<span class="hljs-string">"test2 for MyApp.loginController module 1"</span>, ...);
 
-module(<span class="string">"MyApp.loginController.module2"</span>);
-test (<span class="string">"test1 for MyApp.loginController module 2"</span>, ...);
-test (<span class="string">"test2 for MyApp.loginController module 2"</span>, ...);</code></div></pre>
+<span class="hljs-built_in">module</span>(<span class="hljs-string">"MyApp.loginController.module2"</span>);
+test (<span class="hljs-string">"test1 for MyApp.loginController module 2"</span>, ...);
+test (<span class="hljs-string">"test2 for MyApp.loginController module 2"</span>, ...);</code></div></pre>
 <p>Within the <tt>module</tt>, you may optionally implement <tt>setup()</tt> and <tt>teardown()</tt> callbacks to run before and after each unit test case for that module.
 Use these methods to setup and teardown any common testing infrastructure. </p>
 <p>For example, if you are  writing a group of tests to work on a <tt>Contact</tt> record, you might define your module like so:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class="keyword">var</span> contact ;
-module(<span class="string">"Test Contact record"</span>, {
-  setup: <span class="keyword">function</span>() {
-    contact = MyApp.Contact.create({  firstName: <span class="string">"John"</span>, lastName: <span class="string">"Doe"</span> });
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> contact ;
+<span class="hljs-built_in">module</span>(<span class="hljs-string">"Test Contact record"</span>, {
+  <span class="hljs-attr">setup</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    contact = MyApp.Contact.create({  <span class="hljs-attr">firstName</span>: <span class="hljs-string">"John"</span>, <span class="hljs-attr">lastName</span>: <span class="hljs-string">"Doe"</span> });
   },
-  teardown: <span class="keyword">function</span>() {
-    contact = <span class="literal">null</span>; <span class="comment">// reset</span>
+  <span class="hljs-attr">teardown</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    contact = <span class="hljs-literal">null</span>; <span class="hljs-comment">// reset</span>
  }
 });
 
-<span class="comment">// .. unit tests go here</span></code></div></pre>
+<span class="hljs-comment">// .. unit tests go here</span></code></div></pre>
 <p>Note that any common setup you define should be placed into global variables (such as the <tt>contact</tt> variable above).  Since unit tests are the last
 thing loaded in the page, it is OK to create these variables globally instead of isolating everything into namespaces like you should with all other
 code.</p>
@@ -163,21 +163,21 @@ code.</p>
 
 <p>Once you&#39;ve defined a module, you can add individual unit test cases.  A unit test case is defined using the <tt>test()</tt> method.  A test should have a
 description followed by the function you want to execute to perform the test.  </p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">test(<span class="string">"test description"</span>, <span class="keyword">function</span>() {
-  <span class="keyword">var</span> expected = <span class="string">"test"</span>;
-  <span class="keyword">var</span> result   = <span class="string">"test"</span>;
-  equals(result, expected, <span class="string">"test should equal test"</span>);
+<pre class="highlight"><code class="hljs javascript">test(<span class="hljs-string">"test description"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">var</span> expected = <span class="hljs-string">"test"</span>;
+  <span class="hljs-keyword">var</span> result   = <span class="hljs-string">"test"</span>;
+  equals(result, expected, <span class="hljs-string">"test should equal test"</span>);
 });</code></div></pre>
 <p>For example, if you were writing tests for a <tt>Contact</tt> model object, you might add a test like this:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">test(<span class="string">"fullName property returns combined firstName and lastName"</span>, <span class="keyword">function</span>() {
-  <span class="comment">// set preconditions</span>
-  contact.set(<span class="string">'firstName'</span>, <span class="string">'John'</span>);
-  contact.set(<span class="string">'lastName'</span>, <span class="string">'Doe'</span>);
+<pre class="highlight"><code class="hljs javascript">test(<span class="hljs-string">"fullName property returns combined firstName and lastName"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">// set preconditions</span>
+  contact.set(<span class="hljs-string">'firstName'</span>, <span class="hljs-string">'John'</span>);
+  contact.set(<span class="hljs-string">'lastName'</span>, <span class="hljs-string">'Doe'</span>);
 
-  <span class="comment">// verify</span>
-  equals(contact.get(<span class="string">'fullName'</span>), <span class="string">'John Doe'</span>);
+  <span class="hljs-comment">// verify</span>
+  equals(contact.get(<span class="hljs-string">'fullName'</span>), <span class="hljs-string">'John Doe'</span>);
 });</code></div></pre>
-<div class='note'><p> Use the test description to describe the <em>business rule</em> you are testing; you (and developers that follow you) will be thankful that you did.
+<div class='note'><p> Use the test description to describe the _business rule_ you are testing; you (and developers that follow you) will be thankful that you did.
 
 </p></div>
 
@@ -197,7 +197,7 @@ passes, then your test is allowed to continue.</p>
 
 <p>The most basic assertion you can make is <tt>ok()</tt>. This method accepts a boolean value and an optional description string. The assertion passes if the
 value is true and fails otherwise.  For example, here is how you would assert that a test value is greater than 10:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">ok(contacts.get(<span class="string">'length'</span>) &gt; <span class="number">10</span>, <span class="string">"should be more than 10 contacts"</span>);</code></div></pre>
+<pre class="highlight"><code class="hljs javascript">ok(contacts.get(<span class="hljs-string">'length'</span>) &gt; <span class="hljs-number">10</span>, <span class="hljs-string">"should be more than 10 contacts"</span>);</code></div></pre>
 <p>To make your tests more understandable, you should always include a description when you use <tt>ok()</tt> assertions.  Otherwise, the test runner will
 simply print the value that was returned and the value that was expected.</p>
 <h4 id='-equals---'>4.2 -  equals()
@@ -208,14 +208,14 @@ simply print the value that was returned and the value that was expected.</p>
 equal and fails otherwise.  The advantage of using <tt>equals</tt> over <tt>ok(a == b, &quot;a equals b&quot;)</tt> is that, if the test fails, then the test runner will
 display both the expected value and the actual value; this can be valuable when debugging your code.</p>
 <p>For example, here is how you would test the fullName property of a contact:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">equals(contact.get(<span class="string">'fullName'</span>), <span class="string">'John Doe'</span>, <span class="string">'fullName = John Doe'</span>);</code></div></pre>
+<pre class="highlight"><code class="hljs javascript">equals(contact.get(<span class="hljs-string">'fullName'</span>), <span class="hljs-string">'John Doe'</span>, <span class="hljs-string">'fullName = John Doe'</span>);</code></div></pre>
 <p>Note: this method is equivalent to <tt>equal()</tt> in the latest QUnit API.</p>
 <h4 id='-Other-assertions-'>4.3 -  Other assertions
 </h4>
 
 
-<p>There are several other assertion types that you can learn about from the <a href="http://docs.jquery.com/QUnit#API_documentation">QUnit pages</a>, such as</p>
-<p><tt>same()</tt> or <tt>expects()</tt>.  Most of these assertions are not as generally useful as <tt>ok()</tt> and <tt>equals()</tt>. However, you can use them if you wish.</p>
+<p>There are several other assertion types that you can learn about from the <a href="http://docs.jquery.com/QUnit#API_documentation">QUnit pages</a>, such as
+<tt>same()</tt> or <tt>expects()</tt>.  Most of these assertions are not as generally useful as <tt>ok()</tt> and <tt>equals()</tt>. However, you can use them if you wish.</p>
 <h3 id='-Asynchronous-Unit-Tests-Cases-'>5 -  Asynchronous Unit Tests Cases
 </h3>
 
@@ -227,66 +227,66 @@ module&#39;s <tt>teardown()</tt> method (if defined) and running the next unit t
 <p>After the test runner has been stopped, you can resume it by calling <tt>start()</tt>.  To invoke <tt>start()</tt>, you will need to setup a callback or timer.  </p>
 <p>For example, the unit test case below verifies if a particular file loads from the server.  It first issues a <tt>stop()</tt> to the test runner for 1
 second.  If <tt>start()</tt> is not called within 1 second, the test will fail.  It then uses the callback in <tt>SC.Request.getUrl()</tt> to call <tt>start()</tt>.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">test(<span class="string">"load file from server"</span>, <span class="keyword">function</span>() {
-  <span class="comment">// setup a timeout in case of failure</span>
-  stop(<span class="number">1000</span>);
+<pre class="highlight"><code class="hljs javascript">test(<span class="hljs-string">"load file from server"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">// setup a timeout in case of failure</span>
+  stop(<span class="hljs-number">1000</span>);
 
-  <span class="keyword">var</span> req = SC.Request.getUrl(<span class="string">"/foo.json"</span>).notify(<span class="keyword">function</span>() {
-    <span class="comment">// verify request loaded OK</span>
-    ok(SC.typeOf(req.get(<span class="string">'response'</span>)) !== SC.T_ERROR, <span class="string">"response should not be an error"</span>);
-    <span class="comment">// resume executing tests</span>
+  <span class="hljs-keyword">var</span> req = SC.Request.getUrl(<span class="hljs-string">"/foo.json"</span>).notify(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-comment">// verify request loaded OK</span>
+    ok(SC.typeOf(req.get(<span class="hljs-string">'response'</span>)) !== SC.T_ERROR, <span class="hljs-string">"response should not be an error"</span>);
+    <span class="hljs-comment">// resume executing tests</span>
     start();
   });
 });</code></div></pre>
 <p>Here&#39;s a more complex example with assertions.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">test(<span class="string">'Create User'</span>, <span class="keyword">function</span>() {
-  <span class="comment">// Pause the test runner. If start() is not called within 2 seconds, fail the test.</span>
-  stop(<span class="number">2000</span>);
+<pre class="highlight"><code class="hljs javascript">test(<span class="hljs-string">'Create User'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">// Pause the test runner. If start() is not called within 2 seconds, fail the test.</span>
+  stop(<span class="hljs-number">2000</span>);
 
-  <span class="keyword">var</span> user = MyApp.store.createRecord(MyApp.UserRecord, {
-    username: <span class="string">'SpongeBob'</span>,
-    department: <span class="string">'Accounts'</span>,
-    status: <span class="string">'Active'</span>,
-    isAdmin: NO,
-    lastLoggedInDate: <span class="string">'2010-05-05T10:20:30Z'</span>
+  <span class="hljs-keyword">var</span> user = MyApp.store.createRecord(MyApp.UserRecord, {
+    <span class="hljs-attr">username</span>: <span class="hljs-string">'SpongeBob'</span>,
+    <span class="hljs-attr">department</span>: <span class="hljs-string">'Accounts'</span>,
+    <span class="hljs-attr">status</span>: <span class="hljs-string">'Active'</span>,
+    <span class="hljs-attr">isAdmin</span>: NO,
+    <span class="hljs-attr">lastLoggedInDate</span>: <span class="hljs-string">'2010-05-05T10:20:30Z'</span>
   });
 
-  equal(user.get(<span class="string">'username'</span>), <span class="string">'SpongeBob'</span>, <span class="string">'user name'</span>);
-  equal(user.get(<span class="string">'department'</span>), <span class="string">'Accounts'</span>, <span class="string">'department'</span>);
-  equal(user.get(<span class="string">'userStatus'</span>), <span class="string">'Active'</span>, <span class="string">'user status'</span>);
-  equal(user.get(<span class="string">'isAdmin'</span>), NO, <span class="string">'user is Admin'</span>);
-  <span class="keyword">var</span> d1 = user.get(<span class="string">'lastLoggedInDate'</span>).toISO8601();
-  <span class="keyword">var</span> d2 = <span class="string">'2010-05-05T10:20:30+00:00'</span>;
-  equal(d1, d2, <span class="string">'user last logged in'</span>);
+  equal(user.get(<span class="hljs-string">'username'</span>), <span class="hljs-string">'SpongeBob'</span>, <span class="hljs-string">'user name'</span>);
+  equal(user.get(<span class="hljs-string">'department'</span>), <span class="hljs-string">'Accounts'</span>, <span class="hljs-string">'department'</span>);
+  equal(user.get(<span class="hljs-string">'userStatus'</span>), <span class="hljs-string">'Active'</span>, <span class="hljs-string">'user status'</span>);
+  equal(user.get(<span class="hljs-string">'isAdmin'</span>), NO, <span class="hljs-string">'user is Admin'</span>);
+  <span class="hljs-keyword">var</span> d1 = user.get(<span class="hljs-string">'lastLoggedInDate'</span>).toISO8601();
+  <span class="hljs-keyword">var</span> d2 = <span class="hljs-string">'2010-05-05T10:20:30+00:00'</span>;
+  equal(d1, d2, <span class="hljs-string">'user last logged in'</span>);
 
-  <span class="comment">// Status should be ready new because record is new and not committed to server</span>
-  ok(user.get(<span class="string">'status'</span>) === SC.Record.READY_NEW, <span class="string">'Status is READY_NEW'</span>);
+  <span class="hljs-comment">// Status should be ready new because record is new and not committed to server</span>
+  ok(user.get(<span class="hljs-string">'status'</span>) === SC.Record.READY_NEW, <span class="hljs-string">'Status is READY_NEW'</span>);
 
-  <span class="comment">// Commit changes</span>
+  <span class="hljs-comment">// Commit changes</span>
   MyApp.store.commitRecords();
 
-  <span class="comment">// Give our store 1 second to commit records to the remote server</span>
-  setTimeout(checkCreate, <span class="number">1000</span>);
+  <span class="hljs-comment">// Give our store 1 second to commit records to the remote server</span>
+  setTimeout(checkCreate, <span class="hljs-number">1000</span>);
 });
 
-<span class="function"><span class="keyword">function</span> <span class="title">checkCreate</span><span class="params">()</span> {</span>
-  <span class="comment">// Should be to find record now</span>
-  <span class="keyword">var</span> query = SC.Query.local(MyApp.UserRecord, {
-    conditions: <span class="string">'username = {name}'</span>,
-    name: <span class="string">'SpongeBob'</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">checkCreate</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">// Should be to find record now</span>
+  <span class="hljs-keyword">var</span> query = SC.Query.local(MyApp.UserRecord, {
+    <span class="hljs-attr">conditions</span>: <span class="hljs-string">'username = {name}'</span>,
+    <span class="hljs-attr">name</span>: <span class="hljs-string">'SpongeBob'</span>
   });
 
-  <span class="keyword">var</span> users = MyApp.store.find(query);
-  equal(users.get(<span class="string">'length'</span>), <span class="number">1</span>, <span class="string">'SpongeBob record should be searchable by query'</span>);
+  <span class="hljs-keyword">var</span> users = MyApp.store.find(query);
+  equal(users.get(<span class="hljs-string">'length'</span>), <span class="hljs-number">1</span>, <span class="hljs-string">'SpongeBob record should be searchable by query'</span>);
 
-  <span class="comment">// Status should now be 'clean' since it's been saved</span>
-  equal(user.get(<span class="string">'status'</span>), SC.Record.READY_CLEAN, <span class="string">'Status is READY_CLEAN'</span>);
+  <span class="hljs-comment">// Status should now be 'clean' since it's been saved</span>
+  equal(user.get(<span class="hljs-string">'status'</span>), SC.Record.READY_CLEAN, <span class="hljs-string">'Status is READY_CLEAN'</span>);
 
-  <span class="comment">// Can get our record by primary key</span>
-  <span class="keyword">var</span> user2 = MyApp.store.find(MyApp.UserRecord, user.get(<span class="string">'id'</span>));
-  equal(user2.get(<span class="string">'username'</span>), <span class="string">'SpongeBob'</span>, <span class="string">'user name'</span>);
+  <span class="hljs-comment">// Can get our record by primary key</span>
+  <span class="hljs-keyword">var</span> user2 = MyApp.store.find(MyApp.UserRecord, user.get(<span class="hljs-string">'id'</span>));
+  equal(user2.get(<span class="hljs-string">'username'</span>), <span class="hljs-string">'SpongeBob'</span>, <span class="hljs-string">'user name'</span>);
 
-  <span class="comment">// Resume the test runner again</span>
+  <span class="hljs-comment">// Resume the test runner again</span>
   start();
 }</code></div></pre>
 <h3 id='-Writing-HTML-'>6 -  Writing HTML
@@ -298,8 +298,8 @@ the HTML you need will already exist.</p>
 <p>If you do need to write out some sample HTML on the page to work against when testing, however, you can add this HTML using the method <tt>htmlbody()</tt>.
 This method should be the first thing called in your page, even before you start a new module.</p>
 <p>To use this method, just pass a string containing the HTML you want to add.  The HTML will be appended to the main body tag.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class="comment">// adds the h1 tag to the end of the body.</span>
-htmlbody(<span class="string">"&lt;h1 id='testheader'&gt;&lt;/h1&gt;"</span>) ;</code></div></pre>
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-comment">// adds the h1 tag to the end of the body.</span>
+htmlbody(<span class="hljs-string">"&lt;h1 id='testheader'&gt;&lt;/h1&gt;"</span>) ;</code></div></pre>
 <h3 id='-Moving-On-'>7 -  Moving On
 </h3>
 

@@ -20,7 +20,7 @@
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-    <meta name="generator" content="DocPad v6.55.5" />
+    <meta name="generator" content="DocPad v6.79.0" />
     
   </head>
 
@@ -155,33 +155,33 @@ and error prone task.</li>
 </ul>
 <p>For a list of the available commands, type <tt>sproutcore</tt> on the command line
 after installing the SproutCore gem:</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">$ sproutcore
+<pre class="highlight"><code class="hljs bash">$ sproutcore
 
 SproutCore 1.9.2 Usage
 ======================
 
 Tasks:
-  sproutcore build [TARGET..]                                                                   <span class="comment"># Builds one or more targets</span>
-  sproutcore build-number TARGET                                                                <span class="comment"># Computes a build number for the target</span>
-  sproutcore docs [TARGET..]                                                                    <span class="comment"># Generates JSDoc's for specified targets.</span>
-  sproutcore gen generator Namespace[.ClassName] [--target=TARGET_NAME] [--filename=FILE_NAME]  <span class="comment"># Generates SproutCore components</span>
-  sproutcore help                                                                               <span class="comment"># How to use the sproutcore command</span>
-  sproutcore help [TASK]                                                                        <span class="comment"># Describe available tasks or one specific task</span>
-  sproutcore init PROJECT [APP]                                                                 <span class="comment"># Generates a SproutCore project with an initial appl...</span>
-  sproutcore manifest [TARGET..]                                                                <span class="comment"># Generates a manifest for the specified targets</span>
-  sproutcore server                                                                             <span class="comment"># Starts the development server</span>
-  sproutcore version                                                                            <span class="comment"># Show the SproutCore version number</span>
+  sproutcore build [TARGET..]                                                                   <span class="hljs-comment"># Builds one or more targets</span>
+  sproutcore build-number TARGET                                                                <span class="hljs-comment"># Computes a build number for the target</span>
+  sproutcore docs [TARGET..]                                                                    <span class="hljs-comment"># Generates JSDoc's for specified targets.</span>
+  sproutcore gen generator Namespace[.ClassName] [--target=TARGET_NAME] [--filename=FILE_NAME]  <span class="hljs-comment"># Generates SproutCore components</span>
+  sproutcore <span class="hljs-built_in">help</span>                                                                               <span class="hljs-comment"># How to use the sproutcore command</span>
+  sproutcore <span class="hljs-built_in">help</span> [TASK]                                                                        <span class="hljs-comment"># Describe available tasks or one specific task</span>
+  sproutcore init PROJECT [APP]                                                                 <span class="hljs-comment"># Generates a SproutCore project with an initial appl...</span>
+  sproutcore manifest [TARGET..]                                                                <span class="hljs-comment"># Generates a manifest for the specified targets</span>
+  sproutcore server                                                                             <span class="hljs-comment"># Starts the development server</span>
+  sproutcore version                                                                            <span class="hljs-comment"># Show the SproutCore version number</span>
 
 Options:
       [--project=PROJECT]
       [--mode=MODE]
       [--logfile=LOGFILE]
   -b, [--build=BUILD]
-      [--build-targets=BUILD-TARGETS]  <span class="comment"># Targets to build (excluding their dependencies)</span>
-      [--dont-minify]                  <span class="comment"># Disables minification for the build.</span>
+      [--build-targets=BUILD-TARGETS]  <span class="hljs-comment"># Targets to build (excluding their dependencies)</span>
+      [--dont-minify]                  <span class="hljs-comment"># Disables minification for the build.</span>
   -v, [--verbose]
   -V, [--very-verbose]
-      [--help]</code></div></pre>
+      [--<span class="hljs-built_in">help</span>]</code></div></pre>
 <h3 id='-Generating-a-New-SproutCore-Project---tt-sproutcore-init--tt--'>2 -  Generating a New SproutCore Project: <tt>sproutcore init</tt>
 </h3>
 
@@ -191,7 +191,7 @@ short form equivalent, <tt>sc-init</tt>, and supply a project name and optional
 initial app name.  If you don&#39;t supply the AppName parameter, an app with the
 same name as the project will be created.  For example, to create a project
 &quot;MediaTools&quot; with the default app &quot;VideoEditor&quot; use the following:</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">$ sproutcore init MediaTools VideoEditor
+<pre class="highlight"><code class="hljs bash">$ sproutcore init MediaTools VideoEditor
  ~ Created directory at media_tools
  ~ Created file at media_tools/Buildfile
  ~ Created file at media_tools/README
@@ -207,22 +207,21 @@ same name as the project will be created.  For example, to create a project
  ~ Created file at apps/video_editor/theme.js
 Your new SproutCore project is ready!
 
-To get started, you can find your initial application <span class="keyword">in</span> the <span class="string">"apps"</span> directory.</code></div></pre>
+To get started, you can find your initial application <span class="hljs-keyword">in</span> the <span class="hljs-string">"apps"</span> directory.</code></div></pre>
 <p>To create a project &quot;Calculator&quot; with an app of the same name, simply use:</p>
-<pre class="highlighted"><div class="code_container"><code class="r">$ sproutcore init Calculator
-~ Created directory at calculator
-~ Created file at calculator/Buildfile
-<span class="keyword">...</span></code></div></pre>
-<p>To create a project &quot;BusyBee&quot; with an app of the same name with a base
+<pre class="highlight"><code class="hljs livecodeserver">$ sproutcore init Calculator
+~ Created <span class="hljs-built_in">directory</span> <span class="hljs-keyword">at</span> calculator
+~ Created <span class="hljs-built_in">file</span> <span class="hljs-keyword">at</span> calculator/Buildfile
+...</code></div></pre><p>To create a project &quot;BusyBee&quot; with an app of the same name with a base
 statechart, simply use:</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">$ sproutcore init BusyBee --statechart
+<pre class="highlight"><code class="hljs bash">$ sproutcore init BusyBee --statechart
 ~ Created directory at busy_bee
 ~ Created file at busy_bee/Buildfile
 ...</code></div></pre>
 <div class='note'><p> Passing a camelcase app name to <tt>sproutcore init</tt>, such as
-<code>VideoEditor</code> &mdash; notice the uppercase &#39;E&#39; &mdash; creates a
-namespace <code>VideoEditor</code> and the directories are named using
-underscores (i.e. <em><tt>apps/video_editor</tt></em>).
+`VideoEditor` &mdash; notice the uppercase 'E' &mdash; creates a
+namespace `VideoEditor` and the directories are named using
+underscores (i.e. *<tt>apps/video_editor</tt>*).
 
 </p></div>
 
@@ -255,9 +254,9 @@ namespace <code>AppName</code>.</p>
 
 <p>When called from within a project, adds an app with a basic SC.Statechart
 setup.</p>
-<div class='note'><p> Similar to generating basic statechart files with <code>sproutcore init
---statechart</code> you can achieve the same result with <code>sproutcore gen
-app --statechart</code>.
+<div class='note'><p> Similar to generating basic statechart files with `sproutcore init
+--statechart` you can achieve the same result with `sproutcore gen
+app --statechart`.
 
 </p></div>
 
@@ -293,7 +292,7 @@ file <code>controller_name_controller.js</code> and a stub unit test file.</p>
 
 <p>Adds a language file for &#39;Language&#39;, in the file <code>language.lproj</code>.
 Here are some examples:</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">$ sc-gen language MediaTools French
+<pre class="highlight"><code class="hljs bash">$ sc-gen language MediaTools French
  ~ Created directory at french.lproj
  ~ Created file at french.lproj/strings.js
 
@@ -304,8 +303,8 @@ $ sc-gen language MediaTools en-ca
 $ sc-gen language MediaTools Latin
  ~ Created directory at Latin.lproj
  ~ Created file at Latin.lproj/strings.js</code></div></pre>
-<div class='note'><p> Generally the provided &#39;Language&#39; will result in the same named
-directory, &#39;Language.lproj&#39;, but as can be seen by the French example above,
+<div class='note'><p> Generally the provided 'Language' will result in the same named
+directory, 'Language.lproj', but as can be seen by the French example above,
 the build tools have a bit of an odd behavior of recognizing English, French,
 German, Italian, Spanish and Japanese as parameters and making the directory
 name the lowercase version.
@@ -342,7 +341,7 @@ default, <code>sproutcore build</code> uses the mode <tt>production</tt> and
 custom mode by passing <tt>--mode=my_mode</tt> to the command.</p>
 <p>The following list describes the most common Buildfile <code>config</code>
 properties.</p>
-<h4 id='--tt--build-number-----String---tt--'>4.1 -  <tt>:build_number =&gt; {String}</tt>
+<h4 id='--tt--build-number-----String---tt--'>4.1 -  <tt>:build_number => {String}</tt>
 </h4>
 
 
@@ -356,32 +355,32 @@ invalidated.  Use this setting with caution.
 
 
 
-<h4 id='--tt--combine-javascript-----Boolean---tt--'>4.2 -  <tt>:combine_javascript =&gt; {Boolean}</tt>
+<h4 id='--tt--combine-javascript-----Boolean---tt--'>4.2 -  <tt>:combine_javascript => {Boolean}</tt>
 </h4>
 
 
 <p>By default, the built project combines all the JavaScript files into a single
 file.  Setting <code>:combine_javascript</code> to <code>false</code> will
 prevent this from happening, which may be useful for debugging purposes.</p>
-<h4 id='--tt--combine-stylesheets-----Boolean---tt--'>4.3 -  <tt>:combine_stylesheets =&gt; {Boolean}</tt>
+<h4 id='--tt--combine-stylesheets-----Boolean---tt--'>4.3 -  <tt>:combine_stylesheets => {Boolean}</tt>
 </h4>
 
 
 <p>By default, the built project combines all the CSS files into a single file.
 Setting <code>:combine_stylesheets</code> to <code>false</code> will prevent
 this from happening, which may be useful for debugging purposes.</p>
-<h4 id='--tt--javascript-libs-----Array---tt--'>4.4 -  <tt>:javascript_libs =&gt; {Array}</tt>
+<h4 id='--tt--javascript-libs-----Array---tt--'>4.4 -  <tt>:javascript_libs => {Array}</tt>
 </h4>
 
 
 <p>An array of JavaScript file URLs that will be inserted as the src attributes of
 <code>&lt;script&gt;</code> tags in the <code>&lt;head&gt;</code> element.</p>
 <p>Ex. Including the Google Maps API:</p>
-<pre class="highlighted"><div class="code_container"><code class="ruby"><span class="comment"><span class='comment'><div class='filename'>my_project/apps/my_app/Buildfile</span></div></span>
-config <span class="symbol">:my_app</span>, <span class="symbol">:javascript_libs</span> =&gt; [
-  <span class="string">'https://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false'</span>
+<pre class="highlight"><code class="hljs ruby"><span class="hljs-comment"><span class='comment'><div class='filename'>my_project/apps/my_app/Buildfile</span></div></span>
+config <span class="hljs-symbol">:my_app</span>, <span class="hljs-symbol">:javascript_libs</span> =&gt; [
+  <span class="hljs-string">'https://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false'</span>
 ]</code></div></pre>
-<h4 id='--tt--layout-----String---tt--'>4.5 -  <tt>:layout =&gt; {String}</tt>
+<h4 id='--tt--layout-----String---tt--'>4.5 -  <tt>:layout => {String}</tt>
 </h4>
 
 
@@ -397,43 +396,43 @@ the template directly.
 
 
 
-<h4 id='--tt--load-debug-----Boolean---tt--'>4.6 -  <tt>:load_debug =&gt; {Boolean}</tt>
+<h4 id='--tt--load-debug-----Boolean---tt--'>4.6 -  <tt>:load_debug => {Boolean}</tt>
 </h4>
 
 
 <p>By default, directories named <code>debug</code> are not included in the built
 project.  Set <code>:load_debug</code> to <code>true</code> to have them
 included.</p>
-<h4 id='--tt--load-fixtures-----Boolean---tt--'>4.7 -  <tt>:load_fixtures =&gt; {Boolean}</tt>
+<h4 id='--tt--load-fixtures-----Boolean---tt--'>4.7 -  <tt>:load_fixtures => {Boolean}</tt>
 </h4>
 
 
 <p>By default, fixtures are excluded in the built project.  Set
 <code>:load_fixtures</code> to <code>true</code> to have them included.</p>
-<h4 id='--tt--load-protocols-----Boolean---tt--'>4.8 -  <tt>:load_protocols =&gt; {Boolean}</tt>
+<h4 id='--tt--load-protocols-----Boolean---tt--'>4.8 -  <tt>:load_protocols => {Boolean}</tt>
 </h4>
 
 
 <p>By default, files in directories named <code>protocols</code> are excluded in
 the built project.  Set <code>:load_protocols</code> to <code>true</code> to
 have them included.</p>
-<h4 id='--tt--minify-----Boolean---tt--'>4.9 -  <tt>:minify =&gt; {Boolean}</tt>
+<h4 id='--tt--minify-----Boolean---tt--'>4.9 -  <tt>:minify => {Boolean}</tt>
 </h4>
 
 
 <p>By default, the HTML, JavaScript and CSS is minified when built.  Set this to
 <code>false</code> to prevent minification, which may be useful for debugging.
-You can also be more specific by using either <tt>:minify_javascript</tt>,</p>
-<p><tt>:minify_css</tt> or <tt>:minify_html</tt>.</p>
-<div class='note'><p> If minify is <code>false</code>, <code>sc-build</code> will throw a
-security exception unless <code>--allow-commented-js</code> is set, because all
+You can also be more specific by using either <tt>:minify_javascript</tt>,
+<tt>:minify_css</tt> or <tt>:minify_html</tt>.</p>
+<div class='note'><p> If minify is `false`, `sc-build` will throw a
+security exception unless `--allow-commented-js` is set, because all
 comments will be visible in the built product.
 
 </p></div>
 
 
 
-<h4 id='--tt--required-----Array---tt--'>4.10 -  <tt>:required =&gt; {Array}</tt>
+<h4 id='--tt--required-----Array---tt--'>4.10 -  <tt>:required => {Array}</tt>
 </h4>
 
 
@@ -444,59 +443,59 @@ framework is actually just a wrapper framework that includes several of its
 sub-frameworks each of which have their own requirements as well.  New
 developers should not generally concern themselves with stripping away</p>
 <p>Ex. The most basic Buildfile:</p>
-<pre class="highlighted"><div class="code_container"><code class="ruby"><span class="comment"><span class='comment'><div class='filename'>my_project/Buildfile</span></div></span>
-config <span class="symbol">:all</span>, <span class="symbol">:required</span> =&gt; <span class="symbol">:sproutcore</span></code></div></pre>
+<pre class="highlight"><code class="hljs ruby"><span class="hljs-comment"><span class='comment'><div class='filename'>my_project/Buildfile</span></div></span>
+config <span class="hljs-symbol">:all</span>, <span class="hljs-symbol">:required</span> =&gt; <span class="hljs-symbol">:sproutcore</span></code></div></pre>
 <p>Ex. Including a framework, DataHelpers, from the project&#39;s frameworks directory for all apps within the project:</p>
-<pre class="highlighted"><div class="code_container"><code class="ruby"><span class="comment"><span class='comment'><div class='filename'>my_project/Buildfile</span></div></span>
-config <span class="symbol">:all</span>, <span class="symbol">:required</span> =&gt; [<span class="symbol">:sproutcore</span>, <span class="symbol">:data_helpers</span>]</code></div></pre>
+<pre class="highlight"><code class="hljs ruby"><span class="hljs-comment"><span class='comment'><div class='filename'>my_project/Buildfile</span></div></span>
+config <span class="hljs-symbol">:all</span>, <span class="hljs-symbol">:required</span> =&gt; [<span class="hljs-symbol">:sproutcore</span>, <span class="hljs-symbol">:data_helpers</span>]</code></div></pre>
 <p>Ex. Including different frameworks for different apps:</p>
-<pre class="highlighted"><div class="code_container"><code class="ruby"><span class="comment"><span class='comment'><div class='filename'>my_project/Buildfile</span></div></span>
-config <span class="symbol">:all</span>, <span class="symbol">:required</span> =&gt; [<span class="symbol">:sproutcore</span>]
+<pre class="highlight"><code class="hljs ruby"><span class="hljs-comment"><span class='comment'><div class='filename'>my_project/Buildfile</span></div></span>
+config <span class="hljs-symbol">:all</span>, <span class="hljs-symbol">:required</span> =&gt; [<span class="hljs-symbol">:sproutcore</span>]
 
-config <span class="symbol">:my_app</span>, <span class="symbol">:required</span> =&gt; [<span class="symbol">:client_views</span>]
+config <span class="hljs-symbol">:my_app</span>, <span class="hljs-symbol">:required</span> =&gt; [<span class="hljs-symbol">:client_views</span>]
 
-config <span class="symbol">:my_admin_app</span>, <span class="symbol">:required</span> =&gt; [<span class="symbol">:admin_tools</span>]</code></div></pre>
+config <span class="hljs-symbol">:my_admin_app</span>, <span class="hljs-symbol">:required</span> =&gt; [<span class="hljs-symbol">:admin_tools</span>]</code></div></pre>
 <p>Ex. Including different frameworks for different apps using app specific Buildfiles:</p>
-<pre class="highlighted"><div class="code_container"><code class="ruby"><span class="comment"><span class='comment'><div class='filename'>my_project/Buildfile</span></div></span>
-config <span class="symbol">:all</span>, <span class="symbol">:required</span> =&gt; [<span class="symbol">:sproutcore</span>]</code></div></pre>
-<pre class="highlighted"><div class="code_container"><code class="ruby"><span class="comment"><span class='comment'><div class='filename'>my_project/apps/my_app/Buildfile</span></div></span>
-config <span class="symbol">:my_app</span>, <span class="symbol">:required</span> =&gt; [<span class="symbol">:client_views</span>]</code></div></pre>
-<pre class="highlighted"><div class="code_container"><code class="ruby"><span class="comment"><span class='comment'><div class='filename'>my_project/apps/my_admin_app/Buildfile</span></div></span>
-config <span class="symbol">:my_admin_app</span>, <span class="symbol">:required</span> =&gt; [<span class="symbol">:admin_tools</span>]</code></div></pre>
+<pre class="highlight"><code class="hljs ruby"><span class="hljs-comment"><span class='comment'><div class='filename'>my_project/Buildfile</span></div></span>
+config <span class="hljs-symbol">:all</span>, <span class="hljs-symbol">:required</span> =&gt; [<span class="hljs-symbol">:sproutcore</span>]</code></div></pre>
+<pre class="highlight"><code class="hljs ruby"><span class="hljs-comment"><span class='comment'><div class='filename'>my_project/apps/my_app/Buildfile</span></div></span>
+config <span class="hljs-symbol">:my_app</span>, <span class="hljs-symbol">:required</span> =&gt; [<span class="hljs-symbol">:client_views</span>]</code></div></pre>
+<pre class="highlight"><code class="hljs ruby"><span class="hljs-comment"><span class='comment'><div class='filename'>my_project/apps/my_admin_app/Buildfile</span></div></span>
+config <span class="hljs-symbol">:my_admin_app</span>, <span class="hljs-symbol">:required</span> =&gt; [<span class="hljs-symbol">:admin_tools</span>]</code></div></pre>
 <div class='info'><p> For advanced manipulation of the included SproutCore frameworks, refer to
 the SproutCore
-<a href="https://github.com/sproutcore/sproutcore/blob/master/Buildfile">Buildfile</a>.
+[Buildfile](https://github.com/sproutcore/sproutcore/blob/master/Buildfile).
 
 </p></div>
 
 
 
-<h4 id='--tt--theme-----String---tt--'>4.11 -  <tt>:theme =&gt; {String}</tt>
+<h4 id='--tt--theme-----String---tt--'>4.11 -  <tt>:theme => {String}</tt>
 </h4>
 
 
 <p>The framework or theme that contains the app&#39;s theme.  See the guide on
 <a href="/theming_app.html">Theming Your App</a> for more information.</p>
-<h4 id='--tt--theme-name-----String---tt--'>4.12 -  <tt>:theme-name =&gt; {String}</tt>
+<h4 id='--tt--theme-name-----String---tt--'>4.12 -  <tt>:theme-name => {String}</tt>
 </h4>
 
 
 <p>A class name to set on the <code>&lt;body&gt;</code> element.  If not specified, the
 body will have a class <code>sc-theme</code>.</p>
-<h4 id='--tt--title-----String---tt--'>4.13 -  <tt>:title =&gt; {String}</tt>
+<h4 id='--tt--title-----String---tt--'>4.13 -  <tt>:title => {String}</tt>
 </h4>
 
 
 <p>The value of the HTML <code>&lt;title&gt;</code> element.</p>
 <p>Ex. Separate titles for different apps:</p>
-<pre class="highlighted"><div class="code_container"><code class="ruby"><span class="comment"><span class='comment'><div class='filename'>my_project/Buildfile</span></div></span>
-config <span class="symbol">:all</span>, <span class="symbol">:required</span> =&gt; [<span class="symbol">:sproutcore</span>]
+<pre class="highlight"><code class="hljs ruby"><span class="hljs-comment"><span class='comment'><div class='filename'>my_project/Buildfile</span></div></span>
+config <span class="hljs-symbol">:all</span>, <span class="hljs-symbol">:required</span> =&gt; [<span class="hljs-symbol">:sproutcore</span>]
 
-config <span class="symbol">:my_app</span>, <span class="symbol">:title</span> =&gt; <span class="string">'My App'</span>
+config <span class="hljs-symbol">:my_app</span>, <span class="hljs-symbol">:title</span> =&gt; <span class="hljs-string">'My App'</span>
 
-config <span class="symbol">:my_admin_app</span>, <span class="symbol">:title</span> =&gt; <span class="string">'My App (Administration)'</span></code></div></pre>
-<div class='info'><p> For advanced Buildfile configuration, refer to the build tool&#39;s
-<a href="https://github.com/sproutcore/abbot/blob/master/lib/Buildfile">Buildfile</a>.
+config <span class="hljs-symbol">:my_admin_app</span>, <span class="hljs-symbol">:title</span> =&gt; <span class="hljs-string">'My App (Administration)'</span></code></div></pre>
+<div class='info'><p> For advanced Buildfile configuration, refer to the build tool's
+[Buildfile](https://github.com/sproutcore/abbot/blob/master/lib/Buildfile).
 
 </p></div>
 
@@ -524,26 +523,26 @@ data from your backend from a URL like <a href="https://my-private-api.com:8080/
 your XHR request must be to <a href="/http://locahost:4020/users/3">/users/3</a> and you
 will use the SproutCore server to proxy the request across.</p>
 <p>Here are some examples configuring the SproutCore server proxy:</p>
-<pre class="highlighted"><div class="code_container"><code class="ruby"><span class="comment"><span class='comment'><div class='filename'>my_project/Buildfile</span></div></span>
-<span class="comment"># Proxy all requests for '/news' to 'http://news.com/news'.</span>
-proxy <span class="string">"/news"</span>, <span class="symbol">:to</span> =&gt; <span class="string">"news-server.com"</span>
+<pre class="highlight"><code class="hljs ruby"><span class="hljs-comment"><span class='comment'><div class='filename'>my_project/Buildfile</span></div></span>
+<span class="hljs-comment"># Proxy all requests for '/news' to 'http://news.com/news'.</span>
+proxy <span class="hljs-string">"/news"</span>, <span class="hljs-symbol">:to</span> =&gt; <span class="hljs-string">"news-server.com"</span>
 
-<span class="comment"># Proxy all requests for '/session' to 'https://session-server.net/session'.</span>
-proxy <span class="string">"/session"</span>, <span class="symbol">:to</span> =&gt; <span class="string">"session-server.com"</span>, <span class="symbol">:secure</span> =&gt; <span class="keyword">true</span>
+<span class="hljs-comment"># Proxy all requests for '/session' to 'https://session-server.net/session'.</span>
+proxy <span class="hljs-string">"/session"</span>, <span class="hljs-symbol">:to</span> =&gt; <span class="hljs-string">"session-server.com"</span>, <span class="hljs-symbol">:secure</span> =&gt; <span class="hljs-literal">true</span>
 
-<span class="comment"># Proxy all requests for '/users' to 'https://our-app.com/people'.</span>
-<span class="comment">#   ex. /users/23 =&gt; https://our-app.com/people/23</span>
-proxy <span class="string">"/users"</span>, <span class="symbol">:to</span> =&gt; <span class="string">"our-app.com"</span>, <span class="symbol">:secure</span> =&gt; <span class="keyword">true</span>, <span class="symbol">:url</span> =&gt; <span class="string">"/people"</span>
+<span class="hljs-comment"># Proxy all requests for '/users' to 'https://our-app.com/people'.</span>
+<span class="hljs-comment">#   ex. /users/23 =&gt; https://our-app.com/people/23</span>
+proxy <span class="hljs-string">"/users"</span>, <span class="hljs-symbol">:to</span> =&gt; <span class="hljs-string">"our-app.com"</span>, <span class="hljs-symbol">:secure</span> =&gt; <span class="hljs-literal">true</span>, <span class="hljs-symbol">:url</span> =&gt; <span class="hljs-string">"/people"</span>
 
-<span class="comment"># Proxy to a local server with a longer timeout to support long-polling requests.</span>
-<span class="comment">#   ex. /socket.io =&gt; http://localhost:3443/socket.io</span>
-proxy <span class="string">'/socket.io'</span>, <span class="symbol">:to</span> =&gt; <span class="string">'localhost:3443'</span>, <span class="symbol">:timeout</span> =&gt; <span class="number">25</span>
+<span class="hljs-comment"># Proxy to a local server with a longer timeout to support long-polling requests.</span>
+<span class="hljs-comment">#   ex. /socket.io =&gt; http://localhost:3443/socket.io</span>
+proxy <span class="hljs-string">'/socket.io'</span>, <span class="hljs-symbol">:to</span> =&gt; <span class="hljs-string">'localhost:3443'</span>, <span class="hljs-symbol">:timeout</span> =&gt; <span class="hljs-number">25</span>
 
-<span class="comment"># An alternate configuration of the above.</span>
-proxy <span class="string">'/socket.io'</span>, <span class="symbol">:to</span> =&gt; <span class="string">'localhost:3443'</span>, <span class="symbol">:connect_timeout</span> =&gt; <span class="number">5</span>, <span class="symbol">:inactivity_timeout</span> =&gt; <span class="number">30</span>
+<span class="hljs-comment"># An alternate configuration of the above.</span>
+proxy <span class="hljs-string">'/socket.io'</span>, <span class="hljs-symbol">:to</span> =&gt; <span class="hljs-string">'localhost:3443'</span>, <span class="hljs-symbol">:connect_timeout</span> =&gt; <span class="hljs-number">5</span>, <span class="hljs-symbol">:inactivity_timeout</span> =&gt; <span class="hljs-number">30</span>
 
-<span class="comment"># Disallow redirects</span>
-proxy <span class="string">'/originals'</span>, <span class="symbol">:to</span> =&gt; <span class="string">'some-api.org'</span>, <span class="symbol">:redirect</span> =&gt; <span class="keyword">false</span></code></div></pre>
+<span class="hljs-comment"># Disallow redirects</span>
+proxy <span class="hljs-string">'/originals'</span>, <span class="hljs-symbol">:to</span> =&gt; <span class="hljs-string">'some-api.org'</span>, <span class="hljs-symbol">:redirect</span> =&gt; <span class="hljs-literal">false</span></code></div></pre>
 <div class='note'><p> When changing proxy settings, the server may need to be restarted to
 reflect the changes.
 
@@ -560,10 +559,9 @@ will do a production build and move the files across to be hosted.  Depending
 on the options you set in your Buildfile, this will generate some variant of
 static deployable and cache-able content.</p>
 <p>Ex. Building all apps and required frameworks within a project.</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">$ sproutcore build</code></div></pre>
+<pre class="highlight"><code class="hljs bash">$ sproutcore build</code></div></pre>
 <p>Ex. Building a specific app within a project, including it&#39;s required frameworks.</p>
-<pre class="highlighted"><div class="code_container"><code class="ruby"><span class="variable">$ </span>sproutcore build my_app</code></div></pre>
-<p>The following are some options that you may want to pass to <tt>sproutcore build</tt>
+<pre class="highlight"><code class="hljs armasm">$ sproutcore <span class="hljs-keyword">build </span>my_app</code></div></pre><p>The following are some options that you may want to pass to <tt>sproutcore build</tt>
 or <tt>sc-build</tt>.</p>
 <h4 id='--tt---allow-commented-js--tt--'>6.1 -  <tt>--allow-commented-js</tt>
 </h4>
@@ -578,20 +576,20 @@ comments.</p>
 
 <p>Specify the build number manually to use. This results in paths that won&#39;t
 cache properly, but may be useful for testing or embedding a SproutCore app.</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">$ sproutcore build my_app --build=test_build</code></div></pre>
+<pre class="highlight"><code class="hljs bash">$ sproutcore build my_app --build=test_build</code></div></pre>
 <h4 id='--tt---buildroot--tt--'>6.3 -  <tt>--buildroot</tt>
 </h4>
 
 
 <p>Specify the path to the built product.</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">$ sproutcore build my_app --buildroot=../builds</code></div></pre>
+<pre class="highlight"><code class="hljs bash">$ sproutcore build my_app --buildroot=../builds</code></div></pre>
 <h4 id='--tt---languages--tt--'>6.4 -  <tt>--languages</tt>
 </h4>
 
 
 <p>Specify which languages to build.  By default, the build tool will build all
 languages in the project.</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">$ sproutcore build my_app --languages=en,en-ca,zh</code></div></pre>
+<pre class="highlight"><code class="hljs bash">$ sproutcore build my_app --languages=en,en-ca,zh</code></div></pre>
 <h4 id='--tt---dont-minify--tt--'>6.5 -  <tt>--dont-minify</tt>
 </h4>
 
@@ -610,7 +608,7 @@ will cause the build to fail.
 
 
 <p>Specify the path to the staging products.</p>
-<pre class="highlighted"><div class="code_container"><code class="bash">$ sproutcore build my_app --stageroot=../tmp/staging</code></div></pre>
+<pre class="highlight"><code class="hljs bash">$ sproutcore build my_app --stageroot=../tmp/staging</code></div></pre>
 <h4 id='--tt---verbose--tt--or--tt--v--tt--'>6.7 -  <tt>--verbose</tt> or <tt>-v</tt>
 </h4>
 

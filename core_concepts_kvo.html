@@ -20,7 +20,7 @@
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-    <meta name="generator" content="DocPad v6.55.5" />
+    <meta name="generator" content="DocPad v6.79.0" />
     
   </head>
 
@@ -131,18 +131,18 @@ update the state of our application as these properties change.</p>
 
 
 <p>For KVO to work properly, SproutCore implements getters and setters to track
-changes to objects. This is why it&#39;s important to always use <tt>get()</tt> and</p>
-<p><tt>set()</tt> for properties that might use observers, bindings, or be computed
+changes to objects. This is why it&#39;s important to always use <tt>get()</tt> and
+<tt>set()</tt> for properties that might use observers, bindings, or be computed
 properties. Failure to do so will cause your app to get out of sync and not
 update properly.  While this may seem like a nuisance for those used to
 accessing everything via dot notation, the benefits of KVO are substantial and
 you&#39;ll quickly get used to using <code>get()</code> and <code>set()</code> such
 that you&#39;ll forget you ever had to worry about it.</p>
 <p>The following example shows KVO compliant access to an SC.Object object.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class="keyword">var</span> obj = SC.Object.create({ name: <span class="string">'Jim'</span> });
-obj.get(<span class="string">'name'</span>); <span class="comment">// Jim</span>
-obj.set(<span class="string">'name'</span>, <span class="string">'Bob'</span>);
-obj.get(<span class="string">'name'</span>); <span class="comment">// Bob</span></code></div></pre>
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> obj = SC.Object.create({ <span class="hljs-attr">name</span>: <span class="hljs-string">'Jim'</span> });
+obj.get(<span class="hljs-string">'name'</span>); <span class="hljs-comment">// Jim</span>
+obj.set(<span class="hljs-string">'name'</span>, <span class="hljs-string">'Bob'</span>);
+obj.get(<span class="hljs-string">'name'</span>); <span class="hljs-comment">// Bob</span></code></div></pre>
 <div class='info'><p> Those of you who have worked in languages like Java may be familiar with
 having to write property accessors. Instead of having to define accessors for
 every property, <tt>get()</tt> and <tt>set()</tt> serve as universal accessors.
@@ -164,8 +164,8 @@ instance, within the context of <code>MyApp</code>, you could use the path
 <code>&quot;.userController.firstName&quot;</code> to point to the same location. As you can see,
 the relative property begins with a period, which is always the case for
 relative property paths.</p>
-<p>To work with relative property paths you can use the <tt>getPath()</tt> and</p>
-<p><tt>setPath()</tt> functions. These work identically to <code>get()</code> and <code>set()</code> except
+<p>To work with relative property paths you can use the <tt>getPath()</tt> and
+<tt>setPath()</tt> functions. These work identically to <code>get()</code> and <code>set()</code> except
 that they expect a path as the first argument.</p>
 <h3 id='-Computed-Properties-'>2 -  Computed Properties
 </h3>
@@ -174,28 +174,28 @@ that they expect a path as the first argument.</p>
 <p>Often you have properties that depend on the value of several other properties.
 These are known as computed properties and they are an extremely useful means
 to keep your code contextually correct without resorting to manual property
-manipulation. Computed properties are defined as functions with a call to</p>
-<p><tt>property()</tt> using a list of the dependent property names or property paths as
+manipulation. Computed properties are defined as functions with a call to
+<tt>property()</tt> using a list of the dependent property names or property paths as
 arguments.</p>
 <p>In the next example, we will revisit an earlier version of <code>MyApp.Person</code>, to
 make the <code>fullName()</code> function into a computed property.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">MyApp.Person = SC.Object.extend({
-  firstName: <span class="literal">null</span>,
-  lastName:  <span class="literal">null</span>,
+<pre class="highlight"><code class="hljs javascript">MyApp.Person = SC.Object.extend({
+  <span class="hljs-attr">firstName</span>: <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">lastName</span>:  <span class="hljs-literal">null</span>,
 
-  fullName: <span class="keyword">function</span>() {
-    <span class="keyword">return</span> [<span class="keyword">this</span>.get(<span class="string">'firstName'</span>), <span class="keyword">this</span>.get(<span class="string">'lastName'</span>)].compact().join(<span class="string">' '</span>);
-  }.property(<span class="string">'firstName'</span>, <span class="string">'lastName'</span>)
+  <span class="hljs-attr">fullName</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> [<span class="hljs-keyword">this</span>.get(<span class="hljs-string">'firstName'</span>), <span class="hljs-keyword">this</span>.get(<span class="hljs-string">'lastName'</span>)].compact().join(<span class="hljs-string">' '</span>);
+  }.property(<span class="hljs-string">'firstName'</span>, <span class="hljs-string">'lastName'</span>)
 });
 
-<span class="keyword">var</span> person = MyApp.Person.create({
-  firstName: <span class="string">'Peter'</span>,
-  lastName:  <span class="string">'Wagenet'</span>
+<span class="hljs-keyword">var</span> person = MyApp.Person.create({
+  <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Peter'</span>,
+  <span class="hljs-attr">lastName</span>:  <span class="hljs-string">'Wagenet'</span>
 });
 
-person.get(<span class="string">'fullName'</span>); <span class="comment">// Peter Wagenet</span>
-person.set(<span class="string">'lastName'</span>, <span class="string">'Smith'</span>);
-person.get(<span class="string">'fullName'</span>); <span class="comment">// Peter Smith</span></code></div></pre>
+person.get(<span class="hljs-string">'fullName'</span>); <span class="hljs-comment">// Peter Wagenet</span>
+person.set(<span class="hljs-string">'lastName'</span>, <span class="hljs-string">'Smith'</span>);
+person.get(<span class="hljs-string">'fullName'</span>); <span class="hljs-comment">// Peter Smith</span></code></div></pre>
 <p>As you can see, you are able to use <code>get()</code> with computed properties in the
 same way you would use it with regular properties.</p>
 <p>This may not seem like much of an improvement over the previous <code>fullName()</code>
@@ -209,29 +209,29 @@ properties change</em>.</p>
 <p>The next example highlights how multiple requests of the same property don&#39;t
 involve re-calculations. Notice the addition of <code>cacheable()</code> to the computed
 property.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">MyApp.Person = SC.Object.extend({
-  firstName: <span class="literal">null</span>,
-  lastName:  <span class="literal">null</span>,
+<pre class="highlight"><code class="hljs javascript">MyApp.Person = SC.Object.extend({
+  <span class="hljs-attr">firstName</span>: <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">lastName</span>:  <span class="hljs-literal">null</span>,
 
-  fullName: <span class="keyword">function</span>() {
-    console.log(<span class="string">'Calculating fullName...'</span>);
-    <span class="keyword">return</span> [<span class="keyword">this</span>.get(<span class="string">'firstName'</span>), <span class="keyword">this</span>.get(<span class="string">'lastName'</span>)].compact().join(<span class="string">' '</span>);
-  }.property(<span class="string">'firstName'</span>, <span class="string">'lastName'</span>).cacheable()
+  <span class="hljs-attr">fullName</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Calculating fullName...'</span>);
+    <span class="hljs-keyword">return</span> [<span class="hljs-keyword">this</span>.get(<span class="hljs-string">'firstName'</span>), <span class="hljs-keyword">this</span>.get(<span class="hljs-string">'lastName'</span>)].compact().join(<span class="hljs-string">' '</span>);
+  }.property(<span class="hljs-string">'firstName'</span>, <span class="hljs-string">'lastName'</span>).cacheable()
 });
 
-<span class="keyword">var</span> person = MyApp.Person.create({
-  firstName: <span class="string">'Peter'</span>,
-  lastName:  <span class="string">'Wagenet'</span>
+<span class="hljs-keyword">var</span> person = MyApp.Person.create({
+  <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Peter'</span>,
+  <span class="hljs-attr">lastName</span>:  <span class="hljs-string">'Wagenet'</span>
 });
 
-person.get(<span class="string">'fullName'</span>);
-&gt; <span class="string">'Calculating fullName...'</span> <span class="comment">// Peter Wagenet</span>
-person.get(<span class="string">'fullName'</span>);   <span class="comment">// Peter Wagenet</span>
-person.set(<span class="string">'lastName'</span>, <span class="string">'Smith'</span>);
-person.get(<span class="string">'fullName'</span>);
-&gt; <span class="string">'Calculating fullName...'</span> <span class="comment">// Peter Smith</span></code></div></pre>
-<div class='note'><p> Computed properties are &quot;lazily&quot; computed.  That is, their functions are
-not run <em>until</em> the property is requested.  If the computed property is never
+person.get(<span class="hljs-string">'fullName'</span>);
+&gt; <span class="hljs-string">'Calculating fullName...'</span> <span class="hljs-comment">// Peter Wagenet</span>
+person.get(<span class="hljs-string">'fullName'</span>);   <span class="hljs-comment">// Peter Wagenet</span>
+person.set(<span class="hljs-string">'lastName'</span>, <span class="hljs-string">'Smith'</span>);
+person.get(<span class="hljs-string">'fullName'</span>);
+&gt; <span class="hljs-string">'Calculating fullName...'</span> <span class="hljs-comment">// Peter Smith</span></code></div></pre>
+<div class='note'><p> Computed properties are "lazily" computed.  That is, their functions are
+not run _until_ the property is requested.  If the computed property is never
 requested, the function will never need be run.
 
 </p></div>
@@ -243,20 +243,20 @@ only pass the <code>key</code> and the <code>value</code> will be <code>undefine
 existence of <code>value</code> tells us whether the property is being got or set.</p>
 <p>Here is an example of creating a computed property that is also writable with
 <code>set()</code>.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">MyApp.Capitalizer = SC.Object.extend({
-  capitalizedValue: <span class="keyword">function</span>(key, value) {
-    <span class="keyword">if</span> (value !== <span class="literal">undefined</span>) {
-      <span class="keyword">this</span>._capitalizedValue = value.toUpperCase();
-      console.log(<span class="string">'Set capitalizedValue to '</span> + <span class="keyword">this</span>._capitalizedValue);
+<pre class="highlight"><code class="hljs javascript">MyApp.Capitalizer = SC.Object.extend({
+  <span class="hljs-attr">capitalizedValue</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">key, value</span>) </span>{
+    <span class="hljs-keyword">if</span> (value !== <span class="hljs-literal">undefined</span>) {
+      <span class="hljs-keyword">this</span>._capitalizedValue = value.toUpperCase();
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Set capitalizedValue to '</span> + <span class="hljs-keyword">this</span>._capitalizedValue);
     }
-    <span class="keyword">return</span> <span class="keyword">this</span>._capitalizedValue;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._capitalizedValue;
   }.property()
 });
 
-<span class="keyword">var</span> cap = MyApp.Capitalizer.create();
-cap.set(<span class="string">'capitalizedValue'</span>, <span class="string">'abc'</span>);
-&gt; <span class="string">'Set capitalizedValue to ABC'</span>
-cap.get(<span class="string">'capitalizedValue'</span>); <span class="comment">// 'ABC'</span></code></div></pre>
+<span class="hljs-keyword">var</span> cap = MyApp.Capitalizer.create();
+cap.set(<span class="hljs-string">'capitalizedValue'</span>, <span class="hljs-string">'abc'</span>);
+&gt; <span class="hljs-string">'Set capitalizedValue to ABC'</span>
+cap.get(<span class="hljs-string">'capitalizedValue'</span>); <span class="hljs-comment">// 'ABC'</span></code></div></pre>
 <p>The <code>key</code> argument is ignored, which is generally the case with computed
 properties.</p>
 <h3 id='-Observers-'>3 -  Observers
@@ -266,14 +266,14 @@ properties.</p>
 <p>Closely related to the concept of properties is that of observers. Observers do
 exactly what their name suggests, they observe properties, watching for
 changes. The most basic observer looks like this,</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class="keyword">var</span> obj = SC.Object.create({
-  value: <span class="literal">null</span>,
-  valueDidUpdate: <span class="keyword">function</span>(){
-    alert(<span class="string">'New Value: '</span> + <span class="keyword">this</span>.get(<span class="string">'value'</span>));
-  }.observes(<span class="string">'value'</span>)
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> obj = SC.Object.create({
+  <span class="hljs-attr">value</span>: <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">valueDidUpdate</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    alert(<span class="hljs-string">'New Value: '</span> + <span class="hljs-keyword">this</span>.get(<span class="hljs-string">'value'</span>));
+  }.observes(<span class="hljs-string">'value'</span>)
 });
 
-obj.set(<span class="string">'value'</span>, <span class="string">'Test'</span>); <span class="comment">// alert('New Value: Test');</span></code></div></pre>
+obj.set(<span class="hljs-string">'value'</span>, <span class="hljs-string">'Test'</span>); <span class="hljs-comment">// alert('New Value: Test');</span></code></div></pre>
 <p>As you can see <tt>observes()</tt> is added to the function and when the matching
 property is updated, the function is run. You can even pass multiple properties
 or property paths into an observer.</p>
@@ -283,38 +283,38 @@ This is actually an example of an improper use of <code>observes()</code>, becau
 appears to change whenever one of those properties changes.  Therefore, it
 probably doesn&#39;t make sense to observe both <code>fullName</code> and <code>firstName</code>, but it
 helps us to really understand how computed properties and observers work.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">MyApp.Person = SC.Object.extend({
-  firstName: <span class="literal">null</span>,
-  lastName: <span class="literal">null</span>,
-  fullName: <span class="keyword">function</span>() {
-    console.log(<span class="string">'Calculating fullName...'</span>);
-    <span class="keyword">return</span> [<span class="keyword">this</span>.get(<span class="string">'firstName'</span>), <span class="keyword">this</span>.get(<span class="string">'lastName'</span>)].compact().join(<span class="string">' '</span>);
-  }.property(<span class="string">'firstName'</span>, <span class="string">'lastName'</span>).cacheable(),
+<pre class="highlight"><code class="hljs javascript">MyApp.Person = SC.Object.extend({
+  <span class="hljs-attr">firstName</span>: <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">lastName</span>: <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">fullName</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Calculating fullName...'</span>);
+    <span class="hljs-keyword">return</span> [<span class="hljs-keyword">this</span>.get(<span class="hljs-string">'firstName'</span>), <span class="hljs-keyword">this</span>.get(<span class="hljs-string">'lastName'</span>)].compact().join(<span class="hljs-string">' '</span>);
+  }.property(<span class="hljs-string">'firstName'</span>, <span class="hljs-string">'lastName'</span>).cacheable(),
 
-  nameDidChange: <span class="keyword">function</span>() {
-    console.log(<span class="string">'firstName or fullName changed!'</span>);
-  }.observes(<span class="string">'firstName'</span>,<span class="string">'fullName'</span>)
+  <span class="hljs-attr">nameDidChange</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'firstName or fullName changed!'</span>);
+  }.observes(<span class="hljs-string">'firstName'</span>,<span class="hljs-string">'fullName'</span>)
 });
 
 person = MyApp.Person.create({
-  firstName: <span class="string">'Emma'</span>,
-  lastName: <span class="string">'Goldman'</span>
+  <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Emma'</span>,
+  <span class="hljs-attr">lastName</span>: <span class="hljs-string">'Goldman'</span>
 });
 
-person.set(<span class="string">'lastName'</span>,<span class="string">'Berkman'</span>);
-&gt; <span class="string">'firstName or fullName changed!'</span> <span class="comment">// because fullName will have changed</span>
-person.set(<span class="string">'firstName'</span>,<span class="string">'Alexander'</span>);
-&gt; <span class="string">'firstName or fullName changed!'</span> <span class="comment">// because firstName changed</span>
-&gt; <span class="string">'firstName or fullName changed!'</span> <span class="comment">// because fullName will have changed</span></code></div></pre>
-<div class='note'><p> Note that <code>fullName</code> properly notifies changing as <code>firstName</code> and
-<code>lastName</code> change, but it is still not re-computed in this example because we
-didn&#39;t actually <code>get()</code> <code>fullName</code> anywhere.
+person.set(<span class="hljs-string">'lastName'</span>,<span class="hljs-string">'Berkman'</span>);
+&gt; <span class="hljs-string">'firstName or fullName changed!'</span> <span class="hljs-comment">// because fullName will have changed</span>
+person.set(<span class="hljs-string">'firstName'</span>,<span class="hljs-string">'Alexander'</span>);
+&gt; <span class="hljs-string">'firstName or fullName changed!'</span> <span class="hljs-comment">// because firstName changed</span>
+&gt; <span class="hljs-string">'firstName or fullName changed!'</span> <span class="hljs-comment">// because fullName will have changed</span></code></div></pre>
+<div class='note'><p> Note that `fullName` properly notifies changing as `firstName` and
+`lastName` change, but it is still not re-computed in this example because we
+didn't actually `get()` `fullName` anywhere.
 
 </p></div>
 
 
 
-<div class='info'><p> Using <code>set()</code> to repeatedly set the same value will not result in the
+<div class='info'><p> Using `set()` to repeatedly set the same value will not result in the
 observer firing repeatedly.  It will only fire when the value changes.
 
 </p></div>
@@ -354,22 +354,22 @@ property path. Therefore, if you add an observer for the path
 property. In this case, nothing is observing <code>MyApp.usersController</code> to see if
 its <code>mainUser</code> property changes.</p>
 <p>For example,</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">MyApp.usersController = SC.Object.create({
-  mainUser: SC.Object.create({
-    name: <span class="string">'Joe'</span>
+<pre class="highlight"><code class="hljs javascript">MyApp.usersController = SC.Object.create({
+  <span class="hljs-attr">mainUser</span>: SC.Object.create({
+    <span class="hljs-attr">name</span>: <span class="hljs-string">'Joe'</span>
   })
 });
 
 MyApp.observerObject = SC.Object.create({
-  userNameDidChange: <span class="keyword">function</span>() {
-    console.log(<span class="keyword">this</span>.getPath(<span class="string">'MyApp.usersController.mainUser.name'</span>));
-  }.observes(<span class="string">'MyApp.usersController.mainUser.name'</span>)
+  <span class="hljs-attr">userNameDidChange</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.getPath(<span class="hljs-string">'MyApp.usersController.mainUser.name'</span>));
+  }.observes(<span class="hljs-string">'MyApp.usersController.mainUser.name'</span>)
 });
 
-MyApp.usersController.setPath(<span class="string">'mainUser.name'</span>, <span class="string">'Jim'</span>);
-&gt; <span class="string">'Jim'</span>
-MyApp.usersController.set(<span class="string">'mainUser'</span>, SC.Object.create({ name: <span class="string">'Bob'</span> }));
-MyApp.usersController.setPath(<span class="string">'mainUser.name'</span>, <span class="string">'Doug'</span>);</code></div></pre>
+MyApp.usersController.setPath(<span class="hljs-string">'mainUser.name'</span>, <span class="hljs-string">'Jim'</span>);
+&gt; <span class="hljs-string">'Jim'</span>
+MyApp.usersController.set(<span class="hljs-string">'mainUser'</span>, SC.Object.create({ <span class="hljs-attr">name</span>: <span class="hljs-string">'Bob'</span> }));
+MyApp.usersController.setPath(<span class="hljs-string">'mainUser.name'</span>, <span class="hljs-string">'Doug'</span>);</code></div></pre>
 <p>As you can see, when we replace <code>mainUser</code> the observer does not fire. This is
 because we only had an observer on the original <code>mainUser</code> object, which has
 been replaced.</p>
@@ -381,16 +381,16 @@ path like <code>MyApp.usersController*mainUser.name</code>.</p>
 observe changes to all properties <em>following</em> the asterisk. In this case, that
 is both <code>mainUser</code> and <code>name</code>.</p>
 <p>Here&#39;s an updated version of the previous example with a chained observer,</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">MyApp.observerObject = SC.Object.create({
-  userNameDidChange: <span class="keyword">function</span>() {
-    console.log(<span class="keyword">this</span>.getPath(<span class="string">'MyApp.usersController.mainUser.name'</span>));
-  }.observes(<span class="string">'MyApp.usersController*mainUser.name'</span>) <span class="comment">// Chained observer</span>
+<pre class="highlight"><code class="hljs javascript">MyApp.observerObject = SC.Object.create({
+  <span class="hljs-attr">userNameDidChange</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.getPath(<span class="hljs-string">'MyApp.usersController.mainUser.name'</span>));
+  }.observes(<span class="hljs-string">'MyApp.usersController*mainUser.name'</span>) <span class="hljs-comment">// Chained observer</span>
 });
 
-MyApp.usersController.setPath(<span class="string">'mainUser.name'</span>, <span class="string">'Jim'</span>);
-&gt; <span class="string">'Jim'</span>
-MyApp.usersController.set(<span class="string">'mainUser'</span>, SC.Object.create({ name: <span class="string">'Bob'</span> }));
-&gt; <span class="string">'Bob'</span></code></div></pre>
+MyApp.usersController.setPath(<span class="hljs-string">'mainUser.name'</span>, <span class="hljs-string">'Jim'</span>);
+&gt; <span class="hljs-string">'Jim'</span>
+MyApp.usersController.set(<span class="hljs-string">'mainUser'</span>, SC.Object.create({ <span class="hljs-attr">name</span>: <span class="hljs-string">'Bob'</span> }));
+&gt; <span class="hljs-string">'Bob'</span></code></div></pre>
 <p>The observer will now fire if <code>MyApp.usersController.mainUser.name</code> or
 <code>MyApp.usersController.mainUser</code> changes.</p>
 <p>So why don&#39;t we always use chained observers?  Observers are &quot;expensive&quot;, they
@@ -412,27 +412,27 @@ a controller object.  SC.View is the main SproutCore view class and it is a
 common pattern to bind views to controllers, so that as properties change on
 the controller, the view updates automatically.  This example uses the short
 form of creating a binding, by simply suffixing <tt>Binding</tt> to the property name.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">MyApp.userController = SC.Object.create({
-  name: <span class="literal">null</span>
+<pre class="highlight"><code class="hljs javascript">MyApp.userController = SC.Object.create({
+  <span class="hljs-attr">name</span>: <span class="hljs-literal">null</span>
 });
 
 MyApp.mainView = SC.View.create({
-  userBinding: <span class="string">'MyApp.userController.name'</span>
+  <span class="hljs-attr">userBinding</span>: <span class="hljs-string">'MyApp.userController.name'</span>
 });
 
-MyApp.userController.set(<span class="string">'name'</span>, <span class="string">'Joe'</span>);
+MyApp.userController.set(<span class="hljs-string">'name'</span>, <span class="hljs-string">'Joe'</span>);
 
-<span class="comment">// The runloop must run</span>
+<span class="hljs-comment">// The runloop must run</span>
 
-console.log(MyApp.mainView.get(<span class="string">'user'</span>));
-&gt; <span class="string">'Joe'</span>
+<span class="hljs-built_in">console</span>.log(MyApp.mainView.get(<span class="hljs-string">'user'</span>));
+&gt; <span class="hljs-string">'Joe'</span>
 
-MyApp.mainView.set(<span class="string">'user'</span>, <span class="string">'Jim'</span>);
+MyApp.mainView.set(<span class="hljs-string">'user'</span>, <span class="hljs-string">'Jim'</span>);
 
-<span class="comment">// The runloop must run</span>
+<span class="hljs-comment">// The runloop must run</span>
 
-console.log(MyApp.userController.get(<span class="string">'name'</span>));
-&gt; <span class="string">'Jim'</span></code></div></pre>
+<span class="hljs-built_in">console</span>.log(MyApp.userController.get(<span class="hljs-string">'name'</span>));
+&gt; <span class="hljs-string">'Jim'</span></code></div></pre>
 <div class='note'><p> In this example, we used the absolute path to the property. Bindings
 support relative property paths and chained property paths as well.
 
@@ -444,34 +444,34 @@ default bindings are bi-directional, but you can also set them to only go in
 one direction by using the long form <tt>SC.Binding.oneWay()</tt> setup instead.
 Making bindings unidirectional increases the performance of the binding and is
 recommended.</p>
-<div class='info'><p> The long form for a bi-directional binding is <code>SC.Binding.from()</code>.
+<div class='info'><p> The long form for a bi-directional binding is `SC.Binding.from()`.
 
 </p></div>
 
 <p>For example, if we used <code>userBinding: SC.Binding.oneWay(&#39;MyApp.userController.name&#39;)</code>,
 changes to <code>MyApp.userController.name</code> would update <code>MyApp.mainView.user</code>, but
 setting <code>MyApp.mainView.user</code> will not update <code>MyApp.userController.name</code>.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">MyApp.userController = SC.Object.create({
-  name: <span class="literal">null</span>
+<pre class="highlight"><code class="hljs javascript">MyApp.userController = SC.Object.create({
+  <span class="hljs-attr">name</span>: <span class="hljs-literal">null</span>
 });
 
 MyApp.mainView = SC.View.create({
-  userBinding: SC.Binding.oneWay(<span class="string">'MyApp.userController.name'</span>)
+  <span class="hljs-attr">userBinding</span>: SC.Binding.oneWay(<span class="hljs-string">'MyApp.userController.name'</span>)
 });
 
-MyApp.userController.set(<span class="string">'name'</span>, <span class="string">'Joe'</span>);
+MyApp.userController.set(<span class="hljs-string">'name'</span>, <span class="hljs-string">'Joe'</span>);
 
-<span class="comment">// The runloop must run</span>
+<span class="hljs-comment">// The runloop must run</span>
 
-console.log(MyApp.mainView.get(<span class="string">'user'</span>));
-&gt; <span class="string">'Joe'</span>
+<span class="hljs-built_in">console</span>.log(MyApp.mainView.get(<span class="hljs-string">'user'</span>));
+&gt; <span class="hljs-string">'Joe'</span>
 
-MyApp.mainView.set(<span class="string">'user'</span>, <span class="string">'Jim'</span>);
+MyApp.mainView.set(<span class="hljs-string">'user'</span>, <span class="hljs-string">'Jim'</span>);
 
-<span class="comment">// The runloop must run</span>
+<span class="hljs-comment">// The runloop must run</span>
 
-console.log(MyApp.userController.get(<span class="string">'name'</span>));
-&gt; <span class="string">'Joe'</span></code></div></pre>
+<span class="hljs-built_in">console</span>.log(MyApp.userController.get(<span class="hljs-string">'name'</span>));
+&gt; <span class="hljs-string">'Joe'</span></code></div></pre>
 <div class='note'><p> One very important difference between bindings and observers is that
 observers update almost immediately, while bindings update once at the end of
 each Run Loop. By deferring binding updates, it offers considerable
@@ -491,29 +491,29 @@ principles of chained observers applies. This means that if you want to bind a
 chained property path, you will want to use asterisks in your path as
 appropriate.</p>
 <p>For example,</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">MyApp.usersController = SC.Object.create({
-  mainUser: SC.Object.create({
-    name: <span class="string">'Joe'</span>
+<pre class="highlight"><code class="hljs javascript">MyApp.usersController = SC.Object.create({
+  <span class="hljs-attr">mainUser</span>: SC.Object.create({
+    <span class="hljs-attr">name</span>: <span class="hljs-string">'Joe'</span>
   })
 });
 
 MyApp.userNameView = SC.LabelView.create({
-  valueBinding: <span class="string">'MyApp.usersController*mainUser.name'</span>
+  <span class="hljs-attr">valueBinding</span>: <span class="hljs-string">'MyApp.usersController*mainUser.name'</span>
 });
 
-MyApp.usersController.setPath(<span class="string">'mainUser.name'</span>, <span class="string">'Harriet'</span>);
+MyApp.usersController.setPath(<span class="hljs-string">'mainUser.name'</span>, <span class="hljs-string">'Harriet'</span>);
 
-<span class="comment">// The run loop must run</span>
+<span class="hljs-comment">// The run loop must run</span>
 
-console.log(MyApp.userNameView.get(<span class="string">'value'</span>));
-&gt; <span class="string">'Harriet'</span>
+<span class="hljs-built_in">console</span>.log(MyApp.userNameView.get(<span class="hljs-string">'value'</span>));
+&gt; <span class="hljs-string">'Harriet'</span>
 
-MyApp.usersController.set(<span class="string">'mainUser'</span>, SC.Object.create({ name: <span class="string">'Eunice'</span> }));
+MyApp.usersController.set(<span class="hljs-string">'mainUser'</span>, SC.Object.create({ <span class="hljs-attr">name</span>: <span class="hljs-string">'Eunice'</span> }));
 
-<span class="comment">// The run loop must run</span>
+<span class="hljs-comment">// The run loop must run</span>
 
-console.log(MyApp.userNameView.get(<span class="string">'value'</span>));
-&gt; <span class="string">'Eunice'</span></code></div></pre>
+<span class="hljs-built_in">console</span>.log(MyApp.userNameView.get(<span class="hljs-string">'value'</span>));
+&gt; <span class="hljs-string">'Eunice'</span></code></div></pre>
 <p>Since we used an asterisk in the property path, the binding will be updated
 when either <code>mainUser</code> or <code>mainUser.name</code> changes.</p>
 <h4 id='-Binding-Transforms-'>4.2 -  Binding Transforms
@@ -529,7 +529,7 @@ object that emits a Number on the other side?</p>
 transforms</em>.  Transforms convert values that change on one side of the bindings
 into another value before it is applied to the other side.</p>
 <table><tr><th> Helper</th><th> Description </th></tr>
-<tr><td>oneWay()</td><td>Forces binding to only relay changes in one direction.  Changes on the &quot;from&quot; side (the path you name as the value) will be relayed to the &quot;to&quot; side (the property you name before &quot;Binding&quot;).  Changes in the other direction will not be relayed. </td></tr>
+<tr><td>oneWay()</td><td>Forces binding to only relay changes in one direction.  Changes on the "from" side (the path you name as the value) will be relayed to the "to" side (the property you name before "Binding").  Changes in the other direction will not be relayed. </td></tr>
 <tr><td>bool()</td><td>Forces all values to become booleans.  <tt>null</tt>, <tt>undefined</tt>, <tt>0</tt>, and <tt>false</tt> all become <tt>false</tt>.  All other values become <tt>true</tt> </td></tr>
 <tr><td>single()</td><td>Forces all values to a non-Enumerable value.  Arrays with one item in them will be converted to that item only.  Arrays with multiple items will be converted to a placeholder value (default <tt>SC.MULTIPLE_PLACEHOLDER</tt>).</td></tr>
 <tr><td>multiple()</td><td>Forces all values to an Array-like value.  <tt>null</tt> or <tt>undefined</tt> becomes an empty array.  Single objects will be wrapped in an array.  Arrays and enumerables pass through unchanged.</td></tr>
@@ -543,20 +543,20 @@ into another value before it is applied to the other side.</p>
 <p>Transforms can be chained together.  You can use this facility to construct
 just the type of binding you want.  For example, if you have an object that
 expects single values only, no errors and no empty values, you could code:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">userBinding: SC.Binding.from(<span class="string">'MyApp.userController.name'</span>.single().noError().notEmpty()</code></div></pre>
+<pre class="highlight"><code class="hljs javascript">userBinding: SC.Binding.from(<span class="hljs-string">'MyApp.userController.name'</span>).single().noError().notEmpty()</code></div></pre>
 <p>As another example, if you only need a one way binding that is of a boolean
 type, you could code:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">isVisibleBinding: SC.Binding.from(<span class="string">'MyApp.userController.isBusy").oneWay().bool()</code></div></pre>
+<pre class="highlight"><code class="hljs javascript">isVisibleBinding: SC.Binding.from(<span class="hljs-string">'MyApp.userController.isBusy'</span>).oneWay().bool()</code></div></pre>
 <p>In addition to using the built-in transforms listed above, you can also add
 your own transforms.  A transform is simply a function that accepts an
 untransformed value and returns the transformed value.  It has the following
 signature.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class="keyword">function</span>(value, isForward) {
-  <span class="comment">// do transform</span>
-  <span class="keyword">return</span> transformedValue;
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value, isForward</span>) </span>{
+  <span class="hljs-comment">// do transform</span>
+  <span class="hljs-keyword">return</span> transformedValue;
 }</code></div></pre>
-<p>The first parameter passed to a transform function will be the untransformed</p>
-<p><tt>value</tt>.  </p>
+<p>The first parameter passed to a transform function will be the untransformed
+<tt>value</tt>.  </p>
 <p>If <tt>isForward</tt> is <tt>YES</tt>, then the value being passed came from the &quot;from&quot; side
 of the binding (i.e. the &quot;Binding.path&quot; you named).  If <tt>isForward</tt> is <tt>NO</tt>,
 then the value came from the &quot;to&quot; side (i.e. the property you named with
@@ -566,21 +566,22 @@ the direction of the change.</p>
 you don&#39;t want to perform any kind of transform, then return the value as it
 was passed in.</p>
 <p>For example, to make a string upper case:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">userBinding: SC.Binding.from(<span class="string">'MyApp.userController.name'</span>)
-  .transform(<span class="keyword">function</span>(value, isForward) {
-    <span class="keyword">return</span> (value &amp;&amp; value.toString) ? value.toString().toUpperCase() : <span class="string">''</span>;
+<pre class="highlight"><code class="hljs javascript">userBinding: SC.Binding.from(<span class="hljs-string">'MyApp.userController.name'</span>)
+  .transform(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value, isForward</span>) </span>{
+    <span class="hljs-keyword">return</span> (value &amp;&amp; value.toString) ? value.toString().toUpperCase() : <span class="hljs-string">''</span>;
   })</code></div></pre>
 <p>If you want use a transform over and over again, you can define a new method on
 the <tt>SC.Binding</tt> object like so:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">SC.Binding.upperCaseString = <span class="keyword">function</span>() {
-  <span class="keyword">return</span> <span class="keyword">this</span>.transform(<span class="keyword">function</span>(value, isForward) {
-    <span class="keyword">return</span> (value &amp;&amp; value.toString) ? value.toString().toUpperCase() : <span class="string">''</span>;
+<pre class="highlight"><code class="hljs javascript">SC.Binding.upperCaseString = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.transform(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value, isForward</span>) </span>{
+    <span class="hljs-keyword">return</span> (value &amp;&amp; value.toString) ? value.toString().toUpperCase() : <span class="hljs-string">''</span>;
   });
 };
 
 ...
 
-userBinding: SC.Binding.from(<span class="string">'MyApp.userController.name'</span>.upperCaseString())</code></div></pre>
+userBinding: SC.Binding.from(<span class="hljs-string">'MyApp.userController.name'</span>).upperCaseString()
+</code></div></pre>
 <h4 id='-Manually-Creating-and-Disconnecting-Bindings-'>4.3 -  Manually Creating and Disconnecting Bindings
 </h4>
 
@@ -592,12 +593,12 @@ bindings yourself.  </p>
 inherited by <tt>SC.Object</tt>.  The first parameter you pass should be the property
 name you want to bind to.  The second is the same thing you would set as the
 value of a binding property:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript">myView.bind(<span class="string">'isVisible'</span>, SC.Binding.from(<span class="string">'MyApp.mainController.title'</span>).bool());
+<pre class="highlight"><code class="hljs javascript">myView.bind(<span class="hljs-string">'isVisible'</span>, SC.Binding.from(<span class="hljs-string">'MyApp.mainController.title'</span>).bool());
 
-<span class="comment">// is the same as</span>
+<span class="hljs-comment">// is the same as</span>
 
 myView = SC.View.create({
-  isVisibleBinding: SC.Binding.from(<span class="string">'MyApp.mainController.title'</span>).bool()
+  <span class="hljs-attr">isVisibleBinding</span>: SC.Binding.from(<span class="hljs-string">'MyApp.mainController.title'</span>).bool()
 });</code></div></pre>
 <p>Note that when you manually create a binding, the <tt>BindingDefaults</tt> property is
 not consulted.  You must configure the binding exactly as you need.</p>
@@ -607,16 +608,16 @@ can call the <tt>disconnect()</tt> method on the binding itself.</p>
 returned from the bind() call.</p>
 <p>If you create a binding by defining it on your class, you can find the binding
 instance on the same property on an object instance:</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class="keyword">var</span> binding = myView.bind(<span class="string">'isVisible'</span>, SC.Binding.from(<span class="string">'MyApp.mainController.title'</span>).bool());
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> binding = myView.bind(<span class="hljs-string">'isVisible'</span>, SC.Binding.from(<span class="hljs-string">'MyApp.mainController.title'</span>).bool());
 
-<span class="comment">// is the same as</span>
+<span class="hljs-comment">// is the same as</span>
 
 myView = SC.View.create({
-  isVisibleBinding: SC.Binding.form(<span class="string">'MyApp.mainController.title'</span>).bool()
+  <span class="hljs-attr">isVisibleBinding</span>: SC.Binding.from(<span class="hljs-string">'MyApp.mainController.title'</span>).bool()
 });
-<span class="keyword">var</span> binding = myView.get(<span class="string">'isVisibleBinding'</span>);
+<span class="hljs-keyword">var</span> binding = myView.get(<span class="hljs-string">'isVisibleBinding'</span>);
 
-<span class="comment">// disconnect!</span>
+<span class="hljs-comment">// disconnect!</span>
 binding.disconnect();</code></div></pre>
 <p>You can reconnect a binding that has been disconnected using the <tt>connect()</tt>
 method as well.</p>

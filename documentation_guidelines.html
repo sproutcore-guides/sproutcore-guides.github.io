@@ -20,7 +20,7 @@
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-    <meta name="generator" content="DocPad v6.55.5" />
+    <meta name="generator" content="DocPad v6.79.0" />
     
   </head>
 
@@ -138,8 +138,8 @@ text</li>
 (<tt>===</tt>) for 1st level headers. These go on the subsequent line</li>
 <li>For list, prefix each line with a dash (<tt>-</tt>)</li>
 </ul>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"Sample Class Documentation"</span></div></span>
-<span class="comment">/**
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"Sample Class Documentation"</div></span>
+/**
   @class
 
   Class Description
@@ -162,10 +162,10 @@ text</li>
   @extends SC.Object
   @author Majd Taby
   @since SproutCore 1.0
-*/</span>
+*/
 
 SC.Request = SC.Object.extend(
- <span class="comment">/** @scope SC.Request.prototype */</span>{
+ /** @scope SC.Request.prototype */{
  ...
 });</code></div></pre>
 <p>The <tt>@scope</tt> definition is mandatory, and it defines what class/namespace the
@@ -188,8 +188,8 @@ documentation, and it’s your responsibility to keep them up to date as you
 update the method. </p>
 <p>In the example below, the response property is marked as optional by wrapping
 the name in square brackets.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"Sample Instance Method Documentation"</span></div></span>
-<span class="comment">/**
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"Sample Instance Method Documentation"</div></span>
+/**
   Method description.
 
   @param {SC.Request}   request     A copy of the request, frozen.
@@ -198,8 +198,8 @@ the name in square brackets.</p>
 
   @throws {SC.Exception} SC.RequestNotValidException
   @returns {Boolean} Yes on success, NO on failure.
-*/</span>
-didSend: <span class="keyword">function</span>(request, response) {},</code></div></pre>
+*/
+didSend: function(request, response) {},</code></div></pre>
 <h4 id='-Class-Methods-'>2.3 -  Class Methods
 </h4>
 
@@ -208,15 +208,15 @@ didSend: <span class="keyword">function</span>(request, response) {},</code></di
 class. For these methods/properties to show up in the same location in the
 generated output, you need to add a <tt>@scope</tt> declaration just as you did with
 the class.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"Sample Class Method Documentation"</span></div></span>
-<span class="comment">/**
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"Sample Class Method Documentation"</div></span>
+/**
   @class
 
    ...
-*/</span>
-SC.Store = SC.Object.extend(<span class="comment">/** @scope SC.Store.prototype */</span>{...});
+*/
+SC.Store = SC.Object.extend(/** @scope SC.Store.prototype */{...});
 
-SC.Store.mixin(<span class="comment">/** @scope SC.Store.prototype */</span>{...})</code></div></pre>
+SC.Store.mixin(/** @scope SC.Store.prototype */{...})</code></div></pre>
 <h4 id='-Properties-'>2.4 -  Properties
 </h4>
 
@@ -224,13 +224,13 @@ SC.Store.mixin(<span class="comment">/** @scope SC.Store.prototype */</span>{...
 <p>Properties are arguably the simplest entity to document. You simply need to
 write a description of what the property represents, and what type it is. You
 can optionally provide a default value.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"Sample Property Documentation"</span></div></span>
-<span class="comment">/**
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"Sample Property Documentation"</div></span>
+/**
   Description
 
   @default YES
   @type Boolean
-*/</span>
+*/
 isAsynchronous: YES,</code></div></pre>
 <div class='note'><p> Constants are documented using <tt>@constant</tt> but they don’t need a default
 value.
@@ -245,15 +245,15 @@ value.
 
 <p>Computed Properties are documented just like regular properties but they add
 the <tt>@field</tt> property.</p>
-<pre class="highlighted"><div class="code_container"><code class="javascript"><span class='comment'><div class='filename'><span class="string">"Sample Computed Property Documentation"</span></div></span>
-<span class="comment">/**
+<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"Sample Computed Property Documentation"</div></span>
+/**
   Description
 
   @field
   @default YES
   @type Boolean
-*/</span>
-isAsynchronous: <span class="keyword">function</span>(){...</code></div></pre>
+*/
+isAsynchronous: function(){...</code></div></pre>
 <h3 id='-Testing-and-viewing-your-documentation-during-development-'>3 -  Testing and viewing your documentation during development
 </h3>
 
