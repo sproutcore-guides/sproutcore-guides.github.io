@@ -71,10 +71,10 @@
 <dd><a href='/views.html'>Core View Concepts</a></dd><dt>Models</dt>
 <dd><a href='/records.html'>SproutCore Records</a></dd>
 <dd><a href='/fixtures.html'>Using Fixtures</a></dd><dt>Theming</dt>
-<dd><a href='/theming_app.html'>Theming Your App</a></dd>
-<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd></dl><dl class='R'><dt>Testing</dt>
-<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
 <dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
 <dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
 <dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
 <dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd><dt>Extras</dt>
@@ -122,19 +122,19 @@
 objects, and which allows you to work with those children using the Enumerable
 interface. The most basic Enumerable is the built-in JavaScript Array.</p>
 <p>For instance, all Enumerables support the standard <tt>forEach</tt> method:</p>
-<pre class="highlight"><code class="hljs javascript">[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>].forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">item</span>) </span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>].forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">item</span>) </span>{
   <span class="hljs-built_in">console</span>.log(item);
 });</code></div></pre>
 <p>In general, Enumerable methods, like <tt>forEach</tt>, take an optional second
 parameter, which will become the value of <tt>this</tt> in the callback function:</p>
-<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> array = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>];
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript"><span class="hljs-keyword">var</span> array = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>];
 
 array.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">item</span>) </span>{
   <span class="hljs-built_in">console</span>.log(item, <span class="hljs-keyword">this</span>.indexOf(item));
 }, array)</code></div></pre>
 <p>Among other reasons, you will find this useful when using another Enumerable
 method as a callback to <tt>forEach</tt>:</p>
-<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> array = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>];
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript"><span class="hljs-keyword">var</span> array = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>];
 
 array.forEach(array.removeObject, array);</code></div></pre>
 <div class='note'><p> This second parameter helps work around a limitation of JavaScript which
@@ -187,12 +187,12 @@ answer whether it includes an object.</li>
 
 
 <p>To enumerate all the values of an enumerable object, use the <tt>forEach</tt> method:</p>
-<pre class="highlight"><code class="hljs javascript">enumerable.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">item, index, self</span>) </span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">enumerable.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">item, index, self</span>) </span>{
   <span class="hljs-built_in">console</span>.log(item);
 });</code></div></pre>
 <p>To invoke some method on each element of an enumerable object, use the <tt>invoke</tt>
 method:</p>
-<pre class="highlight"><code class="hljs javascript">Person = SC.Object.extend({
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">Person = SC.Object.extend({
   <span class="hljs-attr">sayHello</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Hello from "</span> + <span class="hljs-keyword">this</span>.get(<span class="hljs-string">'name'</span>));
   }
@@ -215,7 +215,7 @@ people.invoke(<span class="hljs-string">'sayHello'</span>);
 
 <p>You can get the first or last object from an Enumerable by
 getting <tt>firstObject</tt> or <tt>lastObject</tt>.</p>
-<pre class="highlight"><code class="hljs javascript">[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>].get(<span class="hljs-string">'firstObject'</span>) <span class="hljs-comment">// 1</span>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>].get(<span class="hljs-string">'firstObject'</span>) <span class="hljs-comment">// 1</span>
 [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>].get(<span class="hljs-string">'lastObject'</span>)  <span class="hljs-comment">// 3</span></code></div></pre>
 <h4 id='-Converting-to-Array-'>3.4 -  Converting to Array
 </h4>
@@ -228,7 +228,7 @@ its <tt>toArray</tt> method.</p>
 
 
 <p>You can transform an Enumerable into a derived Array by using the <tt>map</tt> method:</p>
-<pre class="highlight"><code class="hljs javascript">[<span class="hljs-string">'Goodbye'</span>, <span class="hljs-string">'cruel'</span>, <span class="hljs-string">'world'</span>].map(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">item, index, self</span>) </span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">[<span class="hljs-string">'Goodbye'</span>, <span class="hljs-string">'cruel'</span>, <span class="hljs-string">'world'</span>].map(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">item, index, self</span>) </span>{
   <span class="hljs-keyword">return</span> item + <span class="hljs-string">"!"</span>;
 });
 
@@ -240,7 +240,7 @@ its <tt>toArray</tt> method.</p>
 <p>A very common use of <tt>forEach</tt> and <tt>map</tt> is to get (or set) a property on each
 element. You can use the <tt>getEach</tt> and <tt>setEach</tt> methods to accomplish these
 goals.</p>
-<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> arr = [SC.Object.create(), SC.Object.create()];
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript"><span class="hljs-keyword">var</span> arr = [SC.Object.create(), SC.Object.create()];
 
 <span class="hljs-comment">// we now have an Array containing two SC.Objects</span>
 
@@ -256,7 +256,7 @@ criteria.</p>
 <p>For arbitrary filtering, use the (you guessed it) <tt>filter</tt> method. The filter
 method expects the callback to return <tt>true</tt> if SproutCore should include it in
 the final Array, and <tt>false</tt> or <tt>undefined</tt> if SproutCore should not.</p>
-<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> arr = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>];
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript"><span class="hljs-keyword">var</span> arr = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>];
 
 arr.filter(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">item, index, self</span>) </span>{
   <span class="hljs-keyword">if</span> (item &lt; <span class="hljs-number">4</span>) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
@@ -269,7 +269,7 @@ arr.filter(<span class="hljs-function"><span class="hljs-keyword">function</span
 <p>When working with a collection of SproutCore objects, you will often want to
 filter a set of objects based upon the value of some property.
 The <tt>filterProperty</tt> method provides a shortcut.</p>
-<pre class="highlight"><code class="hljs javascript">Todo = SC.Object.extend({
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">Todo = SC.Object.extend({
   <span class="hljs-attr">title</span>: <span class="hljs-literal">null</span>,
   <span class="hljs-attr">isDone</span>: <span class="hljs-literal">false</span>
 });
@@ -293,7 +293,7 @@ which work just like <tt>filter</tt> and <tt>filterProperty</tt>, but return onl
 properties using <tt>sortProperty</tt>. If you pass in multiple properties, SproutCore
 will sort items with the same value for the first property by the value of the
 second parameter, and so on.</p>
-<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> todos = [
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript"><span class="hljs-keyword">var</span> todos = [
   Todo.create({ <span class="hljs-attr">title</span>: <span class="hljs-string">'Write code'</span>, <span class="hljs-attr">isDone</span>: <span class="hljs-literal">true</span> }),
   Todo.create({ <span class="hljs-attr">title</span>: <span class="hljs-string">'Go to sleep'</span> }),
   Todo.create({ <span class="hljs-attr">title</span>: <span class="hljs-string">'Eat lunch'</span>, <span class="hljs-attr">isDone</span>: <span class="hljs-literal">true</span> })
@@ -315,7 +315,7 @@ the <tt><a href="http://docs.sproutcore.com/#doc=SC.Comparable">SC.Comparable</a
 
 <p>If you want to find out whether every item in an Enumerable matches some
 condition, you can use the <tt>every</tt> method:</p>
-<pre class="highlight"><code class="hljs javascript">Person = SC.Object.extend({
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">Person = SC.Object.extend({
   <span class="hljs-attr">name</span>: <span class="hljs-literal">null</span>,
   <span class="hljs-attr">isHappy</span>: <span class="hljs-literal">false</span>
 });
@@ -332,14 +332,14 @@ people.every(<span class="hljs-function"><span class="hljs-keyword">function</sp
 <span class="hljs-comment">// returns false</span></code></div></pre>
 <p>If you want to find out whether at least one item in an Enumerable matches some
 conditions, you can use the <tt>some</tt> method:</p>
-<pre class="highlight"><code class="hljs javascript">people.some(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">person, index, self</span>) </span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">people.some(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">person, index, self</span>) </span>{
   <span class="hljs-keyword">if</span>(person.get(<span class="hljs-string">'isHappy'</span>)) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
 });
 
 <span class="hljs-comment">// returns true</span></code></div></pre>
 <p>Just like the filtering methods, the <tt>every</tt> and <tt>some</tt> methods have
 analogous <tt>everyProperty</tt> and <tt>someProperty</tt> methods.</p>
-<pre class="highlight"><code class="hljs javascript">people.everyProperty(<span class="hljs-string">'isHappy'</span>, <span class="hljs-literal">true</span>) <span class="hljs-comment">// false</span>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">people.everyProperty(<span class="hljs-string">'isHappy'</span>, <span class="hljs-literal">true</span>) <span class="hljs-comment">// false</span>
 people.someProperty(<span class="hljs-string">'isHappy'</span>, <span class="hljs-literal">true</span>)  <span class="hljs-comment">// true</span></code></div></pre>
 <h3 id='-Changelog-'>4 -  Changelog
 </h3>

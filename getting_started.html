@@ -71,10 +71,10 @@
 <dd><a href='/views.html'>Core View Concepts</a></dd><dt>Models</dt>
 <dd><a href='/records.html'>SproutCore Records</a></dd>
 <dd><a href='/fixtures.html'>Using Fixtures</a></dd><dt>Theming</dt>
-<dd><a href='/theming_app.html'>Theming Your App</a></dd>
-<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd></dl><dl class='R'><dt>Testing</dt>
-<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
 <dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
 <dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
 <dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
 <dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd><dt>Extras</dt>
@@ -122,29 +122,18 @@
 </h3>
 
 
-<p>The introductory &quot;Getting Started&quot; guides pages are step-by-step treatments of concepts needed to make a full 
-SproutCore application. </p>
-<p>This first &quot;Getting Started&quot; guide will ensure that you have the latest version of Sproutcore installed and 
+<p>The introductory &quot;Getting Started&quot; guides pages are step-by-step treatments of concepts needed to make a full
+SproutCore application.</p>
+<p>This first &quot;Getting Started&quot; guide will ensure that you have the latest version of Sproutcore installed and
 configured properly. If you run into any issues or bumps along the way, please reach out on the
-<a href="http://groups.google.com/group/sproutcore">mailing list</a> or find us on IRC at #sproutcore!</p>
+<a href="http://groups.google.com/group/sproutcore">mailing list</a>, find us on IRC at #sproutcore or leave a message on <a href="https://gitter.im/sproutcore/sproutcore">Gitter</a>!</p>
 <h3 id='-Installation-'>2 -  Installation
 </h3>
 
 
-<p>There are two basic ways to install SproutCore.</p>
-<ul>
-<li>The Package Installers</li>
-<li>Using RubyGems</li>
-</ul>
-<p>The installation method you choose should be based upon your current platform and your experience with Ruby.
-The installers are currently only available for Windows and Mac. Linux and other platforms should use the
-RubyGems method. </p>
-<p>Additionally, if your machine is already setup for development in Ruby, you may find it more
-convenient to forgo the package installers, and use RubyGems so that you can always get the latest
-version by typing the following:</p>
-<pre class="highlight"><code class="hljs bash">gem update sproutcore</code></div></pre>
-<p>So, before you move on, please visit the <a href="http://sproutcore.com/install/">Installation Page</a> and either
-download the appropriate package, or follow the guide for your platform.</p>
+<p>To install the SproutCore development environment you need to have <a href="http://nodejs.org/">NodeJS</a> and NPM installed.
+The latest version of NodeJS currently supported by this environment is 9.x.</p>
+<p>Please visit the <a href="http://sproutcore.com/install/">Installation Page</a> and follow the guide for your platform.</p>
 <p>Great! Now that SproutCore is installed, we can move forward and get our first app up-and-running!</p>
 <h3 id='-Creating-A-New-SproutCore-Application-'>3 -  Creating A New SproutCore Application
 </h3>
@@ -153,57 +142,48 @@ download the appropriate package, or follow the guide for your platform.</p>
 <p>When you are first learning any new language or framework, it is generally a good idea to create a separate
 directory to store all of your code. So, in some area of your hard drive where you develop software, make a
 sproutcore directory.</p>
-<pre class="highlight"><code class="hljs bash">$ mkdir -p ~/development/sproutcore</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">$ mkdir -p ~/development/sproutcore</code></div></pre>
 <div class='note'><p> The dollar sign ($) in the code above and below represents the command line prompt and should not
 be typed when executing the commands. Lines without a prompt generally show you the output of the previous
 command.
 
 </p></div>
 
-<p>This directory can serve as a place for all things SproutCore. Change directory to ~/development/sproutcore, then
+<p>This directory can serve as a place for all things SproutCore. Change directory to <code>~/development/sproutcore</code>, then
 create a SproutCore project:</p>
-<pre class="highlight"><code class="hljs bash">$ <span class="hljs-built_in">cd</span> ~/development/sproutcore
-$ sproutcore gen project getting_started
-
-   ~ Created directory at getting_started
-   ~ Created file at getting_started/Buildfile
-   ~ Created file at getting_started/README
-
-   Your project is now ready to use!
-
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">$ <span class="hljs-built_in">cd</span> ~/development/sproutcore
+$ sproutcore init getting_started
+  Your project has been successfully created!
 $ <span class="hljs-built_in">cd</span> getting_started</code></div></pre>
 <p>Now you have a getting_started project directory, ~/development/sproutcore/getting_started. We will build
 several SproutCore apps in this project space, but for now, we&#39;ll just create a basic &quot;Hello World&quot; style application
 to ensure that everything is installed and working properly.</p>
 <p>Create the app in the getting_started project directory:</p>
-<pre class="highlight"><code class="hljs bash">$ sproutcore gen app TodosOne
-   ~ Created directory at apps
-   ~ Created directory at apps/todos_one
-   ~ Created file at apps/todos_one/Buildfile
-   ~ Created file at apps/todos_one/core.js
-   ~ Created file at apps/todos_one/main.js
-   ~ Created directory at apps/todos_one/resources
-   ~ Created file at apps/todos_one/resources/_theme.css
-   ~ Created file at apps/todos_one/resources/loading.rhtml
-   ~ Created file at apps/todos_one/resources/main_page.js
-   ~ Created file at apps/todos_one/theme.js
-
-  Your application target is now ready to use!</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">$ sproutcore gen app TodosOne
+  App TodosOne generated</code></div></pre>
 <p>Your directory structure should now look like the following:</p>
 <ul>
-<li>** getting_started/**<ul>
-<li>** Buildfile**</li>
-<li>** README.md**</li>
-<li>** apps/**<ul>
-<li>** todos_one/**<ul>
-<li>** Buildfile**</li>
-<li>** core.js**</li>
-<li>** main.js**</li>
-<li>** theme.js**</li>
-<li>** resources/**<ul>
-<li>** _theme.css**</li>
-<li>** loading.rhtml**</li>
-<li>** main_page.js**</li>
+<li><strong>getting_started/</strong><ul>
+<li><strong>sc_config</strong></li>
+<li><strong>apps/</strong><ul>
+<li><strong>TodosOne/</strong><ul>
+<li><strong>sc_config</strong></li>
+<li><strong>core.js</strong></li>
+<li><strong>main.js</strong></li>
+<li><strong>theme.js</strong></li>
+<li><strong>statechart.js</strong></li>
+<li><strong>controllers/</strong></li>
+<li><strong>fixtures/</strong></li>
+<li><strong>views/</strong></li>
+<li><strong>states/</strong><ul>
+<li><strong>ready_state.js</strong></li>
+</ul>
+</li>
+<li><strong>resources/</strong><ul>
+<li><strong>_theme.css</strong></li>
+<li><strong>loading.ejs</strong></li>
+<li><strong>main_page.js</strong></li>
+<li><strong>main_page.css</strong></li>
 </ul>
 </li>
 </ul>
@@ -223,23 +203,22 @@ manageable parts. For instance, Apple&#39;s iCloud application has apps for
 e-mail, contacts and finding your friends.</p>
 <p>This is why there is an <strong>apps/</strong> directory inside of the getting_started project directory. It
 allows you to easily separate distinct applications.</p>
-<p>Inside the <strong>apps/todos_one</strong> directory, you will find the Buildfile for the TodosOne application.
-Just like the project (getting_started) has a <strong>Buildfile</strong>, each application or
-framework that you create should also have a <strong>Buildfile</strong> which specifies it&#39;s
+<p>Inside the <strong>apps/TodosOne</strong> directory, you will find the sc_config for the TodosOne application.
+Just like the project (getting_started) has a <strong>sc_config</strong>, each application or
+framework that you create should also have a <strong>sc_config</strong> which specifies it&#39;s
 requirements as well as any build-options that you may want to change, such as
 whether or not to minify and compact the code.</p>
 <p>The <strong>core.js</strong> file is the first file that gets loaded, and is where the actual
 application is defined. This is also where you usually define any global
 constants that the application might use (which should be very few), or any
 configuration that external libraries might require.</p>
-<p>The <strong>main.js</strong> file is usually very basic. It starts the application. If you
-are using the Statechart framework (which we will discuss in Part 2), <strong>main.js</strong>
-would simply initialize the statechart. If you open up <strong>main.js</strong> right now,
-you&#39;ll see that it appends the main view to the screen.</p>
+<p>The <strong>main.js</strong> file is usually very basic. It starts the application. The default
+assumes you are using the Statechart framework (which we will discuss in Part 2).
+<strong>main.js</strong> simply initializes the statechart, which you will see if you open up <strong>main.js</strong> right now.</p>
 <p>The resources folder contains things like images, stylesheets and views.</p>
 <p>Inside the resources folder, the <strong>_theme.css</strong> file defines that directory&#39;s
 CSS theme. This allows you to define different themes for each directory.</p>
-<p>The <strong>resources/loading.rhtml</strong> file defines the HTML that your users see before
+<p>The <strong>resources/loading.ejs</strong> file defines the HTML that your users see before
 SproutCore has fully loaded and handed control over to the application. For
 now, it displays a simple loading message.</p>
 <p>Lastly, the <strong>resources/main_page.js</strong> file describes the actual user interface of the
@@ -248,25 +227,34 @@ the app becomes, you may decide to have just the mainPage and mainPane, or
 you may decide you want to break it out a bit more by having a loadingPane,
 loggedInPane, loggedOutPane, etc. Most applications have at least a few
 panes, and possibly a few pages.</p>
-<h3 id='-Viewing-Your-Application-'>5 -  Viewing Your Application
+<h3 id='-Installing-the-SproutCore-framework-'>5 -  Installing the SproutCore framework
+</h3>
+
+
+
+
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">$ sproutcore install sproutcore frameworks</code></div></pre>
+<p>This installs the SproutCore framework inside the frameworks folder of your
+project.</p>
+<h3 id='-Viewing-Your-Application-'>6 -  Viewing Your Application
 </h3>
 
 
 <p>So, we have our SproutCore TodosOne application built, and we understand the basic
 layout of the files. Let&#39;s see what it looks like in the browser!</p>
 <p>Inside the project directory type the following command:</p>
-<pre class="highlight"><code class="hljs bash">$ sproutcore server</code></div></pre>
-<div class='note'><p> If you are attempting to run multiple copies of **sproutcore server** at the same
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">$ sproutcore serve</code></div></pre>
+<div class='note'><p> If you are attempting to run multiple copies of **sproutcore serve** at the same
 time, you will probably see an error about the port already being in use. If
-so, just re-run the command and add --port 4030 so the second instance will not use 
+so, just re-run the command and add --port 4030 so the second instance will not use
 the default 4020 port.
 
 </p></div>
 
 <p>Using your favorite web browser, visit
-<a href="http://localhost:4020/todos_one">http://localhost:4020/todos_one</a>. If all goes
+<a href="http://localhost:4020/TodosOne">http://localhost:4020/TodosOne</a>. If all goes
 well, you should see &quot;Welcome to Sproutcore!&quot; in the middle of the screen.</p>
-<h3 id='-Making-Changes-'>6 -  Making Changes
+<h3 id='-Making-Changes-'>7 -  Making Changes
 </h3>
 
 
@@ -274,7 +262,7 @@ well, you should see &quot;Welcome to Sproutcore!&quot; in the middle of the scr
 line to say &quot;SproutCore is Awesome!&quot;. Save the file and refresh the page in
 your web browser. If the message updates properly, you&#39;re ready to move on to
 <a href="/getting_started_2.html">Getting Started: Part 2</a> of the tutorial.</p>
-<h3 id='-Troubleshooting-'>7 -  Troubleshooting
+<h3 id='-Troubleshooting-'>8 -  Troubleshooting
 </h3>
 
 
@@ -282,20 +270,10 @@ your web browser. If the message updates properly, you&#39;re ready to move on t
 we list some of the common pitfalls that users have discovered, with
 solutions for getting past them.</p>
 <ul>
-<li><p><em>&quot;Error: Handlebars is not defined Source File: ...&quot;</em> - If you have previously
-installed SproutCore 1.6 using the installer, you may see this error. If so, please make
-sure to un-install SproutCore 1.6 first and then re-install 1.8.</p>
-</li>
-<li><p><em>&quot;RuntimeError at /todos_one html_builder could not find a layout file for ...&quot;</em> -
-This error usually means that <strong>sproutcore server</strong> could not find SproutCore where it
-thought it should exist. Make sure that you&#39;ve properly installed the latest
-version of SproutCore; and if you are using RubyGems, try closing and
-re-opening the terminal to ensure that paths are properly set.</p>
-</li>
 <li><p><em>&quot;Browser says &#39;No matching target&#39;&quot;</em> - This is generally caused if you
 misspelled the name of the application in the URL. Make sure that you properly
 typed it, and that you used underscores instead of spaces. For example:
-<a href="http://localhost/todos_one">http://localhost/todos_one</a>.</p>
+<a href="http://localhost/TodosOne">http://localhost/TodosOne</a>.</p>
 </li>
 <li><p><em>&quot;ERROR: missing } after property list ...&quot;</em> - This error is usually thrown
 if you added a property somewhere, but forgot to put a comma at the end.
@@ -303,7 +281,7 @@ Look at the line in the error, and then look above it to see if there is
 a comma missing.</p>
 </li>
 </ul>
-<h3 id='-Changelog-'>8 -  Changelog
+<h3 id='-Changelog-'>9 -  Changelog
 </h3>
 
 
@@ -320,8 +298,9 @@ by <a href="credits.html#publickeating">Tyler Keating</a></li>
 <li>March 6, 2012: rewrite for SproutCore 1.8 by the 1.8 release sprint team, including the following who did
 much work on this task: <a href="credits.html#tce">Tim Evans</a>, <a href="credits.html#topherfangio">Topher Fangio</a> and <a href="credits.html#geojeff">Jeff Pittman</a></li>
 <li>March 12, 2012: added new error and fixed italics in the troubleshooting section by <a href="credits.html#topherfangio">Topher Fangio</a></li>
-<li>July 30, 2013: converted to Markdown format for DocPad guides by <a href="credits.html#erictheise">Eric Theise</a> </li>
+<li>July 30, 2013: converted to Markdown format for DocPad guides by <a href="credits.html#erictheise">Eric Theise</a></li>
 <li>July 30, 2013: fix issues with formatting and updated Changelog by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+<li>January 17, 2019: Change to NPM build tools.</li>
 </ul>
 
         </div>
@@ -356,6 +335,14 @@ much work on this task: <a href="credits.html#tce">Tim Evans</a>, <a href="credi
             
               <li>
                 <a href='#-Explanation-'><p> Explanation
+</p></a>
+                <ul>
+                  
+                </ul>
+              </li>
+            
+              <li>
+                <a href='#-Installing-the-SproutCore-framework-'><p> Installing the SproutCore framework
 </p></a>
                 <ul>
                   

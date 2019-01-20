@@ -71,10 +71,10 @@
 <dd><a href='/views.html'>Core View Concepts</a></dd><dt>Models</dt>
 <dd><a href='/records.html'>SproutCore Records</a></dd>
 <dd><a href='/fixtures.html'>Using Fixtures</a></dd><dt>Theming</dt>
-<dd><a href='/theming_app.html'>Theming Your App</a></dd>
-<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd></dl><dl class='R'><dt>Testing</dt>
-<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
 <dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
 <dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
 <dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
 <dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd><dt>Extras</dt>
@@ -135,7 +135,7 @@ stored inside Myapp.store. Changes are not set to auto-commit.
 
 
 
-<pre class="highlight"><code class="hljs javascript">  record = MyApp.MyModel.find(MyApp.store, <span class="hljs-number">1</span>);
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">  record = MyApp.MyModel.find(MyApp.store, <span class="hljs-number">1</span>);
   <span class="hljs-comment">// Assuming this record already exists in the store...</span>
   record.status; <span class="hljs-comment">// Meaningless numeric response</span>
   record.status &amp; SC.Record.READY; <span class="hljs-comment">// Will return a 'truthy' value, because the record is in a ready status</span>
@@ -150,7 +150,7 @@ stored inside Myapp.store. Changes are not set to auto-commit.
 <p>The status (like all the record attributes) is not stored in the SC.Record
 object directly, but rather in its entry in the data store. This means if you
 have two instances of the same record, they will always have the same status.</p>
-<pre class="highlight"><code class="hljs javascript">  record = MyApp.MyModel.find(MyApp.store, <span class="hljs-number">1</span>);
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">  record = MyApp.MyModel.find(MyApp.store, <span class="hljs-number">1</span>);
   the_same_record = MyApp.MyModel.find(MyApp.store, <span class="hljs-number">1</span>);
 
   record.status === SC.Record.READY_CLEAN; <span class="hljs-comment">// true</span>
@@ -478,7 +478,7 @@ data source.</p>
 <p>Our crack research team has been reading and came across an intriguing new
 baby name to add to our database, and thus are creating a new <tt>BabyNames.Entry</tt> 
 record, like so:</p>
-<pre class="highlight"><code class="hljs javascript">  <span class="hljs-keyword">var</span> astrolabe = BabyNames.store.createRecord{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">  <span class="hljs-keyword">var</span> astrolabe = BabyNames.store.createRecord{
     BabyNames.Entry, {
       <span class="hljs-attr">name</span>: <span class="hljs-string">"Astrolabe"</span>
     }
@@ -487,7 +487,7 @@ record, like so:</p>
 record is in the <tt>SC.Record.EMPTY</tt> status, but we will never see this change,
 because immediately the createRecord process will set an explicit status for
 the record. The record that gets returned will be ready for us to work with:</p>
-<pre class="highlight"><code class="hljs javascript">  astrolabe.status &amp; SC.Record.EMPTY; <span class="hljs-comment">// this is false, by the time the record is returned</span>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">  astrolabe.status &amp; SC.Record.EMPTY; <span class="hljs-comment">// this is false, by the time the record is returned</span>
   astrolabe.status &amp; SC.Record.READY; <span class="hljs-comment">// returns a 'truthy' value</span>
   astrolabe.status === SC.Record.READY_NEW; <span class="hljs-comment">// returns true - we have a new, unsaved record</span></code></div></pre>
 <div class='note'><p> For the purposes of this discussion, we're not going to explore the work
@@ -500,12 +500,12 @@ guide on Using Records and the Data Store
 team closed their browser, this entry would be lost, forever.</p>
 <p>Because this is a new record, there&#39;s no worries about clean versus dirty
 status. So, when we set attributes on the record, there is no status change:</p>
-<pre class="highlight"><code class="hljs javascript">  astrolabe.status === SC.Record.READY_NEW; <span class="hljs-comment">// returns true</span>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">  astrolabe.status === SC.Record.READY_NEW; <span class="hljs-comment">// returns true</span>
   astrolabe.meaning = <span class="hljs-string">"A scientific instrument used anciently in astronomy."</span>
   astrolabe.status === SC.Record.READY_NEW; <span class="hljs-comment">// still returns true</span></code></div></pre>
 <p>Now, our researcher is happy with the record. As such, she commits all the
 pending changes to the server.</p>
-<pre class="highlight"><code class="hljs javascript">  BabyNames.store.commitRecords();</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">  BabyNames.store.commitRecords();</code></div></pre>
 <p>At this point, a complex series of events happens. First, the store searches
 through the records it holds, and extracts every record that is awaiting a
 commit (any record, in other words, that is in <tt>SC.Record.READY_NEW</tt>, <tt>SC.Record.READY_DIRTY</tt>, 
@@ -513,12 +513,12 @@ or <tt>SC.Record.DESTROYED_DIRTY</tt>). Our record certainly fits these criteria
 is committed to the server to update. Now, presuming that our remote data source 
 is a bit, slow, it may a take a while for this commit to complete. If this is 
 true, we can now see our record in a different status:</p>
-<pre class="highlight"><code class="hljs javascript">  astrolabe.status &amp; SC.Record.READY; <span class="hljs-comment">// False: Our record is now in a different status...</span>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">  astrolabe.status &amp; SC.Record.READY; <span class="hljs-comment">// False: Our record is now in a different status...</span>
   astrolabe.status &amp; SC.Record.BUSY; <span class="hljs-comment">// True: ...busy, as it tries to work with the server</span>
   astrolabe.status === SC.Record.BUSY_CREATING; <span class="hljs-comment">// True: Specifically, it is trying to create this record</span></code></div></pre>
 <p>After a moment, though, our server accepts our new record creation, and we&#39;ve
 completed the process of creating this record.</p>
-<pre class="highlight"><code class="hljs javascript">  astrolabe.status &amp; SC.Record.READY; <span class="hljs-comment">// True</span>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">  astrolabe.status &amp; SC.Record.READY; <span class="hljs-comment">// True</span>
   astrolabe.status === SC.Record.READY_CLEAN; <span class="hljs-comment">// Our record is saved to the server</span></code></div></pre>
 <div class='note'><p> So, what happens if the record does NOT save? In large part, this
 depends on how we write the code for our data store. It is often a good idea,
@@ -545,7 +545,7 @@ on the name, to reassure people that the name has, truly, been used in the
 past. First, of course, they&#39;ll need to look up the record in the data source.
 (For the purposes of this document, rather than getting into the fine art of
 writing queries, we will assume that the <tt>id</tt> of the Astrolabe record is <tt>12345</tt>)</p>
-<pre class="highlight"><code class="hljs javascript">  <span class="hljs-keyword">var</span> astrolabe = BabyNames.Entry.find(BabyNames.store, <span class="hljs-number">12345</span>);</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">  <span class="hljs-keyword">var</span> astrolabe = BabyNames.Entry.find(BabyNames.store, <span class="hljs-number">12345</span>);</code></div></pre>
 <p>Now, in the background, the application will look in it&#39;s data store and
 check: do I have a record here that has id 12345? If we had, for instance, not
 closed our browser between the creation example above and now (presuming we
@@ -563,13 +563,13 @@ data store will look up the ID <tt>12345</tt>, and find nothing, and then procee
 check the remote data source instead, requesting the record from there.
 Presume, again, that our remote server is a tad slow. In this case, now when
 we look at the record, what will be it&#39;s status?</p>
-<pre class="highlight"><code class="hljs javascript">  astrolabe.status &amp; SC.Record.READY; <span class="hljs-comment">// false - this record is not ready for us to use, yet</span>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">  astrolabe.status &amp; SC.Record.READY; <span class="hljs-comment">// false - this record is not ready for us to use, yet</span>
   astrolabe.status &amp; SC.Record.BUSY; <span class="hljs-comment">// true - the record is busy because it's waiting for a server response</span>
   astrolabe.status === SC.Record.BUSY_LOADING; <span class="hljs-comment">// true - the record is busy loading the record from the server</span></code></div></pre>
 <p>Eventually, the server responds, and hands us the record we&#39;re looking for. At
 this point, the data store will write this data into it&#39;s internal storage,
 and you have a valid, clean record to use:</p>
-<pre class="highlight"><code class="hljs javascript">  astrolabe.status &amp; SC.Record.READY; <span class="hljs-comment">// true - it's ready for you to work with, now!</span>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">  astrolabe.status &amp; SC.Record.READY; <span class="hljs-comment">// true - it's ready for you to work with, now!</span>
   astrolabe.status &amp; SC.Record.READY_CLEAN; <span class="hljs-comment">// true - since we just retrieved it from the server, it's clean, and needs no updates</span></code></div></pre>
 <div class='note'><p> Again, the behavior surrounding a failure - like, if we were searching
 for a record that doesn't exist on the remote data source - is up to us. We
@@ -585,25 +585,25 @@ she DID hear the name &#39;Astrolabe&#39;. This takes her about 15 minutes, befo
 remembers, so she figures, maybe she ought to just check and make sure no one
 has altered this record elsewhere, in the meantime, so she refreshes it from
 the server</p>
-<pre class="highlight"><code class="hljs javascript">  BabyNames.store.find(BabyNames.Entry, <span class="hljs-number">12345</span>);
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">  BabyNames.store.find(BabyNames.Entry, <span class="hljs-number">12345</span>);
   astrolabe.status &amp; SC.Record.READY; <span class="hljs-comment">// False: Now we're busy talking to the server again...</span>
   astrolabe.status === SC.Record.BUSY_REFRESH_CLEAN; <span class="hljs-comment">// True: looks like the server is still busy letting us know the changes</span>
   <span class="hljs-comment">// wait a few minutes</span>
   astrolabe.status &amp; SC.Record.READY; <span class="hljs-comment">// TRUE: Good, refresh is complete!</span>
   astrolabe.status === SC.Record.READY_CLEAN; <span class="hljs-comment">// TRUE: And, our record is clean and ready</span></code></div></pre>
 <p>Now, it&#39;s time to make our changes:</p>
-<pre class="highlight"><code class="hljs javascript">  astrolabe.meaning = <span class="hljs-string">"A scientific instrument used anciently in astronomy. Used by famous medieval lovers Abelard and Heloise, as the name for their illegitimate son. Not a very popular name, since."</span></code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">  astrolabe.meaning = <span class="hljs-string">"A scientific instrument used anciently in astronomy. Used by famous medieval lovers Abelard and Heloise, as the name for their illegitimate son. Not a very popular name, since."</span></code></div></pre>
 <p>Again, though, this record has not been saved. If we close the browser, now,
 we&#39;ll lose our hard work.</p>
-<pre class="highlight"><code class="hljs javascript">  astrolabe.status &amp; SC.Record.READY; <span class="hljs-comment">// True: Yes, the record is still ready for work</span>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">  astrolabe.status &amp; SC.Record.READY; <span class="hljs-comment">// True: Yes, the record is still ready for work</span>
   astrolabe.status === SC.Record.READY_CLEAN; <span class="hljs-comment">// False: But it has not been synced to the server!</span>
   astrolabe.status === SC.Record.READY_DIRTY; <span class="hljs-comment">// True: The record exists on the server, but we've made changes that haven't been saved yet!</span></code></div></pre>
 <p>So, we&#39;d better save our changes, now.</p>
-<pre class="highlight"><code class="hljs javascript">  BabyNames.store.commitRecords();</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">  BabyNames.store.commitRecords();</code></div></pre>
 <p>Since our record is in the <tt>SC.Record.READY_DIRTY</tt> status, it should be
 included in the refreshes, so it will start pushing these changes to the
 server.</p>
-<pre class="highlight"><code class="hljs javascript">  astrolabe.status &amp; SC.Record.READY; <span class="hljs-comment">//False - not ready, busy talking to the server</span>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">  astrolabe.status &amp; SC.Record.READY; <span class="hljs-comment">//False - not ready, busy talking to the server</span>
   astrolabe.status &amp; SC.Record.BUSY; <span class="hljs-comment">//True</span>
   astrolabe.status === SC.Record.BUSY_COMMITTING; <span class="hljs-comment">// Since we're updating an existing record, we are in the SC.Record.BUSY_COMMITING status, this time</span>
   <span class="hljs-comment">// Now we wait a minute for the process to finish...</span>
@@ -633,19 +633,19 @@ about this, and asks them to remove the record since it&#39;s just cluttering up
 the database and making customers roll their eyes. This process is pretty
 simple. The find should follow the exact same process as in the update task.
 The only difference is the actual process of deletion.</p>
-<pre class="highlight"><code class="hljs javascript">  astrolabe.status &amp; SC.Record.READY; <span class="hljs-comment">//True: So, it's available to be worked with</span>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">  astrolabe.status &amp; SC.Record.READY; <span class="hljs-comment">//True: So, it's available to be worked with</span>
   astrolabe.status == SC.Record.READY_CLEAN; <span class="hljs-comment">//True: There's no changes hanging around on the record. Let's go ahead and delete it.</span>
   astrolabe.destroy();</code></div></pre>
 <p>Now, the destroy status does not make any change, immediately on the server,
 it essentially just marks the record for deletion. So, if we closed the
 application now, then the record would still be in the database, next time we
 reopened it.</p>
-<pre class="highlight"><code class="hljs javascript">  astrolabe.status &amp; SC.Record.DESTROYED; <span class="hljs-comment">//True, this record is destroyed in our local data store...</span>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">  astrolabe.status &amp; SC.Record.DESTROYED; <span class="hljs-comment">//True, this record is destroyed in our local data store...</span>
   astrolabe.status === SC.Record.DESTROYED_CLEAN; <span class="hljs-comment">//False: ...but we haven't synced this deletion to the remote server yet!</span>
   astrolabe.status === SC.Record.DESTROYED_DIRTY; <span class="hljs-comment">// True: record is marked to be deleted when we sync with our server</span></code></div></pre>
 <p>So, the next time we sync to the server, we&#39;ll go through a process more or
 less parallel to record creation.</p>
-<pre class="highlight"><code class="hljs javascript">  BabyNames.store.commitRecords(); <span class="hljs-comment">//So, since our record is in dirty, it should be included in the commits</span>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">  BabyNames.store.commitRecords(); <span class="hljs-comment">//So, since our record is in dirty, it should be included in the commits</span>
   astrolabe.status &amp; SC.Record.BUSY; <span class="hljs-comment">// True - looks like we're in the process of talking to the server</span>
   astrolabe.status === SC.Record.BUSY_DESTROYING; <span class="hljs-comment">// True - we're busy destroying the record remotely</span>
   <span class="hljs-comment">// So, lets wait and let the server finish</span>

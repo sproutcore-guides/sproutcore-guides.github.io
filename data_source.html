@@ -71,10 +71,10 @@
 <dd><a href='/views.html'>Core View Concepts</a></dd><dt>Models</dt>
 <dd><a href='/records.html'>SproutCore Records</a></dd>
 <dd><a href='/fixtures.html'>Using Fixtures</a></dd><dt>Theming</dt>
-<dd><a href='/theming_app.html'>Theming Your App</a></dd>
-<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd></dl><dl class='R'><dt>Testing</dt>
-<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
 <dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
 <dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
 <dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
 <dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd><dt>Extras</dt>
@@ -167,9 +167,9 @@ examples in the
 that will provide us with a basic
 <a href="http://en.wikipedia.org/wiki/Representational_State_Transfer#RESTful_web_services">RESTful API</a>.
 If we wanted to get a list of all ToDo items, we would send a GET request to:</p>
-<pre class="highlight"><code class="hljs bash">GET: /todos/</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">GET: /todos/</code></div></pre>
 <p>Which will return a <a href="http://en.wikipedia.org/wiki/Json">JSON</a> array like:</p>
-<pre class="highlight"><code class="hljs javascript">[
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">[
   {
     <span class="hljs-string">"id"</span>: <span class="hljs-number">1</span>,
     <span class="hljs-string">"title"</span>: <span class="hljs-string">"Learn to use SproutCore"</span>,
@@ -182,19 +182,19 @@ If we wanted to get a list of all ToDo items, we would send a GET request to:</p
   }
 ]</code></div></pre>
 <p>To create a new ToDo item, we can POST to this URL with JSON in the body.</p>
-<pre class="highlight"><code class="hljs bash">POST: /todos/
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">POST: /todos/
 {
   <span class="hljs-string">"title"</span>: <span class="hljs-string">"Profit!"</span>,
   <span class="hljs-string">"done"</span>: <span class="hljs-literal">false</span>
 }</code></div></pre>
 <p>The server will return the new ID for us.</p>
-<pre class="highlight"><code class="hljs javascript">{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">{
   <span class="hljs-string">"id"</span>: <span class="hljs-number">3</span>
 }</code></div></pre>
 <p>If we specify an ID in the url:</p>
-<pre class="highlight"><code class="hljs bash">GET: /todos/3</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">GET: /todos/3</code></div></pre>
 <p>You&#39;ll see just one object returned:</p>
-<pre class="highlight"><code class="hljs javascript">{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">{
   <span class="hljs-string">"id"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-string">"title"</span>: <span class="hljs-string">"Profit!"</span>,
   <span class="hljs-string">"done"</span>: <span class="hljs-literal">false</span>
@@ -216,7 +216,7 @@ writing our DataSource.</p>
 
 
 <p>To generate a DataSource, use the command:</p>
-<pre class="highlight"><code class="hljs bash">sc-gen data-source MyApp.RESTDataSource</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">sc-gen data-source MyApp.RESTDataSource</code></div></pre>
 <div class='note'><p> Anywhere you see MyApp, replace this with the name of the application
 that you're building.
 
@@ -230,9 +230,9 @@ stubbed with the default functions that will get called by the store.</p>
 
 <p>The next step is linking the new DataSource to the store. By default, the store
 will be using <a href="fixtures.html">Fixtures</a>. In <tt>core.js</tt> you&#39;ll see:</p>
-<pre class="highlight"><code class="hljs javascript">  store: SC.Store.create().from(SC.Record.fixtures)</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">  store: SC.Store.create().from(SC.Record.fixtures)</code></div></pre>
 <p>Replace this with the newly created DataSource:</p>
-<pre class="highlight"><code class="hljs javascript">  store: SC.Store.create().from(<span class="hljs-string">'MyApp.RESTDataSource'</span>)</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">  store: SC.Store.create().from(<span class="hljs-string">'MyApp.RESTDataSource'</span>)</code></div></pre>
 <p>This will tell the store to use the new DataSource when trying to find data.</p>
 <div class='note'><p> As you can see we are replacing a JavaScript Object: <tt>SC.Record.fixtures</tt>
 with a string <tt>'MyApp.RESTDataSource'</tt>. This is because our DataSource won't
@@ -257,7 +257,7 @@ it will convert the string to an object and save it for future reference. See
 <p>The first thing that your app will likely do is to fetch a bunch of data. This
 is usually done via a <a href="records.html#using-queries">query</a>. The query for
 finding all ToDo&#39;s will look like:</p>
-<pre class="highlight"><code class="hljs javascript">  MyApp.QUERY_ALL_TODOS = SC.Query.local(MyApp.Todo)</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">  MyApp.QUERY_ALL_TODOS = SC.Query.local(MyApp.Todo)</code></div></pre>
 <div class='note'><p> Our DataSource will be written assuming that
 [local queries](records.html#local-vs-remote-queries) are being used. Local
 queries are what you will be using most of the time. Remote queries will be
@@ -273,7 +273,7 @@ time the query conditions match a new record. After it has returned, the store
 will call &#39;fetch&#39; on its attached DataSource. </p>
 <p>This is when we get to take action. The generated DataSource will already
 contain the following code:</p>
-<pre class="highlight"><code class="hljs javascript">  fetch: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">store, query</span>) </span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">  fetch: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">store, query</span>) </span>{
 
     <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Add handlers to fetch data for specific queries.  </span>
     <span class="hljs-comment">// call store.dataSourceDidFetchQuery(query) when done.</span>
@@ -286,7 +286,7 @@ the store that we are not going to handle this query.</p>
 we will call <tt>store.dataSourceDidFetchQuery(query)</tt> to let the store know that
 this query has been updated.</p>
 <p>Now we want to fetch all the Todo&#39;s</p>
-<pre class="highlight"><code class="hljs javascript">fetch: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">store, query</span>) </span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">fetch: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">store, query</span>) </span>{
   SC.Request.getUrl(<span class="hljs-string">'/todos/'</span>).json()
     .notify(<span class="hljs-keyword">this</span>, <span class="hljs-string">'fetchDidComplete'</span>, store, query)
     .send()
@@ -362,7 +362,7 @@ string is converted into JS objects for us. If we did not call <tt>.json()</tt> 
 the <tt>Request</tt>, it would return a string.</p>
 <p>This works because our server responds with an array at the top level of the
 JSON. If your server returned something like:</p>
-<pre class="highlight"><code class="hljs javascript">{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">{
   <span class="hljs-attr">length</span>: <span class="hljs-number">1</span>,
   <span class="hljs-attr">records</span>: [
     {
@@ -373,7 +373,7 @@ JSON. If your server returned something like:</p>
   ]
 }</code></div></pre>
 <p>Then we would use this instead:</p>
-<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> body = response.get(<span class="hljs-string">'body'</span>)
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript"><span class="hljs-keyword">var</span> body = response.get(<span class="hljs-string">'body'</span>)
     records = body.records;</code></div></pre>
 <div class='note'><p> Note how we didn't use <tt>.get('records')</tt>, this is because the JSON is
 converted into plain Javascript objects, not <tt>SC.Object</tt>'s.
@@ -417,7 +417,7 @@ for one url. That won&#39;t get us very far. But given that all of our records a
 going to have a very similar URL, it should be simple to dynamically generate
 this URL.</p>
 <p>We can have each of our models know what their URL will be:</p>
-<pre class="highlight"><code class="hljs javascript">MyApp.Todo = SC.Record.extend(
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">MyApp.Todo = SC.Record.extend(
 <span class="hljs-comment">/** @scope MyApp.Todo.prototype */</span> {
 
   <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Add your own code here.</span>
@@ -432,7 +432,7 @@ MyApp.Todo.mixin({
 path without an instance. For example: <tt>MyApp.Todo.resourcePath</tt>.</p>
 <p>This will allow our DataSource to find the path needed. We&#39;ll change the fetch
 method to:</p>
-<pre class="highlight"><code class="hljs javascript">fetch: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">store, query</span>) </span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">fetch: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">store, query</span>) </span>{
   SC.Request.getUrl(<span class="hljs-string">'/%@/'</span>.fmt(query.recordType.pluralResourcePath))
     .notify(<span class="hljs-keyword">this</span>, <span class="hljs-string">'fetchDidComplete'</span>, store, query)
     .json().send()
@@ -449,7 +449,7 @@ function outputs a formatted string.
 such as <a href="http://docs.sproutcore.com/#doc=String&amp;method=decamelize&amp;src=false">decamalize</a>
 and <a href="http://docs.sproutcore.com/#doc=SC.String&amp;method=.pluralize&amp;src=false">pluralize</a>
 as in the code below:</p>
-<pre class="highlight"><code class="hljs javascript">fetch: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">store, query</span>) </span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">fetch: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">store, query</span>) </span>{
   <span class="hljs-keyword">var</span> path = query.recordType.decamalize().pluralize();
 
   SC.Request.getUrl(<span class="hljs-string">'/%@/'</span>.fmt(path))
@@ -468,7 +468,7 @@ the resource path on the model is a much more robust approach.</p>
 to want to make some changes to these records.</p>
 <p>Each time our store wants to commit changes to the server, the <tt>updateRecord</tt>
 method will be called for each of the changed records.</p>
-<pre class="highlight"><code class="hljs javascript">updateRecord: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">store, storeKey</span>) </span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">updateRecord: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">store, storeKey</span>) </span>{
   <span class="hljs-keyword">var</span> recordType = store.recordTypeFor(storeKey),
       id = store.idFor(storeKey),
       data = store.readDataHash(storeKey);
@@ -504,7 +504,7 @@ with a string.
 
 <p>Our API will return empty response with status 200 from our PUT command.</p>
 <p>So we test for it:</p>
-<pre class="highlight"><code class="hljs javascript">response.get(<span class="hljs-string">'status'</span>) === <span class="hljs-number">200</span></code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">response.get(<span class="hljs-string">'status'</span>) === <span class="hljs-number">200</span></code></div></pre>
 <p>If all is good, then we call <tt>dataSourceDidComplete</tt> to tell the store we are
 done.</p>
 <h5 id='-Server-Processing-'>5.3.1 -  Server Processing
@@ -513,7 +513,7 @@ done.</p>
 
 <p>If your server needs to process the data, it might need to send back different
 data than what you send up. Your server might send back something like:</p>
-<pre class="highlight"><code class="hljs javascript">{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">{
   <span class="hljs-string">"record"</span>: {
     <span class="hljs-string">"id"</span>: <span class="hljs-number">3</span>,
     <span class="hljs-string">"title"</span>: <span class="hljs-string">"Profit!"</span>,
@@ -522,7 +522,7 @@ data than what you send up. Your server might send back something like:</p>
   }
 }</code></div></pre>
 <p>You&#39;ll then need to update your callback to tell the store about it:</p>
-<pre class="highlight"><code class="hljs javascript">store.dataSourceDidComplete(storeKey, response.get(<span class="hljs-string">'body'</span>).record);</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">store.dataSourceDidComplete(storeKey, response.get(<span class="hljs-string">'body'</span>).record);</code></div></pre>
 <p>This will update the properties on your record with any changes that the server
 makes.</p>
 <h4 id='-Going-for-Creation-'>5.4 -  Going for Creation
@@ -532,11 +532,11 @@ makes.</p>
 <p>Creating records is much like updating them, but when you first create a record
 in the store, it does not have an <tt>id</tt>. So when the server responds, with
 the <tt>id</tt>:</p>
-<pre class="highlight"><code class="hljs javascript">{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">{
   <span class="hljs-string">"id"</span>: <span class="hljs-number">3</span>
 }</code></div></pre>
 <p>We tell the store about it:</p>
-<pre class="highlight"><code class="hljs javascript">createRecord: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">store, storeKey</span>) </span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">createRecord: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">store, storeKey</span>) </span>{
   <span class="hljs-keyword">var</span> recordType = store.recordTypeFor(storeKey),
       data = store.readDataHash(storeKey);
 
@@ -568,7 +568,7 @@ the <tt>id</tt>:</p>
 
 <p>Things should start feeling pretty familiar now, you can probably guess what&#39;s
 going to come next.</p>
-<pre class="highlight"><code class="hljs javascript">destroyRecord: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">store, storeKey</span>) </span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">destroyRecord: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">store, storeKey</span>) </span>{
   <span class="hljs-keyword">var</span> recordType = store.recordTypeFor(storeKey),
       id = store.idFor(storeKey);
 
@@ -601,7 +601,7 @@ going to come next.</p>
 <p>One that that is not always used, but some apps find helpful, is being able to
 refresh a record, to get the latest from the server.</p>
 <p>This is similar to a query, but for only a single record.</p>
-<pre class="highlight"><code class="hljs javascript">retrieveRecord: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">store, storeKey</span>) </span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">retrieveRecord: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">store, storeKey</span>) </span>{
   <span class="hljs-keyword">var</span> recordType = store.recordTypeFor(storeKey),
       id = store.idFor(storeKey),
       data = store.readDataHash(storeKey);
@@ -636,7 +636,7 @@ to make sure that the local record is the same as the server copy.</p>
 <p>By default, SproutCore sets the primaryKey property of records to &#39;guid&#39;. A
 common convention of many server side APIs is to use just &#39;id&#39;.  To make your
 records work with this, you can override the default in your Model files.</p>
-<pre class="highlight"><code class="hljs javascript">App.Todo = SC.Record.extend({
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">App.Todo = SC.Record.extend({
   <span class="hljs-attr">primaryKey</span>:<span class="hljs-string">'id'</span>
 })</code></div></pre>
 <p>You may set this to anything that you want, if your server uses, for

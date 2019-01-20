@@ -71,10 +71,10 @@
 <dd><a href='/views.html'>Core View Concepts</a></dd><dt>Models</dt>
 <dd><a href='/records.html'>SproutCore Records</a></dd>
 <dd><a href='/fixtures.html'>Using Fixtures</a></dd><dt>Theming</dt>
-<dd><a href='/theming_app.html'>Theming Your App</a></dd>
-<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd></dl><dl class='R'><dt>Testing</dt>
-<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
 <dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
 <dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
 <dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
 <dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd><dt>Extras</dt>
@@ -205,13 +205,13 @@ states in the last section of this guide.</p>
 
 
 <p>Defining a model in SproutCore is as easy as subclassing <tt>SC.Record</tt>:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/models/contact.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/models/contact.js</div></span>
 App.Contact = SC.Record.extend({
 
 });</code></div></pre>
 <p>You just have created your custom <tt>App.Contact</tt> model class. However, this
 empty model is only of limited use, so let&#39;s add some record attributes.</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/models/contact.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/models/contact.js</div></span>
 App.Contact = SC.Record.extend({
   firstName: SC.Record.attr(String),
   lastName: SC.Record.attr(String),
@@ -228,7 +228,7 @@ for a list of all reserved names.
 and <tt>age</tt> attributes with the type of each attribute as first argument. The
 optional second argument of <tt>SC.Record.attr</tt> is an option hash. E.g. we can add
 some default values to our attributes:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/models/contact.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/models/contact.js</div></span>
 App.Contact = SC.Record.extend({
   firstName: SC.Record.attr(String, { defaultValue: 'Unspecified' }),
   lastName: SC.Record.attr(String, { defaultValue: 'Unspecified' }),
@@ -245,7 +245,7 @@ therefore not committed back to the server.
 <p>If the name of the model&#39;s attribute property differs from the name you want to
 use in the data hash, you can specify a custom key for each attribute which
 will be used to access the data hash:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/models/contact.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/models/contact.js</div></span>
 App.Contact = SC.Record.extend({
   firstName: SC.Record.attr(String, { key: 'first_name' }),
   lastName: SC.Record.attr(String, { key: 'last_name' }),
@@ -265,7 +265,7 @@ App.Contact = SC.Record.extend({
 </ul>
 <p>Additionally SproutCore comes with a predefined attribute helper for date and
 time values. </p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/models/contact.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/models/contact.js</div></span>
 App.Contact = SC.Record.extend({
   dateOfBirth: SC.Record.attr(SC.DateTime, { format: 'YY-mm-dd' })
 });</code></div></pre>
@@ -283,7 +283,7 @@ can become a bit confusing at first... but let&#39;s clear it up step by step.</
 <p>First of all, by default SproutCore uses the identifier &quot;guid&quot; for the primary
 key. You can change this identifier by defining a <tt>primaryKey</tt> property in your
 model:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/models/contact.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/models/contact.js</div></span>
 App.Contact = SC.Record.extend({
   primaryKey: 'uid'
 });</code></div></pre>
@@ -300,7 +300,7 @@ example if you create a record and pass a hash with initial values, then
 SproutCore will now look for a property called &quot;uid&quot; in the hash when you don&#39;t
 explicitly specify an ID. If you want to get or set the ID of a record though,
 you always use <tt>id</tt> independent of the <tt>primaryKey</tt>&#39;s value:</p>
-<pre class="highlight"><code class="hljs javascript">myRecord.get(<span class="hljs-string">'id'</span>); <span class="hljs-comment">// note: NOT 'uid'</span>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">myRecord.get(<span class="hljs-string">'id'</span>); <span class="hljs-comment">// note: NOT 'uid'</span>
 myRecord.set(<span class="hljs-string">'id'</span>, <span class="hljs-number">1</span>);</code></div></pre>
 <div class='warning'><p> You should never change the ID of an existing record using <tt>set()</tt>
 like above unless you know what you are doing.
@@ -319,7 +319,7 @@ before using it to load the record into the store.</p>
 <p>Often models don&#39;t exist completely independently of each other but are related
 to other models. For example one or more addresses could belong to
 the <tt>Contact</tt> model we created above. So let&#39;s define the <tt>Address</tt> model first:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/models/address.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/models/address.js</div></span>
 App.Address = SC.Record.extend({
   street: SC.Record.attr(String),
   number: SC.Record.attr(Number)
@@ -330,14 +330,14 @@ App.Address = SC.Record.extend({
 
 <p>If we only need one address to be associated with each contact, then we can use
 the <tt>toOne</tt> relation helper:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/models/contact.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/models/contact.js</div></span>
 App.Contact = SC.Record.extend({
   address: SC.Record.toOne(
     'App.Address', 
     { isMaster: YES, inverse: 'contact' }
   )
 });</code></div></pre>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/models/address.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/models/address.js</div></span>
 App.Address = SC.Record.extend({
   contact: SC.Record.toOne(
     'App.Contact', 
@@ -368,14 +368,14 @@ don't need it.
 
 <p>If we want to associate multiple addresses with a certain contact, then we have
 to use the <tt>toMany</tt> relation helper:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/models/contact.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/models/contact.js</div></span>
 App.Contact = SC.Record.extend({
   address: SC.Record.toMany(
     'App.Address', 
     { isMaster: YES, inverse: 'contact' }
   )
 });</code></div></pre>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/models/address.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/models/address.js</div></span>
 App.Address = SC.Record.extend({
   contact: SC.Record.toOne(
     'App.Contact', 
@@ -402,14 +402,14 @@ don't need it.
 relate one address to multiple contacts, we have to use <tt>toMany</tt> on both sides
 of the relation. SproutCore&#39;s <tt>toMany</tt> helper manages many-to-many relations
 without a join table, which you would use in a relational database:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/models/contact.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/models/contact.js</div></span>
 App.Contact = SC.Record.extend({
   address: SC.Record.toMany(
     'App.Address', 
     { isMaster: YES, inverse: 'contact' }
   )
 });</code></div></pre>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/models/address.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/models/address.js</div></span>
 App.Address = SC.Record.extend({
   contact: SC.Record.toMany(
     'App.Contact', 
@@ -436,7 +436,7 @@ don't need it.
 property. This means that its value is not passed through to the data hash of
 the record and therefore is neither committed back to the server nor loaded
 from incoming JSON data.</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/models/contact.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/models/contact.js</div></span>
 App.Contact = SC.Record.extend({
   // transient property 
   isContact: YES, 
@@ -464,7 +464,7 @@ actually create some records. All records are managed by the store, so we have
 to make sure first that we have an instance of <tt>SC.Store</tt> available. Usually
 the store is instantiated somewhere in your application&#39;s <code>core.js</code>
 file:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/core.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/core.js</div></span>
 App = SC.Application.create({
   store: SC.Store.create().from(SC.Record.fixtures)
 });</code></div></pre>
@@ -476,11 +476,11 @@ guides.</p>
 
 
 <p>You can create records of a previously defined record type like this:</p>
-<pre class="highlight"><code class="hljs javascript">contact = App.store.createRecord(App.Contact, {});</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">contact = App.store.createRecord(App.Contact, {});</code></div></pre>
 <p>The first argument of the store&#39;s <tt>createRecord</tt> method is the record type. The
 second argument is a hash with optional initial values. Furthermore you can
 specify the record ID as third argument:</p>
-<pre class="highlight"><code class="hljs javascript">contact = App.store.createRecord(
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">contact = App.store.createRecord(
   App.Contact, 
   { <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Florian'</span>, <span class="hljs-attr">lastName</span>: <span class="hljs-string">'Kugler'</span> },
   <span class="hljs-number">99</span>
@@ -489,7 +489,7 @@ specify the record ID as third argument:</p>
 ID from the server, or you want to use some kind of temporary ID on new records
 until they get committed to the server, which then can return a persistent ID.
 So let&#39;s use a temporary ID:</p>
-<pre class="highlight"><code class="hljs javascript">contact = App.store.createRecord(
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">contact = App.store.createRecord(
   App.Contact, 
   { <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Florian'</span>, <span class="hljs-attr">lastName</span>: <span class="hljs-string">'Kugler'</span> },
   - <span class="hljs-built_in">Math</span>.random(<span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * <span class="hljs-number">99999999</span>))
@@ -506,7 +506,7 @@ record is editable and does not exist on the server yet.</p>
 
 <p>When creating associated records, you first have to create the records and
 afterwards establish the connection between the records.</p>
-<pre class="highlight"><code class="hljs javascript">contact = App.store.createRecord(App.Contact, {<span class="hljs-comment">/*...*/</span>}, <span class="hljs-number">1</span>);
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">contact = App.store.createRecord(App.Contact, {<span class="hljs-comment">/*...*/</span>}, <span class="hljs-number">1</span>);
 address = App.store.createRecord(App.Address, {<span class="hljs-comment">/*...*/</span>}, <span class="hljs-number">1</span>);
 
 <span class="hljs-comment">// for a toOne relation</span>
@@ -523,7 +523,7 @@ to set up the connection between these records properly.</p>
 
 
 <p>Updating record attributes is as easy as calling the <tt>set</tt> method:</p>
-<pre class="highlight"><code class="hljs javascript">contact.set(<span class="hljs-string">'firstName'</span>, <span class="hljs-string">'Jack'</span>);</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">contact.set(<span class="hljs-string">'firstName'</span>, <span class="hljs-string">'Jack'</span>);</code></div></pre>
 <p>In order to be able to update record attributes the record has to be in
 a <tt>READY</tt> state. If you update an attribute of a newly created record, the status
 will still be <tt>READY_NEW</tt>. If you update an attribute of a record that was
@@ -541,7 +541,7 @@ to the server.
 
 
 <p>To delete a certain record, just call the <tt>destroy</tt> method on it:</p>
-<pre class="highlight"><code class="hljs javascript">contact.destroy();</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">contact.destroy();</code></div></pre>
 <p>Just as when updating a record, the record has to be in a <tt>READY</tt> state to be
 able to be destroyed. If you destroy a newly created record (which was not yet
 committed to the server) the status will transition from <tt>READY_NEW</tt>
@@ -557,12 +557,12 @@ destroy action.</p>
 
 <p>You can get the ID, the store key and the status of a record by calling the
  <tt>get</tt> method on the respective properties:</p>
-<pre class="highlight"><code class="hljs javascript">id = contact.get(<span class="hljs-string">'id'</span>);
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">id = contact.get(<span class="hljs-string">'id'</span>);
 storeKey = contact.get(<span class="hljs-string">'storeKey'</span>);
 status = contact.get(<span class="hljs-string">'status'</span>);</code></div></pre>
 <p>To test if the record is currently in a certain state, use JavaScript&#39;s binary
 operators:</p>
-<pre class="highlight"><code class="hljs javascript">status = contact.get(<span class="hljs-string">'status'</span>);
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">status = contact.get(<span class="hljs-string">'status'</span>);
 
 <span class="hljs-comment">// checks if the record is in any READY state</span>
 <span class="hljs-keyword">if</span> (status &amp; SC.Record.READY) { 
@@ -592,7 +592,7 @@ of a certain type, records with a certain ID or more complex search criteria.</p
 
 <p>If you know the type and the ID of the record you want to retrieve, you can
 just hand these two parameters to the store&#39;s <tt>find</tt> method:</p>
-<pre class="highlight"><code class="hljs javascript">contact = App.store.find(App.Contact, <span class="hljs-number">1</span>);</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">contact = App.store.find(App.Contact, <span class="hljs-number">1</span>);</code></div></pre>
 <p>This statement returns the record of type <tt>App.Contact</tt> with the ID 1. If the
 record does not exist, then the return value will be <tt>null</tt>. </p>
 <div class='warning'><p> When <tt>find</tt> is called with a record type and an ID as arguments, it
@@ -609,14 +609,14 @@ type is a subclass of the specified record type.
 
 <p>To find all records of one record type, just pass that type to the <tt>find</tt>
 method:</p>
-<pre class="highlight"><code class="hljs javascript">contacts = App.store.find(App.Contact);</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">contacts = App.store.find(App.Contact);</code></div></pre>
 <p>If you want to find all records of several record types, pass an array of
 record types to the <tt>find</tt> method:</p>
-<pre class="highlight"><code class="hljs javascript">contactsAndAddresses = App.store.find(
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">contactsAndAddresses = App.store.find(
   [App.Contact, App.Address]
 );</code></div></pre>
 <p>You can also find all records of a certain type and all its subclasses:</p>
-<pre class="highlight"><code class="hljs javascript">allRecords = App.store.find(SC.Record);</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">allRecords = App.store.find(SC.Record);</code></div></pre>
 <p>The above statement returns all records in your application, because we are
 asking for all records of type <tt>SC.Record</tt>, which is SproutCore&#39;s base model
 class.</p>
@@ -634,12 +634,12 @@ of the previous section to using queries, as <tt>find</tt> does internally. </p>
 <p>To build a query which looks for all records of a certain type, you just
 call <tt>SC.Query.local</tt> with this record type as argument and pass this query
 to <tt>find</tt>:</p>
-<pre class="highlight"><code class="hljs javascript">query = SC.Query.local(App.Contact);
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">query = SC.Query.local(App.Contact);
 contacts = App.store.find(query);</code></div></pre>
 <p>As you can see, the method from the previous section of directly passing the
 record type to the <tt>find</tt> method just saves you the call of <tt>SC.Query.local</tt>.
 Querying for multiple record types or all records follows the same pattern:</p>
-<pre class="highlight"><code class="hljs javascript">query = SC.Query.local([App.Contact, App.Address]);
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">query = SC.Query.local([App.Contact, App.Address]);
 contactsAndAddresses = App.store.find(query);
 
 query = SC.Query.local(SC.Record);
@@ -648,7 +648,7 @@ allRecords = App.store.find(query);</code></div></pre>
 convenient ways from the previous section) it returns a <tt>SC.RecordArray</tt>. As
 the name indicates, <tt>SC.RecordArray</tt> implements <tt>SC.Array</tt> and therefore you
 can use it like a normal read-only array. For example:</p>
-<pre class="highlight"><code class="hljs javascript">contacts.firstObject(); <span class="hljs-comment">// returns first result</span>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">contacts.firstObject(); <span class="hljs-comment">// returns first result</span>
 contacts.objectAt(<span class="hljs-number">3</span>); <span class="hljs-comment">// returns fourth result</span>
 contacts.lastObject(); <span class="hljs-comment">// returns last result</span></code></div></pre>
 <p>Please refer to the <a href="http://docs.sproutcore.com/symbols/SC.Array.html">documentation of SC.Array</a>
@@ -673,7 +673,7 @@ corresponding query.
 
 
 <p>You can limit the results of a query to match certain conditions:</p>
-<pre class="highlight"><code class="hljs javascript">query = SC.Query.local(App.Contacts, { 
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">query = SC.Query.local(App.Contacts, { 
   <span class="hljs-attr">conditions</span>: <span class="hljs-string">'firstName = "Florian"'</span> 
 });
 
@@ -682,7 +682,7 @@ results = App.store.find(query);</code></div></pre>
 this type where the <tt>firstName</tt> attribute matches the value &quot;Florian&quot;. You can
 combine several conditions using the logical operators <tt>AND</tt>, <tt>OR</tt> and <tt>NOT</tt> as
 well as parentheses <tt>(</tt> and <tt>)</tt> for grouping:</p>
-<pre class="highlight"><code class="hljs javascript">query = SC.Query.local(App.Contacts, { 
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">query = SC.Query.local(App.Contacts, { 
   <span class="hljs-attr">conditions</span>: <span class="hljs-string">'firstName = "Florian" AND lastName = "Kugler"'</span> 
 });
 
@@ -694,13 +694,13 @@ of variables containing the desired values. For this you can use query
 parameters.</p>
 <p>SproutCore handles two different types of query parameters: sequential and
 named parameters. Let&#39;s rephrase the above query using sequential parameters:</p>
-<pre class="highlight"><code class="hljs javascript">query = SC.Query.local(App.Contacts, { 
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">query = SC.Query.local(App.Contacts, { 
   <span class="hljs-attr">conditions</span>: <span class="hljs-string">'(firstName = %@ AND lastName = %@) OR age &gt; %@'</span>,
   <span class="hljs-attr">parameters</span>: [<span class="hljs-string">'Florian'</span>, <span class="hljs-string">'Kugler'</span>, <span class="hljs-number">30</span>]
 });</code></div></pre>
 <p>The elements of the <tt>parameters</tt> array will be inserted sequentially at the
 positions of the <tt>%@</tt> placeholders. Now lets do the same with named parameters:</p>
-<pre class="highlight"><code class="hljs javascript">query = SC.Query.local(App.Contacts, { 
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">query = SC.Query.local(App.Contacts, { 
   <span class="hljs-attr">conditions</span>: <span class="hljs-string">'(firstName = {first} AND lastName = {last}) '</span> + <span class="hljs-string">'OR age &gt; {age}'</span>,
   <span class="hljs-attr">parameters</span>: { 
     <span class="hljs-attr">first</span>: <span class="hljs-string">'Florian'</span>, 
@@ -733,7 +733,7 @@ the complexity of your query.</p>
 
 
 <p>To obtain ordered query results you can simply add the <tt>orderBy</tt> option to your query:</p>
-<pre class="highlight"><code class="hljs javascript">query = SC.Query.local(App.Contacts, { 
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">query = SC.Query.local(App.Contacts, { 
   <span class="hljs-attr">conditions</span>: <span class="hljs-string">'age &gt; 30'</span>,
   <span class="hljs-attr">orderBy</span>: <span class="hljs-string">'lastName, firstName ASC'</span>
 });</code></div></pre>
@@ -758,7 +758,7 @@ for further details.
 <p>All the queries you used until now will cause the store to match all records in
 memory with the query&#39;s conditions. You can also build one query on top of
 another to construct more efficient query trees:</p>
-<pre class="highlight"><code class="hljs javascript">query1 = SC.Query.local(App.Contacts, { 
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">query1 = SC.Query.local(App.Contacts, { 
   <span class="hljs-attr">conditions</span>: <span class="hljs-string">'age &gt; 30'</span>,
 });
 
@@ -811,7 +811,7 @@ you're doing.
 you can easily extend the query language. For example, by default there are no
 bit-wise operators, so let&#39;s implement a <tt>BITAND</tt> operator which evaluates
 to <tt>true</tt> if the bit-wise and of the two arguments is unequal to zero:</p>
-<pre class="highlight"><code class="hljs javascript">SC.Query.registerQueryExtension(<span class="hljs-string">'BITAND'</span>, {
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">SC.Query.registerQueryExtension(<span class="hljs-string">'BITAND'</span>, {
   <span class="hljs-attr">reservedWord</span>: <span class="hljs-literal">true</span>,
   <span class="hljs-attr">leftType</span>: <span class="hljs-string">'PRIMITIVE'</span>,
   <span class="hljs-attr">rightType</span>: <span class="hljs-string">'PRIMITIVE'</span>,

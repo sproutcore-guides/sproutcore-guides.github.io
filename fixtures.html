@@ -71,10 +71,10 @@
 <dd><a href='/views.html'>Core View Concepts</a></dd><dt>Models</dt>
 <dd><a href='/records.html'>SproutCore Records</a></dd>
 <dd><a href='/fixtures.html'>Using Fixtures</a></dd><dt>Theming</dt>
-<dd><a href='/theming_app.html'>Theming Your App</a></dd>
-<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd></dl><dl class='R'><dt>Testing</dt>
-<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
 <dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
 <dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
 <dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
 <dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd><dt>Extras</dt>
@@ -133,7 +133,7 @@ without having to be concerned with your application&#39;s backend.</p>
 <p>Fixtures are defined as an array of hashes with each hash containing the
 attributes and values for each instance you wish to create.</p>
 <p>A sample fixture looks something like:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/fixtures/my_model.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/fixtures/my_model.js</div></span>
 App.MyModel.FIXTURES = [
   {
     guid: 1,
@@ -153,26 +153,19 @@ App.MyModel.FIXTURES = [
 
 <p>SproutCore looks for fixtures assigned specifically to a model (i.e. <tt>App.MyModel.FIXTURES</tt> on the above example). By convention, fixtures are defined
 in the <tt>app/fixtures</tt> folder of your application (i.e. <tt>app/fixtures/my_model.js</tt>). By default fixtures are not included in production builds.</p>
-<div class='note'><p> If you use <tt>sc-gen</tt> to create your models then you may have noticed that some placeholder fixtures already exist. You will still need to modify
-these fixtures to suit your needs. Read on to learn how.
-
-</p></div>
-
-
-
 <h3 id='-Writing-Your-Own-Fixtures-'>2 -  Writing Your Own Fixtures
 </h3>
 
 
 <p>Writing fixtures is relatively straightforward. Each item representing a record gets its own hash in the format of <tt>propertyName: value</tt>. If your
 model looks like:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/models/article.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/models/article.js</div></span>
 App.Article = SC.Record.extend({
   title: SC.Record.attr(String),
   body:  SC.Record.attr(String)
 });</code></div></pre>
 <p>Your fixture will look like:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/fixtures/article.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/fixtures/article.js</div></span>
 App.Article.FIXTURES = [
   {
     guid: 1,
@@ -198,7 +191,7 @@ App.Article.FIXTURES = [
 
 <p>Since relationships are only specified with the foreign key it is quite easy to set them up in your fixtures. If you have model declaration, like the
 following, where an employee belongs to a company and a company has many employees:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/models/employee.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/models/employee.js</div></span>
 App.Employee = SC.Record.extend({
   firstName: SC.Record.attr(String),
   lastName:  SC.Record.attr(String),
@@ -216,7 +209,7 @@ App.Company = SC.Record.extend({
   })
 });</code></div></pre>
 <p>You would set up your fixtures like:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/fixtures/employee.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/fixtures/employee.js</div></span>
 App.Employee.FIXTURES = [
   {
     guid: 1,
@@ -271,14 +264,14 @@ type. See <tt>SC.RecordAttribute.registerTransform</tt> for more information.</p
 
 <p>SproutCore comes with a built-in data source for your fixtures. To use the fixtures data source you merely need to set the following in your
 application&#39;s <tt>core.js</tt>.</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/core.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/core.js</div></span>
 App = SC.Application.create({
   store: SC.Store.create().from(SC.Record.fixtures)
 });</code></div></pre>
 <p>You can extend the built-in fixture data source to simulate real world performance (important in managing user expectations).</p>
-<pre class="highlight"><code class="hljs bash">$ sc-gen data-source App.AppsFixturesDataSource SC.FixturesDataSource</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">$ sc-gen data-source App.AppsFixturesDataSource SC.FixturesDataSource</code></div></pre>
 <p>Delete the boilerplate code in the fixture data source so your code looks like:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/data_sources/apps_fixtures.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/app/data_sources/apps_fixtures.js</div></span>
 App.AppsFixturesDataSource = SC.FixturesDataSource.extend({
   simulateRemoteResponse: YES,
 
@@ -286,7 +279,7 @@ App.AppsFixturesDataSource = SC.FixturesDataSource.extend({
 });</code></div></pre>
 <p>This simulates a remote response with 500 milliseconds round trip latency. Tweak the value to match the performance of your network and servers.</p>
 <p>Next, point your store to the new fixtures data source.</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/core.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>in apps/app/core.js</div></span>
 App = SC.Application.create({
   store: SC.Store.create().from('App.AppsFixturesDataSource')
 });</code></div></pre>
@@ -304,6 +297,7 @@ App = SC.Application.create({
 <li>March    2, 2011: added filenames and fixed code formatting by <a href="credits.html#topherfangio">Topher Fangio</a></li>
 <li>July    17, 2011: minor changes by <a href="credits.html#westoque">William Estoque</a></li>
 <li>October 23, 2013: converted to Markdown format for DocPad guides by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+<li>January 17, 2019: removed reference to sc-gen by <a href="credits.html#mauritslamers">Maurits Lamers</a></li>
 </ul>
 
         </div>

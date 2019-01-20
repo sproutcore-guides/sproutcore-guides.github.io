@@ -71,10 +71,10 @@
 <dd><a href='/views.html'>Core View Concepts</a></dd><dt>Models</dt>
 <dd><a href='/records.html'>SproutCore Records</a></dd>
 <dd><a href='/fixtures.html'>Using Fixtures</a></dd><dt>Theming</dt>
-<dd><a href='/theming_app.html'>Theming Your App</a></dd>
-<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd></dl><dl class='R'><dt>Testing</dt>
-<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
 <dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
 <dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
 <dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
 <dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd><dt>Extras</dt>
@@ -138,7 +138,7 @@ text</li>
 (<tt>===</tt>) for 1st level headers. These go on the subsequent line</li>
 <li>For list, prefix each line with a dash (<tt>-</tt>)</li>
 </ul>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"Sample Class Documentation"</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>"Sample Class Documentation"</div></span>
 /**
   @class
 
@@ -188,7 +188,7 @@ documentation, and it’s your responsibility to keep them up to date as you
 update the method. </p>
 <p>In the example below, the response property is marked as optional by wrapping
 the name in square brackets.</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"Sample Instance Method Documentation"</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>"Sample Instance Method Documentation"</div></span>
 /**
   Method description.
 
@@ -208,7 +208,7 @@ didSend: function(request, response) {},</code></div></pre>
 class. For these methods/properties to show up in the same location in the
 generated output, you need to add a <tt>@scope</tt> declaration just as you did with
 the class.</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"Sample Class Method Documentation"</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>"Sample Class Method Documentation"</div></span>
 /**
   @class
 
@@ -224,7 +224,7 @@ SC.Store.mixin(/** @scope SC.Store.prototype */{...})</code></div></pre>
 <p>Properties are arguably the simplest entity to document. You simply need to
 write a description of what the property represents, and what type it is. You
 can optionally provide a default value.</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"Sample Property Documentation"</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>"Sample Property Documentation"</div></span>
 /**
   Description
 
@@ -245,7 +245,7 @@ value.
 
 <p>Computed Properties are documented just like regular properties but they add
 the <tt>@field</tt> property.</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"Sample Computed Property Documentation"</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>"Sample Computed Property Documentation"</div></span>
 /**
   Description
 

@@ -71,10 +71,10 @@
 <dd><a href='/views.html'>Core View Concepts</a></dd><dt>Models</dt>
 <dd><a href='/records.html'>SproutCore Records</a></dd>
 <dd><a href='/fixtures.html'>Using Fixtures</a></dd><dt>Theming</dt>
-<dd><a href='/theming_app.html'>Theming Your App</a></dd>
-<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd></dl><dl class='R'><dt>Testing</dt>
-<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
 <dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
 <dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
 <dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
 <dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd><dt>Extras</dt>
@@ -126,7 +126,7 @@
 
 
 <p>Let&#39;s start with a new project; call it <tt>todos</tt>.  In a console:</p>
-<pre class="highlight"><code class="hljs bash">sc-init todos
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">sc-init todos
 <span class="hljs-built_in">cd</span> todos
 sc-server</code></div></pre>
 <p>Browse to localhost:4020/todos and you should see the &quot;Welcome to SproutCore!&quot; window.</p>
@@ -136,7 +136,7 @@ sc-server</code></div></pre>
 <li>Create folder <tt>integration</tt> under <tt>app/todos/tests</tt>.</li>
 <li>Add the following test, <tt>sanity_check.js</tt>, under <tt>apps/todos/tests</tt>:</li>
 </ol>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/tests/sanity_check.js"</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/tests/sanity_check.js"</div></span>
 module('Sanity Check');
 test('This should pass', function() {
     ok(true);
@@ -152,7 +152,7 @@ test('This should pass', function() {
 
 
 <p>Let&#39;s write a test to see the page display an existing task (which doesn&#39;t, of course, exist yet):</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/tests/integration/view_task.js"</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/tests/integration/view_task.js"</div></span>
 var task;
 module("Given an existing task", {
   setup: function() {
@@ -206,7 +206,7 @@ module: When looking at the list of tasks: TypeError: Cannot read property
 
 <p>The first failure is telling me that <tt>Todos.Task</tt> doesn&#39;t exist, so I have to
 create it:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/models/task.js"</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/models/task.js"</div></span>
 Todos.Task = SC.Record.extend({
   isDone: SC.Record.attr(Boolean),
   description: SC.Record.attr(String)
@@ -219,7 +219,7 @@ only with the second:</p>
 
 <p>This failing test tells me the path for the requested view does not exist, so I
 have to modify apps/todos/resources/main_page.js to include it:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/resources/main_page.js"</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/resources/main_page.js"</div></span>
 Todos.mainPage = SC.Page.design({
   mainPane: SC.MainPane.design({
     childViews: 'middleView'.w(),
@@ -241,7 +241,7 @@ Todos.mainPage = SC.Page.design({
 <p>This is telling me that the content of the ListView is null. So what I need to
 do is bind the contentView to a controller for the tasks, so I do that by
 modifying the main_page again:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/resources/main_page.js"</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/resources/main_page.js"</div></span>
 Todos.mainPage = SC.Page.design({
   mainPane: SC.MainPane.design({
     childViews: 'middleView'.w(),
@@ -263,7 +263,7 @@ Todos.mainPage = SC.Page.design({
 <p>Hmm. <tt>todosList</tt> is null.  There isn&#39;t any content, so the binding isn&#39;t
 working.  Examining <tt>main_page.js</tt> reveals that no controller has been set up
 yet, so create it in <tt>apps/todos/controllers/tasks.js</tt>:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/controllers/tasks.js"</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/controllers/tasks.js"</div></span>
 Todos.tasksController = SC.ArrayController.create({
 }) ;</code></div></pre>
 <p>Rerunning the test yields the error:</p>
@@ -289,7 +289,7 @@ getPath to reach into the view and find elements. By using a long string like
 tests to the current structure of my views. In order to fix this, and to give
 the element a description that is closer to our domain, we can refactor this
 dependency to use SC.outlet:</p>
-<pre class="highlight"><code class="hljs javascript"><span class="hljs-comment">//Replace instances which look like:</span>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript"><span class="hljs-comment">//Replace instances which look like:</span>
 Todos.getPath(<span class="hljs-string">'mainPage.mainPane.middleView.contentView'</span>)
 <span class="hljs-comment">//With something that looks like this:</span>
 Todos.mainPage.todosList();
@@ -303,7 +303,7 @@ Todos.mainPage = SC.Page.design({
 passed property path the first time you try to get the value. This fixes the
 anti-pattern by defining the tight coupling in only one place.</p>
 <p>Here&#39;s the new code:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/resources/main_page.js"</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/resources/main_page.js"</div></span>
 Todos.mainPage = SC.Page.design({
   mainPane: SC.MainPane.design({
     childViews: 'middleView'.w(),
@@ -318,7 +318,7 @@ Todos.mainPage = SC.Page.design({
   }),
   todosList: SC.outlet('mainPane.middleView.contentView')
 });</code></div></pre>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/tests/integration/view_tasks.js"</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/tests/integration/view_tasks.js"</div></span>
 var task;
 module("Given an existing task", {
   setup: function() {
@@ -351,7 +351,7 @@ test("When looking at the list of tasks", function() {
 <p>The test fails because the controller has not had it&#39;s content to be set to use
 Todos.task. In order to ensure that controller has not had it&#39;s content to be
 set to use Todos.task, I write the following unit test:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/tests/main_test.js"</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/tests/main_test.js"</div></span>
 var mockedFindFunction, findMockObject;
 
 module("Todos.main", {
@@ -377,7 +377,7 @@ test("setup finding tasks", function() {
 
 <p>In order to make this pass, within the setup I delegate to the store to find
 the proper object:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/main.js"</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/main.js"</div></span>
 Todos.main = function main() {
   Todos.getPath('mainPage.mainPane').append() ;
   var tasks = Todos.store.find(Todos.Task); //ADDED THIS
@@ -387,7 +387,7 @@ function main() { Todos.main(); }</code></div></pre>
 <p>That makes the unit test that we wrote pass, but the integration test is still
 failing, so we need to delegate to the controller to set it&#39;s content. Here&#39;s
 the unit test to specify that:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/tests/controllers/tasks_test.js"</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/tests/controllers/tasks_test.js"</div></span>
 var mockedSetFunction, mockedFindFunction, setMockObject, findMockObject;
 module("Todos.main", {
   setup: function() {
@@ -416,7 +416,7 @@ test("setup tasksController content", function() {
   equals(setMockObject.callCount, 1, "Should delegate to the tasksController to setup content"); //ADDED THIS
 });</code></div></pre>
 <p>And to make this pass, I need to implement that delegation (<tt>app/todos/main.js</tt>):</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/main.js"</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/main.js"</div></span>
 Todos.main = function main() {
   Todos.getPath('mainPage.mainPane').append() ;
   var tasks = Todos.store.find(Todos.Task);
@@ -446,7 +446,7 @@ broke the true BDD cycle there. But, I guess it works for now.</p>
 <p>At this point, the view - although it is fully functional - is still quite
 ugly. Since this is purly aesthetic, I like to wait to style until all my tests
 are passing. I change main_page.js to be the following:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/resources/main_page.js"</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/todos/resources/main_page.js"</div></span>
 Todos.mainPage = SC.Page.design({
   mainPane: SC.MainPane.design({
     childViews: 'middleView'.w(),

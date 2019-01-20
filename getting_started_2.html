@@ -71,10 +71,10 @@
 <dd><a href='/views.html'>Core View Concepts</a></dd><dt>Models</dt>
 <dd><a href='/records.html'>SproutCore Records</a></dd>
 <dd><a href='/fixtures.html'>Using Fixtures</a></dd><dt>Theming</dt>
-<dd><a href='/theming_app.html'>Theming Your App</a></dd>
-<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd></dl><dl class='R'><dt>Testing</dt>
-<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
 <dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
 <dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
 <dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
 <dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd><dt>Extras</dt>
@@ -108,8 +108,6 @@
                 
                   <li>Learn about statecharts and how they can improve your application.</li>
                 
-                  <li>Create a new statechart-based SproutCore application, TodosTwo.</li>
-                
                   <li>Learn about views and how they should handle events.</li>
                 
                   <li>Learn how to separate views in individual files with the use of <em>sc_require()</em>.</li>
@@ -132,7 +130,7 @@ a variable that you weren&#39;t expecting to be updated. Some bugs happen becaus
 how your app would react under a particular set of conditions.</p>
 <p>Statecharts help reduce uncertainty, by defining more explicitly what can and cannot happen
 within your application. You think of discrete states, such as &quot;showing login panel.&quot; You think
-of transitions between states. For example, you would think about what should happen as the login 
+of transitions between states. For example, you would think about what should happen as the login
 panel is shown, what could happen while it is showing, and what should happen when it is taken down.</p>
 <h3 id='-What-is-a-Statechart--'>2 -  What is a Statechart?
 </h3>
@@ -175,14 +173,14 @@ the statechart. A statechart action is a type of event.
 <div class='info'><p> The Getting Started Todos applications use ALL_CAPS for state names, for the sake of continuity.
 However, states are standard SC objects and can follow any naming convention you want.  Many developers
 prefer CamelCase (i.e., MyApp.LoggedInState) while others prefer namespacing their states (i.e.,
-MyApp.States.LoggedIn).  Some prefer verb-style over noun-style state names. Whatever method you 
+MyApp.States.LoggedIn).  Some prefer verb-style over noun-style state names. Whatever method you
 choose is fine, just be consistent, so you, and other developers, can more easily follow your code.
 
 </p></div>
 
 
 
-<div class='note'><p> The term state is generic: you can use state to refer to states and substates. When you use the term substate, 
+<div class='note'><p> The term state is generic: you can use state to refer to states and substates. When you use the term substate,
 the reference is more specific, and is relative to a parent state.
 
 </p></div>
@@ -193,17 +191,17 @@ the reference is more specific, and is relative to a parent state.
 </h4>
 
 
-<p>In our mapping example here, the application can be in one of the two top level states: LOADING or LOADED. If 
-it is in one of these states, it cannot be in the other. When it is in the LOADING state, the only available 
-action is the <em>loadingFinished</em> action. The statechart/application should not respond to any other events. 
-Once control moves into the LOADED state, it can move to two additional states, substates of the LOADED 
-state: LOGGED_OUT or LOGGED_IN. Again, the program can only be in one at a given time, so when the user is 
+<p>In our mapping example here, the application can be in one of the two top level states: LOADING or LOADED. If
+it is in one of these states, it cannot be in the other. When it is in the LOADING state, the only available
+action is the <em>loadingFinished</em> action. The statechart/application should not respond to any other events.
+Once control moves into the LOADED state, it can move to two additional states, substates of the LOADED
+state: LOGGED_OUT or LOGGED_IN. Again, the program can only be in one at a given time, so when the user is
 &quot;logged out&quot;, after the application has loaded, the only available action is the <em>login</em> action.</p>
 <p>However, notice that the <em>viewTermsOfService</em> action and the <em>viewPrivacyPolicy</em> action are both available in
 the LOADED state. This means that regardless of whether the program is in the LOGGED_OUT state or the LOGGED_IN
 state, the user should be allowed to view the terms of service or the privacy policy.</p>
 <p>Once the user has authenticated and logged in, they have various actions available in the mapping system.
-Imagine a map user interface that appears, with buttons in a dashboard, with live clickable elements on the map, etc. 
+Imagine a map user interface that appears, with buttons in a dashboard, with live clickable elements on the map, etc.
 The example actions given above, <em>createBasemap</em>, <em>zoomMapView</em>, and <em>showPointData</em> are just a sample of what
 would be many actions tied to user interface elements.</p>
 <div class='note'><p> States are used in all parts of an application, not just to user interface parts. A large behind-the-scenes
@@ -220,119 +218,65 @@ data import system in our mapping example could be programmed using statecharts.
 <p>An application only responds to certain actions at certain times. This makes it
 much easier to verify that an app is working properly, by ensuring that events are handled exactly when they
 need to be handled. Furthermore, if, say, a bug in the design of the user interface allows an action to happen
-when it shouldn&#39;t (like allowing some action when the user is logged out), the application itself may maintain 
+when it shouldn&#39;t (like allowing some action when the user is logged out), the application itself may maintain
 a consistent state and continue to operate. Programming with statecharts can help isolate parts of the system.</p>
-<h3 id='-Creating-the-Statechart-'>3 -  Creating the Statechart
-</h3>
-
-
-<p>Create a statechart-based SproutCore app with the <strong>sproutcore gen statechart_app</strong> command:</p>
-<pre class="highlight"><code class="hljs bash">$ <span class="hljs-built_in">cd</span> ~/development/sproutcore/getting_started
-$ sproutcore gen statechart_app TodosTwo
-   ~ Created directory at apps/todos_two
-   ~ Created file at apps/todos_two/Buildfile
-   ~ Created file at apps/todos_two/core.js
-   ~ Created file at apps/todos_two/main.js
-   ~ Created directory at apps/todos_two/resources
-   ~ Created file at apps/todos_two/resources/_theme.css
-   ~ Created file at apps/todos_two/resources/loading.rhtml
-   ~ Created file at apps/todos_two/resources/main_page.js
-   ~ Created file at apps/todos_two/statechart.js
-   ~ Created directory at apps/todos_two/states
-   ~ Created file at apps/todos_two/states/ready_state.js
-   ~ Created file at apps/todos_two/theme.js
-
-  Your application target is now ready to use!</code></div></pre>
-<p>The directory structure is:</p>
-<ul>
-<li><strong>getting_started/</strong><ul>
-<li><strong>Buildfile</strong></li>
-<li><strong>README.md</strong></li>
-<li><strong>apps/</strong><ul>
-<li><strong>todos_one/</strong><ul>
-<li><strong>...</strong></li>
-</ul>
-</li>
-<li><strong>todos_two/</strong><ul>
-<li><strong>Buildfile</strong></li>
-<li><strong>core.js</strong></li>
-<li><strong>main.js</strong></li>
-<li><strong><em>statechart.js</em></strong></li>
-<li><strong>theme.js</strong></li>
-<li><strong>resources/</strong><ul>
-<li><strong>_theme.css</strong></li>
-<li><strong>loading.rhtml</strong></li>
-<li><strong>main_page.js</strong></li>
-</ul>
-</li>
-<li><strong><em>states/</em></strong><ul>
-<li><strong><em>ready</em>state.js_</strong></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>This structure looks almost identical to the standard app made with the <strong>sproutcore gen app</strong> command, except 
-that you now see two new files, a <em>statechart.js</em> file in the application root directory, and a new 
-<em>states</em> directory with one state file, <em>ready</em>state.js_:</p>
+<p>SproutCore generates statechart-based applications by default.
+The basis of the statechart is formed by the <em>statechart.js</em> file in the application root directory, and in the
+<em>states</em> directory <em>ready</em>state.js_:</p>
 <ul>
 <li><em>statechart.js</em>, and</li>
 <li><em>states/ready</em>state.js_</li>
 </ul>
 <p>The <em>statechart.js</em> file describes your statechart and the initial state that should be entered when the
 statechart is first initialized. Open it, and you should see the following:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_two/statechart.js</div></span>
-TodosTwo.statechart = SC.Statechart.create({
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/TodosOne/statechart.js</div></span>
+TodosOne.statechart = SC.Statechart.create({
 
   initialState: 'readyState',
 
-  readyState: SC.State.plugin('TodosTwo.ReadyState'),
-  // someOtherState: SC.State.plugin('TodosTwo.SomeOtherState')
+  readyState: SC.State.plugin('TodosOne.ReadyState'),
+  // someOtherState: SC.State.plugin('TodosOne.SomeOtherState')
 
 });</code></div></pre>
 <div class='note'><p> This example uses CamelCase state names.
 
 </p></div>
 
-<p>Note the use of SC.Statechart.create(), instead of SC.Statechart.extend().  Views and models generally 
+<p>Note the use of SC.Statechart.create(), instead of SC.Statechart.extend().  Views and models generally
 use .extend() when you are defining them, because elsewhere in the system, instantiation of objects happens.
-Controllers and the statechart use .create() because we need to directly create objects to work with. </p>
+Controllers and the statechart use .create() because we need to directly create objects to work with.</p>
 <p>Also note the use of the SC.State.plugin() function. This allows you to put your states in separate files in a
 states directory.</p>
 <p>Open <em>states/ready</em>state.js_ and take a look:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_two/states/ready_state.js</div></span>
-TodosTwo.ReadyState = SC.State.extend({ 
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/TodosOne/states/ready_state.js</div></span>
+TodosOne.ReadyState = SC.State.extend({
 
   enterState: function() {
-    TodosTwo.getPath('mainPage.mainPane').append();
+    TodosOne.getPath('mainPage.mainPane').append();
   },
 
   exitState: function() {
-    TodosTwo.getPath('mainPage.mainPane').remove();
+    TodosOne.getPath('mainPage.mainPane').remove();
   }
 
 });</code></div></pre>
-<p>States may define an <em>enterState()</em> function to prepare for the new state, and an <em>exitState()</em> function to 
-clean up after themselves. For user interface programming, these functions are where you show and hide 
+<p>States may define an <em>enterState()</em> function to prepare for the new state, and an <em>exitState()</em> function to
+clean up after themselves. For user interface programming, these functions are where you show and hide
 panels, as you see here, with the use of .append() to show and .remove() to hide.</p>
-<p>The TodosTwo.ReadyState is the only state in this &quot;Hello World&quot; app, so it only appends the main
-page&#39;s main pane. </p>
-<h3 id='-Where-Views-Fit-In-'>4 -  Where Views Fit In
+<p>The TodosOne.ReadyState is the only state in this &quot;Hello World&quot; app, so it only appends the main
+page&#39;s main pane.</p>
+<h3 id='-Where-Views-Fit-In-'>3 -  Where Views Fit In
 </h3>
 
 
-<p>We&#39;ve covered statecharts, so you know a little bit about how they work. Let&#39;s talk about how statecharts 
+<p>We&#39;ve covered statecharts, so you know a little bit about how they work. Let&#39;s talk about how statecharts
 can help organize views and make your code super-clean.</p>
 <p>The <em>resources/main</em>page.js_ file defines the main user interface of your application.</p>
 <p>Edit the file to add a second child view, labelView2, taking care to add labelView2 to the
 childViews array of view references, which uses the &#39;space delimited strings&#39;.w() SproutCore idiom
 to make an array:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_two/resources/main_page.js</div></span>
-TodosTwo.mainPage = SC.Page.design({
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/TodosOne/resources/main_page.js</div></span>
+TodosOne.mainPage = SC.Page.design({
 
   mainPane: SC.MainPane.design({
     childViews: 'labelView labelView2'.w(),
@@ -340,14 +284,14 @@ TodosTwo.mainPage = SC.Page.design({
     labelView: SC.LabelView.design({
       layout: { centerX: 0, centerY: 0, width: 200, height: 18 },
       textAlign: SC.ALIGN_CENTER,
-      tagName: "h1", 
+      tagName: "h1",
       value: "Welcome to SproutCore!"
     }),
 
     labelView2: SC.LabelView.design({
       layout: { centerX: 0, centerY: 15, width: 200, height: 18 },
       textAlign: SC.ALIGN_CENTER,
-      tagName: "h1", 
+      tagName: "h1",
       value: "Now we're rolling!"
     })
   })
@@ -357,122 +301,120 @@ TodosTwo.mainPage = SC.Page.design({
 
 </p></div>
 
-<p>Note the use of the <em>.design()</em> method here. <em>.design()</em> is often confused with <em>.extend()</em>. 
-This confusion is caused by a SproutCore &quot;wart.&quot; <em>.design()</em> exists so that views will work 
-with a graphical designer tool for SproutCore (like Interface Builder for Mac OS X) that has 
-been in development for a long time, but remains unfinished, with development long ago stalled. 
-A designer tool might be created in the future, but regardless, there is a logic you can follow, 
-wherein you use <em>.design()</em> when you are <strong>using</strong> a view, and <em>.extend()</em> where you 
-are <strong>defining</strong> it. Here we are using <em>.design()</em>, but rest assured that SC.LabelView uses 
-extend where it is defined in the SproutCore codebase. </p>
-<div class='note'><p> When you make your own views, remember to use _.extend()_ when you are making the view 
+<p>Note the use of the <em>.design()</em> method here. <em>.design()</em> is often confused with <em>.extend()</em>.
+This confusion is caused by a SproutCore &quot;wart.&quot; <em>.design()</em> exists so that views will work
+with a graphical designer tool for SproutCore (like Interface Builder for Mac OS X) that has
+been in development for a long time, but remains unfinished, with development long ago stalled.
+A designer tool might be created in the future, but regardless, there is a logic you can follow,
+wherein you use <em>.design()</em> when you are <strong>using</strong> a view, and <em>.extend()</em> where you
+are <strong>defining</strong> it. Here we are using <em>.design()</em>, but rest assured that SC.LabelView uses
+extend where it is defined in the SproutCore codebase.</p>
+<div class='note'><p> When you make your own views, remember to use _.extend()_ when you are making the view
 in the first place, and _.design()_ elsewhere, where you use it.
 
 </p></div>
 
-<p>If you load up <a href="http://localhost:4020/todos_two/">http://localhost:4020/todos_two/</a> in your browser, you should see both labels now; the second one right below the first.</p>
-<h4 id='-Separating-Views-'>4.1 -  Separating Views
+<p>If you load up <a href="http://localhost:4020/TodosOne/">http://localhost:4020/TodosOne/</a> in your browser, you should see both labels now; the second one right below the first.</p>
+<h4 id='-Separating-Views-'>3.1 -  Separating Views
 </h4>
 
 
-<p>Before we get into using views with statecharts, let&#39;s first arrange view files for TodosTwo. 
-Technically, you can put all view code in <em>main_page.js</em>, but that will get impractical 
+<p>Before we get into using views with statecharts, let&#39;s first arrange view files for TodosOne.
+Technically, you can put all view code in <em>main_page.js</em>, but that will get impractical
 very fast. Instead you can separate each view into it&#39;s own file. This is accomplished by
 using the special <em>sc</em>require()_ functionality. Modify the mainPane of the mainPage view to
 have two sc_require() statements at the top, to declare two views as dependencies, and to change
 the childViews of the pane to use these views:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_two/resources/main_page.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/TodosOne/resources/main_page.js</div></span>
 sc_require('views/welcome');
 sc_require('views/rolling');
 
-TodosTwo.mainPage = SC.Page.design({
+TodosOne.mainPage = SC.Page.design({
 
   mainPane: SC.MainPane.design({
     childViews: 'welcomeView rollingView'.w(),
 
-    welcomeView: TodosTwo.WelcomeView.design(),
-    rollingView: TodosTwo.RollingView.design()
+    welcomeView: TodosOne.WelcomeView.design(),
+    rollingView: TodosOne.RollingView.design()
   })
 
 });</code></div></pre>
 <p><em>sc</em>require()_ functionality:</p>
 <ol>
 <li>The file path used in <em>sc</em>require()_ is relative to the application&#39;s root directory.</li>
-<li>The reference in <em>sc</em>require()_ has the filename sans the .js extension.</li>
-<li>The load order for javascript files will be alphabetical, unless otherwise controlled with sc_require().  Sometimes you 
-get lucky on the default file loading order, if you omit a sc_require() statement. Sometimes you don&#39;t, and 
+<li>The reference in <em>sc</em>require()_ has the filename without the .js extension.</li>
+<li>The load order for javascript files will be alphabetical, unless otherwise controlled with sc_require().  Sometimes you
+get lucky on the default file loading order, if you omit a sc_require() statement. Sometimes you don&#39;t, and
 you will get a dependency error.</li>
 </ol>
-<p>Now create the views folder for our new WelcomeView and RollingView:</p>
-<pre class="highlight"><code class="hljs bash">$ <span class="hljs-built_in">cd</span> ~/development/sproutcore/getting_started
-$ mkdir apps/todos_two/views</code></div></pre>
-<p>Next, add the views. Make sure the files have the following content and are located in the views
+<p>Now create the view files for our new WelcomeView and RollingView.
+Make sure the files have the following content and are located in the views
 directory:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_two/views/welcome.js</div></span>
-TodosTwo.WelcomeView = SC.LabelView.extend({
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/TodosOne/views/welcome.js</div></span>
+TodosOne.WelcomeView = SC.LabelView.extend({
   layout: { centerX: 0, centerY: 0, width: 200, height: 18 },
   textAlign: SC.ALIGN_CENTER,
-  tagName: "h1", 
+  tagName: "h1",
   value: "Welcome to SproutCore!"
 });</code></div></pre>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_two/views/rolling.js</div></span>
-TodosTwo.RollingView = SC.LabelView.extend({
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/TodosOne/views/rolling.js</div></span>
+TodosOne.RollingView = SC.LabelView.extend({
   layout: { centerX: 0, centerY: 15, width: 200, height: 18 },
   textAlign: SC.ALIGN_CENTER,
-  tagName: "h1", 
+  tagName: "h1",
   value: "Now we're rolling!"
 });</code></div></pre>
 <p>If you refresh the page, everything should look exactly as it did before,
 but now your code is cleaner and more manageable.</p>
-<h4 id='-Handling-Events-and-Statechart-Actions-'>4.2 -  Handling Events and Statechart Actions
+<h4 id='-Handling-Events-and-Statechart-Actions-'>3.2 -  Handling Events and Statechart Actions
 </h4>
 
 
-<p>Standard events for a web application include the ubiquitous mouseDown, and many others. Here we add 
-an event to watch for mouseDown in our TodosTwo.RollingView, associating it with a statechart action:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_two/views/rolling.js</div></span>
-TodosTwo.RollingView = SC.LabelView.design({
+<p>Standard events for a web application include the ubiquitous mouseDown, and many others. Here we add
+an event to watch for mouseDown in our TodosOne.RollingView, associating it with a statechart action:</p>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/TodosOne/views/rolling.js</div></span>
+TodosOne.RollingView = SC.LabelView.design({
   layout: { centerX: 0, centerY: 15, width: 200, height: 18 },
   textAlign: SC.ALIGN_CENTER,
-  tagName: "h1", 
+  tagName: "h1",
   value: "Now we're rolling!",
 
   mouseDown: function(evt) {
     var someParam = "Woot!";
 
-    TodosTwo.statechart.sendAction('proveIt', someParam);
+    TodosOne.statechart.sendAction('proveIt', someParam);
   }
 });</code></div></pre>
-<p>We set a <em>proveIt</em> action to happen on the mouseDown event, using the statechart.sendAction() function. We must 
+<p>We set a <em>proveIt</em> action to happen on the mouseDown event, using the statechart.sendAction() function. We must
 handle the action in the appropriate state in the statechart.</p>
-<p>The statechart has a property for the <em>current state</em>. When the statechart recieves an 
-action event, it will first ask the current state to handle it. If the current state cannot handle 
-it, the statechart will ask the current state&#39;s parent state to handle the event. Attempts 
-continue in this manner, bubbling up until either an ancestor state is found that can handle 
-the event, or it will log a warning for the developer.  You can see warnings, as well as other 
+<p>The statechart has a property for the <em>current state</em>. When the statechart recieves an
+action event, it will first ask the current state to handle it. If the current state cannot handle
+it, the statechart will ask the current state&#39;s parent state to handle the event. Attempts
+continue in this manner, bubbling up until either an ancestor state is found that can handle
+the event, or it will log a warning for the developer.  You can see warnings, as well as other
 informational messages (such as for state transitions), by turning on tracing on the statechart.</p>
 <p>Do that now:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_two/statechart.js</div></span>
-TodosTwo.statechart = SC.Statechart.create({
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/TodosOne/statechart.js</div></span>
+TodosOne.statechart = SC.Statechart.create({
 
   trace: YES,   // &lt;-- Add this line
 
   initialState: 'readyState',
 
-  readyState: SC.State.plugin('TodosTwo.ReadyState')
+  readyState: SC.State.plugin('TodosOne.ReadyState')
 
 });</code></div></pre>
-<p>Let&#39;s make our TodosTwo.ReadyState handle the <em>proveIt</em> action that was defined on
-the mouseDown event in TodosTwo.RollingView above:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/todos_two/states/ready_state.js</div></span>
-TodosTwo.ReadyState = SC.State.extend({
+<p>Let&#39;s make our TodosOne.ReadyState handle the <em>proveIt</em> action that was defined on
+the mouseDown event in TodosOne.RollingView above:</p>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/TodosOne/states/ready_state.js</div></span>
+TodosOne.ReadyState = SC.State.extend({
 
   enterState: function() {
-    TodosTwo.getPath('mainPage.mainPane').append();
+    TodosOne.getPath('mainPage.mainPane').append();
   },
 
   exitState: function() {
-    TodosTwo.getPath('mainPage.mainPane').remove();
+    TodosOne.getPath('mainPage.mainPane').remove();
   },
 
   // Prove that we are rolling!
@@ -484,19 +426,19 @@ TodosTwo.ReadyState = SC.State.extend({
 <p>proveIt() is a function. It is an action in the ReadyState state.</p>
 <p>Save your files and refresh the page. When you click on the &quot;Now we&#39;re rolling!&quot;
 label, you should see an alert. If you look at the console output, you can also
-see the tracing reports, with the event being handled by the statechart, as well 
+see the tracing reports, with the event being handled by the statechart, as well
 as the initialization and the transition to the readyState.</p>
-<h3 id='-Moving-Forward-'>5 -  Moving Forward
+<h3 id='-Moving-Forward-'>4 -  Moving Forward
 </h3>
 
 
 <p>You are now ready to move on to creating a full-scale SproutCore app!</p>
 <p><a href="/getting_started_3.html">Part 3</a> will introduce you to a more complete Todos application,
-called TodosThree, and walk you through the process of building it from scratch. 
-You will learn about models, controllers and how they tie in with the statechart 
+called TodosThree, and walk you through the process of building it from scratch.
+You will learn about models, controllers and how they tie in with the statechart
 and views.</p>
 <p>Dive in to <a href="/getting_started_3.html">Getting Started: Part 3</a>.</p>
-<h3 id='-Changelog-'>6 -  Changelog
+<h3 id='-Changelog-'>5 -  Changelog
 </h3>
 
 
@@ -506,8 +448,9 @@ and views.</p>
 <li>March 6, 2012: rewrite for SproutCore 1.8 by the 1.8 release sprint team, including the following who
 did much work on this task: <a href="credits.html#tce">Tim Evans</a>, <a href="credits.html#topherfangio">Topher Fangio</a>,
 <a href="credits.html#geojeff">Jeff Pittman</a></li>
-<li>July 30, 2013: converted to Markdown format for DocPad guides by <a href="credits.html#erictheise">Eric Theise</a> </li>
+<li>July 30, 2013: converted to Markdown format for DocPad guides by <a href="credits.html#erictheise">Eric Theise</a></li>
 <li>July 30, 2013: fix issues with formatting and updated Changelog by <a href="credits.html#topherfangio">Topher Fangio</a></li>
+<li>Jan 17, 2019: Updated the guide as the default application already uses the state chart by <a href="credits.html#mauritslamers">Maurits Lamers</a></li>
 </ul>
 
         </div>
@@ -534,14 +477,6 @@ did much work on this task: <a href="credits.html#tce">Tim Evans</a>, <a href="c
                   
                     <li><a href='#-How-Statecharts-Help-'><p> How Statecharts Help
 </p></a></li>
-                  
-                </ul>
-              </li>
-            
-              <li>
-                <a href='#-Creating-the-Statechart-'><p> Creating the Statechart
-</p></a>
-                <ul>
                   
                 </ul>
               </li>

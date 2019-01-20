@@ -71,10 +71,10 @@
 <dd><a href='/views.html'>Core View Concepts</a></dd><dt>Models</dt>
 <dd><a href='/records.html'>SproutCore Records</a></dd>
 <dd><a href='/fixtures.html'>Using Fixtures</a></dd><dt>Theming</dt>
-<dd><a href='/theming_app.html'>Theming Your App</a></dd>
-<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd></dl><dl class='R'><dt>Testing</dt>
-<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
 <dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
 <dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
 <dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
 <dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd><dt>Extras</dt>
@@ -147,14 +147,14 @@ get your finalized changes into the main repo.</p>
 
 <p>Now that we&#39;ve forked the main Guides project, we need to get a copy of our fork onto our local machine so we can make changes to it. To do this, we
 use the <a href="http://gitref.org/creating/#clone"><tt>git clone</tt></a> command:</p>
-<pre class="highlight"><code class="hljs bash">$ git <span class="hljs-built_in">clone</span> git@github.com:&lt;yourname&gt;/guides.git</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">$ git <span class="hljs-built_in">clone</span> git@github.com:&lt;yourname&gt;/guides.git</code></div></pre>
 <h4 id='-Add-the-Upstream-Remote-'>2.3 -  Add the Upstream Remote
 </h4>
 
 
 <p>All that remains is to configure the repository on our local machine so that we can fetch changes from the main SproutCore Guides repository. To do
 this, we use the <a href="http://gitref.org/remotes/"><tt>git remote</tt></a> command from within the repository:</p>
-<pre class="highlight"><code class="hljs bash">$ <span class="hljs-built_in">cd</span> guides
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">$ <span class="hljs-built_in">cd</span> guides
 $ git remote add upstream git://github.com/sproutcore/guides.git</code></div></pre>
 <h3 id='-Installing-DocPad-'>3 -  Installing DocPad
 </h3>
@@ -169,7 +169,7 @@ incredibly easy to preview the compiled HTML + CSS versions of the documents we 
 </p></div>
 
 <p>Once you have Node installed, simply run the following to install DocPad.</p>
-<pre class="highlight"><code class="hljs bash">$ npm install -g docpad</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">$ npm install -g docpad</code></div></pre>
 <div class='info'><p> You may need to use `sudo` for the command above if you get complaints about not having permission to particular directories.
 
 </p></div>
@@ -188,13 +188,13 @@ things: 1) make sure we have the most recent version of the source code and, 2) 
 
 <p>To update our local copy of the SproutCore Guides source code, we use the <a href="http://www.kernel.org/pub/software/scm/git/docs/git-pull.html"><tt>git pull</tt></a>
 command:</p>
-<pre class="highlight"><code class="hljs bash">$ git pull upstream</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">$ git pull upstream</code></div></pre>
 <p>This will fetch any changes that have been committed to the main SproutCore Guides repository since we last ran this command, then merge those changes
 into our local copy of the repository. It will do this all in one fell swoop, without any input on our part.</p>
 <p>If you want to be able to see and approve the changes before they are merged into your local copy of the source, you can split this process into two
 steps by using the <a href="http://www.kernel.org/pub/software/scm/git/docs/git-fetch.html"><tt>git fetch</tt></a> command followed by the
 <a href="http://www.kernel.org/pub/software/scm/git/docs/git-merge.html"><tt>git merge</tt></a> command:</p>
-<pre class="highlight"><code class="hljs bash">$ git fetch upstream
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">$ git fetch upstream
 $ git merge upstream/master</code></div></pre>
 <h4 id='-Create-a-Topic-Branch-'>4.2 -  Create a Topic Branch
 </h4>
@@ -208,7 +208,7 @@ changes to several different files, but all of those changes are related to each
 made changes to several different files, but the changes are <em>not</em> related to each other; we have made two separate logical sets of changes.</p>
 <p>To create a new topic branch and start working in it, we use the <a href="http://www.kernel.org/pub/software/scm/git/docs/git-checkout.html"><tt>git checkout</tt></a>
 command with the <tt>-b</tt> switch:</p>
-<pre class="highlight"><code class="hljs bash">$ git checkout -b &lt;branch_name&gt;</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">$ git checkout -b &lt;branch_name&gt;</code></div></pre>
 <div class='info'><p> Everyone will see this branch name when you submit your changes to the main SproutCore Guides repository, so choose something that describes the
 changes you are making.
 
@@ -237,7 +237,7 @@ as <tt>.html</tt>.
 
 
 
-<pre class="highlight"><code class="hljs markdown"><span class="hljs-section"><span class='comment'><div class='filename'>src/documents/&lt;your_guide_name&gt;.html.md.sd</span></div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs markdown"><span class="hljs-section"><span class='comment'><div class='filename'>src/documents/&lt;your_guide_name&gt;.html.md.sd</span></div></span>
 ---
 layout: default
 sc_category: Choose an Existing Category
@@ -280,7 +280,7 @@ would be <tt>core_concepts_sc_object.html.md.sd</tt>.</p>
 <p>DocPad, that <a href="#-Installing-DocPad-">we installed above</a>, comes with a built in webserver so we can see what the guides on our local
 machine will look like when they&#39;re published to <a href="http://guides.sproutcore.com/">guides.sproutcore.com</a>. To start this webserver, we run <tt>docpad run</tt>
 from the guides directory:</p>
-<pre class="highlight"><code class="hljs bash">$ docpad run
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">$ docpad run
 info: Welcome to DocPad v6.47.0
 info: Contribute: http://docpad.org/docs/contribute
 info: Plugins: eco, highlightjs, marked, sproutdown
@@ -300,7 +300,7 @@ changes to the guides; all we have to do is refresh our browser window to see th
 <p>If you do not see the changes you made, check the terminal window where you ran the <tt>docpad run</tt> command for error messages.</p>
 <p>By default, preview will show guides that are still under construction, even though under construction guides are not displayed on
 <a href="http://guides.sproutcore.com/">guides.sproutcore.com</a>. If you would like to see only guides that <em>will</em> be deployed, use the <tt>--env</tt> flag:</p>
-<pre class="highlight"><code class="hljs bash">$ docpad run --env production</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">$ docpad run --env production</code></div></pre>
 <h3 id='-Submitting-Your-Changes-'>6 -  Submitting Your Changes
 </h3>
 
@@ -315,7 +315,7 @@ pull request to the main SproutCore Guides repository.</p>
 to <a href="http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository#Committing-Your-Changes">commit these changes to our repository</a>. We do
 this with the <a href="http://www.kernel.org/pub/software/scm/git/docs/git-add.html"><tt>git add</tt></a> and
 <a href="http://www.kernel.org/pub/software/scm/git/docs/git-commit.html"><tt>git commit</tt></a> commands:</p>
-<pre class="highlight"><code class="hljs bash">$ git add .
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">$ git add .
 $ git commit</code></div></pre>
 <h4 id='-Push-Your-Changes-to-GitHub-'>6.2 -  Push Your Changes to GitHub
 </h4>
@@ -324,7 +324,7 @@ $ git commit</code></div></pre>
 <p>Now that we&#39;ve committed our changes to our local repository, we need to <a href="http://git-scm.com/book/en/Git-Basics-Working-with-Remotes#Pushing-to-Your-Remotes">push these changes to the remote
 repository</a> hosted on GitHub. We do this with the
 <a href="http://www.kernel.org/pub/software/scm/git/docs/git-push.html"><tt>git push</tt></a> command:</p>
-<pre class="highlight"><code class="hljs bash">$ git push origin &lt;branch_name&gt;</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">$ git push origin &lt;branch_name&gt;</code></div></pre>
 <div class='info'><p> <tt>branch_name</tt> above is the name you used in the [create a topic branch](#-Create-a-Topic-Branch-) step. If you
 can't remember the name use 'git branch -a' to list the branches.
 

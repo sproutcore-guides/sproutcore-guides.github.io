@@ -71,10 +71,10 @@
 <dd><a href='/views.html'>Core View Concepts</a></dd><dt>Models</dt>
 <dd><a href='/records.html'>SproutCore Records</a></dd>
 <dd><a href='/fixtures.html'>Using Fixtures</a></dd><dt>Theming</dt>
-<dd><a href='/theming_app.html'>Theming Your App</a></dd>
-<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd></dl><dl class='R'><dt>Testing</dt>
-<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
 <dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
 <dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
 <dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
 <dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd><dt>Extras</dt>
@@ -133,11 +133,11 @@ automatic bindings, observers and more, which will be described in detail below.
 
 
 <p>Creation of an <code>SC.Object</code> instance is straightforward.</p>
-<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> obj = SC.Object.create()</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript"><span class="hljs-keyword">var</span> obj = SC.Object.create()</code></div></pre>
 <p>In most cases you will want to create your <code>SC.Object</code> with some pre-
 set properties. You accomplish this by providing the properties in a hash.  The
 following example creates a new SC.Object to represent a person.</p>
-<pre class="highlight"><code class="hljs javascript"><span class="hljs-comment">// Create an SC.Object to represent a person.</span>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript"><span class="hljs-comment">// Create an SC.Object to represent a person.</span>
 <span class="hljs-keyword">var</span> person = SC.Object.create({
   <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Peter'</span>,
   <span class="hljs-attr">lastName</span>:  <span class="hljs-string">'Wagenet'</span>
@@ -166,7 +166,7 @@ define a unique <code>Person</code> Class, and to create instances of it.  Doing
 so allows us to define default properties on the Class and to include related
 helper functions.  To do this, we simply call <tt>extend()</tt> on
 <code>SC.Object</code> as the next example shows.</p>
-<pre class="highlight"><code class="hljs javascript">MyApp.Person = SC.Object.extend({
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">MyApp.Person = SC.Object.extend({
   <span class="hljs-attr">firstName</span>: <span class="hljs-literal">null</span>,
   <span class="hljs-attr">lastName</span>:  <span class="hljs-literal">null</span>,
   <span class="hljs-attr">permissions</span>: <span class="hljs-string">'none'</span>,
@@ -180,7 +180,7 @@ helper functions.  To do this, we simply call <tt>extend()</tt> on
 <code>firstName</code>, <code>lastName</code> and <code>permissions</code> as
 well as the simple <code>fullName()</code> function.  The following example
 shows this.</p>
-<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> person = MyApp.Person.create({
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript"><span class="hljs-keyword">var</span> person = MyApp.Person.create({
   <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Peter'</span>,
   <span class="hljs-attr">lastName</span>:  <span class="hljs-string">'Wagenet'</span>
 });
@@ -197,7 +197,7 @@ provides the <tt>sc_super</tt> method which calls the original function. For tho
 familiar with Ruby&#39;s <code>super</code> method, <code>sc_super</code> is very
 similar.  Here is an example of a subclass of <code>Person</code> that extends
 and uses the superclass&#39;s <code>fullName()</code> method.</p>
-<pre class="highlight"><code class="hljs javascript"><span class="hljs-comment">// Define a new subclass of MyApp.Person</span>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript"><span class="hljs-comment">// Define a new subclass of MyApp.Person</span>
 MyApp.FormalPerson = MyApp.Person.extend({
   <span class="hljs-attr">title</span>: <span class="hljs-literal">null</span>,
 
@@ -234,7 +234,7 @@ method is called first. This function can be overridden when you need to
 perform additional setup each time one of your objects is created.  The next
 example uses <code>init()</code> to ensure that a calculation is performed
 each time a new MyApp.Calculation object is created.</p>
-<pre class="highlight"><code class="hljs javascript">MyApp.Calculation = SC.Object.extend({
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">MyApp.Calculation = SC.Object.extend({
   <span class="hljs-attr">input</span>: <span class="hljs-literal">null</span>,
   <span class="hljs-attr">result</span>: <span class="hljs-literal">null</span>,
 
@@ -269,14 +269,14 @@ inheritance tree, with similar functionality.  Mixins are simply a hash with a
 series of properties that will be added to the objects you create.  The next
 example defines the <code>MyApp.Introducable</code> mixin, which can then be
 shared between many different Classes.</p>
-<pre class="highlight"><code class="hljs javascript">MyApp.Introducable = {
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">MyApp.Introducable = {
   <span class="hljs-attr">sayHello</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
     <span class="hljs-keyword">return</span> <span class="hljs-string">'Hello, my name is '</span> + <span class="hljs-keyword">this</span>.name;
   }
 };</code></div></pre>
 <p>To add one or more mixins to a Class, add them as parameters to extend.  For
 example,</p>
-<pre class="highlight"><code class="hljs javascript">MyApp.Person = SC.Object.extend(MyApp.Introducable, { <span class="hljs-attr">name</span>: <span class="hljs-string">''</span>; });
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">MyApp.Person = SC.Object.extend(MyApp.Introducable, { <span class="hljs-attr">name</span>: <span class="hljs-string">''</span>; });
 
 <span class="hljs-keyword">var</span> person = MyApp.Person.create({ <span class="hljs-attr">name</span>: <span class="hljs-string">'Bob'</span> });
 person.sayHello(); <span class="hljs-comment">// Hello, my name is Bob</span></code></div></pre>
@@ -290,7 +290,7 @@ hashes</em> and mixes them all in to a newly created class.</p>
 single Class method to a Class, you can do it in the traditional JavaScript
 manner.  For example, the following adds a <code>quickCreate()</code> helper
 function to <code>MyApp.Person</code>.</p>
-<pre class="highlight"><code class="hljs javascript">MyApp.Person.quickCreate = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">firstName, lastName</span>)</span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">MyApp.Person.quickCreate = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">firstName, lastName</span>)</span>{
   <span class="hljs-keyword">return</span> MyApp.Person.create({
     <span class="hljs-attr">firstName</span>: firstName,
     <span class="hljs-attr">lastName</span>: lastName
@@ -301,7 +301,7 @@ function to <code>MyApp.Person</code>.</p>
 person.fullName(); <span class="hljs-comment">// Peter Wagenet</span></code></div></pre>
 <p>However, sometimes you may want to add a series of Class methods and
 properties. In this case you can use the <tt>mixin()</tt> method.</p>
-<pre class="highlight"><code class="hljs javascript">MyApp.Person.mixin({
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">MyApp.Person.mixin({
   <span class="hljs-attr">quickCreate</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">firstName, lastName</span>)</span>{
     <span class="hljs-keyword">return</span> MyApp.Person.create({
       <span class="hljs-attr">firstName</span>: firstName,

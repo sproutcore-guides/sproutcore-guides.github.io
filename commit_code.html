@@ -71,10 +71,10 @@
 <dd><a href='/views.html'>Core View Concepts</a></dd><dt>Models</dt>
 <dd><a href='/records.html'>SproutCore Records</a></dd>
 <dd><a href='/fixtures.html'>Using Fixtures</a></dd><dt>Theming</dt>
-<dd><a href='/theming_app.html'>Theming Your App</a></dd>
-<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd></dl><dl class='R'><dt>Testing</dt>
-<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
 <dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
 <dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
 <dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
 <dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd><dt>Extras</dt>
@@ -125,7 +125,7 @@ god send and helps check for common mistakes like:</p>
 <p>The following JS lint config can be used in combination with the <a href="https://github.com/sproutit/sproutcore-tmbundle">SproutCore
 Textmate bundle</a>.</p>
 <p>Install it at <tt><path to your Textmate bundles>/SproutCore.tmbundle/Support/bin/prefs.js</tt></p>
-<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> JSLINT_PREFS = {
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript"><span class="hljs-keyword">var</span> JSLINT_PREFS = {
     <span class="hljs-attr">adsafe</span>     : <span class="hljs-literal">false</span>, <span class="hljs-comment">// if ADsafe should be enforced</span>
     bitwise    : <span class="hljs-literal">false</span>, <span class="hljs-comment">// if bitwise operators should not be allowed</span>
     browser    : <span class="hljs-literal">true</span>,  <span class="hljs-comment">// if the standard browser globals should be predefined</span>
@@ -180,7 +180,7 @@ examples of good and bad unit tests:</p>
 
 
 
-<pre class="highlight"><code class="hljs javascript">test(<span class="hljs-string">"basic"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">test(<span class="hljs-string">"basic"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">var</span> view = pane.view(<span class="hljs-string">'basic'</span>);
   ok(!view.$().hasClass(<span class="hljs-string">'disabled'</span>), <span class="hljs-string">'should not have disabled class'</span>);
   ok(!view.$().hasClass(<span class="hljs-string">'sel'</span>), <span class="hljs-string">'should not have sel class'</span>);
@@ -192,7 +192,7 @@ examples of good and bad unit tests:</p>
   equals(label.text(), <span class="hljs-string">'Hello World'</span>, <span class="hljs-string">'should have label'</span>);
 });</code></div></pre>
 <p>The above test is great because it verifies that the <em>rendered DOM</em> is correct.</p>
-<pre class="highlight"><code class="hljs javascript">test(<span class="hljs-string">"basic"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">test(<span class="hljs-string">"basic"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">var</span> view = pane.view(<span class="hljs-string">'basic'</span>);
   equals(view.get(<span class="hljs-string">'title'</span>), <span class="hljs-string">'Hello World'</span>, <span class="hljs-string">'should have label'</span>);
 });</code></div></pre>

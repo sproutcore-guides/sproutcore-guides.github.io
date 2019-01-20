@@ -71,10 +71,10 @@
 <dd><a href='/views.html'>Core View Concepts</a></dd><dt>Models</dt>
 <dd><a href='/records.html'>SproutCore Records</a></dd>
 <dd><a href='/fixtures.html'>Using Fixtures</a></dd><dt>Theming</dt>
-<dd><a href='/theming_app.html'>Theming Your App</a></dd>
-<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd></dl><dl class='R'><dt>Testing</dt>
-<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
 <dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
 <dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
 <dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
 <dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd><dt>Extras</dt>
@@ -118,13 +118,21 @@
             
           </div>
 
-          <h3 id='-Creating-a-Directory-for-Your-Unit-Test-Files-'>1 -  Creating a Directory for Your Unit Test Files
+          <div class='note'><p> The way of interacting with the build tools has changed. Most of the generators are not included, which
+means that these files and folders need to be created by hand. Check out the Getting Started guides for
+which generators can be used. This guide will be updated as soon as possible to reflect these changes.
+
+</p></div>
+
+
+
+<h3 id='-Creating-a-Directory-for-Your-Unit-Test-Files-'>1 -  Creating a Directory for Your Unit Test Files
 </h3>
 
 
 <p>When you first create your SproutCore application, directories are
 automatically created for you.</p>
-<pre class="highlight"><code class="hljs bash">$ sc-init MyApp
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">$ sc-init MyApp
  ~ Created directory at my_app
  ~ Created file at my_app/Buildfile
  ~ Created file at my_app/README
@@ -173,7 +181,7 @@ test files in the <tt>controller</tt> directory to verify.</p>
 <p>When you use the <tt>sc-gen</tt> tool to add new source files to your application, it
 will automatically add a corresponding test file added into the <tt>tests</tt>
 directory.  For example,</p>
-<pre class="highlight"><code class="hljs bash">$ sc-gen controller MyApp.LoginController
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">$ sc-gen controller MyApp.LoginController
  ~ Created directory at controllers
  ~ Created file at controllers/login.js
  ~ Created directory at tests
@@ -183,7 +191,7 @@ directory.  For example,</p>
 Your controller is now ready to use!</code></div></pre>
 <p>Notice the creation of <tt>tests/controllers/login.js</tt>.</p>
 <p>Conveniently, the generated unit test file is built from a template:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/my_app/test/controllers/login.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/my_app/test/controllers/login.js</div></span>
 // ==================================================
 // Project:   MyApp.loginController Unit Test
 // Copyright: ©2011 My Company, Inc.
@@ -203,15 +211,15 @@ test("test description", function() {
 
 
 <p>You can also use the <tt>sc-gen</tt> tool to create your unit test file by itself:</p>
-<pre class="highlight"><code class="hljs bash">$ sc-gen <span class="hljs-built_in">test</span> TARGET_NAME PATH/TO/TEST[.js]</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">$ sc-gen <span class="hljs-built_in">test</span> TARGET_NAME PATH/TO/TEST[.js]</code></div></pre>
 <p>For example, if you wanted to add a unit test file named <tt>views/login/render.js</tt>
 to your application, you would:</p>
-<pre class="highlight"><code class="hljs bash">$ sc-gen <span class="hljs-built_in">test</span> MyApp views/login/render
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">$ sc-gen <span class="hljs-built_in">test</span> MyApp views/login/render
  ~ Created file at tests/views/login/render.js
 
 Your unit <span class="hljs-built_in">test</span> has been generated and is now ready to be configured!</code></div></pre>
 <p><tt>render.js</tt> contains a sample unit test case to help you get started.</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/my_app/tests/views/login/render.js</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>apps/my_app/tests/views/login/render.js</div></span>
 // ==================================================
 // Project:   MyApp Unit Test
 // Copyright: ©2011 My Company, Inc.
@@ -243,7 +251,7 @@ how you might want to run them together.  Often, it is a good practice is to
 create a directory for each class you add to your app and one unit test file
 per method you want to test inside that directory.</p>
 <p>For example, the unit tests for SC.Object might look something like:</p>
-<pre class="highlight"><code class="hljs bash">tests/system/object/create.js
+<pre class="highlighted"><div class="code_container"><code class="hljs bash">tests/system/object/create.js
 tests/system/object/extend.js
 tests/system/object/kindOf.js
 ...</code></div></pre>

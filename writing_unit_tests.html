@@ -71,10 +71,10 @@
 <dd><a href='/views.html'>Core View Concepts</a></dd><dt>Models</dt>
 <dd><a href='/records.html'>SproutCore Records</a></dd>
 <dd><a href='/fixtures.html'>Using Fixtures</a></dd><dt>Theming</dt>
-<dd><a href='/theming_app.html'>Theming Your App</a></dd>
-<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd></dl><dl class='R'><dt>Testing</dt>
-<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
 <dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
 <dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
 <dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
 <dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd><dt>Extras</dt>
@@ -131,9 +131,9 @@ verification on your code.</p>
 
 <p>To define a module, call the <tt>module()</tt> method.  For example, in the <a href="/adding_unit_test.html">previous guide</a>, a module called <tt>MyApp.loginController</tt>
 is created.</p>
-<pre class="highlight"><code class="hljs javascript"><span class="hljs-built_in">module</span>(<span class="hljs-string">"MyApp.loginController"</span>);</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript"><span class="hljs-built_in">module</span>(<span class="hljs-string">"MyApp.loginController"</span>);</code></div></pre>
 <p>Unit test cases defined after calling <tt>module()</tt> will automatically be grouped into that module until the next <tt>module()</tt> call or the end of the file.</p>
-<pre class="highlight"><code class="hljs javascript"><span class="hljs-built_in">module</span>(<span class="hljs-string">"MyApp.loginController.module1"</span>);
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript"><span class="hljs-built_in">module</span>(<span class="hljs-string">"MyApp.loginController.module1"</span>);
 test (<span class="hljs-string">"test1 for MyApp.loginController module 1"</span>, ...);
 test (<span class="hljs-string">"test2 for MyApp.loginController module 1"</span>, ...);
 
@@ -143,7 +143,7 @@ test (<span class="hljs-string">"test2 for MyApp.loginController module 2"</span
 <p>Within the <tt>module</tt>, you may optionally implement <tt>setup()</tt> and <tt>teardown()</tt> callbacks to run before and after each unit test case for that module.
 Use these methods to setup and teardown any common testing infrastructure. </p>
 <p>For example, if you are  writing a group of tests to work on a <tt>Contact</tt> record, you might define your module like so:</p>
-<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> contact ;
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript"><span class="hljs-keyword">var</span> contact ;
 <span class="hljs-built_in">module</span>(<span class="hljs-string">"Test Contact record"</span>, {
   <span class="hljs-attr">setup</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
     contact = MyApp.Contact.create({  <span class="hljs-attr">firstName</span>: <span class="hljs-string">"John"</span>, <span class="hljs-attr">lastName</span>: <span class="hljs-string">"Doe"</span> });
@@ -163,13 +163,13 @@ code.</p>
 
 <p>Once you&#39;ve defined a module, you can add individual unit test cases.  A unit test case is defined using the <tt>test()</tt> method.  A test should have a
 description followed by the function you want to execute to perform the test.  </p>
-<pre class="highlight"><code class="hljs javascript">test(<span class="hljs-string">"test description"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">test(<span class="hljs-string">"test description"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">var</span> expected = <span class="hljs-string">"test"</span>;
   <span class="hljs-keyword">var</span> result   = <span class="hljs-string">"test"</span>;
   equals(result, expected, <span class="hljs-string">"test should equal test"</span>);
 });</code></div></pre>
 <p>For example, if you were writing tests for a <tt>Contact</tt> model object, you might add a test like this:</p>
-<pre class="highlight"><code class="hljs javascript">test(<span class="hljs-string">"fullName property returns combined firstName and lastName"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">test(<span class="hljs-string">"fullName property returns combined firstName and lastName"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-comment">// set preconditions</span>
   contact.set(<span class="hljs-string">'firstName'</span>, <span class="hljs-string">'John'</span>);
   contact.set(<span class="hljs-string">'lastName'</span>, <span class="hljs-string">'Doe'</span>);
@@ -197,7 +197,7 @@ passes, then your test is allowed to continue.</p>
 
 <p>The most basic assertion you can make is <tt>ok()</tt>. This method accepts a boolean value and an optional description string. The assertion passes if the
 value is true and fails otherwise.  For example, here is how you would assert that a test value is greater than 10:</p>
-<pre class="highlight"><code class="hljs javascript">ok(contacts.get(<span class="hljs-string">'length'</span>) &gt; <span class="hljs-number">10</span>, <span class="hljs-string">"should be more than 10 contacts"</span>);</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">ok(contacts.get(<span class="hljs-string">'length'</span>) &gt; <span class="hljs-number">10</span>, <span class="hljs-string">"should be more than 10 contacts"</span>);</code></div></pre>
 <p>To make your tests more understandable, you should always include a description when you use <tt>ok()</tt> assertions.  Otherwise, the test runner will
 simply print the value that was returned and the value that was expected.</p>
 <h4 id='-equals---'>4.2 -  equals()
@@ -208,7 +208,7 @@ simply print the value that was returned and the value that was expected.</p>
 equal and fails otherwise.  The advantage of using <tt>equals</tt> over <tt>ok(a == b, &quot;a equals b&quot;)</tt> is that, if the test fails, then the test runner will
 display both the expected value and the actual value; this can be valuable when debugging your code.</p>
 <p>For example, here is how you would test the fullName property of a contact:</p>
-<pre class="highlight"><code class="hljs javascript">equals(contact.get(<span class="hljs-string">'fullName'</span>), <span class="hljs-string">'John Doe'</span>, <span class="hljs-string">'fullName = John Doe'</span>);</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">equals(contact.get(<span class="hljs-string">'fullName'</span>), <span class="hljs-string">'John Doe'</span>, <span class="hljs-string">'fullName = John Doe'</span>);</code></div></pre>
 <p>Note: this method is equivalent to <tt>equal()</tt> in the latest QUnit API.</p>
 <h4 id='-Other-assertions-'>4.3 -  Other assertions
 </h4>
@@ -227,7 +227,7 @@ module&#39;s <tt>teardown()</tt> method (if defined) and running the next unit t
 <p>After the test runner has been stopped, you can resume it by calling <tt>start()</tt>.  To invoke <tt>start()</tt>, you will need to setup a callback or timer.  </p>
 <p>For example, the unit test case below verifies if a particular file loads from the server.  It first issues a <tt>stop()</tt> to the test runner for 1
 second.  If <tt>start()</tt> is not called within 1 second, the test will fail.  It then uses the callback in <tt>SC.Request.getUrl()</tt> to call <tt>start()</tt>.</p>
-<pre class="highlight"><code class="hljs javascript">test(<span class="hljs-string">"load file from server"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">test(<span class="hljs-string">"load file from server"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-comment">// setup a timeout in case of failure</span>
   stop(<span class="hljs-number">1000</span>);
 
@@ -239,7 +239,7 @@ second.  If <tt>start()</tt> is not called within 1 second, the test will fail. 
   });
 });</code></div></pre>
 <p>Here&#39;s a more complex example with assertions.</p>
-<pre class="highlight"><code class="hljs javascript">test(<span class="hljs-string">'Create User'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">test(<span class="hljs-string">'Create User'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-comment">// Pause the test runner. If start() is not called within 2 seconds, fail the test.</span>
   stop(<span class="hljs-number">2000</span>);
 
@@ -298,7 +298,7 @@ the HTML you need will already exist.</p>
 <p>If you do need to write out some sample HTML on the page to work against when testing, however, you can add this HTML using the method <tt>htmlbody()</tt>.
 This method should be the first thing called in your page, even before you start a new module.</p>
 <p>To use this method, just pass a string containing the HTML you want to add.  The HTML will be appended to the main body tag.</p>
-<pre class="highlight"><code class="hljs javascript"><span class="hljs-comment">// adds the h1 tag to the end of the body.</span>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript"><span class="hljs-comment">// adds the h1 tag to the end of the body.</span>
 htmlbody(<span class="hljs-string">"&lt;h1 id='testheader'&gt;&lt;/h1&gt;"</span>) ;</code></div></pre>
 <h3 id='-Moving-On-'>7 -  Moving On
 </h3>

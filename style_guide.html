@@ -71,10 +71,10 @@
 <dd><a href='/views.html'>Core View Concepts</a></dd><dt>Models</dt>
 <dd><a href='/records.html'>SproutCore Records</a></dd>
 <dd><a href='/fixtures.html'>Using Fixtures</a></dd><dt>Theming</dt>
-<dd><a href='/theming_app.html'>Theming Your App</a></dd>
-<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd></dl><dl class='R'><dt>Testing</dt>
-<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
 <dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
 <dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
 <dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
 <dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd><dt>Extras</dt>
@@ -123,7 +123,7 @@ the build tools, it will automatically set up a name space variable for you in
 core.js in your project.</p>
 <p>For example, if you are writing an application called &quot;AddressBook&quot;, the build
 tools will create the following:</p>
-<pre class="highlight"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/address_book/core.js"</div></span>
+<pre class="highlighted"><div class="code_container"><code class="hljs undefined"><span class='comment'><div class='filename'>"apps/address_book/core.js"</div></span>
 AddressBook = SC.Application.create({
   // ...
 });</code></div></pre>
@@ -132,7 +132,7 @@ existing SproutCore view, it is generally preferred to add the name of the view
 to the end of the class name. For instance, if you extend a <tt>CollectionView</tt> in
 your AddressBook application to show a list of Contact objects, you would do it
 in the following manner:</p>
-<pre class="highlight"><code class="hljs javascript">AddressBook.ContactCollectionView = SC.CollectionView.extend({
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">AddressBook.ContactCollectionView = SC.CollectionView.extend({
   <span class="hljs-comment">// Add your custom properties and functions here.</span>
 });</code></div></pre>
 <h4 id='-Instantiated-Classes-'>1.2 -  Instantiated Classes
@@ -144,7 +144,7 @@ naming convention is slightly different. An instantiated class is named using
 camel case with the first letter lowercase. If you&#39;re creating an
 <tt>ArrayController</tt> to control your <tt>Contact</tt> objects, you would do the
 following:</p>
-<pre class="highlight"><code class="hljs javascript">AddressBook.contactsController = SC.ArrayController.create({
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">AddressBook.contactsController = SC.ArrayController.create({
   <span class="hljs-comment">// Add your custom properties and functions here.</span>
 });</code></div></pre>
 <h4 id='-Create-vs-Extend-and-Design-'>1.3 -  Create vs Extend and Design
@@ -182,7 +182,7 @@ obvious anyway.</p>
 <p>The only exceptions are <em>booleans</em>. When naming a boolean, it is recommended
 that you prefix them with <tt>is</tt> or <tt>isNot</tt>. Therefore, it is easy to determine
 in which manner they are to be used.</p>
-<pre class="highlight"><code class="hljs javascript">isEnabled: <span class="hljs-literal">true</span>, <span class="hljs-comment">// This is good.</span>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">isEnabled: <span class="hljs-literal">true</span>, <span class="hljs-comment">// This is good.</span>
 
 enabled: <span class="hljs-literal">true</span> <span class="hljs-comment">// This is possibly confusing.</span></code></div></pre>
 <h4 id='-Properties-'>2.1 -  Properties
@@ -198,7 +198,7 @@ called <tt>contactsList</tt> that is a public array containing the list of conta
 and then there is a private property called <tt>_contactsCount</tt> for internal book
 keeping. No matter if the property is static or if it is a computed property
 (which is actually a function), the naming convention is the same.</p>
-<pre class="highlight"><code class="hljs javascript">AddressBook.contactsController = SC.ArrayController.create({
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">AddressBook.contactsController = SC.ArrayController.create({
 
   <span class="hljs-attr">_contactsCount</span>: <span class="hljs-number">0</span>, <span class="hljs-comment">// This is a private variable.</span>
 
@@ -236,12 +236,12 @@ error that can be very difficult to debug.</p>
 Making extensive use of local variables will get the best performance out of
 your code.</p>
 <p>For example, in this function, <tt>count</tt> is a local variable:</p>
-<pre class="highlight"><code class="hljs javascript">countContacts: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">countContacts: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
   <span class="hljs-keyword">var</span> count = <span class="hljs-number">0</span>; <span class="hljs-comment">// This is local.</span>
 }</code></div></pre>
 <p>However, in this function, <tt>count</tt> is not a local variable, but rather a global
 variable defined in the window scope:</p>
-<pre class="highlight"><code class="hljs javascript">countContacts: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">countContacts: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
   count = <span class="hljs-number">0</span>; <span class="hljs-comment">// This is NOT local, and VERY BAD.</span>
 }</code></div></pre>
 <h5 id='-Optimizing-the-use-of-variables-'>2.2.1 -  Optimizing the use of variables
@@ -257,7 +257,7 @@ that, it is also hard to read! The second example pulls the content object into
 a local variable, <tt>contact</tt> and constructs the string with far fewer function
 calls and with far superior readability to boot.</p>
 <p>This is confusing and inefficient:</p>
-<pre class="highlight"><code class="hljs javascript">constructName: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">constructName: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
   <span class="hljs-keyword">return</span> [<span class="hljs-keyword">this</span>.get(<span class="hljs-string">'content'</span>).get(<span class="hljs-string">'prefix'</span>),
           <span class="hljs-keyword">this</span>.get(<span class="hljs-string">'content'</span>).get(<span class="hljs-string">'firstName'</span>),
           <span class="hljs-keyword">this</span>.get(<span class="hljs-string">'content'</span>).get(<span class="hljs-string">'middleName'</span>),
@@ -266,7 +266,7 @@ calls and with far superior readability to boot.</p>
 }</code></div></pre>
 <p>This is more readable and far faster since the commonly accessed property is
 saved locally:</p>
-<pre class="highlight"><code class="hljs javascript">constructName: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">constructName: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
   <span class="hljs-keyword">var</span> contact = <span class="hljs-keyword">this</span>.get(<span class="hljs-string">'content'</span>);
 
   <span class="hljs-comment">// This is more readable and far faster.</span>
@@ -277,7 +277,7 @@ saved locally:</p>
           contact.get(<span class="hljs-string">'suffix'</span>)].join(<span class="hljs-string">' '</span>);
 }</code></div></pre>
 <p>This is best (using the <tt>getEach</tt> function):</p>
-<pre class="highlight"><code class="hljs javascript">constructName: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">constructName: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
   <span class="hljs-comment">// This is EVEN more readable.</span>
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.get(<span class="hljs-string">'content'</span>)
              .getEach(<span class="hljs-string">'prefix'</span>,<span class="hljs-string">'firstName'</span>,<span class="hljs-string">'middleName'</span>,
@@ -287,7 +287,7 @@ saved locally:</p>
 <p>Another strategy that often works well is to declare all of your local
 variables at the beginning of your method. The YUI compressor recommends
 declaring all variables on one line, like:</p>
-<pre class="highlight"><code class="hljs javascript">  <span class="hljs-keyword">var</span> a, b, x, obj;</code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">  <span class="hljs-keyword">var</span> a, b, x, obj;</code></div></pre>
 <h3 id='-Functions-'>3 -  Functions
 </h3>
 
@@ -313,7 +313,7 @@ but strongly encouraged to add the <tt>DidChange</tt> suffix to the name. Also, 
 observer function is only observing one property, it is nice to name it after
 the name of the observed property. Below is an observer function observing
 the <tt>isSelected</tt> boolean property of a view:</p>
-<pre class="highlight"><code class="hljs javascript">isSelectedDidChange: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">isSelectedDidChange: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
   <span class="hljs-comment">// Do stuff based on selection.</span>
 }.observes(<span class="hljs-string">'isSelected'</span>)</code></div></pre>
 <p>If you are observing more than one property, it is not useful to name the
@@ -323,7 +323,7 @@ something descriptive that hints at what happens in the function when it is
 triggered. For example, if you are observing multiple properties, such
 as <tt>content</tt>, <tt>isSelected</tt>, and <tt>dimensions</tt> and when any of those change, a
 redraw of your view will be triggered, you can name it as such:</p>
-<pre class="highlight"><code class="hljs javascript">redrawStateDidChange: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">redrawStateDidChange: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
   <span class="hljs-keyword">this</span>.displayDidChange(); <span class="hljs-comment">// Redraw the view.</span>
 }.observes(<span class="hljs-string">'content'</span>, <span class="hljs-string">'isSelected'</span>, <span class="hljs-string">'dimensions'</span>)</code></div></pre>
 <h4 id='-Bindings-'>3.2 -  Bindings
@@ -335,7 +335,7 @@ objects in your application.  Unlike most parts of SproutCore, you must follow
 a very specific formula for bindings to work properly.  To bind to the value
 property of one object from the <tt>title</tt> object of another property, you must
 add a property to the object you are binding TO that looks like this:</p>
-<pre class="highlight"><code class="hljs javascript">  valueBinding: <span class="hljs-string">"MyApp.anotherObject.title"</span></code></div></pre>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">  valueBinding: <span class="hljs-string">"MyApp.anotherObject.title"</span></code></div></pre>
 <h3 id='-Constants-'>4 -  Constants
 </h3>
 
@@ -348,7 +348,7 @@ define constants on your application or classes instead.</p>
 underscores.  You should always define constants in your application namespace
 or on a class.  Never define a global constant that is not prefixed by a
 namespace as it may conflict with other libraries you load.</p>
-<pre class="highlight"><code class="hljs javascript">MyApp.DEFAULT_CONTACT_COUNT = <span class="hljs-number">23</span>; <span class="hljs-comment">// Good - defined on app namespace</span>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript">MyApp.DEFAULT_CONTACT_COUNT = <span class="hljs-number">23</span>; <span class="hljs-comment">// Good - defined on app namespace</span>
 MyApp.controller.HELP_LINK = <span class="hljs-string">"/help"</span>; <span class="hljs-comment">// Good - defined on a class</span>
 
 CONTACT_FIELDS = [<span class="hljs-string">'firstName'</span>, <span class="hljs-string">'lastName'</span>]; <span class="hljs-comment">// Bad - no globals!</span></code></div></pre>
@@ -388,7 +388,7 @@ but ONLY if the following bit does NOT fit on the same line. Never, ever,
 separate <tt>while</tt>, <tt>for</tt>, or <tt>if</tt> statements from their predicated onto separate
 lines without wrapping in curly braces.  This creates lots of programming
 errors:</p>
-<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">if</span> (isReady) readyCount++;  <span class="hljs-comment">// OK - one line</span>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript"><span class="hljs-keyword">if</span> (isReady) readyCount++;  <span class="hljs-comment">// OK - one line</span>
 
 <span class="hljs-keyword">if</span> (isReady)
  readyCount = oldReadCount + newReadyCount; <span class="hljs-comment">// not OK!</span>
@@ -418,13 +418,13 @@ languages than <em>==</em> or <em>!=</em>.  If you want to see if a value is eit
 
 <p>When writing <tt>for()</tt> loops, first capture the length you want to iterate
 through like so:</p>
-<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> idx;
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript"><span class="hljs-keyword">var</span> idx;
 <span class="hljs-keyword">for</span>(idx = <span class="hljs-number">0</span>, len = items.length; idx &lt; len; idx++) {
   item = items[idx]; <span class="hljs-comment">//do stuff...</span>
 }</code></div></pre>
 <p>Better yet, if the order you iterate does not matter, use a <tt>while</tt> loop like
 below since it is faster than using a for loop:</p>
-<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> idx = items.length;
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript"><span class="hljs-keyword">var</span> idx = items.length;
 <span class="hljs-keyword">while</span>(--idx) {
   <span class="hljs-comment">//do stuff</span>
 }</code></div></pre>
@@ -444,7 +444,7 @@ pass a pointer to the method instead.  All SproutCore classes that accept
 callback functions (such as <tt>addObserver()</tt>, <tt>removeObserver()</tt>,
 and <tt>invokeLater()</tt>) all accept both a target object and a method so you can
 avoid creating closures in most cases.</p>
-<pre class="highlight"><code class="hljs javascript"><span class="hljs-comment">// Bad - this function creates a closure function</span>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript"><span class="hljs-comment">// Bad - this function creates a closure function</span>
 <span class="hljs-comment">// to iterate over the array, AND creates a closure</span>
 <span class="hljs-comment">// function to pass as a callback to addObserver().</span>
 <span class="hljs-comment">//</span>
@@ -485,7 +485,7 @@ an empty array, you are actually creating an object.  When you write code,
 think about those times when you define new arrays and try to keep them to a
 minimum, especially in loops or other &quot;hot&quot; code.  Instead of defining a new
 array, consider reusing an existing array and just resetting its length to 0.</p>
-<pre class="highlight"><code class="hljs javascript"><span class="hljs-comment">// Good - reuses the array to collect temporary values</span>
+<pre class="highlighted"><div class="code_container"><code class="hljs javascript"><span class="hljs-comment">// Good - reuses the array to collect temporary values</span>
 enqueItems: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
  <span class="hljs-keyword">var</span> items = <span class="hljs-keyword">this</span>.get(items), len = items.length, idx;
  <span class="hljs-keyword">var</span> cur = [] ; <span class="hljs-comment">// we'll reuse this one</span>

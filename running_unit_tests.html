@@ -71,10 +71,10 @@
 <dd><a href='/views.html'>Core View Concepts</a></dd><dt>Models</dt>
 <dd><a href='/records.html'>SproutCore Records</a></dd>
 <dd><a href='/fixtures.html'>Using Fixtures</a></dd><dt>Theming</dt>
-<dd><a href='/theming_app.html'>Theming Your App</a></dd>
-<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd></dl><dl class='R'><dt>Testing</dt>
-<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
+<dd><a href='/chance.html'>Using Chance, SproutCore's CSS Framework</a></dd>
+<dd><a href='/theming_app.html'>Theming Your App</a></dd></dl><dl class='R'><dt>Testing</dt>
 <dd><a href='/adding_unit_test.html'>Adding a Unit Test</a></dd>
+<dd><a href='/unit_test_framework.html'>Unit Testing</a></dd>
 <dd><a href='/writing_unit_tests.html'>Writing Unit Tests</a></dd>
 <dd><a href='/running_unit_tests.html'>Running Unit Tests</a></dd>
 <dd><a href='/todos_tdd.html'>SproutCore Development Using TDD</a></dd><dt>Extras</dt>
@@ -200,7 +200,7 @@ detailed below.</p>
 
 <p>Any unit test file can be run from a browser using a URL in the following
 format:</p>
-<pre class="highlight"><code class="hljs awk">http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">4020</span><span class="hljs-regexp">/APP_NAME/</span>LANGUAGE<span class="hljs-regexp">/current/</span>tests<span class="hljs-regexp">/PATH/</span>TO<span class="hljs-regexp">/TEST.html@</span></code></div></pre><p>where:</p>
+<pre class="highlighted"><div class="code_container"><code class="hljs awk">http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">4020</span><span class="hljs-regexp">/APP_NAME/</span>LANGUAGE<span class="hljs-regexp">/current/</span>tests<span class="hljs-regexp">/PATH/</span>TO<span class="hljs-regexp">/TEST.html@</span></code></div></pre><p>where:</p>
 <ul>
 <li><tt>APP_NAME</tt> is your application name.</li>
 <li><tt>LANGUAGE</tt> is the language you want to run tests for. (Usually &#39;en&#39;)</li>
@@ -209,8 +209,8 @@ folder.  It should include the body of the javascript file name but</li>
 <li>not the <tt>.js</tt> extension.</li>
 </ul>
 <p>As an example, suppose you have a unit test file located at:</p>
-<pre class="highlight"><code class="hljs awk">PROJECT_HOME<span class="hljs-regexp">/apps/my</span>_app<span class="hljs-regexp">/tests/u</span>nit<span class="hljs-regexp">/sample.js</span></code></div></pre><p>To run this test, browse:</p>
-<pre class="highlight"><code class="hljs awk">http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">4020</span><span class="hljs-regexp">/my_app/</span>en<span class="hljs-regexp">/current/</span>tests<span class="hljs-regexp">/unit/</span>sample.html</code></div></pre><h4 id='-Running-All-Unit-Tests-in-a-Directory-'>3.2 -  Running All Unit Tests in a Directory
+<pre class="highlighted"><div class="code_container"><code class="hljs awk">PROJECT_HOME<span class="hljs-regexp">/apps/my</span>_app<span class="hljs-regexp">/tests/u</span>nit<span class="hljs-regexp">/sample.js</span></code></div></pre><p>To run this test, browse:</p>
+<pre class="highlighted"><div class="code_container"><code class="hljs awk">http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">4020</span><span class="hljs-regexp">/my_app/</span>en<span class="hljs-regexp">/current/</span>tests<span class="hljs-regexp">/unit/</span>sample.html</code></div></pre><h4 id='-Running-All-Unit-Tests-in-a-Directory-'>3.2 -  Running All Unit Tests in a Directory
 </h4>
 
 
@@ -218,7 +218,7 @@ folder.  It should include the body of the javascript file name but</li>
 same method described as above, but instead name the directory with an .html
 extension.  For example, to run all of the unit tests in the <tt>tests/unit</tt>
 directory, you could visit:</p>
-<pre class="highlight"><code class="hljs awk">http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">4020</span><span class="hljs-regexp">/my_app/</span>en<span class="hljs-regexp">/current/</span>tests<span class="hljs-regexp">/unit.html</span></code></div></pre><p>Note that the HTML file loaded at this URL will contain all of your unit tests
+<pre class="highlighted"><div class="code_container"><code class="hljs awk">http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">4020</span><span class="hljs-regexp">/my_app/</span>en<span class="hljs-regexp">/current/</span>tests<span class="hljs-regexp">/unit.html</span></code></div></pre><p>Note that the HTML file loaded at this URL will contain all of your unit tests
 files concatenated together in a single HTML page.  If your tests are not
 properly isolated, they may interfere with one another when loaded this way,
 though this is rare.</p>
@@ -230,7 +230,7 @@ though this is rare.</p>
 that too.  Instead of naming a directory, just visit a URL with the format
 described above but ending in tests.html.  For example, to load all of the unit
 tests at once for your contact application you could visit:</p>
-<pre class="highlight"><code class="hljs awk">http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">4020</span><span class="hljs-regexp">/my_app/</span>en<span class="hljs-regexp">/current/</span>tests.html</code></div></pre><p>Note that, like the combined directory tests above, this global test file will
+<pre class="highlighted"><div class="code_container"><code class="hljs awk">http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">4020</span><span class="hljs-regexp">/my_app/</span>en<span class="hljs-regexp">/current/</span>tests.html</code></div></pre><p>Note that, like the combined directory tests above, this global test file will
 contain all of your unit test files concatenated together in a single HTML
 page.  If your tests are not properly isolated, they may interfere with one
 another, causing the unit tests to pass when loaded individually but fail when
@@ -244,7 +244,7 @@ write your test files so that they will not clobber one another at load time.</p
 your nested target like you name it in a config file.  For example, the
 sproutcore framework contains a nested framework called &quot;runtime&quot;.  You could
 load all of the unit tests for the sproutcore/runtime framework by visiting:</p>
-<pre class="highlight"><code class="hljs awk">http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">4020</span><span class="hljs-regexp">/sproutcore/</span>runtime<span class="hljs-regexp">/en/</span>current<span class="hljs-regexp">/tests.html</span></code></div></pre><h3 id='-Moving-On-'>4 -  Moving On
+<pre class="highlighted"><div class="code_container"><code class="hljs awk">http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">4020</span><span class="hljs-regexp">/sproutcore/</span>runtime<span class="hljs-regexp">/en/</span>current<span class="hljs-regexp">/tests.html</span></code></div></pre><h3 id='-Moving-On-'>4 -  Moving On
 </h3>
 
 
